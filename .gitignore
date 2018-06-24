@@ -1,0 +1,10 @@
+devtools/exe/mac/cefclient.app
+devtools/exe/win/cefclient_win
+ToolSources/CEPSparkerConfig/Builds*
+ToolSources/CEPSparkerConfig/*.xojo_uistate
+build
+css
+html
+js
+jsx
+.DS_Store
