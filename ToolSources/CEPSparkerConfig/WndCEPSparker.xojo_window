@@ -345,13 +345,13 @@ End
 		        Exit
 		      end if
 		      
-		      if fCSXSTemplatesFolder = nil then
-		        LogError CurrentMethodName, "fCSXSTemplatesFolder = nil"
+		      if fTemplatesFolder = nil then
+		        LogError CurrentMethodName, "fTemplatesFolder = nil"
 		        Exit
 		      end if
 		      
-		      if not fCSXSTemplatesFolder.Directory then
-		        LogError CurrentMethodName, "fCSXSTemplatesFolder does not exist"
+		      if not fTemplatesFolder.Directory then
+		        LogError CurrentMethodName, "fTemplatesFolder does not exist"
 		        Exit
 		      end if
 		      
@@ -377,7 +377,7 @@ End
 		        
 		      next
 		      
-		      GenerateProjectItemFromTemplate selectedVersion, fCSXSTemplatesFolder, fProjectRootFolder
+		      GenerateProjectItemFromTemplate selectedVersion, fTemplatesFolder, fProjectRootFolder
 		      
 		    catch e as RuntimeException
 		      LogError CurrentMethodName, "Throws " + e.Message
@@ -626,15 +626,15 @@ End
 		        Exit
 		      end if
 		      
-		      fTemplateFolder = nil
+		      fTemplatesFolder = nil
 		      fProjectRootFolder = appFolder
 		      
 		      do
 		        fProjectRootFolder = fProjectRootFolder.parent
 		        if fProjectRootFolder <> nil then
-		          fTemplateFolder = fProjectRootFolder.Child(kTemplatesFolderName)
+		          fTemplatesFolder = fProjectRootFolder.Child(kTemplatesFolderName)
 		        end if
-		      Loop until fProjectRootFolder = nil or (fTemplateFolder <> nil and fTemplateFolder.Directory)
+		      Loop until fProjectRootFolder = nil or (fTemplatesFolder <> nil and fTemplatesFolder.Directory)
 		      
 		      if fProjectRootFolder = nil then
 		        LogError CurrentMethodName, "Cannot locate project root folder"
@@ -642,12 +642,12 @@ End
 		        Exit
 		      end if
 		      
-		      if fTemplateFolder = nil or not fTemplateFolder.Directory then
+		      if fTemplatesFolder = nil or not fTemplatesFolder.Directory then
 		        LogError CurrentMethodName, "Cannot find project templates folder '" + kTemplatesFolderName + "'"
 		        Exit
 		      end if
 		      
-		      fCSXSTemplatesFolder = fTemplateFolder.Child(kCSXSFolderName)
+		      fCSXSTemplatesFolder = fTemplatesFolder.Child(kCSXSFolderName)
 		      if fCSXSTemplatesFolder = nil or not fCSXSTemplatesFolder.Directory then
 		        LogError CurrentMethodName, "Cannot find project CSXS templates folder '" + kCSXSFolderName + "'"
 		        ReportError "Cannot find project CSXS templates folder '" + kCSXSFolderName + "'"
@@ -974,7 +974,7 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		fTemplateFolder As FolderItem
+		fTemplatesFolder As FolderItem
 	#tag EndProperty
 
 
