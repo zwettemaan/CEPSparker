@@ -10,6 +10,11 @@ export projectHomeDir=`dirname "$scriptDir"`
 
 cd "$projectHomeDir"
 
+#
+# Do nothing if the LocalLinks already exists. If you want a clean
+# slate, delete LocalLinks before running this script
+#
+
 if [ ! -d LocalLinks ]; then
 	mkdir LocalLinks
 	cd LocalLinks

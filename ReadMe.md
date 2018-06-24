@@ -101,10 +101,17 @@ the `setupLocalLinks` script.
 
 ## Getting it to run
 
-First open up the file called `ProjectConfig.txt` and adjust it; the file contains
-some sample placeholder values. 
+Run the `CEPSparkerConfig` app. Mac and Windows versions are provided.
 
-Then run the `setupProject` script.
+When you click the _Generate_ button, the app will perform a find-and-replace
+on the files found in the _Templates_ and set up the project. 
+
+You can run _Generate_ only once. Once the project has been generated, 
+it cannot be generated again. This is to protect you from accidentally 
+overwriting an existing project.
+
+If you want to start over from scratch, you must unzip a new, 
+fresh copy of the CEPSparker project folder.
 
 ## Debugging
 

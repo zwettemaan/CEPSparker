@@ -9,7 +9,7 @@ Begin Window WndCEPSparker
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   436
+   Height          =   430
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -18,9 +18,9 @@ Begin Window WndCEPSparker
    MaxWidth        =   32000
    MenuBar         =   1754114047
    MenuBarVisible  =   True
-   MinHeight       =   64
+   MinHeight       =   430
    MinimizeButton  =   True
-   MinWidth        =   64
+   MinWidth        =   600
    Placement       =   0
    Resizeable      =   True
    Title           =   "CEPSparker Config"
@@ -111,18 +111,18 @@ Begin Window WndCEPSparker
       GridLinesVertical=   0
       HasHeading      =   True
       HeadingIndex    =   -1
-      Height          =   329
-      HelpTag         =   ""
+      Height          =   295
+      HelpTag         =   "Double-click a value to edit it."
       Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   "Setting	Value"
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
       Scope           =   0
@@ -136,7 +136,7 @@ Begin Window WndCEPSparker
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   52
+      Top             =   84
       Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
@@ -159,11 +159,11 @@ Begin Window WndCEPSparker
       InitialParent   =   ""
       Italic          =   False
       Left            =   500
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       Scope           =   0
       TabIndex        =   4
       TabPanelIndex   =   0
@@ -171,7 +171,7 @@ Begin Window WndCEPSparker
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   396
+      Top             =   390
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -191,11 +191,11 @@ Begin Window WndCEPSparker
       InitialParent   =   ""
       Italic          =   False
       Left            =   408
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       Scope           =   0
       TabIndex        =   5
       TabPanelIndex   =   0
@@ -203,37 +203,413 @@ Begin Window WndCEPSparker
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   396
+      Top             =   390
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
+   End
+   Begin Label LblHeading
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Please change the placeholder values below, then click 'Generate'."
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   52
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   560
    End
 End
 #tag EndWindow
 
 #tag WindowCode
 	#tag Event
+		Sub Close()
+		  Handle_Close
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
-		  do 
-		    Init
-		    if fErrorMessage <> "" then
-		      MsgBox fErrorMessage
-		      Quit
-		      Exit
-		    end if
-		    
-		    UpdateUI
-		  loop until True
+		  Handle_Open
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub Generate()
+		Sub AppQuit()
+		  if not fQuitting then
+		    fQuitting = true
+		    Quit
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function CheckIfPristine() As Boolean
+		  Dim retVal as Boolean
+		  
 		  do
+		    try 
+		      
+		      if fProjectRootFolder = nil then
+		        LogError CurrentMethodName, "fProjectRootFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not fProjectRootFolder.Directory then
+		        LogError CurrentMethodName, "fProjectRootFolder does not exist"
+		        Exit
+		      end if
+		      
+		      if fCSXSTemplatesFolder = nil then
+		        LogError CurrentMethodName, "fCSXSTemplatesFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not fCSXSTemplatesFolder.Directory then
+		        LogError CurrentMethodName, "fCSXSTemplatesFolder does not exist"
+		        Exit
+		      end if
+		      
+		      Dim fileCount as integer
+		      fileCount = fCSXSTemplatesFolder.Count
+		      
+		      retVal = true
+		      
+		      // Bail out if any of the template subfolders exists in the 
+		      // project folder: the project has already been generated
+		      
+		      for idx as integer = 1 to fileCount
+		        try 
+		          Dim subFile as FolderItem
+		          subFile = fCSXSTemplatesFolder.Item(idx)
+		          if subFile.Directory then
+		            if fProjectRootFolder.Child(subFile.Name).Exists then
+		              retVal = false
+		              Exit // For
+		            end if
+		          end if
+		        catch e as RuntimeException
+		          
+		        end try
+		      next
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
 		    
 		  Loop Until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Generate()
+		  do
+		    try 
+		      
+		      if fProjectRootFolder = nil then
+		        LogError CurrentMethodName, "fProjectRootFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not fProjectRootFolder.Directory then
+		        LogError CurrentMethodName, "fProjectRootFolder does not exist"
+		        Exit
+		      end if
+		      
+		      if fCSXSTemplatesFolder = nil then
+		        LogError CurrentMethodName, "fCSXSTemplatesFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not fCSXSTemplatesFolder.Directory then
+		        LogError CurrentMethodName, "fCSXSTemplatesFolder does not exist"
+		        Exit
+		      end if
+		      
+		      Dim selectedVersion as String
+		      selectedVersion = PupCEPVersion.List(PupCEPVersion.ListIndex)
+		      if selectedVersion = "" then
+		        LogError CurrentMethodName, "no selectedVersion"
+		        Exit
+		      end if
+		      
+		      Dim maxPlaceholderIdx as Integer
+		      maxPlaceholderIdx = LstConfigStrings.ListCount - 1
+		      
+		      for idx as integer = 0 to maxPlaceholderIdx
+		        
+		        Dim placeholder as String
+		        placeholder = LstConfigStrings.Cell(idx,0)
+		        
+		        Dim value as String
+		        value = LstConfigStrings.Cell(idx,1)
+		        
+		        fPlaceholderDict.Value(placeholder) = value
+		        
+		      next
+		      
+		      GenerateProjectItemFromTemplate selectedVersion, fCSXSTemplatesFolder, fProjectRootFolder
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub GenerateProjectFileFromTemplateFile(in_selectedVersion as String, in_sourceItem as FolderItem, in_targetItem as FolderItem)
+		  do
+		    try 
+		      
+		      if in_sourceItem = nil then
+		        LogError CurrentMethodName, "in_sourceItem = nil"
+		        Exit
+		      end if
+		      
+		      if not in_sourceItem.Exists or in_sourceItem.Directory then
+		        LogError CurrentMethodName, "in_sourceItem does not exist"
+		        Exit
+		      end if
+		      
+		      if in_targetItem = nil then
+		        LogError CurrentMethodName, "in_targetItem = nil"
+		        Exit
+		      end if
+		      
+		      if in_targetItem.Exists then
+		        LogError CurrentMethodName, "in_targetItem already exists"
+		        Exit
+		      end if
+		      
+		      Dim tis as TextInputStream
+		      tis = TextInputStream.Open(in_sourceItem)
+		      if tis = nil then
+		        LogError CurrentMethodName, "Cannot open text file"
+		        Exit
+		      end if
+		      
+		      Dim fileText as String
+		      fileText = tis.ReadAll
+		      tis.Close
+		      
+		      Dim textChopped as String 
+		      textChopped = fileText
+		      
+		      Dim generatedText as String
+		      
+		      Static placeholderMatch as RegEx
+		      if placeholderMatch = nil then
+		        placeHolderMatch = new RegEx
+		        placeholderMatch.SearchPattern = "^[a-z][a-z0-9_-]*$"
+		        placeholderMatch.Options.CaseSensitive = false
+		      end if
+		      
+		      Dim placeholderStartPos as Integer
+		      placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		      while placeholderStartPos > 0
+		        
+		        if placeholderStartPos > 1 then
+		          generatedText = generatedText + textChopped.Left(placeholderStartPos - 1)
+		        end if
+		        
+		        textChopped = textChopped.mid(placeHolderStartPos + Len(kPlaceholderPrefixSuffix))
+		        
+		        Dim placeholderEndPos as integer
+		        placeholderEndPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		        
+		        if placeholderEndPos <= 0 then
+		          
+		          placeholderStartPos = -1
+		          
+		        else
+		          
+		          Dim possiblePlaceholder as String
+		          possiblePlaceholder = Left(textChopped, placeholderEndPos - 1)
+		          
+		          if placeHolderMatch.Search(possiblePlaceholder) = nil then
+		            
+		            placeholderStartPos = placeholderEndPos
+		            
+		          else
+		            
+		            Dim placeholder as String
+		            placeholder = possiblePlaceholder.Uppercase()
+		            
+		            textChopped = textChopped.mid(placeholderEndPos + Len(kPlaceholderPrefixSuffix))
+		            
+		            placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		            
+		            generatedText = generatedText + fPlaceholderDict.Value(placeholder)
+		            
+		          end if
+		        end if
+		      wend
+		      
+		      generatedText = generatedText + textChopped
+		      
+		      Dim tos as TextOutputStream
+		      tos = TextOutputStream.Create(in_targetItem)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create text file"
+		        Exit
+		      end if
+		      
+		      tos.Write generatedText
+		      tos.Close
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub GenerateProjectItemFromTemplate(in_selectedVersion as String, in_sourceItem as FolderItem, in_targetItem as FolderItem)
+		  do
+		    try 
+		      
+		      if in_sourceItem = nil then
+		        LogError CurrentMethodName, "in_sourceItem = nil"
+		        Exit
+		      end if
+		      
+		      if not in_sourceItem.Exists then
+		        LogError CurrentMethodName, "in_sourceItem does not exist"
+		        Exit
+		      end if
+		      
+		      if in_targetItem = nil then
+		        LogError CurrentMethodName, "in_targetItem = nil"
+		        Exit
+		      end if
+		      
+		      if not in_sourceItem.Directory then
+		        GenerateProjectFileFromTemplateFile in_selectedVersion, in_sourceItem, in_targetItem
+		        Exit
+		      end if
+		      
+		      if not in_targetItem.Exists then
+		        in_targetItem.CreateAsFolder
+		      end if
+		      
+		      if not in_targetItem.Directory then
+		        LogError CurrentMethodName, "in_targetItem is not a directory"
+		        Exit
+		      end if
+		      
+		      Dim fileCount as integer
+		      fileCount = in_sourceItem.Count
+		      
+		      for idx as integer = 1 to fileCount
+		        
+		        try 
+		          
+		          Dim subItem as FolderItem
+		          subItem = in_sourceItem.Item(idx)
+		          
+		          Dim subItemName as String
+		          subItemName = subItem.Name
+		          
+		          if IsVersionedFolder(subItem) then
+		            
+		            if subItem.name = in_selectedVersion then
+		              GenerateProjectItemFromTemplate in_selectedVersion, subItem, in_targetItem
+		            end if
+		            
+		          else
+		            
+		            Dim targetItem as FolderItem
+		            targetItem = in_targetItem.Child(subItemName)
+		            
+		            GenerateProjectItemFromTemplate in_selectedVersion, subItem, targetItem
+		            
+		          end if
+		          
+		        catch e as RuntimeException
+		          LogError CurrentMethodName, "Copy loop throws " + e.Message
+		        end try
+		        
+		      next
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Handle_BtnCancel_Action()
+		  AppQuit
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Handle_BtnGenerate_Action()
+		  Generate
+		  AppQuit
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Handle_Close()
+		  AppQuit
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Handle_Open()
+		  do 
+		    Init
+		    
+		    if not CheckIfPristine then
+		      ReportError "This project has already been generated. Please unzip the original folder and try again with a clean copy"
+		    end if
+		    
+		    if fErrorMessage <> "" then
+		      MsgBox fErrorMessage
+		      AppQuit
+		      Exit
+		    end if
+		    
+		    UpdateUI
+		    
+		  loop until True
 		End Sub
 	#tag EndMethod
 
@@ -244,22 +620,30 @@ End
 		      
 		      Dim appFolder as FolderItem
 		      appFolder = GetFolderItem("")
-		      
-		      fProjectHomeFolder = appFolder.Parent
-		      while (fProjectHomeFolder <> nil) and (fProjectHomeFolder.Name <> kProjectHomeFolderName)
-		        fProjectHomeFolder = fProjectHomeFolder.Parent
-		      wend
-		      
-		      if fProjectHomeFolder = nil then
-		        LogError CurrentMethodName, "Cannot find project home folder '" + kProjectHomeFolderName + "'"
-		        ReportError "Cannot find project home folder '" + kProjectHomeFolderName + "'"
+		      if appFolder = nil then
+		        LogError CurrentMethodName, "appFolder = nil"
+		        ReportError "Fatal error: app cannot locate its own folder"
 		        Exit
 		      end if
 		      
-		      fTemplateFolder = fProjectHomeFolder.Child(kTemplatesFolderName)
+		      fTemplateFolder = nil
+		      fProjectRootFolder = appFolder
+		      
+		      do
+		        fProjectRootFolder = fProjectRootFolder.parent
+		        if fProjectRootFolder <> nil then
+		          fTemplateFolder = fProjectRootFolder.Child(kTemplatesFolderName)
+		        end if
+		      Loop until fProjectRootFolder = nil or (fTemplateFolder <> nil and fTemplateFolder.Directory)
+		      
+		      if fProjectRootFolder = nil then
+		        LogError CurrentMethodName, "Cannot locate project root folder"
+		        ReportError "Cannot locate project root folder"
+		        Exit
+		      end if
+		      
 		      if fTemplateFolder = nil or not fTemplateFolder.Directory then
 		        LogError CurrentMethodName, "Cannot find project templates folder '" + kTemplatesFolderName + "'"
-		        ReportError "Cannot find project templates folder '" + kTemplatesFolderName + "'"
 		        Exit
 		      end if
 		      
@@ -312,8 +696,45 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub LogError(in_methodName as String, in_message as String)
+		Function IsVersionedFolder(in_folder as FolderItem) As Boolean
+		  Dim retVal as Boolean
 		  
+		  do
+		    
+		    try 
+		      
+		      if in_folder = nil or not in_folder.Directory then
+		        Exit
+		      end if
+		      
+		      Dim folderName as String
+		      folderName = in_folder.Name
+		      
+		      Static versionedFolderRegEx as RegEx
+		      if versionedFolderRegEx = nil then
+		        versionedFolderRegEx = new RegEx
+		        versionedFolderRegEx.SearchPattern = "^\d\.x$"
+		        versionedFolderRegEx.Options.CaseSensitive = false
+		      end if
+		      
+		      if versionedFolderRegEx.Search(folderName) <> nil then
+		        retVal = true
+		      end if
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogError(in_methodName as String, in_message as String)
+		  // TODO when needed. This is a simple project, and I've not needed any advanced logging or debugging
+		  // just yet.
 		End Sub
 	#tag EndMethod
 
@@ -323,18 +744,18 @@ End
 		    
 		    try 
 		      
-		      if fProjectHomeFolder = nil then
-		        LogError CurrentMethodName, "fProjectHomeFolder = nil"
+		      if fProjectRootFolder = nil then
+		        LogError CurrentMethodName, "fProjectRootFolder = nil"
 		        Exit
 		      end if
 		      
-		      if not fProjectHomeFolder.Directory then
-		        LogError CurrentMethodName, "fProjectHomeFolder does not exist"
+		      if not fProjectRootFolder.Directory then
+		        LogError CurrentMethodName, "fProjectRootFolder does not exist"
 		        Exit
 		      end if
 		      
 		      Dim projectConfigFile as FolderItem
-		      projectConfigFile = fProjectHomeFolder.Child(kProjectConfigFileName)
+		      projectConfigFile = fProjectRootFolder.Child(kProjectConfigFileName)
 		      if projectConfigFile = nil then
 		        LogError CurrentMethodName, "projectConfigFile = nil"
 		        Exit
@@ -411,6 +832,7 @@ End
 		  do 
 		    
 		    try 
+		      
 		      if in_textFile = nil then
 		        LogError CurrentMethodName, "in_textFile is nil"
 		        Exit
@@ -435,10 +857,12 @@ End
 		      Dim textChopped as String 
 		      textChopped = fileText
 		      
-		      Dim placeholderMatch as RegEx
-		      placeHolderMatch = new RegEx
-		      placeholderMatch.SearchPattern = "^[a-z][a-z0-9_-]*$"
-		      placeholderMatch.Options.CaseSensitive = false
+		      Static placeholderMatch as RegEx
+		      if placeholderMatch = nil then
+		        placeHolderMatch = new RegEx
+		        placeholderMatch.SearchPattern = "^[a-z][a-z0-9_-]*$"
+		        placeholderMatch.Options.CaseSensitive = false
+		      end if
 		      
 		      Dim placeholderStartPos as Integer
 		      placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
@@ -486,6 +910,8 @@ End
 	#tag Method, Flags = &h0
 		Sub UpdateUI()
 		  do 
+		    LstConfigStrings.TextSize = 10
+		    LstConfigStrings.DefaultRowHeight = 14
 		    
 		    PupCEPVersion.DeleteAllRows
 		    Dim highestVersion as double
@@ -540,7 +966,11 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		fProjectHomeFolder As FolderItem
+		fProjectRootFolder As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		fQuitting As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -572,16 +1002,15 @@ End
 #tag Events BtnGenerate
 	#tag Event
 		Sub Action()
-		  Generate
-		  Quit
-		  
+		  Handle_BtnGenerate_Action
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events BtnCancel
 	#tag Event
 		Sub Action()
-		  Quit
+		  Handle_BtnCancel_Action
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
