@@ -1,11 +1,9 @@
-devtools/exe/mac/cefclient.app
-devtools/exe/win/cefclient_win
+.DS_Store
+./build
+./css
+./html
+./js
+./jsx
 ToolSources/CEPSparkerConfig/Builds*
 ToolSources/CEPSparkerConfig/*.xojo_uistate
-build
-css
-html
-js
-jsx
-.DS_Store
 ToolSources/CEPSparkerConfig/CEPSparkerConfig.debug.app

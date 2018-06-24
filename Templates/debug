@@ -3,9 +3,9 @@
     The ant build task will convert this to a .debug file 
 -->
 <ExtensionList>
-    <Extension Id="com.rorohiko.textexporter4.ui">
+    <Extension Id="$$EXTENSION_ID$$">
         <HostList>          
-            <Host Name="IDSN" Port="8111" /> 
+            <Host Name="$$TARGETAPP$$" Port="$$DEBUGPORT$$" /> 
  		</HostList>
     </Extension>
 </ExtensionList>

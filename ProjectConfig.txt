@@ -1,12 +1,19 @@
 #
-# This file is used to populate the template files in the project
-#
 # The values below are the default shown when you run the CEPSparkerConfig app
 # This app will read the templates, find the placeholder strings in them, and 
 # will use search-and-replace to create the actual files needed for the project
 #
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
+HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"
 EXTENSION_BUNDLENAME="Rorohiko CEP Sparker"
+HELP_EXTENSION_BUNDLENAME="Descriptive name for the extension"
 EXTENSION_VERSION="1.0.0"
+HELP_EXTENSION_VERSION="Initial version number for the extension"
 EXTENSION_ID="com.rorohiko.cepsparker.samplepanel"
+HELP_EXTENSION_ID="A unique identifier for the panel within the extension. It is recommended to use a reverse domain (DNS) name"
 EXTENSION_MENUNAME="Rorohiko CEP Sparker"
+HELP_EXTENSION_MENUNAME="Menu item used to activate the panel from the Adobe application"
+TARGETAPP="INDD"
+HELP_TARGETAPP="4-letter code identifying the target Adobe application"
+SHORTCODE="SPRK"
+HELP_SHORTCODE="Some variable name for global object used to store js/jsx globals. Helps avoiding variable name clashes."
