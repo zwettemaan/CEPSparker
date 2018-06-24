@@ -1,5 +1,7 @@
 # CEPSparker
 
+  **** NOTE: THIS PROJECT IS INCOMPLETE. DO NOT TRY TO USE IT YET
+
 Starter project for developing CEP panels to be used with Adobe applications
 
 © 2018, Rorohiko Ltd. - Kris Coppieters
@@ -58,8 +60,9 @@ CEP versions as possible.
 
 ## CEPSparkerConfig
 
-_CEPSparkerConfig_ is written in Xojo (sources are provided). I used
-Xojo so I could easily provide WYSIWYG apps for Mac and Windows. 
+_CEPSparkerConfig_ is written in Xojo (sources are provided). 
+
+I used Xojo so I could easily provide WYSIWYG apps for Mac and Windows. 
 
 However, the _CEPSparker_ project is not dependent on Xojo: _CEPSparkerConfig_
 does not contain any 'secret sauce' and you can easily perform the same
