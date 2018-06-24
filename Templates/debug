@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    The ant build task will convert this to a .debug file 
+-->
+<ExtensionList>
+    <Extension Id="com.rorohiko.textexporter4.ui">
+        <HostList>          
+            <Host Name="IDSN" Port="8111" /> 
+ 		</HostList>
+    </Extension>
+</ExtensionList>
