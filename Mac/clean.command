@@ -11,7 +11,7 @@ export projectHomeDir=`dirname "$scriptDir"`
 cd "$projectHomeDir"
 
 export EXTENSION_DIRNAME=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionDirName.txt"`
-export EXTENSION_HOMEDIR="~/Library/Application\ Support/Adobe/CEP/extensions/$EXTENSION_DIRNAME"
+export EXTENSION_HOMEDIR=~/Library/Application\ Support/Adobe/CEP/extensions/"$EXTENSION_DIRNAME"
 
 rm -rf LocalLinks
 rm -rf build
