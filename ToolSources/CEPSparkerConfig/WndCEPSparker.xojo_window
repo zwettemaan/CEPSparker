@@ -287,28 +287,32 @@ End
 		        Exit
 		      end if
 		      
-		      if fCSXSTemplatesFolder = nil then
-		        LogError CurrentMethodName, "fCSXSTemplatesFolder = nil"
+		      if fTemplatesFolder = nil then
+		        LogError CurrentMethodName, "fTemplatesFolder = nil"
 		        Exit
 		      end if
 		      
-		      if not fCSXSTemplatesFolder.Directory then
-		        LogError CurrentMethodName, "fCSXSTemplatesFolder does not exist"
+		      if not fTemplatesFolder.Directory then
+		        LogError CurrentMethodName, "fTemplatesFolder does not exist"
 		        Exit
 		      end if
-		      
-		      Dim fileCount as integer
-		      fileCount = fCSXSTemplatesFolder.Count
 		      
 		      retVal = true
+		      
+		      if DebugBuild then
+		        Exit
+		      end if
 		      
 		      // Bail out if any of the template subfolders exists in the 
 		      // project folder: the project has already been generated
 		      
+		      Dim fileCount as integer
+		      fileCount = fTemplatesFolder.Count
+		      
 		      for idx as integer = 1 to fileCount
 		        try 
 		          Dim subFile as FolderItem
-		          subFile = fCSXSTemplatesFolder.Item(idx)
+		          subFile = fTemplatesFolder.Item(idx)
 		          if subFile.Directory then
 		            if fProjectRootFolder.Child(subFile.Name).Exists then
 		              retVal = false
@@ -316,7 +320,7 @@ End
 		            end if
 		          end if
 		        catch e as RuntimeException
-		          
+		          LogError CurrentMethodName, "Loop throws " + e.Message
 		        end try
 		      next
 		      
@@ -362,6 +366,32 @@ End
 		        Exit
 		      end if
 		      
+		      Dim macScriptFolder as FolderItem
+		      macScriptFolder = fProjectRootFolder.Child(kMacScriptFolder)
+		      
+		      if macScriptFolder = nil then
+		        LogError CurrentMethodName, "macScriptFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not macScriptFolder.Directory then
+		        LogError CurrentMethodName, "macScriptFolder does not exist"
+		        Exit
+		      end if
+		      
+		      Dim winScriptFolder as FolderItem
+		      winScriptFolder = fProjectRootFolder.Child(kWinScriptFolder)
+		      
+		      if winScriptFolder = nil then
+		        LogError CurrentMethodName, "winScriptFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not winScriptFolder.Directory then
+		        LogError CurrentMethodName, "winScriptFolder does not exist"
+		        Exit
+		      end if
+		      
 		      Dim maxPlaceholderIdx as Integer
 		      maxPlaceholderIdx = LstConfigStrings.ListCount - 1
 		      
@@ -378,6 +408,67 @@ End
 		      next
 		      
 		      GenerateProjectItemFromTemplate selectedVersion, fTemplatesFolder, fProjectRootFolder
+		      
+		      Dim extensionVersion as String
+		      extensionVersion = fPlaceholderDict.Value(kPlaceholder_ExtensionVersion)
+		      
+		      Dim generatedMacProjectSettings as String
+		      Dim generatedWinProjectSettings as String
+		      
+		      generatedMacProjectSettings = "export " + kPlaceholder_CEPVersion + "=" + CHR(34) + selectedVersion + Chr(34) + Chr(10)
+		      generatedWinProjectSettings = "SET " + kPlaceholder_CEPVersion + "=" + selectedVersion + Chr(13) + CHR(10)
+		      
+		      for idx as integer = 0 to UBound(fPlaceholders)
+		        
+		        Dim placeholder as String
+		        placeholder = fPlaceholders(idx)
+		        
+		        if placeholder <> kPlaceholder_ExtensionVersion then
+		          Dim value as String
+		          value = fPlaceholderDict.Value(placeholder)
+		          
+		          generatedMacProjectSettings = generatedMacProjectSettings + "export " + placeholder + "=" + Chr(34) + value + Chr(34) + Chr(10)
+		          generatedWinProjectSettings = generatedWinProjectSettings + "SET " + placeholder + "=" + value + Chr(13) + CHR(10)
+		        end if
+		        
+		      next
+		      
+		      Dim generatedMacSettingsFile as FolderItem
+		      generatedMacSettingsFile = macScriptFolder.Child(kGeneratedProjectConfigFileName + ".command")
+		      
+		      Dim tos as TextOutputStream
+		      tos = TextOutputStream.Create(generatedMacSettingsFile)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create Mac text file"
+		        Exit
+		      end if
+		      
+		      tos.Write generatedMacProjectSettings
+		      tos.Close
+		      
+		      Dim generatedWinSettingsFile as FolderItem
+		      generatedWinSettingsFile = winScriptFolder.Child(kGeneratedProjectConfigFileName + ".bat")
+		      
+		      tos = TextOutputStream.Create(generatedWinSettingsFile)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create Windows text file"
+		        Exit
+		      end if
+		      
+		      tos.Write generatedWinProjectSettings
+		      tos.Close
+		      
+		      Dim extensionVersionFile as FolderItem
+		      extensionVersionFile = fProjectRootFolder.Child(kExtensionVersionFile)
+		      
+		      tos = TextOutputStream.Create(extensionVersionFile)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create version text file"
+		        Exit
+		      end if
+		      
+		      tos.Write extensionVersion
+		      tos.Close
 		      
 		    catch e as RuntimeException
 		      LogError CurrentMethodName, "Throws " + e.Message
@@ -801,7 +892,7 @@ End
 		            if left(value, 1) = Chr(34) and right(value,1) = Chr(34) then
 		              value = value.Mid(2, value.len - 2)
 		            end if
-		            if left(placeholder, 5) = "HELP_" then
+		            if left(placeholder, kPlaceHolderPrefix_Help.Len) = kPlaceHolderPrefix_Help then
 		              placeholder = Mid(placeholder,6)
 		              io_helpStrings.Value(placeholder) = value
 		            else
@@ -1039,10 +1130,28 @@ End
 	#tag Constant, Name = kCSXSFolderName, Type = String, Dynamic = False, Default = \"CSXS", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kExtensionVersionFile, Type = String, Dynamic = False, Default = \"ExtensionVersion.txt", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kGeneratedProjectConfigFileName, Type = String, Dynamic = False, Default = \"ProjectSettings", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kMacScriptFolder, Type = String, Dynamic = False, Default = \"Mac", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kManifestFileName, Type = String, Dynamic = False, Default = \"manifest.xml", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kPlaceholderPrefixSuffix, Type = String, Dynamic = False, Default = \"$$", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPlaceHolderPrefix_Help, Type = String, Dynamic = False, Default = \"HELP_", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPlaceholder_CEPVersion, Type = String, Dynamic = False, Default = \"CEPVERSION", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPlaceholder_ExtensionVersion, Type = String, Dynamic = False, Default = \"EXTENSION_VERSION", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kProjectConfigFileName, Type = String, Dynamic = False, Default = \"ProjectConfig.txt", Scope = Public
@@ -1052,6 +1161,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kTemplatesFolderName, Type = String, Dynamic = False, Default = \"Templates", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kWinScriptFolder, Type = String, Dynamic = False, Default = \"Windows", Scope = Public
 	#tag EndConstant
 
 

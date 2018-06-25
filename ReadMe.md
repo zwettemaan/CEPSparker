@@ -83,7 +83,7 @@ around.
 
 In order to help you with that, there is a script called `setupLocalLinks`
 
-There is a Mac version in the _Mac_ folder and a Windows version in the _Win_
+There is a Mac version in the _Mac_ folder and a Windows version in the _Windows_
 folder
 
 The Mac version is called `setupLocalLinks.command`. The Windows version is 
