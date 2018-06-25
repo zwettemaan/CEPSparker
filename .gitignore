@@ -1,9 +1,11 @@
 .DS_Store
-./build
-./css
-./html
-./js
-./jsx
+/build
+/css
+/CSXS
+/html
+/js
+/jsx
+/js_jsx
 ToolSources/CEPSparkerConfig/Builds*
 ToolSources/CEPSparkerConfig/*.xojo_uistate
 ToolSources/CEPSparkerConfig/CEPSparkerConfig.debug.app

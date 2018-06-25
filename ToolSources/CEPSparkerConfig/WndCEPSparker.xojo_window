@@ -674,8 +674,10 @@ End
 		      fCSXSVersionList.SortWith(fCSXSManifestTemplateList)
 		      
 		      fPlaceholderDict = new Dictionary
-		      ParseTemplates fPlaceholderDict
-		      ParseConfigFile fPlaceholderDict
+		      ParseTemplates fTemplatesFolder, fPlaceholderDict
+		      
+		      fHelpStringDict = new Dictionary
+		      ParseConfigFile fPlaceholderDict, fHelpStringDict
 		      
 		      Redim fPlaceholders(-1)
 		      
@@ -739,7 +741,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ParseConfigFile(io_placeholders as Dictionary)
+		Sub ParseConfigFile(io_placeholders as Dictionary, io_helpStrings as Dictionary)
 		  do 
 		    
 		    try 
@@ -799,7 +801,12 @@ End
 		            if left(value, 1) = Chr(34) and right(value,1) = Chr(34) then
 		              value = value.Mid(2, value.len - 2)
 		            end if
-		            io_placeholders.Value(placeholder) = value
+		            if left(placeholder, 5) = "HELP_" then
+		              placeholder = Mid(placeholder,6)
+		              io_helpStrings.Value(placeholder) = value
+		            else
+		              io_placeholders.Value(placeholder) = value
+		            end if
 		          end if
 		        end if
 		      next
@@ -813,17 +820,54 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ParseManifest(in_manifestTemplateFile as FolderItem, io_placeholders as Dictionary)
-		  ParseTextFile in_manifestTemplateFile, io_placeholders
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub ParseTemplates(io_placeholders as Dictionary)
-		  for each manifestTemplateFile as FolderItem in fCSXSManifestTemplateList
-		    ParseManifest manifestTemplateFile, io_placeholders
-		  next
-		  
+		Sub ParseTemplates(in_sourceFolder as FolderItem, io_placeholders as Dictionary)
+		  do
+		    try 
+		      
+		      if in_sourceFolder = nil then
+		        LogError CurrentMethodName, "fTemplatesFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not in_sourceFolder.Directory then
+		        LogError CurrentMethodName, "in_sourceFolder does not exist"
+		        Exit
+		      end if
+		      
+		      Dim fileCount as integer
+		      fileCount = in_sourceFolder.Count
+		      
+		      for idx as integer = 1 to fileCount
+		        
+		        try 
+		          
+		          Dim subItem as FolderItem
+		          subItem = in_sourceFolder.Item(idx)
+		          
+		          Dim subItemName as String
+		          subItemName = subItem.Name
+		          
+		          if not subItem.Directory then
+		            
+		            ParseTextFile subItem, io_placeholders
+		            
+		          else
+		            
+		            ParseTemplates subItem, io_placeholders
+		            
+		          end if
+		          
+		        catch e as RuntimeException
+		          LogError CurrentMethodName, "Copy loop throws " + e.Message
+		        end try
+		        
+		      next
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
 		End Sub
 	#tag EndMethod
 
@@ -931,9 +975,19 @@ End
 		    
 		    LstConfigStrings.DeleteAllRows
 		    for idx as integer = 0 to UBound(fPlaceholders)
-		      LstConfigStrings.AddRow fPlaceholders(idx)
-		      LstConfigStrings.Cell(idx,1) = fPlaceholderDict.Value(fPlaceholders(idx))
-		      LstConfigStrings.CellType(idx, 1) = Listbox.TypeEditableTextField
+		      Dim placeholder as String
+		      placeholder = fPlaceholders(idx)
+		      LstConfigStrings.AddRow placeholder
+		      if fPlaceholderDict.HasKey(placeholder) then
+		        LstConfigStrings.Cell(idx,1) = fPlaceholderDict.Value(placeholder)
+		        LstConfigStrings.CellType(idx, 1) = Listbox.TypeEditableTextField
+		        if fHelpStringDict.HasKey(placeholder) then
+		          Dim helpString as String
+		          helpString = fHelpStringDict.Value(placeholder)
+		          LstConfigStrings.CellHelpTag(idx,0) = helpString
+		          LstConfigStrings.CellHelpTag(idx,1) = helpString
+		        end if 
+		      end if
 		    next
 		    
 		  Loop until true
@@ -955,6 +1009,10 @@ End
 
 	#tag Property, Flags = &h0
 		fErrorMessage As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		fHelpStringDict As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
