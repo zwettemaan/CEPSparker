@@ -28,8 +28,14 @@ HELP_SHORTCODE="Some variable name for global object used to store js/jsx global
 DEBUGPORT=8888
 HELP_DEBUGPORT="This is the port to use for debugging with Chrome (e.g. http://localhost:8888)"
 
-PREFS_DIRNAME=CEPSparker
-HELP_PREFS_DIRNAME="This is a subfolder name to store preferences in ~/Library/Preferences or %APPDATA%"
+EXTENSION_DIRNAME=CEPSparker
+HELP_EXTENSION_DIRNAME="This is a subfolder name used to store the extension in the local extension folder, and to store preferences in ~/Library/Preferences or %APPDATA%"
 
 PREFS_FILENAME=CEPSparkerPreferences.json
 HELP_PREFS_FILENAME="This is a file name name to store preferences in the preferences subfolder"
+
+PANELHEIGHT=700
+HELP_PANELHEIGHT="Panel height in manifest file"
+
+PANELWIDTH=570
+HELP_PANELHEIGHT="Panel width in manifest file"

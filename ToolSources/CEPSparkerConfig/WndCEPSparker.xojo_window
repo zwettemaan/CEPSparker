@@ -409,57 +409,27 @@ End
 		      
 		      GenerateProjectItemFromTemplate selectedVersion, fTemplatesFolder, fProjectRootFolder
 		      
+		      Dim buildSettingsFolder as FolderItem
+		      buildSettingsFolder = fProjectRootFolder.Child(kBuildSettingsFolderName)
+		      if not buildSettingsFolder.Exists then
+		        buildSettingsFolder.CreateAsFolder
+		      end if
+		      
+		      if not buildSettingsFolder.Directory then
+		        LogError CurrentMethodName, "buildSettingsFolder is not a directory"
+		        Exit
+		      end if
+		      
 		      Dim extensionVersion as String
 		      extensionVersion = fPlaceholderDict.Value(kPlaceholder_ExtensionVersion)
 		      
-		      Dim generatedMacProjectSettings as String
-		      Dim generatedWinProjectSettings as String
-		      
-		      generatedMacProjectSettings = "export " + kPlaceholder_CEPVersion + "=" + CHR(34) + selectedVersion + Chr(34) + Chr(10)
-		      generatedWinProjectSettings = "SET " + kPlaceholder_CEPVersion + "=" + selectedVersion + Chr(13) + CHR(10)
-		      
-		      for idx as integer = 0 to UBound(fPlaceholders)
-		        
-		        Dim placeholder as String
-		        placeholder = fPlaceholders(idx)
-		        
-		        if placeholder <> kPlaceholder_ExtensionVersion then
-		          Dim value as String
-		          value = fPlaceholderDict.Value(placeholder)
-		          
-		          generatedMacProjectSettings = generatedMacProjectSettings + "export " + placeholder + "=" + Chr(34) + value + Chr(34) + Chr(10)
-		          generatedWinProjectSettings = generatedWinProjectSettings + "SET " + placeholder + "=" + value + Chr(13) + CHR(10)
-		        end if
-		        
-		      next
-		      
-		      Dim generatedMacSettingsFile as FolderItem
-		      generatedMacSettingsFile = macScriptFolder.Child(kGeneratedProjectConfigFileName + ".command")
-		      
-		      Dim tos as TextOutputStream
-		      tos = TextOutputStream.Create(generatedMacSettingsFile)
-		      if tos = nil then
-		        LogError CurrentMethodName, "Cannot create Mac text file"
-		        Exit
-		      end if
-		      
-		      tos.Write generatedMacProjectSettings
-		      tos.Close
-		      
-		      Dim generatedWinSettingsFile as FolderItem
-		      generatedWinSettingsFile = winScriptFolder.Child(kGeneratedProjectConfigFileName + ".bat")
-		      
-		      tos = TextOutputStream.Create(generatedWinSettingsFile)
-		      if tos = nil then
-		        LogError CurrentMethodName, "Cannot create Windows text file"
-		        Exit
-		      end if
-		      
-		      tos.Write generatedWinProjectSettings
-		      tos.Close
+		      Dim extensionDirName as String
+		      extensionDirName = fPlaceholderDict.Value(kPlaceholder_ExtensionDirName)
 		      
 		      Dim extensionVersionFile as FolderItem
-		      extensionVersionFile = fProjectRootFolder.Child(kFileName_ExtensionVersion)
+		      extensionVersionFile = buildSettingsFolder.Child(kFileName_ExtensionVersion)
+		      
+		      Dim tos as TextOutputStream
 		      
 		      tos = TextOutputStream.Create(extensionVersionFile)
 		      if tos = nil then
@@ -471,7 +441,7 @@ End
 		      tos.Close
 		      
 		      Dim cepVersionFile as FolderItem
-		      cepVersionFile = fProjectRootFolder.Child(kFileName_CEPVersion)
+		      cepVersionFile = buildSettingsFolder.Child(kFileName_CEPVersion)
 		      
 		      tos = TextOutputStream.Create(cepVersionFile)
 		      if tos = nil then
@@ -480,6 +450,18 @@ End
 		      end if
 		      
 		      tos.Write selectedVersion
+		      tos.Close
+		      
+		      Dim extensionDirNameFile as FolderItem
+		      extensionDirNameFile = buildSettingsFolder.Child(kFileName_ExtensionDirName)
+		      
+		      tos = TextOutputStream.Create(extensionDirnameFile)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create dirname text file"
+		        Exit
+		      end if
+		      
+		      tos.Write extensionDirName
 		      tos.Close
 		      
 		    catch e as RuntimeException
@@ -1139,10 +1121,16 @@ End
 	#tag EndProperty
 
 
+	#tag Constant, Name = kBuildSettingsFolderName, Type = String, Dynamic = False, Default = \"BuildSettings", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kCSXSFolderName, Type = String, Dynamic = False, Default = \"CSXS", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kFileName_CEPVersion, Type = String, Dynamic = False, Default = \"CEPVersion.txt", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileName_ExtensionDirName, Type = String, Dynamic = False, Default = \"ExtensionDirName.txt", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kFileName_ExtensionVersion, Type = String, Dynamic = False, Default = \"ExtensionVersion.txt", Scope = Public
@@ -1164,6 +1152,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kPlaceholder_CEPVersion, Type = String, Dynamic = False, Default = \"CEPVERSION", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPlaceholder_ExtensionDirName, Type = String, Dynamic = False, Default = \"EXTENSION_DIRNAME", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kPlaceholder_ExtensionVersion, Type = String, Dynamic = False, Default = \"EXTENSION_VERSION", Scope = Public
@@ -1429,5 +1420,10 @@ End
 		Group="Behavior"
 		Type="String"
 		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="fQuitting"
+		Group="Behavior"
+		Type="Boolean"
 	#tag EndViewProperty
 #tag EndViewBehavior

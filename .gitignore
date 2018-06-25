@@ -1,10 +1,7 @@
 .DS_Store
-ExtensionVersion.txt
 ToolSources/CEPSparkerConfig/Builds*
 ToolSources/CEPSparkerConfig/*.xojo_uistate
 ToolSources/CEPSparkerConfig/CEPSparkerConfig.debug.app
-Mac/ProjectSettings.command
-Windows/ProjectSettings.bat
 /build
 /debug
 /css
@@ -14,4 +11,5 @@ Windows/ProjectSettings.bat
 /jsx
 /js_jsx
 /shared_js_jsx
-CEPVersion.txt
+/LocalLinks
+/BuildSettings

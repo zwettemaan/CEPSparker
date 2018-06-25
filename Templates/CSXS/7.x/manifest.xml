@@ -6,7 +6,7 @@
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
-			<Host Name="IDSN" Version="[12,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[12,99)" />
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
@@ -33,19 +33,19 @@
 				</Lifecycle>
 				<UI>
 					<Type>ModalDialog</Type>
-					<Menu>TextExporter</Menu>
+					<Menu>$$EXTENSION_MENUNAME$$</Menu>
 					<Geometry>
 						<Size>
-							<Height>700</Height>
-							<Width>570</Width>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
 						</Size>
 						<MinSize>
-							<Height>700</Height>
-							<Width>570</Width>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
 						</MinSize>
 						<MaxSize>
-							<Height>700</Height>
-							<Width>570</Width>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
 						</MaxSize>
 					</Geometry>
 				</UI>
