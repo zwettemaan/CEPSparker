@@ -1,0 +1,7 @@
+    <script type="text/javascript">
+        window.nodeRequire = window.require || function () {}; 
+        window.nodeModule = window.module; 
+        delete window.module; 
+        window.nodeGlobal = window.global; 
+        delete window.global;
+    </script>

@@ -6,7 +6,9 @@
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
+$if "$$TARGETAPP$$" == "IDSN"
 			<Host Name="$$TARGETAPP$$" Version="[10,99)" />
+$endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />

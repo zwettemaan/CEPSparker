@@ -2,7 +2,7 @@ var $$SHORTCODE$$ = {};
 
 $$SHORTCODE$$.C = {}; // stash constants here
 
-$$SHORTCODE$$.C.EXTENSION_DIRNAME = "$$EXTENSION_DIRNAME$$";
+$$SHORTCODE$$.C.EXTENSION_DIRNAME    = "$$EXTENSION_DIRNAME$$";
 $$SHORTCODE$$.C.FILENAME_PREFERENCES = "$$PREFS_FILENAME$$";
 
 $$SHORTCODE$$.C.LOG_NONE                      = 0;

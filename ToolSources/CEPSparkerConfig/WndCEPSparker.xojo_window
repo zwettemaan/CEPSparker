@@ -335,6 +335,239 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function EvalCondition(in_condition as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    try 
+		      
+		      Dim leftSide as String
+		      Dim rightSide as String
+		      Dim operator as String
+		      
+		      Const kState_Idle = 0
+		      Const kState_LeftSide = 1
+		      Const kState_LeftSideQuoted = 2
+		      Const kState_LeftSideUnquoted = 3
+		      Const kState_Operator = 4
+		      Const kState_RightSide = 5
+		      Const kState_RightSideQuoted = 6
+		      Const kState_RightSideUnquoted = 7
+		      Const kState_Done = 8
+		      
+		      Dim state as integer
+		      state = kState_Idle
+		      
+		      Dim pos as integer
+		      while pos <= Len(in_condition) 
+		        Dim c as String
+		        c = Mid(in_condition, pos, 1)
+		        pos = pos + 1
+		        
+		        select case state
+		        case kState_Idle
+		          if c > " " then
+		            pos = pos - 1
+		            state = kState_LeftSide
+		          end if
+		        case kState_LeftSide
+		          if c = Chr(34) then
+		            state = kState_LeftSideQuoted
+		          else
+		            leftSide = leftSide + c
+		            state = kState_LeftSideUnquoted
+		          end if
+		        case kState_LeftSideQuoted
+		          if c = Chr(34) then
+		            state = kState_Operator
+		          else
+		            leftSide = leftSide + c
+		          end if
+		        case kState_LeftSideUnquoted
+		          if c <= " " then
+		            state = kState_Operator
+		          else
+		            leftSide = leftSide + c
+		          end if
+		        case kState_Operator
+		          if c = "=" or c = ">" or c = "<" or c = "!" then
+		            operator = operator + c
+		          elseif c > " " then
+		            state = kState_RightSide
+		            pos = pos - 1
+		          end if
+		        case kState_RightSide
+		          if c = Chr(34) then
+		            state = kState_RightSideQuoted
+		          else
+		            rightSide = rightSide + c
+		            state = kState_RightSideUnquoted
+		          end if
+		        case kState_RightSideQuoted
+		          if c = Chr(34) then
+		            state = kState_Done
+		          else
+		            rightSide = rightSide + c
+		          end if
+		        case kState_RightSideUnquoted
+		          if c <= " " then
+		            state = kState_Done
+		          else
+		            rightSide = rightSide + c
+		          end if
+		        end select
+		      wend
+		      
+		      Select case operator
+		      case "=", "=="
+		        retVal = leftSide = rightSide
+		      case "<"
+		        retVal = leftSide < rightSide
+		      case "<=", "=<"
+		        retVal = leftSide <= rightSide
+		      case ">=", "=>"
+		        retVal = leftSide >= rightSide
+		      case ">", ">"
+		        retVal = leftSide > rightSide
+		      case "<>", "!=", "><"
+		        retVal = leftSide <> rightSide
+		      end select
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ExtractPlaceholdersFromFile(in_textFile as FolderItem, io_placeholders as Dictionary)
+		  do 
+		    
+		    try 
+		      
+		      if in_textFile = nil then
+		        LogError CurrentMethodName, "in_textFile is nil"
+		        Exit
+		      end if
+		      
+		      if not in_textFile.Exists or in_textFile.Directory then
+		        LogError CurrentMethodName, "Text file does not exist"
+		        Exit
+		      end if
+		      
+		      Dim tis as TextInputStream
+		      tis = TextInputStream.Open(in_textFile)
+		      if tis = nil then
+		        LogError CurrentMethodName, "Cannot open text file"
+		        Exit
+		      end if
+		      
+		      Dim fileText as String
+		      fileText = tis.ReadAll
+		      tis.Close
+		      
+		      Dim textChopped as String 
+		      textChopped = fileText
+		      
+		      Static placeholderMatch as RegEx
+		      if placeholderMatch = nil then
+		        placeHolderMatch = new RegEx
+		        placeholderMatch.SearchPattern = "^[a-z][a-z0-9_-]*$"
+		        placeholderMatch.Options.CaseSensitive = false
+		      end if
+		      
+		      Dim placeholderStartPos as Integer
+		      placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		      while placeholderStartPos > 0
+		        textChopped = textChopped.mid(placeHolderStartPos + Len(kPlaceholderPrefixSuffix))
+		        
+		        Dim placeholderEndPos as integer
+		        placeholderEndPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		        
+		        if placeholderEndPos <= 0 then
+		          placeholderStartPos = -1
+		        else
+		          
+		          Dim possiblePlaceholder as String
+		          possiblePlaceholder = Left(textChopped, placeholderEndPos - 1)
+		          if placeHolderMatch.Search(possiblePlaceholder) = nil then
+		            placeholderStartPos = placeholderEndPos
+		          else
+		            Dim placeholder as String
+		            placeholder = possiblePlaceholder.Uppercase()
+		            io_placeholders.Value(placeholder) = ""
+		            
+		            textChopped = textChopped.mid(placeholderEndPos + Len(kPlaceholderPrefixSuffix))
+		            placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		          end if
+		        end if
+		      wend
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ExtractPlaceholdersFromTemplates(in_sourceFolder as FolderItem, io_placeholders as Dictionary)
+		  do
+		    try 
+		      
+		      if in_sourceFolder = nil then
+		        LogError CurrentMethodName, "fTemplatesFolder = nil"
+		        Exit
+		      end if
+		      
+		      if not in_sourceFolder.Directory then
+		        LogError CurrentMethodName, "in_sourceFolder does not exist"
+		        Exit
+		      end if
+		      
+		      Dim fileCount as integer
+		      fileCount = in_sourceFolder.Count
+		      
+		      for idx as integer = 1 to fileCount
+		        
+		        try 
+		          
+		          Dim subItem as FolderItem
+		          subItem = in_sourceFolder.Item(idx)
+		          
+		          Dim subItemName as String
+		          subItemName = subItem.Name
+		          
+		          if not subItem.Directory then
+		            
+		            ExtractPlaceholdersFromFile subItem, io_placeholders
+		            
+		          else
+		            
+		            ExtractPlaceholdersFromTemplates subItem, io_placeholders
+		            
+		          end if
+		          
+		        catch e as RuntimeException
+		          LogError CurrentMethodName, "Copy loop throws " + e.Message
+		        end try
+		        
+		      next
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Generate()
 		  do
 		    try 
@@ -365,6 +598,8 @@ End
 		        LogError CurrentMethodName, "no selectedVersion"
 		        Exit
 		      end if
+		      
+		      fPlaceholderDict.Value(kPlaceholder_CEPVersion) = selectedVersion
 		      
 		      Dim macScriptFolder as FolderItem
 		      macScriptFolder = fProjectRootFolder.Child(kMacScriptFolder)
@@ -497,71 +732,15 @@ End
 		        Exit
 		      end if
 		      
-		      Dim tis as TextInputStream
-		      tis = TextInputStream.Open(in_sourceItem)
-		      if tis = nil then
-		        LogError CurrentMethodName, "Cannot open text file"
+		      if left(in_sourceItem.Name, 1) = "." then
 		        Exit
 		      end if
 		      
-		      Dim fileText as String
-		      fileText = tis.ReadAll
-		      tis.Close
-		      
-		      Dim textChopped as String 
-		      textChopped = fileText
+		      Dim sourceText as String
+		      sourceText = ProcessIncludes(in_sourceItem)
 		      
 		      Dim generatedText as String
-		      
-		      Static placeholderMatch as RegEx
-		      if placeholderMatch = nil then
-		        placeHolderMatch = new RegEx
-		        placeholderMatch.SearchPattern = "^[a-z][a-z0-9_-]*$"
-		        placeholderMatch.Options.CaseSensitive = false
-		      end if
-		      
-		      Dim placeholderStartPos as Integer
-		      placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
-		      while placeholderStartPos > 0
-		        
-		        if placeholderStartPos > 1 then
-		          generatedText = generatedText + textChopped.Left(placeholderStartPos - 1)
-		        end if
-		        
-		        textChopped = textChopped.mid(placeHolderStartPos + Len(kPlaceholderPrefixSuffix))
-		        
-		        Dim placeholderEndPos as integer
-		        placeholderEndPos = textChopped.InStr(kPlaceholderPrefixSuffix)
-		        
-		        if placeholderEndPos <= 0 then
-		          
-		          placeholderStartPos = -1
-		          
-		        else
-		          
-		          Dim possiblePlaceholder as String
-		          possiblePlaceholder = Left(textChopped, placeholderEndPos - 1)
-		          
-		          if placeHolderMatch.Search(possiblePlaceholder) = nil then
-		            
-		            placeholderStartPos = placeholderEndPos
-		            
-		          else
-		            
-		            Dim placeholder as String
-		            placeholder = possiblePlaceholder.Uppercase()
-		            
-		            textChopped = textChopped.mid(placeholderEndPos + Len(kPlaceholderPrefixSuffix))
-		            
-		            placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
-		            
-		            generatedText = generatedText + fPlaceholderDict.Value(placeholder)
-		            
-		          end if
-		        end if
-		      wend
-		      
-		      generatedText = generatedText + textChopped
+		      generatedText = ReplacePlaceholders(sourceText)
 		      
 		      Dim tos as TextOutputStream
 		      tos = TextOutputStream.Create(in_targetItem)
@@ -625,21 +804,30 @@ End
 		          Dim subItem as FolderItem
 		          subItem = in_sourceItem.Item(idx)
 		          
-		          Dim subItemName as String
-		          subItemName = subItem.Name
-		          
-		          if IsVersionedFolder(subItem) then
+		          if not IsReservedSubitem(subItem) then
 		            
-		            if subItem.name = in_selectedVersion then
-		              GenerateProjectItemFromTemplate in_selectedVersion, subItem, in_targetItem
+		            Dim subItemName as String
+		            subItemName = subItem.Name
+		            
+		            Dim selector as String
+		            Dim value as String
+		            Dim isConditionalFolder as Boolean
+		            isConditionalFolder = ParseConditionalFolderName(subItem, selector, value)
+		            
+		            if isConditionalFolder then
+		              
+		              if IsSelectedConditionalFolder(selector, value) then
+		                GenerateProjectItemFromTemplate in_selectedVersion, subItem, in_targetItem
+		              end if
+		              
+		            else
+		              
+		              Dim targetItem as FolderItem
+		              targetItem = in_targetItem.Child(subItemName)
+		              
+		              GenerateProjectItemFromTemplate in_selectedVersion, subItem, targetItem
+		              
 		            end if
-		            
-		          else
-		            
-		            Dim targetItem as FolderItem
-		            targetItem = in_targetItem.Child(subItemName)
-		            
-		            GenerateProjectItemFromTemplate in_selectedVersion, subItem, targetItem
 		            
 		          end if
 		          
@@ -739,19 +927,27 @@ End
 		        Exit
 		      end if
 		      
-		      Dim maxSubFolderIdx as Integer
-		      maxSubFolderIdx = fCSXSTemplatesFolder.Count
+		      Dim subItemCount as Integer
+		      subItemCount = fCSXSTemplatesFolder.Count
 		      
 		      Redim fCSXSVersionList(-1)
-		      for idx as integer = 1 to maxSubFolderIdx
+		      for idx as integer = 1 to subItemCount
 		        Dim subFolder as FolderItem
 		        subFolder = fCSXSTemplatesFolder.Item(idx)
-		        if subFolder <> nil and subFolder.Exists then
-		          Dim manifestFile as FolderItem
-		          manifestFile = subFolder.Child(kManifestFileName)
-		          if manifestFile <> nil and manifestFile.exists then
-		            fCSXSVersionList.Append subFolder.name
-		            fCSXSManifestTemplateList.Append manifestFile
+		        if subFolder <> nil and subFolder.Directory then
+		          
+		          Dim selector as String
+		          Dim value as String
+		          Dim isConditionalFolder as Boolean
+		          isConditionalFolder = ParseConditionalFolderName(subFolder, selector, value)
+		          
+		          if isConditionalFolder and selector = kSelector_CEPVersion then
+		            Dim manifestFile as FolderItem
+		            manifestFile = subFolder.Child(kManifestFileName)
+		            if manifestFile <> nil and manifestFile.exists then
+		              fCSXSVersionList.Append value
+		              fCSXSManifestTemplateList.Append manifestFile
+		            end if
 		          end if
 		        end if
 		      next
@@ -759,7 +955,7 @@ End
 		      fCSXSVersionList.SortWith(fCSXSManifestTemplateList)
 		      
 		      fPlaceholderDict = new Dictionary
-		      ParseTemplates fTemplatesFolder, fPlaceholderDict
+		      ExtractPlaceholdersFromTemplates fTemplatesFolder, fPlaceholderDict
 		      
 		      fHelpStringDict = new Dictionary
 		      ParseConfigFile fPlaceholderDict, fHelpStringDict
@@ -783,29 +979,72 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function IsVersionedFolder(in_folder as FolderItem) As Boolean
+		Function IsReservedSubitem(in_item as FolderItem) As Boolean
 		  Dim retVal as Boolean
 		  
 		  do
 		    
 		    try 
 		      
-		      if in_folder = nil or not in_folder.Directory then
+		      retVal = true
+		      
+		      if in_item = nil then
+		        LogError CurrentMethodName, "in_item = nil"
 		        Exit
 		      end if
 		      
-		      Dim folderName as String
-		      folderName = in_folder.Name
-		      
-		      Static versionedFolderRegEx as RegEx
-		      if versionedFolderRegEx = nil then
-		        versionedFolderRegEx = new RegEx
-		        versionedFolderRegEx.SearchPattern = "^\d\.x$"
-		        versionedFolderRegEx.Options.CaseSensitive = false
+		      if not in_item.Exists then
+		        LogError CurrentMethodName, "in_item does not exist"
+		        Exit
 		      end if
 		      
-		      if versionedFolderRegEx.Search(folderName) <> nil then
-		        retVal = true
+		      Dim name as String
+		      name = in_item.Name
+		      
+		      if left(name,1) = "." then
+		        Exit
+		      end if
+		      
+		      if name = kIncludesFolderName and in_item.Parent.URLPath = fTemplatesFolder.URLPath then
+		        Exit
+		      end if
+		      
+		      retVal = false
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Copy loop throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IsSelectedConditionalFolder(in_selector as String, in_value as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    
+		    try 
+		      
+		      if in_selector = kSelector_CEPVersion then
+		        
+		        Dim version as String
+		        version = fPlaceholderDict.Value(kPlaceholder_CEPVersion)
+		        if in_value = version then
+		          retVal = true
+		        end if
+		        Exit
+		      end if
+		      
+		      if in_selector = kSelector_TargetApp then
+		        Dim targetApp as String 
+		        targetApp = fPlaceholderDict.Value(kPlaceholder_TargetApp)
+		        if in_value = targetApp then
+		          retVal = true
+		        end if
 		      end if
 		      
 		    catch e as RuntimeException
@@ -823,6 +1062,47 @@ End
 		  // TODO when needed. This is a simple project, and I've not needed any advanced logging or debugging
 		  // just yet.
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ParseConditionalFolderName(in_folder as FolderItem, ByRef out_selector as String, ByRef out_value as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    
+		    try 
+		      
+		      if in_folder = nil or not in_folder.Directory then
+		        Exit
+		      end if
+		      
+		      Dim folderName as String
+		      folderName = in_folder.Name
+		      
+		      Static conditionalFolderRegEx as RegEx
+		      if conditionalFolderRegEx = nil then
+		        conditionalFolderRegEx = new RegEx
+		        conditionalFolderRegEx.SearchPattern = "^\$([^-]+)-(.+)$"
+		      end if
+		      
+		      Dim match as RegExMatch
+		      match = conditionalFolderRegEx.Search(folderName)
+		      if match <> nil and match.SubExpressionCount = 3 then
+		        
+		        out_selector = match.SubExpressionString(1)
+		        out_value = match.SubExpressionString(2)
+		        retVal = true
+		        
+		      end if
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -905,86 +1185,194 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ParseTemplates(in_sourceFolder as FolderItem, io_placeholders as Dictionary)
+		Function ProcessIncludes(in_file as FolderItem) As String
+		  Dim fileText as String
+		  
 		  do
 		    try 
 		      
-		      if in_sourceFolder = nil then
-		        LogError CurrentMethodName, "fTemplatesFolder = nil"
+		      fileText = ReadFileText(in_file)
+		      
+		      Dim lines() as String
+		      lines = SplitIntoLines(fileText)
+		      
+		      Dim includesFolder as FolderItem
+		      includesFolder = fTemplatesFolder.Child(kIncludesFolderName)
+		      if includesFolder = nil then
+		        LogError CurrentMethodName, "includesFolder = nil"
 		        Exit
 		      end if
 		      
-		      if not in_sourceFolder.Directory then
-		        LogError CurrentMethodName, "in_sourceFolder does not exist"
+		      if not includesFolder.Directory then
+		        LogError CurrentMethodName, "includesFolder does not exist"
 		        Exit
 		      end if
 		      
-		      Dim fileCount as integer
-		      fileCount = in_sourceFolder.Count
+		      Dim changed as Boolean
 		      
-		      for idx as integer = 1 to fileCount
+		      do
 		        
-		        try 
+		        Dim conditionStack() as Boolean
+		        Dim condition as Boolean
+		        condition = true
+		        changed = false
+		        
+		        Dim updatedLines() as String
+		        
+		        for each line as String in lines
 		          
-		          Dim subItem as FolderItem
-		          subItem = in_sourceFolder.Item(idx)
+		          Dim trimmedLine as String
+		          trimmedLine = Trim(line)
 		          
-		          Dim subItemName as String
-		          subItemName = subItem.Name
-		          
-		          if not subItem.Directory then
+		          if StartsWith(kPreprocessorCommand_Include, trimmedLine) then
 		            
-		            ParseTextFile subItem, io_placeholders
+		            Dim fileName as String
+		            fileName = Trim(trimmedLine.Mid(kPreprocessorCommand_Include.Len + 1))
+		            if Left(fileName,1) = Chr(34) and Right(fileName, 1) = Chr(34) then
+		              fileName = Mid(fileName, 2, Len(fileName) - 2)
+		            end if
+		            
+		            Dim includeFile as FolderItem
+		            includeFile = includesFolder.Child(fileName)
+		            
+		            if includeFile = nil or not includeFile.Exists then
+		              
+		              if condition then
+		                updatedLines.Append line
+		              end if
+		              
+		            else
+		              
+		              if condition then
+		                
+		                changed = true
+		                
+		                Dim includeText as String
+		                includeText = ReadFileText(includeFile)
+		                
+		                Dim includeLines() as String
+		                includeLines = SplitIntoLines(includeText)
+		                
+		                
+		                for each includeLine as String in includeLines
+		                  updatedLines.Append includeLine
+		                next
+		                
+		              end if
+		              
+		            end if
+		            
+		          elseif StartsWith(kPreprocessorCommand_If, trimmedLine) then
+		            
+		            Dim expression as String
+		            expression = Trim(trimmedLine.Mid(kPreprocessorCommand_If.Len + 1))
+		            
+		            conditionStack.Append condition
+		            
+		            expression = ReplacePlaceholders(expression)
+		            
+		            condition = condition and EvalCondition(expression)
+		            
+		          elseif StartsWith(kPreprocessorCommand_ElseIf, trimmedLine) then
+		            
+		            Dim expression as String
+		            expression = Trim(trimmedLine.Mid(kPreprocessorCommand_ElseIf.Len + 1))
+		            
+		            if UBound(conditionStack) >= 0 then
+		              condition = conditionStack.Pop
+		            else
+		              condition = true
+		            end if
+		            
+		            conditionStack.Append condition
+		            
+		            expression = ReplacePlaceholders(expression)
+		            
+		            condition = condition and EvalCondition(expression)
+		            
+		          elseif StartsWith(kPreprocessorCommand_Else, trimmedLine) then
+		            
+		            condition = not condition
+		            
+		          elseif StartsWith(kPreprocessorCommand_Endif, trimmedLine) then
+		            
+		            if UBound(conditionStack) >= 0 then
+		              condition = conditionStack.Pop
+		            else
+		              condition = true
+		            end if
 		            
 		          else
 		            
-		            ParseTemplates subItem, io_placeholders
+		            if condition then
+		              updatedLines.Append line
+		            end if
 		            
 		          end if
-		          
-		        catch e as RuntimeException
-		          LogError CurrentMethodName, "Copy loop throws " + e.Message
-		        end try
+		        next
 		        
-		      next
+		        lines = updatedLines
+		        
+		      loop until not changed
+		      
+		      fileText = Join(lines, EndOfLine)
 		      
 		    catch e as RuntimeException
 		      LogError CurrentMethodName, "Throws " + e.Message
 		    end try
 		    
 		  Loop Until true
-		End Sub
+		  
+		  return fileText
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ParseTextFile(in_textFile as FolderItem, io_placeholders as Dictionary)
-		  do 
-		    
+		Function ReadFileText(in_file as FolderItem) As String
+		  Dim fileText as String
+		  
+		  do
 		    try 
 		      
-		      if in_textFile = nil then
-		        LogError CurrentMethodName, "in_textFile is nil"
+		      if in_file = nil then
+		        LogError CurrentMethodName, "in_file = nil"
 		        Exit
 		      end if
 		      
-		      if not in_textFile.Exists or in_textFile.Directory then
-		        LogError CurrentMethodName, "Text file does not exist"
+		      if not in_file.Exists then
+		        LogError CurrentMethodName, "in_file does not exist"
 		        Exit
 		      end if
 		      
 		      Dim tis as TextInputStream
-		      tis = TextInputStream.Open(in_textFile)
+		      tis = TextInputStream.Open(in_file)
 		      if tis = nil then
 		        LogError CurrentMethodName, "Cannot open text file"
 		        Exit
 		      end if
 		      
-		      Dim fileText as String
 		      fileText = tis.ReadAll
 		      tis.Close
 		      
-		      Dim textChopped as String 
-		      textChopped = fileText
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return fileText
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ReplacePlaceholders(in_text as String) As String
+		  Dim generatedText as String
+		  
+		  do
+		    try 
+		      
+		      Dim textChopped as String
+		      textChopped = in_text
 		      
 		      Static placeholderMatch as RegEx
 		      if placeholderMatch = nil then
@@ -996,36 +1384,54 @@ End
 		      Dim placeholderStartPos as Integer
 		      placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
 		      while placeholderStartPos > 0
+		        
+		        if placeholderStartPos > 1 then
+		          generatedText = generatedText + textChopped.Left(placeholderStartPos - 1)
+		        end if
+		        
 		        textChopped = textChopped.mid(placeHolderStartPos + Len(kPlaceholderPrefixSuffix))
 		        
 		        Dim placeholderEndPos as integer
 		        placeholderEndPos = textChopped.InStr(kPlaceholderPrefixSuffix)
 		        
 		        if placeholderEndPos <= 0 then
+		          
 		          placeholderStartPos = -1
+		          
 		        else
 		          
 		          Dim possiblePlaceholder as String
 		          possiblePlaceholder = Left(textChopped, placeholderEndPos - 1)
+		          
 		          if placeHolderMatch.Search(possiblePlaceholder) = nil then
+		            
 		            placeholderStartPos = placeholderEndPos
+		            
 		          else
+		            
 		            Dim placeholder as String
 		            placeholder = possiblePlaceholder.Uppercase()
-		            io_placeholders.Value(placeholder) = ""
 		            
 		            textChopped = textChopped.mid(placeholderEndPos + Len(kPlaceholderPrefixSuffix))
+		            
 		            placeholderStartPos = textChopped.InStr(kPlaceholderPrefixSuffix)
+		            
+		            generatedText = generatedText + fPlaceholderDict.Value(placeholder)
+		            
 		          end if
 		        end if
 		      wend
+		      
+		      generatedText = generatedText + textChopped
 		      
 		    catch e as RuntimeException
 		      LogError CurrentMethodName, "Throws " + e.Message
 		    end try
 		    
-		  Loop until true
-		End Sub
+		  Loop Until true
+		  
+		  return generatedText
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -1037,14 +1443,74 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SplitIntoLines(in_fileText as String) As String()
+		  Dim lines() as String
+		  
+		  do
+		    try 
+		      
+		      Dim delimiter as String
+		      delimiter = Chr(13) + Chr(10)
+		      
+		      lines = in_fileText.Split(delimiter)
+		      
+		      if UBound(lines) = 0 then
+		        delimiter = Chr(13)
+		        lines = in_fileText.Split(delimiter)
+		        if UBound(lines) = 0 then
+		          delimiter = Chr(10)
+		          lines = in_fileText.Split(delimiter)
+		        end if
+		      end if
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return lines
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function StartsWith(in_start as String, in_s as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do 
+		    
+		    try 
+		      
+		      retVal = (Left(in_s, in_start.Len) = in_start)
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub UpdateUI()
 		  do 
 		    LstConfigStrings.TextSize = 10
 		    LstConfigStrings.DefaultRowHeight = 14
 		    
 		    PupCEPVersion.DeleteAllRows
+		    
+		    Dim selectedVersionString as String
+		    if fPlaceholderDict.HasKey(kPlaceholder_CEPVersion) then
+		      selectedVersionString = fPlaceholderDict.Value(kPlaceholder_CEPVersion)
+		    end if
+		    
 		    Dim highestVersion as double
+		    Dim highestVersionIdx as integer
+		    highestVersionIdx = -1
 		    Dim selectedIdx as integer
+		    selectedIdx = -1
 		    for idx as integer = 0 to UBound(fCSXSVersionList)
 		      dim versionString as String
 		      versionString = fCSXSVersionList(idx)
@@ -1053,10 +1519,18 @@ End
 		      version = Val(versionString)
 		      if version > highestVersion then
 		        highestVersion = version
+		        highestVersionIdx = idx
+		      end if
+		      if selectedVersionString <> "" and versionString = selectedVersionString then
 		        selectedIdx = idx
 		      end if
 		    next
-		    PupCEPVersion.ListIndex = selectedIdx
+		    
+		    if selectedIdx >= 0 then
+		      PupCEPVersion.ListIndex = selectedIdx
+		    elseif highestVersionIdx >= 0 then
+		      PupCEPVersion.ListIndex = highestVersionIdx
+		    end if
 		    
 		    LstConfigStrings.DeleteAllRows
 		    for idx as integer = 0 to UBound(fPlaceholders)
@@ -1139,6 +1613,9 @@ End
 	#tag Constant, Name = kGeneratedProjectConfigFileName, Type = String, Dynamic = False, Default = \"ProjectSettings", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kIncludesFolderName, Type = String, Dynamic = False, Default = \"includes", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kMacScriptFolder, Type = String, Dynamic = False, Default = \"Mac", Scope = Public
 	#tag EndConstant
 
@@ -1160,10 +1637,34 @@ End
 	#tag Constant, Name = kPlaceholder_ExtensionVersion, Type = String, Dynamic = False, Default = \"EXTENSION_VERSION", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kPlaceholder_TargetApp, Type = String, Dynamic = False, Default = \"TARGETAPP", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPreprocessorCommand_Else, Type = String, Dynamic = False, Default = \"$else", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPreprocessorCommand_ElseIf, Type = String, Dynamic = False, Default = \"$elif", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPreprocessorCommand_Endif, Type = String, Dynamic = False, Default = \"$endif", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPreprocessorCommand_If, Type = String, Dynamic = False, Default = \"$if", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPreprocessorCommand_Include, Type = String, Dynamic = False, Default = \"$include", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kProjectConfigFileName, Type = String, Dynamic = False, Default = \"ProjectConfig.txt", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kProjectHomeFolderName, Type = String, Dynamic = False, Default = \"CEPSparker", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kSelector_CEPVersion, Type = String, Dynamic = False, Default = \"v", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kSelector_TargetApp, Type = String, Dynamic = False, Default = \"t", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kTemplatesFolderName, Type = String, Dynamic = False, Default = \"Templates", Scope = Public

@@ -18,13 +18,16 @@ if [ "$reply" == "YES" ]; then
 
   cd "$projectHomeDir"
 
+  rm -rf BuildSettings
+  rm -rf debug
   rm -rf css
   rm -rf CSXS
   rm -rf html
   rm -rf js
   rm -rf jsx
+  rm -rf LocalLinks
   rm -rf shared_js_jsx
-  rm -rf debug
-  rm -rf BuildSettings
+  rm -rf ToolSources/CEPSparkerConfig/Builds*
+  rm -rf ToolSources/CEPSparkerConfig/.CEPSparkerConfig.xojo_uistate
   
 fi

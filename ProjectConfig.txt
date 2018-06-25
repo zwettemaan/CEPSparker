@@ -4,6 +4,8 @@
 # will use search-and-replace to create the actual files needed for the project
 #
 
+CEPVERSION=7
+
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
 HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"
 
@@ -19,8 +21,9 @@ HELP_EXTENSION_ID="A unique identifier for the panel within the extension. It is
 EXTENSION_MENUNAME="Rorohiko CEP Sparker"
 HELP_EXTENSION_MENUNAME="Menu item used to activate the panel from the Adobe application"
 
-TARGETAPP="INDD"
+TARGETAPP="IDSN"
 HELP_TARGETAPP="4-letter code identifying the target Adobe application"
+SELECT_TARGETAPP="IDSN"
 
 SHORTCODE="SPRK"
 HELP_SHORTCODE="Some variable name for global object used to store js/jsx globals. Helps avoiding variable name clashes."
@@ -39,3 +42,4 @@ HELP_PANELHEIGHT="Panel height in manifest file"
 
 PANELWIDTH=570
 HELP_PANELHEIGHT="Panel width in manifest file"
+

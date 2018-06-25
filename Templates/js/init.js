@@ -1,5 +1,63 @@
 $$SHORTCODE$$.csInterface = new CSInterface();
 
+function init() {
+
+    getExtendScriptExtensionDirs_PRM().
+$if "$$TARGETAPP$$" == "IDSN"
+    then(getInDesignInfo_PRM).
+$endif
+    then(getJavaScriptExtensionDirs_PRM).
+    then(getLocale_PRM).
+    then(wireUI_PRM).
+    then(readPreferences_PRM).
+    then(updateUI_PRM);
+}
+
+if ($$SHORTCODE$$.S.MANUAL_START_FROM_CHROME) {
+    console.log("Running in debug mode. Must call init() from the Chrome console");
+}
+else {
+    init();
+}
+
+// ----------------
+
+function closeExtension_PRM() {
+
+    var promise = new Promise(function(resolve, reject) {
+        window.__adobe_cep__.closeExtension();
+        resolve();
+    });
+
+    return promise;
+
+}
+
+function getExtendScriptExtensionDirs_PRM() {
+
+    var promise = new Promise(function(resolve, reject) {
+        var script = "JSON.stringify({'home': Folder('~').fsName, 'temp': Folder.temp.fsName })";
+
+        $$SHORTCODE$$.csInterface.evalScript(
+            script,
+            function(data) { 
+                try {
+                    var dirs = JSON.parse(data);
+                    $$SHORTCODE$$.dirs.homeDir = dirs.home;
+                    $$SHORTCODE$$.dirs.tempDir = dirs.temp;
+                    resolve();
+                } 
+                catch (err) {
+                    reject();
+                }
+            }
+        );
+    });
+
+    return promise;
+}
+
+$if "$$TARGETAPP$$" == "IDSN"
 function getInDesignInfo_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
@@ -30,30 +88,7 @@ function getInDesignInfo_PRM() {
 
     return promise;
 }
-
-function getExtendScriptExtensionDirs_PRM() {
-
-    var promise = new Promise(function(resolve, reject) {
-        var script = "JSON.stringify({'home': Folder('~').fsName, 'temp': Folder.temp.fsName })";
-
-        $$SHORTCODE$$.csInterface.evalScript(
-            script,
-            function(data) { 
-                try {
-                    var dirs = JSON.parse(data);
-                    $$SHORTCODE$$.dirs.homeDir = dirs.home;
-                    $$SHORTCODE$$.dirs.tempDir = dirs.temp;
-                    resolve();
-                } 
-                catch (err) {
-                    reject();
-                }
-            }
-        );
-    });
-
-    return promise;
-}
+$endif
 
 function getJavaScriptExtensionDirs_PRM() {
 
@@ -89,13 +124,6 @@ function getLocale_PRM() {
     });
 
     return promise;
-}
-
-function setDefaultPreferences() {
-
-    $$SHORTCODE$$.prefs = {};
-
-    /* provide defaults for whatever preferences you want in $$SHORTCODE$$.prefs */
 }
 
 function readPreferences_PRM() {
@@ -145,25 +173,11 @@ function savePreferences_PRM() {
 
 }
 
-function closeExtension_PRM() {
+function setDefaultPreferences() {
 
-    var promise = new Promise(function(resolve, reject) {
-        window.__adobe_cep__.closeExtension();
-        resolve();
-    });
+    $$SHORTCODE$$.prefs = {};
 
-    return promise;
-
-}
-
-function wireUI_PRM() {
-
-    var promise = new Promise(function(resolve, reject) {
-// TODO
-        resolve();
-    });
-
-    return promise;
+    /* provide defaults for whatever preferences you want in $$SHORTCODE$$.prefs */
 }
 
 function updateUI_PRM() {
@@ -176,20 +190,13 @@ function updateUI_PRM() {
     return promise;
 }
 
-function init() {
+function wireUI_PRM() {
 
-    getExtendScriptExtensionDirs_PRM().
-    then(getInDesignInfo_PRM).
-    then(getJavaScriptExtensionDirs_PRM).
-    then(getLocale_PRM).
-    then(wireUI_PRM).
-    then(readPreferences_PRM).
-    then(updateUI_PRM);
+    var promise = new Promise(function(resolve, reject) {
+// TODO
+        resolve();
+    });
+
+    return promise;
 }
 
-if ($$SHORTCODE$$.S.MANUAL_START_FROM_CHROME) {
-    console.log("Running in debug mode. Must call init() from the Chrome console");
-}
-else {
-    init();
-}

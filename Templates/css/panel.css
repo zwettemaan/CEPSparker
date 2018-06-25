@@ -1,0 +1,11 @@
+body {
+	background-color: #606060;
+	font-family: "Verdana";
+	font-size: 10px;
+	line-height: 21px;
+}
+
+.panel {
+	padding: 5px;
+	overflow: hidden;
+}

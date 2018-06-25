@@ -34,10 +34,12 @@ $$SHORTCODE$$.deepClone = function(obj)
 	return retVal;
 }
 
+// dQ: Wrap a string in double quotes
 $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"') + '"';
 }
 
+// sQ: Wrap a string in single quotes
 $$SHORTCODE$$.sQ = function(s) {
     return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'") + "'";
 }
