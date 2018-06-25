@@ -1,5 +1,5 @@
 #
-# Enable debugging
+# Disable debugging
 #
 
 export scriptDir=`dirname "$0"`
@@ -23,8 +23,8 @@ elif [ $CEP_VERSION = "8.x" ]; then
   export PLIST_FILE=com.adobe.CSXS.8.plist
 fi
 
-defaults write $PLIST_FILE PlayerDebugMode 1
-defaults write $PLIST_FILE LogLevel 5
+defaults write $PLIST_FILE PlayerDebugMode 0
+defaults write $PLIST_FILE LogLevel 1
 
 #
 # Force Mac OS to re-read the PLIST file

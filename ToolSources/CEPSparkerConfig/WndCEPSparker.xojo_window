@@ -459,7 +459,7 @@ End
 		      tos.Close
 		      
 		      Dim extensionVersionFile as FolderItem
-		      extensionVersionFile = fProjectRootFolder.Child(kExtensionVersionFile)
+		      extensionVersionFile = fProjectRootFolder.Child(kFileName_ExtensionVersion)
 		      
 		      tos = TextOutputStream.Create(extensionVersionFile)
 		      if tos = nil then
@@ -468,6 +468,18 @@ End
 		      end if
 		      
 		      tos.Write extensionVersion
+		      tos.Close
+		      
+		      Dim cepVersionFile as FolderItem
+		      cepVersionFile = fProjectRootFolder.Child(kFileName_CEPVersion)
+		      
+		      tos = TextOutputStream.Create(cepVersionFile)
+		      if tos = nil then
+		        LogError CurrentMethodName, "Cannot create CEP version text file"
+		        Exit
+		      end if
+		      
+		      tos.Write selectedVersion
 		      tos.Close
 		      
 		    catch e as RuntimeException
@@ -1130,7 +1142,10 @@ End
 	#tag Constant, Name = kCSXSFolderName, Type = String, Dynamic = False, Default = \"CSXS", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kExtensionVersionFile, Type = String, Dynamic = False, Default = \"ExtensionVersion.txt", Scope = Public
+	#tag Constant, Name = kFileName_CEPVersion, Type = String, Dynamic = False, Default = \"CEPVersion.txt", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileName_ExtensionVersion, Type = String, Dynamic = False, Default = \"ExtensionVersion.txt", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kGeneratedProjectConfigFileName, Type = String, Dynamic = False, Default = \"ProjectSettings", Scope = Public
