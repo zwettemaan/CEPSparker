@@ -183,6 +183,7 @@ function setDefaultPreferences() {
 function updateUI_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
+        themeManager.init();
 // TODO
         resolve();
     });

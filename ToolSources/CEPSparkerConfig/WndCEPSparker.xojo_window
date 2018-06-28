@@ -111,8 +111,8 @@ Begin Window WndCEPSparker
       GridLinesVertical=   0
       HasHeading      =   True
       HeadingIndex    =   -1
-      Height          =   295
-      HelpTag         =   "Double-click a value to edit it."
+      Height          =   237
+      HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
@@ -239,6 +239,41 @@ Begin Window WndCEPSparker
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   560
+   End
+   Begin Label LblHelpText
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   45
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   True
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   333
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -941,7 +976,7 @@ End
 		          Dim isConditionalFolder as Boolean
 		          isConditionalFolder = ParseConditionalFolderName(subFolder, selector, value)
 		          
-		          if isConditionalFolder and selector = kSelector_CEPVersion then
+		          if isConditionalFolder and selector = kPlaceholder_CEPVersion then
 		            Dim manifestFile as FolderItem
 		            manifestFile = subFolder.Child(kManifestFileName)
 		            if manifestFile <> nil and manifestFile.exists then
@@ -1030,22 +1065,13 @@ End
 		    
 		    try 
 		      
-		      if in_selector = kSelector_CEPVersion then
-		        
-		        Dim version as String
-		        version = fPlaceholderDict.Value(kPlaceholder_CEPVersion)
-		        if in_value = version then
+		      if fPlaceholderDict.HasKey(in_selector) then
+		        Dim compareValue as String
+		        compareValue = fPlaceholderDict.Value(in_selector)
+		        if in_value = compareValue then
 		          retVal = true
 		        end if
 		        Exit
-		      end if
-		      
-		      if in_selector = kSelector_TargetApp then
-		        Dim targetApp as String 
-		        targetApp = fPlaceholderDict.Value(kPlaceholder_TargetApp)
-		        if in_value = targetApp then
-		          retVal = true
-		        end if
 		      end if
 		      
 		    catch e as RuntimeException
@@ -1083,7 +1109,7 @@ End
 		      Static conditionalFolderRegEx as RegEx
 		      if conditionalFolderRegEx = nil then
 		        conditionalFolderRegEx = new RegEx
-		        conditionalFolderRegEx.SearchPattern = "^\$([^-]+)-(.+)$"
+		        conditionalFolderRegEx.SearchPattern = "^\$\$([^-]+)\$\$-(.+)$"
 		      end if
 		      
 		      Dim match as RegExMatch
@@ -1552,12 +1578,6 @@ End
 		          LstConfigStrings.CellType(row, 1) = Listbox.TypeEditableTextField
 		        end if
 		        
-		        if fHelpStringDict.HasKey(placeholder) then
-		          Dim helpString as String
-		          helpString = fHelpStringDict.Value(placeholder)
-		          LstConfigStrings.CellHelpTag(row,0) = helpString
-		        end if
-		        
 		      end if
 		    next
 		    
@@ -1680,12 +1700,6 @@ End
 	#tag Constant, Name = kProjectHomeFolderName, Type = String, Dynamic = False, Default = \"CEPSparker", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kSelector_CEPVersion, Type = String, Dynamic = False, Default = \"v", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kSelector_TargetApp, Type = String, Dynamic = False, Default = \"t", Scope = Public
-	#tag EndConstant
-
 	#tag Constant, Name = kTemplatesFolderName, Type = String, Dynamic = False, Default = \"Templates", Scope = Public
 	#tag EndConstant
 
@@ -1695,6 +1709,121 @@ End
 
 #tag EndWindowCode
 
+#tag Events LstConfigStrings
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  Dim row As Integer = Me.RowFromXY(x, y)
+		  
+		  Dim placeholder as String
+		  placeholder = Me.Cell(row, 0)
+		  
+		  if fSelectionListDict.HasKey(placeholder) then
+		    Dim col As Integer = Me.ColumnFromXY(x, y)
+		    If col = 1 Then
+		      
+		      Me.ListIndex = row
+		      Me.Selected(row) = True
+		      
+		      Dim selectionsStr as String 
+		      selectionsStr = fSelectionListDict.Value(placeholder)
+		      
+		      Dim selections() as String
+		      selections = selectionsStr.Split(",")
+		      
+		      Dim base As New MenuItem
+		      for idx as integer = 0 to UBound(selections)
+		        Dim selection as String
+		        selection = selections(idx)
+		        base.Append(New MenuItem(selections(idx)))
+		      next
+		      
+		      Dim selectedMenu As MenuItem
+		      selectedMenu = base.PopUp
+		      
+		      If selectedMenu <> Nil Then
+		        // CellTextPaint will check for a value in the CellTag
+		        // and display it.
+		        Me.Cell(row,1) = selectedMenu.Text
+		      End If
+		    End If
+		  end if
+		  
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim retVal as Boolean
+		  
+		  Dim row As Integer
+		  row = Me.RowFromXY(X, Y)
+		  
+		  Dim placeholder as String
+		  placeholder = Me.Cell(row, 0)
+		  
+		  if fSelectionListDict.HasKey(placeholder) then
+		    retVal = true
+		  end if
+		  
+		  return retVal
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub MouseMove(X As Integer, Y As Integer)
+		  Dim helpText as String
+		  
+		  Dim row As Integer
+		  row = Me.RowFromXY(X, Y)
+		  
+		  Dim placeholder as String
+		  placeholder = Me.Cell(row, 0)
+		  
+		  if fHelpStringDict.HasKey(placeholder) then
+		    helpText = fHelpStringDict.Value(placeholder)
+		  end if
+		  
+		  if helpText <> "" and Right(helpText, 1) <> "." then
+		    helpText = helptext + "."
+		  end if
+		  
+		  if not fSelectionListDict.HasKey(placeholder) then
+		    helpText = helpText + " Double-click value to edit."
+		  else
+		    helpText = helpText + " Click triangle for menu."
+		  end if
+		  
+		  LblHelpText.Text = helpText
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function CellTextPaint(g As Graphics, row As Integer, column As Integer, x as Integer, y as Integer) As Boolean
+		  Select Case column
+		  Case 1 // PopupMenu
+		    
+		    Dim placeholder as String
+		    placeholder = Me.Cell(row, 0)
+		    
+		    if fSelectionListDict.HasKey(placeholder) then
+		      
+		      // Points for a triangle on the right side of the cell
+		      Dim points(6) As Integer
+		      points(1) = g.Width - 10
+		      points(2) = 1
+		      points(3) = g.Width
+		      points(4) = 1
+		      points(5) = g.Width - 5
+		      points(6) = 10
+		      
+		      g.FillPolygon(points)
+		      
+		    end if
+		    
+		    
+		  End Select
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events BtnGenerate
 	#tag Event
 		Sub Action()

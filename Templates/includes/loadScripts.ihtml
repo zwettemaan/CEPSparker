@@ -1,5 +1,7 @@
     <script src="../js/CSInterface.js"></script>
-    <script src="../js/jQuery/jQuery-3.2.1.min.js"></script>
+    <script src="../js/jQuery/jQuery-3.3.1.min.js"></script>
+    <script src="../js/jQuery/jQuery-ui.min.js"></script>
+    <script src="../js/themeManager.js"></script>
     <script src="../js/promiscuous/promiscuous-browser.js"></script>
 
     <script src="../shared_js_jsx/globals.js"></script>
@@ -8,5 +10,7 @@
     <script src="../shared_js_jsx/utils.js"></script>
     <script src="../js/utils.js"></script>
 
+    <script src="../shared_js_jsx/pathUtils.js"></script>
+    
     <script src="../shared_js_jsx/init.js"></script>
     <script src="../js/init.js"></script>

@@ -43,3 +43,6 @@ HELP_PANELHEIGHT="Panel height in manifest file"
 PANELWIDTH=570
 HELP_PANELHEIGHT="Panel width in manifest file"
 
+UI_TYPE="Panel"
+HELP_UI_TYPE="Which type of UI/panel to use"
+SELECT_UI_TYPE="ModalDialog,Panel,Modeless,Invisible"

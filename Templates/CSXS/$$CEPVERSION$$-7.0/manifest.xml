@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-Version seems to be 5.0 for CEP 6.0. Not sure about CEP 6.1. See
-https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/ExtensionManifest_v_6_0.xsd
--->
 <ExtensionManifest 
-	Version="5.0" 
+	Version="7.0" 
 	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
 	ExtensionBundleVersion="1.0.0"
 	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
@@ -15,19 +11,14 @@ https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/ExtensionManifest
 	<ExecutionEnvironment>
 		<HostList>
 $if "$$TARGETAPP$$" == "IDSN"
-			<Host Name="$$TARGETAPP$$" Version="[11,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[12,99)" />
 $endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
 		</LocaleList>
-		<RequiredRuntimeList>		
-			<!-- 
-			Docs say this needs to be 5.0 for CEP 6.0. Not sure about CEP 6.1. See
-			https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf
-			https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/ExtensionManifest_v_6_0.xsd
-			-->
-			<RequiredRuntime Name="CSXS" Version="5.0" />
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="7.0" />
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
@@ -47,7 +38,7 @@ $endif
 					<AutoVisible>true</AutoVisible>
 				</Lifecycle>
 				<UI>
-					<Type>ModalDialog</Type>
+					<Type>$$UI_TYPE$$</Type>
 					<Menu>$$EXTENSION_MENUNAME$$</Menu>
 					<Geometry>
 						<Size>

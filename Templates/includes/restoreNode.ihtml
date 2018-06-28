@@ -1,4 +1,4 @@
     <script type="text/javascript">
         window.module = window.nodeModule; 
-        window.global = window.nodeGlobal 
+        window.global = window.nodeGlobal;
     </script>
