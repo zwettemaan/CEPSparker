@@ -129,3 +129,5 @@ If and when that happens, there might be some information in this folder.
 Clearing the whole folder will avoid getting drowned in old log info.
 
 
+For CC 2013, it is 4.0
+for CC 2014, it is 5.0

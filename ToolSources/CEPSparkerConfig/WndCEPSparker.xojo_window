@@ -958,7 +958,8 @@ End
 		      ExtractPlaceholdersFromTemplates fTemplatesFolder, fPlaceholderDict
 		      
 		      fHelpStringDict = new Dictionary
-		      ParseConfigFile fPlaceholderDict, fHelpStringDict
+		      fSelectionListDict = new Dictionary
+		      ParseConfigFile fPlaceholderDict, fHelpStringDict, fSelectionListDict
 		      
 		      Redim fPlaceholders(-1)
 		      
@@ -1106,7 +1107,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ParseConfigFile(io_placeholders as Dictionary, io_helpStrings as Dictionary)
+		Sub ParseConfigFile(io_placeholders as Dictionary, io_helpStrings as Dictionary, io_selectionList as Dictionary)
 		  do 
 		    
 		    try 
@@ -1166,9 +1167,12 @@ End
 		            if left(value, 1) = Chr(34) and right(value,1) = Chr(34) then
 		              value = value.Mid(2, value.len - 2)
 		            end if
-		            if left(placeholder, kPlaceHolderPrefix_Help.Len) = kPlaceHolderPrefix_Help then
-		              placeholder = Mid(placeholder,6)
+		            if StartsWith(kPlaceHolderPrefix_Help, placeholder) then
+		              placeholder = Mid(placeholder,kPlaceHolderPrefix_Help.Len + 1)
 		              io_helpStrings.Value(placeholder) = value
+		            elseif StartsWith(kPlaceHolderPrefix_SelectionList, placeholder) then
+		              placeholder = Mid(placeholder,kPlaceHolderPrefix_SelectionList.Len + 1)
+		              io_selectionList.Value(placeholder) = value
 		            else
 		              io_placeholders.Value(placeholder) = value
 		            end if
@@ -1536,16 +1540,24 @@ End
 		    for idx as integer = 0 to UBound(fPlaceholders)
 		      Dim placeholder as String
 		      placeholder = fPlaceholders(idx)
-		      LstConfigStrings.AddRow placeholder
-		      if fPlaceholderDict.HasKey(placeholder) then
-		        LstConfigStrings.Cell(idx,1) = fPlaceholderDict.Value(placeholder)
-		        LstConfigStrings.CellType(idx, 1) = Listbox.TypeEditableTextField
+		      if placeholder <> kPlaceholder_CEPVersion then
+		        
+		        LstConfigStrings.AddRow placeholder
+		        
+		        Dim row as Integer
+		        row = LstConfigStrings.ListCount - 1
+		        
+		        if fPlaceholderDict.HasKey(placeholder) then
+		          LstConfigStrings.Cell(row,1) = fPlaceholderDict.Value(placeholder)
+		          LstConfigStrings.CellType(row, 1) = Listbox.TypeEditableTextField
+		        end if
+		        
 		        if fHelpStringDict.HasKey(placeholder) then
 		          Dim helpString as String
 		          helpString = fHelpStringDict.Value(placeholder)
-		          LstConfigStrings.CellHelpTag(idx,0) = helpString
-		          LstConfigStrings.CellHelpTag(idx,1) = helpString
-		        end if 
+		          LstConfigStrings.CellHelpTag(row,0) = helpString
+		        end if
+		        
 		      end if
 		    next
 		    
@@ -1591,6 +1603,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		fSelectionListDict As Dictionary
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		fTemplatesFolder As FolderItem
 	#tag EndProperty
 
@@ -1626,6 +1642,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kPlaceHolderPrefix_Help, Type = String, Dynamic = False, Default = \"HELP_", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kPlaceHolderPrefix_SelectionList, Type = String, Dynamic = False, Default = \"SELECT_", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kPlaceholder_CEPVersion, Type = String, Dynamic = False, Default = \"CEPVERSION", Scope = Public

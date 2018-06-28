@@ -9,3 +9,40 @@ body {
 	padding: 5px;
 	overflow: hidden;
 }
+
+.box {
+	padding: 5px;
+	margin-bottom: 5px;
+	border-top: 1px solid #535353;
+	border-left: 1px solid #535353;
+	border-bottom: 1px solid #A0A0A0;
+	border-right: 1px solid #A0A0A0;
+	color: #FFFFFF;
+	float: left;
+}
+.boxleft {
+	width: 100px;
+	float: left;
+	text-align: right;
+}
+
+.boxright {
+	overflow: hidden;
+}
+.actionButton {
+	width: 110px;
+	margin-left: 5px;
+	padding: 4px;
+	overflow: hidden;
+}
+.hidden {
+	display: none;
+}
+
+.fieldDisabled {
+	color: #808080;
+	background-color: #C0C0C0;
+}
+.labelDisabled {
+	color: #808080;
+}

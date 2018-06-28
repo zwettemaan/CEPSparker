@@ -9,7 +9,6 @@ export projectHomeDir=`dirname "$scriptDir"`
 
 cd "$projectHomeDir"
 
-export CEP_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/CEPVersion.txt"`
 export EXTENSION_DIRNAME=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionDirName.txt"`
 export EXTENSION_HOMEDIR=~/Library/Application\ Support/Adobe/CEP/extensions/"$EXTENSION_DIRNAME"
 

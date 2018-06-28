@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="6.0" ExtensionBundleId="$$EXTENSION_BUNDLEID$$" ExtensionBundleVersion="1.0.0"
-		ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!-- Keep Version at 7.0, even for CEP 8.0 -->
+<ExtensionManifest 
+	Version="7.0" 
+	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
+	ExtensionBundleVersion="1.0.0"
+	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
 		<Extension Id="$$EXTENSION_ID$$" Version="$$EXTENSION_VERSION$$" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
 $if "$$TARGETAPP$$" == "IDSN"
-			<Host Name="$$TARGETAPP$$" Version="[11,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
 $endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
 		</LocaleList>
 		<RequiredRuntimeList>
-			<RequiredRuntime Name="CSXS" Version="6.0" />
+			<!-- Keep Version at 7.0, even for CEP 8.0 -->
+			<RequiredRuntime Name="CSXS" Version="7.0" />
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>

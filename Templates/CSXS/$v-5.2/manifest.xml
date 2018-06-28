@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest 
+	Version="5.0" 
+	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
+	ExtensionBundleVersion="1.0.0"
+	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ExtensionList>
+		<Extension Id="$$EXTENSION_ID$$" Version="$$EXTENSION_VERSION$$" />
+	</ExtensionList>
+	<ExecutionEnvironment>
+		<HostList>
+$if "$$TARGETAPP$$" == "IDSN"
+			<Host Name="$$TARGETAPP$$" Version="[10,99)" />
+$endif			
+		</HostList>
+		<LocaleList>
+			<Locale Code="All" />
+		</LocaleList>
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="5.0" />
+		</RequiredRuntimeList>
+	</ExecutionEnvironment>
+	<DispatchInfoList>
+		<Extension Id="$$EXTENSION_ID$$">
+			<DispatchInfo>
+				<Resources>
+					<MainPath>./html/index.html</MainPath>
+					<ScriptPath>./jsx/hostscript.jsx</ScriptPath>
+				</Resources>
+				<Lifecycle>
+					<AutoVisible>true</AutoVisible>
+				</Lifecycle>
+				<UI>
+					<Type>ModalDialog</Type>
+					<Menu>$$EXTENSION_MENUNAME$$</Menu>
+					<Geometry>
+						<Size>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
+						</Size>
+						<MinSize>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
+						</MinSize>
+						<MaxSize>
+							<Height>$$PANELHEIGHT$$</Height>
+							<Width>$$PANELWIDTH$$</Width>
+						</MaxSize>
+					</Geometry>
+				</UI>
+			</DispatchInfo>
+		</Extension>
+	</DispatchInfoList>
+</ExtensionManifest>

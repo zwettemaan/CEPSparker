@@ -11,15 +11,15 @@ cd "$projectHomeDir"
 
 export CEP_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/CEPVersion.txt"`
 
-if [ "$CEP_VERSION" == "4.x" ]; then
+if [ "$CEP_VERSION" == "4.2" ]; then
   export PLIST_FILE=com.adobe.CSXS.4.plist
-elif [ "$CEP_VERSION" == "5.x" ]; then
+elif [ "$CEP_VERSION" == "5.2" ]; then
   export PLIST_FILE=com.adobe.CSXS.5.plist
-elif [ "$CEP_VERSION" == "6.x" ]; then
+elif [ "$CEP_VERSION" == "6.1" ]; then
   export PLIST_FILE=com.adobe.CSXS.5.plist
-elif [ "$CEP_VERSION" == "7.x" ]; then
+elif [ "$CEP_VERSION" == "7.0" ]; then
   export PLIST_FILE=com.adobe.CSXS.5.plist
-elif [ "$CEP_VERSION" == "8.x" ]; then
+elif [ "$CEP_VERSION" == "8.0" ]; then
   export PLIST_FILE=com.adobe.CSXS.8.plist
 fi
 

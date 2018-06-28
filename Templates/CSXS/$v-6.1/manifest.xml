@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="7.0" ExtensionBundleId="$$EXTENSION_BUNDLEID$$" ExtensionBundleVersion="1.0.0"
-		ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!-- 
+Version seems to be 5.0 for CEP 6.0. Not sure about CEP 6.1. See
+https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/ExtensionManifest_v_6_0.xsd
+-->
+<ExtensionManifest 
+	Version="5.0" 
+	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
+	ExtensionBundleVersion="1.0.0"
+	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
 		<Extension Id="$$EXTENSION_ID$$" Version="$$EXTENSION_VERSION$$" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
 $if "$$TARGETAPP$$" == "IDSN"
-			<Host Name="$$TARGETAPP$$" Version="[12,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[11,99)" />
 $endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
 		</LocaleList>
-		<RequiredRuntimeList>
-			<RequiredRuntime Name="CSXS" Version="7.0" />
+		<RequiredRuntimeList>		
+			<!-- 
+			Docs say this needs to be 5.0 for CEP 6.0. Not sure about CEP 6.1. See
+			https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf
+			https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/ExtensionManifest_v_6_0.xsd
+			-->
+			<RequiredRuntime Name="CSXS" Version="5.0" />
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
