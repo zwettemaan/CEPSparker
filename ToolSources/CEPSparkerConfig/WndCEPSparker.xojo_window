@@ -926,30 +926,21 @@ End
 		  do 
 		    try 
 		      
-		      Dim appFolder as FolderItem
-		      appFolder = GetFolderItem("")
-		      if appFolder = nil then
-		        LogError CurrentMethodName, "appFolder = nil"
-		        ReportError "Fatal error: app cannot locate its own folder"
-		        Exit
-		      end if
+		      Dim dlg As SelectFolderDialog
+		      dlg = New SelectFolderDialog
+		      dlg.ActionButtonCaption = "Select"
+		      dlg.Title = "Select Folder"
+		      dlg.PromptText = "Select the root folder of the CEPSparker project"
+		      dlg.InitialDirectory = SpecialFolder.Home
 		      
-		      fTemplatesFolder = nil
-		      fProjectRootFolder = appFolder
-		      
-		      do
-		        fProjectRootFolder = fProjectRootFolder.parent
-		        if fProjectRootFolder <> nil then
-		          fTemplatesFolder = fProjectRootFolder.Child(kTemplatesFolderName)
-		        end if
-		      Loop until fProjectRootFolder = nil or (fTemplatesFolder <> nil and fTemplatesFolder.Directory)
-		      
+		      fProjectRootFolder = dlg.ShowModal
 		      if fProjectRootFolder = nil then
 		        LogError CurrentMethodName, "Cannot locate project root folder"
 		        ReportError "Cannot locate project root folder"
 		        Exit
 		      end if
 		      
+		      fTemplatesFolder = fProjectRootFolder.Child(kTemplatesFolderName)
 		      if fTemplatesFolder = nil or not fTemplatesFolder.Directory then
 		        LogError CurrentMethodName, "Cannot find project templates folder '" + kTemplatesFolderName + "'"
 		        Exit
