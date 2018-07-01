@@ -338,6 +338,8 @@ End
 		        Exit
 		      end if
 		      
+		      MsgBox fProjectRootFolder.URLPath + EndOfLine + fTemplatesFolder.URLPath
+		      
 		      // Bail out if any of the template subfolders exists in the 
 		      // project folder: the project has already been generated
 		      
@@ -350,6 +352,7 @@ End
 		          subFile = fTemplatesFolder.Item(idx)
 		          if subFile.Directory then
 		            if fProjectRootFolder.Child(subFile.Name).Exists then
+		              MsgBox subFile.Name
 		              retVal = false
 		              Exit // For
 		            end if
@@ -903,6 +906,7 @@ End
 	#tag Method, Flags = &h0
 		Sub Handle_Open()
 		  do 
+		    
 		    Init
 		    
 		    if not CheckIfPristine then
