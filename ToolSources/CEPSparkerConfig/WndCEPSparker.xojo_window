@@ -338,8 +338,6 @@ End
 		        Exit
 		      end if
 		      
-		      MsgBox fProjectRootFolder.URLPath + EndOfLine + fTemplatesFolder.URLPath
-		      
 		      // Bail out if any of the template subfolders exists in the 
 		      // project folder: the project has already been generated
 		      
@@ -937,6 +935,8 @@ End
 		        ReportError "Fatal error: app cannot locate its own folder"
 		        Exit
 		      end if
+		      
+		      MsgBox appFolder.URLPath
 		      
 		      fTemplatesFolder = nil
 		      fProjectRootFolder = appFolder
