@@ -10,7 +10,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			lNImHRT5+ZFeNX3UZXF6TVzUYI4=
+			osiKkr2vDPnKLVl7U61PRNfV+Wk=
 			</data>
 			<key>requirement</key>
 			<string>identifier RegEx and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
@@ -19,7 +19,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			E3LO3x9nHWN/J1TwiyPk6jvhIIM=
+			pu4wfGu75USt67nwGzZUFH1HB0M=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.xojo.XojoFramework" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
