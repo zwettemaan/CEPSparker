@@ -944,12 +944,6 @@ End
 		        end if
 		      Loop until fProjectRootFolder = nil or (fTemplatesFolder <> nil and fTemplatesFolder.Directory)
 		      
-		      if fProjectRootFolder = nil then
-		        LogError CurrentMethodName, "Cannot locate project root folder"
-		        ReportError "Cannot locate project root folder"
-		        Exit
-		      end if
-		      
 		      if fTemplatesFolder = nil or not fTemplatesFolder.Directory then
 		        LogError CurrentMethodName, "Cannot find project templates folder '" + kTemplatesFolderName + "'"
 		        Exit
