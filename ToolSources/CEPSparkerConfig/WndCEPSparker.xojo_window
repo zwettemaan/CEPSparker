@@ -910,7 +910,7 @@ End
 		    Init
 		    
 		    if not CheckIfPristine then
-		      ReportError "This project has already been generated. Please unzip the original folder and try again with a clean copy"
+		      ReportError "This project folder has been previously configured. Please unzip the original folder and try again with a clean copy"
 		    end if
 		    
 		    if fErrorMessage <> "" then
