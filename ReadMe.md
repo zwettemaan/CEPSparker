@@ -44,11 +44,7 @@ it is easy to get confused and click 'Cancel' button without noticing).
 
 7) Launch InDesign CC 2014 or later. The sample extension should be under Window - Extensions
 
-8) Point your cefclient (custom version of Chrome) debugger to http://localhost:8888 (replace 8888 with whatever port you used in the configuration).
-
-I find that the cefclient_mac.zip that comes in the CEP 6.x repo works best.
-
-https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/cefclient_mac.zip 
+8) Point your Chrome browser or cefclient to http://localhost:8888 (replace 8888 with whatever port you used in the configuration).
 
 --
 
