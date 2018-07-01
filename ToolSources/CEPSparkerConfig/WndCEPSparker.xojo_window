@@ -929,7 +929,7 @@ End
 		    try 
 		      
 		      Dim appFolder as FolderItem
-		      appFolder = SpecialFolder.UserHome.Child("Downloads").Child("CEPSparker-master").Child("Mac")
+		      appFolder = GetFolderItem("")
 		      if appFolder = nil then
 		        LogError CurrentMethodName, "appFolder = nil"
 		        ReportError "Fatal error: app cannot locate its own folder"
