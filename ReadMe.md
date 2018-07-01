@@ -1,6 +1,14 @@
 # CEPSparker
 
   **** NOTE: THIS PROJECT IS INCOMPLETE. DO NOT TRY TO USE IT YET
+--
+Status 2018-07-02: Currently I am fighting with the Mac sandboxing, which keeps 
+my app from accessing its own resources because the app file is moved to a 
+sandboxed location by Mac OS X.
+
+I will have to rethink the app setup (possibly will need to move the templates into the .app
+file on Mac)
+--
 
 Starter project for developing CEP panels to be used with Adobe applications
 
