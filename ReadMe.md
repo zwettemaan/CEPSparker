@@ -1,13 +1,55 @@
 # CEPSparker
 
-  **** NOTE: THIS PROJECT IS INCOMPLETE. DO NOT TRY TO USE IT YET
---
-Status 2018-07-02: Currently I am fighting with the Mac sandboxing, which keeps 
-my app from accessing its own resources because the app file is moved to a 
-sandboxed location by Mac OS X.
+  **** NOTE: THIS PROJECT IS INCOMPLETE. USE WITH EXTREME CARE. NO WINDOWS SUPPORT JUST YET
 
-I will have to rethink the app setup (possibly will need to move the templates into the .app
-file on Mac)
+--
+
+Starter project for developing CEP panels to be used with Adobe applications
+
+© 2018, Rorohiko Ltd. - Kris Coppieters
+kris@rorohiko.com
+
+v1.0, June 23, 2018
+
+--
+
+Status 2018-07-02: The Mac version kind of works with InDesign. You need to jump through a few
+hoops.
+
+1) Download this repository from Github as a ZIP file
+
+2) Unzip
+
+3) Right-click the 
+
+    Mac/initialSetupConfigApp.command
+
+script, and select 'Open'. Allow it to run (be careful - the buttons are positioned in unexpected places and
+it is easy to get confused and click 'Cancel' button without noticing).
+
+4) Double-click the
+
+    CEPSparkerConfig
+
+icon
+
+5) Configure away. The templates will be consulted and a project will be set up.
+
+6) Right-click the
+
+    Mac/localDebugInstall.command
+
+script, and select 'Open'. Allow it to run (be careful - the buttons are positioned in unexpected places and
+it is easy to get confused and click 'Cancel' button without noticing).  
+
+7) Launch InDesign CC 2014 or later. The sample extension should be under Window - Extensions
+
+8) Point your cefclient (custom version of Chrome) debugger to http://localhost:8888 (replace 8888 with whatever port you used in the configuration).
+
+I find that the cefclient_mac.zip that comes in the CEP 6.x repo works best.
+
+https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/cefclient_mac.zip 
+
 --
 
 Starter project for developing CEP panels to be used with Adobe applications
