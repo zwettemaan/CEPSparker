@@ -1086,6 +1086,8 @@ End
 		Sub LogError(in_methodName as String, in_message as String)
 		  // TODO when needed. This is a simple project, and I've not needed any advanced logging or debugging
 		  // just yet.
+		  
+		  MsgBox in_methodName + " " + in_message
 		End Sub
 	#tag EndMethod
 
