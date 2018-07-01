@@ -936,8 +936,6 @@ End
 		        Exit
 		      end if
 		      
-		      MsgBox appFolder.URLPath
-		      
 		      fTemplatesFolder = nil
 		      fProjectRootFolder = appFolder
 		      
