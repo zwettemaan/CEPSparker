@@ -6,6 +6,10 @@
 
 CEPVERSION=4.2
 
+STARTERCODE="HelloWorld"
+HELP_STARTERCODE="Choose whether some sample code should be added"
+SELECT_STARTERCODE="None,HelloWorld,SamplePanel"
+
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
 HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"
 

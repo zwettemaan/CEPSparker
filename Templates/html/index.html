@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+$include "loadCSS.ihtml"
+$include "hideNode.ihtml"
+$include "loadScripts.ihtml"
+$include "restoreNode.ihtml"
+
+</head>
+
+<body>
+   <div class="panel">
+
+$if "$$STARTERCODE$$" == "HelloWorld"
+
+        Hello World!
+
+$elif "$$STARTERCODE$$" == "SamplePanel"
+
+$include "samplePanel.ihtml"
+		
+$endif
+
+   </div>
+</body>
+
+</html>

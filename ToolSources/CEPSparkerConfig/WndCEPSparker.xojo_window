@@ -350,7 +350,6 @@ End
 		          subFile = fTemplatesFolder.Item(idx)
 		          if subFile.Directory then
 		            if fProjectRootFolder.Child(subFile.Name).Exists then
-		              MsgBox subFile.Name
 		              retVal = false
 		              Exit // For
 		            end if
@@ -908,7 +907,7 @@ End
 		    Init
 		    
 		    if not CheckIfPristine then
-		      ReportError "This project folder has been previously configured. Please unzip the original folder and try again with a clean copy"
+		      LogFatalError CurrentMethodName, "This project folder has been previously configured. Please unzip the original folder and try again with a clean copy"
 		    end if
 		    
 		    if fErrorMessage <> "" then
@@ -928,11 +927,12 @@ End
 		  do 
 		    try 
 		      
+		      fLogLevel = kLogLevel_Warning
+		      
 		      Dim appFolder as FolderItem
 		      appFolder = GetFolderItem("")
 		      if appFolder = nil then
-		        LogError CurrentMethodName, "appFolder = nil"
-		        ReportError "Fatal error: app cannot locate its own folder"
+		        LogFatalError CurrentMethodName, "App cannot locate its own folder"
 		        Exit
 		      end if
 		      
@@ -953,8 +953,7 @@ End
 		      
 		      fCSXSTemplatesFolder = fTemplatesFolder.Child(kCSXSFolderName)
 		      if fCSXSTemplatesFolder = nil or not fCSXSTemplatesFolder.Directory then
-		        LogError CurrentMethodName, "Cannot find project CSXS templates folder '" + kCSXSFolderName + "'"
-		        ReportError "Cannot find project CSXS templates folder '" + kCSXSFolderName + "'"
+		        LogFatalError CurrentMethodName, "Cannot find project CSXS templates folder '" + kCSXSFolderName + "'"
 		        Exit
 		      end if
 		      
@@ -1082,10 +1081,89 @@ End
 
 	#tag Method, Flags = &h0
 		Sub LogError(in_methodName as String, in_message as String)
-		  // TODO when needed. This is a simple project, and I've not needed any advanced logging or debugging
-		  // just yet.
+		  if fLogLevel >= kLogLevel_Error then
+		    LogMessage "ERROR: " + in_methodName + ": " + in_message
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogFatalError(in_methodName as String, in_message as String)
+		  LogMessage "FATAL: " + in_methodName + ": " + in_message
 		  
-		  MsgBox in_methodName + " " + in_message
+		  fErrorMessage = in_message
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogMessage(in_message as String)
+		  Do
+		    try 
+		      static logFile as FolderItem
+		      
+		      if logFile = nil then
+		        logFile = SpecialFolder.ApplicationData
+		        if logFile = nil or not logFile.Directory then
+		          Exit
+		        end if
+		        logFile = logFile.Child(kRorohikoFolder)
+		        if logFile = nil then
+		          Exit
+		        end if
+		        if not logFile.Exists then
+		          logFile.CreateAsFolder
+		        end if
+		        if not logFile.Directory then
+		          Exit
+		        end if
+		        logFile = logFile.Child(kLogFile)
+		      end if
+		      
+		      Dim tos as TextOutputStream
+		      if not logFile.exists then
+		        tos = TextOutputStream.Create(logFile)
+		      else
+		        tos = TextOutputStream.Append(logFile)
+		      end if
+		      if tos = nil then
+		        Exit
+		      end if
+		      
+		      Dim date as Date
+		      date = new Date
+		      
+		      tos.WriteLine date.ShortDate + " " + date.ShortTime + " " + in_message
+		      
+		      tos.Close
+		      
+		    catch e as RuntimeException
+		    end try
+		    
+		  Loop until true
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogNote(in_methodName as String, in_message as String)
+		  if fLogLevel >= kLogLevel_Note then
+		    LogMessage "NOTE : " + in_methodName + ": " + in_message
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogTrace(in_methodName as String, in_message as String)
+		  if fLogLevel >= kLogLevel_Trace then
+		    LogMessage "TRACE: " + in_methodName + ": " + in_message
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LogWarning(in_methodName as String, in_message as String)
+		  if fLogLevel >= kLogLevel_Warning then
+		    LogMessage "WARN : " + in_methodName + ": " + in_message
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -1463,14 +1541,6 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ReportError(in_message as String)
-		  if fErrorMessage = "" then
-		    fErrorMessage = in_message
-		  end if
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function SplitIntoLines(in_fileText as String) As String()
 		  Dim lines() as String
 		  
@@ -1605,6 +1675,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		fLogLevel As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		fPlaceholderDict As Dictionary
 	#tag EndProperty
 
@@ -1648,6 +1722,24 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kIncludesFolderName, Type = String, Dynamic = False, Default = \"includes", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogFile, Type = String, Dynamic = False, Default = \"CEPSparkerConfigLog.txt", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogLevel_Error, Type = Double, Dynamic = False, Default = \"1", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogLevel_Note, Type = Double, Dynamic = False, Default = \"3", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogLevel_Off, Type = Double, Dynamic = False, Default = \"0", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogLevel_Trace, Type = Double, Dynamic = False, Default = \"4", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kLogLevel_Warning, Type = Double, Dynamic = False, Default = \"2", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kMacScriptFolder, Type = String, Dynamic = False, Default = \"Mac", Scope = Public
@@ -1696,6 +1788,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kProjectHomeFolderName, Type = String, Dynamic = False, Default = \"CEPSparker", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kRorohikoFolder, Type = String, Dynamic = False, Default = \"Rorohiko", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kTemplatesFolderName, Type = String, Dynamic = False, Default = \"Templates", Scope = Public
