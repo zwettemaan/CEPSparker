@@ -75,11 +75,11 @@ function getInDesignInfo_PRM() {
                 $$SHORTCODE$$.inDesignInfo.serialNumber = info.serialNumber;
                 var applicationDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.HOST_APPLICATION);
                 if ($$SHORTCODE$$.isMac) {
-                    while (applicationDir != "" && path.filenameExtension(applicationDir) != "app") {
-                        applicationDir = path.dirname(applicationDir);
+                    while (applicationDir != "" && $$SHORTCODE$$.path.filenameExtension(applicationDir) != "app") {
+                        applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
                     }
                 }
-                applicationDir = path.dirname(applicationDir);
+                applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
                 $$SHORTCODE$$.inDesignInfo.pluginPath = applicationDir + "/Plug-Ins";
                 resolve();
             }
@@ -96,7 +96,7 @@ function getJavaScriptExtensionDirs_PRM() {
         $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) + "/";
         $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) + "/";
         if ($$SHORTCODE$$.isMac) {
-            $$SHORTCODE$$.dirs.systemPreferencesDir = path.dirname($$SHORTCODE$$.dirs.appSupportDir) + "/Preferences/";
+            $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.appSupportDir) + "/Preferences/";
         }
         else {
             $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.dirs.appSupportDir;
@@ -150,8 +150,8 @@ function savePreferences_PRM() {
 
         var err = cep.fs.NO_ERROR;
 
-        if (! path.exists($$SHORTCODE$$.dirs.preferencesDir)) {
-            err = path.mkdir($$SHORTCODE$$.dirs.preferencesDir);
+        if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.preferencesDir)) {
+            err = $$SHORTCODE$$.path.mkdir($$SHORTCODE$$.dirs.preferencesDir);
         }
 
         if (err == cep.fs.NO_ERROR) {

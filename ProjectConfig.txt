@@ -41,7 +41,7 @@ HELP_EXTENSION_DIRNAME="This is a subfolder name used to store the extension in 
 PREFS_FILENAME=CEPSparkerPreferences.json
 HELP_PREFS_FILENAME="This is a file name name to store preferences in the preferences subfolder"
 
-PANELHEIGHT=700
+PANELHEIGHT=300
 HELP_PANELHEIGHT="Panel height in manifest file"
 
 PANELWIDTH=570

@@ -16,8 +16,8 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
             err = cep.fs.NO_ERROR;
         }
         else {
-            var parentFolderPath = path.dirname(folderPath, separator);
-            var err = path.mkdir(parentFolderPath, separator);
+            var parentFolderPath = $$SHORTCODE$$.path.dirname(folderPath, separator);
+            var err = $$SHORTCODE$$.path.mkdir(parentFolderPath, separator);
             if (err == cep.fs.NO_ERROR) {
                 var result = cep.fs.makedir(folderPath);
                 err = result.err;           

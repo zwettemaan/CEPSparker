@@ -77,13 +77,6 @@ CEP versions as possible.
 
 ## Getting Started
 
-Decompress the .zip file. 
-
-Run the configuration app _CEPSparkerConfig_. 
-
-Both Mac and Windows versions of _CEPSparkerConfig_ are provided.
-
-Look in the _Mac_ or _Windows_ subfolders.
 
 ## Getting Started On Mac
 
@@ -94,6 +87,12 @@ which discusses everything in much more detail.
 
 On a Mac, there are a few hoops to jump through: recent versions of Mac OS X
 are very security-conscious, and this sample project triggers a few security measures.
+
+Download and decompress the .zip file from GitHub:
+
+https://github.com/zwettemaan/CEPSparker/archive/master.zip
+
+Look in the _Mac_ subfolder.
 
 ### De-quarataine _CEPSparkerConfig_
 
@@ -107,6 +106,8 @@ Allow the script to run (be careful - the buttons are positioned in unexpected p
 it is easy to get confused and click 'Cancel' button without noticing).
 
 This script will 'de-quarantaine' _CEPSparkerConfig_, telling Mac OS X it is OK to run this app without setting up a protective sandbox. If you forget to do this, _CEPSparkerConfig_ will end up running in a 'sandbox' where it does not have access to the rest of the unzipped information.
+
+You will need to close the Terminal window afterwards.
 
 ### Generate the project from the templates
 
@@ -139,14 +140,19 @@ script, and select 'Open'.
 Allow the script to run (be careful - the buttons are positioned in unexpected places and
 it is easy to get confused and click 'Cancel' button without noticing).  
 
-This script set up a subfolder of 
+You will need to close the Terminal window afterwards.
+
+This script will set the CEP debug flag, which allows you to run the extension without having a proper code signature.
+
+Then the script will create a subfolder for the extension in
 
     ~/Library/Application Support/Adobe/CEP/extensions
 
-In this subfolder, a number of symbolic links will be created that lead back to the source code folder for the panel.
+In this subfolder, a number of symbolic links will be created that lead back to the source folders for the panel.
 
-This approach avoids making extra copies of the extension source code. There is only one copy of the source code
-files in existence, and it is 'hot-linked' to the Adobe extensions folder.
+This approach avoids making extra copies of the extension source code. 
+
+There is only one copy of the source code files in existence, and it is 'hot-linked' to the Adobe extensions folder, so the target app will load the extension when it is restarted.
 
 Launch your target application and check under 'Window - Extensions'. 
 
