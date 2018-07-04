@@ -166,14 +166,14 @@ Typical issue are blank windows or garbled windows when trying to start a debug 
 
 Some links to other Chrome-based browsers to try:
 
-https://www.chromium.org/getting-involved/download-chromium
-https://www.google.com/intl/en/chrome/browser/canary.html
+https://www.chromium.org/getting-involved/download-chromium    
+https://www.google.com/intl/en/chrome/browser/canary.html    
 
 For cefclient: look for .zip files in:
 
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x    
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x    
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x    
 
 Point your Chrome browser or cefclient to http://localhost:8888
 
