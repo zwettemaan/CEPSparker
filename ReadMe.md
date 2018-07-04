@@ -40,29 +40,31 @@ dependencies:
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
 
-Note: the .zip file you download from GitHub initially does not contain the starter project.
+The CEPSparker.zip file you download from this GitHub repository **does not 
+contain the starter project**.
 
-Instead, it contains a precursor to the project. 
+Instead, it contains a **precursor** to the project. 
 
-You will first use the _CEPSparkerConfig_ configuration tool to make some choices 
-and set some preferences. 
+You need to run the _CEPSparkerConfig_ configuration tool first.
 
-Based on these configuration options, the _CEPSparkerConfig_ will then provide you 
-with the starter project.
+This allows you to select between some options, and to set some preferences. 
 
-You will only be able to run _CEPSparkerConfig_ once for any particular project. 
+Based on these configuration options, the _CEPSparkerConfig_ will then set up 
+a the starter project for you.
 
-If you want to start over with a clean slate, you need to go back to the downloaded .zip file.
+After that, the project is then ready to be installed, debugged, tweaked...
 
-Note that _CEPSparkerConfig_ is a simple-minded convenience app. 
+_CEPSparkerConfig_ is a simple-minded convenience app. 
 
-It does not contain esoteric 'magic'.
+It does not contain esoteric 'magic'; source code is provided.
 
 _CEPSparkerConfig_ will read the content of the Templates folder,
 do some simple search-and-replace and some text preprocessing on the text files 
 that live inside the Templates folder, and will set up your starter project.
 
-The project is then ready to be installed and/or tweaked.
+You will only be able to **run** _CEPSparkerConfig_ **once** for any particular project. 
+
+If you want to start over with a clean slate, you need to go back to the downloaded .zip file.
 
 I attempted to make everything self-explanatory and well documented.
 
@@ -77,21 +79,36 @@ CEP versions as possible.
 
 ## Getting Started
 
-## Getting Started On Mac
-
 First a very quick whirlwind tour.
 
 Further down in this document, I have a 'cookbook' section 
 which discusses everything in much more detail.
 
-On a Mac, there are a few hoops to jump through: recent versions of Mac OS X
-are very security-conscious, and this sample project triggers a few security measures.
+### Getting Started On Mac
 
 Download and decompress the .zip file from GitHub:
 
 https://github.com/zwettemaan/CEPSparker/archive/master.zip
 
 Look in the _Mac_ subfolder.
+
+On more recent versions of Mac OS X, there are a few hoops to jump through.
+
+#### Security issues
+
+Mac OS X is now very security-conscious, and this starter project triggers a
+few security warnings.
+
+Initially, you will need to open the .command files provided in this project 
+with 'Right-Click, Open' instead of double-clicking.
+
+After that initial 'declaration of trust', the .command file will work with
+just a double-click.
+
+But every time you (re)download/unzip from GitHub, you will need to 'prime' 
+each command-line script with 'Right-click, Open' instead of double-click. 
+
+Subsequent runs will only need a double-click.
 
 ### De-quarataine _CEPSparkerConfig_
 
@@ -104,7 +121,10 @@ and select 'Open' from the context menu.
 Allow the script to run (be careful - the buttons are positioned in unexpected places and
 it is easy to get confused and click the 'Cancel' button without noticing).
 
-This script will 'de-quarantaine' _CEPSparkerConfig_, telling Mac OS X it is OK to run this app without setting up a protective sandbox. If you forget to do this, _CEPSparkerConfig_ will end up running in a 'sandbox' where it does not have access to the rest of the unzipped information.
+This script will 'de-quarantaine' _CEPSparkerConfig_, telling Mac OS X it is OK to 
+run this app without setting up a protective sandbox. If you forget to do this, 
+_CEPSparkerConfig_ will end up running in a 'sandbox' where it does not have access
+to the rest of the unzipped information.
 
 You will need to close the Terminal window afterwards.
 
@@ -118,15 +138,17 @@ icon. You will now be presented with a table where you can configure some import
 
 If you're only trying things out, you can leave all options unchanged and click 'Generate' immediately.
 
-If you're getting ready to build a 'real' CEP panel, you do need to change the dummy default values into
-'real' values. Check the cookbook further down, where I'll discuss all the options in detail.
+If you're getting ready to build a 'real' CEP panel, you do need to change the dummy default 
+values into 'real' values. Check the cookbook further down, where I'll discuss all the options 
+in detail.
 
 One important value to pay attention to is the port number. This port number is used for debugging.
 
-You might have multiple CEP panels installed, and in order to debug all of them, each needs a unique network port
-number. 
+You might have multiple CEP panels installed, and in order to debug all of them, each needs a
+unique network port number. 
 
-The default presented is 8888. If you are dealing with multiple panels, make sure to give each panel a different port number.
+The default presented is 8888. If you are dealing with multiple panels, make sure to give each 
+panel a different port number.
 
 ### Install the extension
 
@@ -141,28 +163,35 @@ it is easy to get confused and click the 'Cancel' button without noticing).
 
 You will need to close the Terminal window afterwards.
 
-This script will set the CEP debug flag, which allows you to run the extension without having a proper code signature.
+This script will set the CEP debug flag, which allows you to run the extension without 
+having a proper code signature.
 
 Then the script will create a subfolder for the extension in
 
     ~/Library/Application Support/Adobe/CEP/extensions
 
-In this subfolder, a number of symbolic links will be created that lead back to the source folders for the panel.
+In this subfolder, a number of symbolic links will be created that lead back to
+the source folders for the panel.
 
 This approach avoids making extra copies of the extension source code. 
 
-There is only one copy of the source code files in existence, and it is 'hot-linked' to the Adobe extensions folder, so the target app will load the extension when it is restarted.
+There is only one copy of the source code files in existence, and it is 
+'hot-linked' to the Adobe extensions folder, so the target app will load 
+the extension directly from your source code folder when it is restarted.
 
 Launch your target application and check under 'Window - Extensions'. 
 
-The extension should be listed, and the panel should appear when you select the menu item.
+The extension should be listed, and the panel should appear when you 
+select the menu item.
 
 ### Debug the extension
 
-For debugging, the milage will vary: Google Chrome often does not work, and I find myself
-multiple Chrome-based browsers, until I find one that works.
+For debugging, the milage will vary: Google Chrome often does not work, 
+and I find myself trying multiple Chrome-based browsers, until I find 
+one that works.
 
-Typical issue are blank windows or garbled windows when trying to start a debug session.
+Typical issue are blank windows or garbled windows when trying to start
+a debug session.
 
 Some links to other Chrome-based browsers to try:
 
