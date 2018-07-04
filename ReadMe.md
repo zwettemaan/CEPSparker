@@ -58,7 +58,7 @@ Note that _CEPSparkerConfig_ is a simple-minded convenience app.
 
 It does not contain esoteric 'magic'.
 
-_CEPSparkerConfig_ will read the content of the Templates folder, 
+_CEPSparkerConfig_ will read the content of the Templates folder,
 do some simple search-and-replace and some text preprocessing on the text files 
 that live inside the Templates folder, and will set up your starter project.
 
@@ -178,7 +178,8 @@ tasks manually.
 _CEPSparkerConfig_ will:
 
     - search the text files under _Templates_ for placeholder patterns `$$PLACEHOLDER$$`
-    - show the placeholders with some default values to the user
+    - read the ProjectConfig.txt file to determine what default values to use for placeholders.
+    - show the placeholders with their default values to the user
     - allow the user to tweak stuff
     - when the user clicks 'Generate', do a search-and-replace with the user-provided placeholder replacements 
     - depending on the user selection, it will also select between multiple variants of some key files. For example, there are multiple manifest.xml files in the Templates folder, and depending on the CEPVERSION selected, one of them will be picked.
