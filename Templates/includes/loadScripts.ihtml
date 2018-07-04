@@ -1,8 +1,13 @@
     <script src="../js/CSInterface.js"></script>
+
+    <script src="../js/promiscuous/promiscuous-browser.js"></script>
+
+$include "hideNode.ihtml"
     <script src="../js/jQuery/jQuery-3.3.1.min.js"></script>
     <script src="../js/jQuery/jQuery-ui.min.js"></script>
+$include "restoreNode.ihtml"
+
     <script src="../js/themeManager.js"></script>
-    <script src="../js/promiscuous/promiscuous-browser.js"></script>
 
     <script src="../shared_js_jsx/globals.js"></script>
     <script src="../shared_js_jsx/tweakableSettings.js"></script>

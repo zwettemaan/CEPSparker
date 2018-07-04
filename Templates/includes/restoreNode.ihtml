@@ -1,4 +1,6 @@
+$if $$CEPVERSION$$ >= 5.2
     <script type="text/javascript">
         window.module = window.nodeModule; 
         window.global = window.nodeGlobal;
     </script>
+$endif

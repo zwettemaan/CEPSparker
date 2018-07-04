@@ -453,20 +453,37 @@ End
 		        end select
 		      wend
 		      
-		      Select case operator
-		      case "=", "=="
-		        retVal = leftSide = rightSide
-		      case "<"
-		        retVal = leftSide < rightSide
-		      case "<=", "=<"
-		        retVal = leftSide <= rightSide
-		      case ">=", "=>"
-		        retVal = leftSide >= rightSide
-		      case ">", ">"
-		        retVal = leftSide > rightSide
-		      case "<>", "!=", "><"
-		        retVal = leftSide <> rightSide
-		      end select
+		      if IsNumeric(leftSide) and IsNumeric(rightSide) then
+		        Select case operator
+		        case "=", "=="
+		          retVal = val(leftSide) = val(rightSide)
+		        case "<"
+		          retVal = val(leftSide) < val(rightSide)
+		        case "<=", "=<"
+		          retVal = val(leftSide) <= val(rightSide)
+		        case ">=", "=>"
+		          retVal = val(leftSide) >= val(rightSide)
+		        case ">", ">"
+		          retVal = val(leftSide) > val(rightSide)
+		        case "<>", "!=", "><"
+		          retVal = val(leftSide) <> val(rightSide)
+		        end select
+		      else
+		        Select case operator
+		        case "=", "=="
+		          retVal = leftSide = rightSide
+		        case "<"
+		          retVal = leftSide < rightSide
+		        case "<=", "=<"
+		          retVal = leftSide <= rightSide
+		        case ">=", "=>"
+		          retVal = leftSide >= rightSide
+		        case ">", ">"
+		          retVal = leftSide > rightSide
+		        case "<>", "!=", "><"
+		          retVal = leftSide <> rightSide
+		        end select
+		      end if
 		      
 		    catch e as RuntimeException
 		      LogError CurrentMethodName, "Throws " + e.Message
@@ -2167,5 +2184,10 @@ End
 		Name="fQuitting"
 		Group="Behavior"
 		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="fLogLevel"
+		Group="Behavior"
+		Type="Integer"
 	#tag EndViewProperty
 #tag EndViewBehavior

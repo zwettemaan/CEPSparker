@@ -17,6 +17,8 @@ read reply
 if [ "$reply" == "YES" ]; then
 
   cd "$projectHomeDir"
+  
+  Mac/clean.command
 
   rm -rf BuildSettings
   rm -rf debug

@@ -1,3 +1,4 @@
+$if $$CEPVERSION$$ >= 5.2
     <script type="text/javascript">
         window.nodeRequire = window.require || function () {}; 
         window.nodeModule = window.module; 
@@ -5,3 +6,4 @@
         window.nodeGlobal = window.global; 
         delete window.global;
     </script>
+$endif

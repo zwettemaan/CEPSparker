@@ -163,6 +163,14 @@ The extension should be listed, and the panel should appear when you select the 
 Point your Chrome browser or cefclient to http://localhost:8888 
 (replace 8888 with whatever port you used in the _CEPSparkerConfig_ configuration screen).
 
+### Uninstall the debug extension
+
+Right-click the
+
+    Mac/clean.command
+
+script, and select 'Open'. 
+
 ## CEPSparkerConfig
 
 _CEPSparkerConfig_ is an app written in Xojo.
