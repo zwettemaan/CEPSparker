@@ -38,7 +38,7 @@ dependencies:
 - Adobe Creative Cloud CC 2014 or higher
 - Mac OS X 10.9 or Windows 7.x or higher
 - A text editor
-- Google Chrome browser
+- Google Chrome browser, Google Chromium, or cefclient
 
 Note: the .zip file you download from GitHub initially does not contain the starter project.
 
@@ -76,7 +76,6 @@ The panel is set up to run with as wide a range of applications and
 CEP versions as possible.
 
 ## Getting Started
-
 
 ## Getting Started On Mac
 
@@ -160,7 +159,24 @@ The extension should be listed, and the panel should appear when you select the 
 
 ### Debug the extension
 
-Point your Chrome browser or cefclient to http://localhost:8888 
+For debugging, the milage will vary: Google Chrome often does not work, and I find myself
+multiple Chrome-based browsers, until I find one that works.
+
+Typical issue are blank windows or garbled windows when trying to start a debug session.
+
+Some links to other Chrome-based browsers to try:
+
+https://www.chromium.org/getting-involved/download-chromium
+https://www.google.com/intl/en/chrome/browser/canary.html
+
+For cefclient: look for .zip files in:
+
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x
+https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x
+
+Point your Chrome browser or cefclient to http://localhost:8888
+
 (replace 8888 with whatever port you used in the _CEPSparkerConfig_ configuration screen).
 
 ### Uninstall the debug extension
