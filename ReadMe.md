@@ -113,9 +113,9 @@ But every time you (re)download/unzip from GitHub, you will need to 'prime'
 each and every command-line script in the CEPSparker folder with 'Right-click, 
 Open' instead of double-click. 
 
-Subsequent runs of the same command file will only need a double-click.
+Subsequent runs of a 'primed' command file will only need a double-click.
 
-### De-quarataine _CEPSparkerConfig_
+### De-quarantaine _CEPSparkerConfig_
 
 Right-click the command-line script
 
