@@ -110,7 +110,8 @@ This way, you tell Mac OS you trust that particular .command file, and next time
 the same .command file will work with just a double-click.
 
 But every time you (re)download/unzip from GitHub, you will need to 'prime' 
-each and every command-line script you use with 'Right-click, Open' instead of double-click. 
+each and every command-line script in the CEPSparker folder with 'Right-click, 
+Open' instead of double-click. 
 
 Subsequent runs of the same command file will only need a double-click.
 
