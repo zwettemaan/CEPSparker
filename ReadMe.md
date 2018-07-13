@@ -45,16 +45,15 @@ contain the starter project**.
 
 Instead, it contains a **precursor** to the project. 
 
-On Mac, you need to jump through a few preliminary hoops, in order to disable the
-Mac's security defenses - see 'Getting Started' below. Otherwise it will 
-not allow _CEPSparkerConfig_ to run properly.
-
 To convert the precursor to the project into a real project, you need to run
-the _CEPSparkerConfig_ configuration tool first.
+the _CEPSparkerConfig_ configuration tool first. On Mac, you first will need to jump 
+through a few preliminary hoops, in order to disable the Mac's security defenses
+ - see 'Getting Started' below. Otherwise it will not allow _CEPSparkerConfig_ to
+run properly.
 
-This allows you to select between some options, and to set some preferences. 
+_CEPSparkerConfig_ allows you to select between some options, and to set some preferences. 
 
-Based on these configuration options, the _CEPSparkerConfig_ will then set up 
+Based on these configuration options, _CEPSparkerConfig_ will then set up 
 a the starter project for you.
 
 After that, the project is then ready to be installed, debugged, tweaked...
@@ -104,16 +103,16 @@ On more recent versions of Mac OS X, there are a few hoops to jump through.
 Mac OS X is now very security-conscious, and this starter project triggers a
 few security warnings.
 
-Initially, you will need to open the .command files provided in this project 
+Initially, you will need to open each of the .command files provided in this project 
 with 'Right-Click, Open' instead of double-clicking.
 
-After that initial 'declaration of trust', the .command file will work with
-just a double-click.
+This way, you tell Mac OS you trust that particular .command file, and next time around 
+the same .command file will work with just a double-click.
 
 But every time you (re)download/unzip from GitHub, you will need to 'prime' 
-each command-line script with 'Right-click, Open' instead of double-click. 
+each and every command-line script you use with 'Right-click, Open' instead of double-click. 
 
-Subsequent runs will only need a double-click.
+Subsequent runs of the same command file will only need a double-click.
 
 ### De-quarataine _CEPSparkerConfig_
 
