@@ -47,8 +47,8 @@ Instead, it contains a **precursor** to the project.
 
 To convert the precursor to the project into a real project, you need to run
 the _CEPSparkerConfig_ configuration tool first. On Mac, you first will need to jump 
-through a few preliminary hoops, in order to disable the Mac's security defenses
- - see 'Getting Started' below. Otherwise it will not allow _CEPSparkerConfig_ to
+through a few preliminary hoops, in order to disable the Mac's security defenses. 
+See 'Getting Started' below. Otherwise it will not allow _CEPSparkerConfig_ to
 run properly.
 
 _CEPSparkerConfig_ allows you to select between some options, and to set some preferences. 
