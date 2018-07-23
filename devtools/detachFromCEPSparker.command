@@ -16,7 +16,7 @@ cd "$projectHomeDir"
 if [ -d "./BuildSettings"]; then
 
   echo "***WARNING WARNING WARNING***"
-  echo "This will irrevokably delete all templates files and CEPSparker code generation software. 
+  echo "This will irrevokably delete all templates files and CEPSparker code generation software."
   echo "Type 'YES' at the prompt only if you're really sure you want to do this."
 
   read reply
