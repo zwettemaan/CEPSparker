@@ -8,9 +8,13 @@ cd $devtoolsDir
 export devtoolsDir=`pwd`
 export projectHomeDir=`dirname "$devtoolsDir"`
 
+echo "*******************************************"
 echo "***WARNING WARNING WARNING***"
-echo "This will irrevokably delete all generated files. Type 'YES' at the"
-echo "prompt only if you're really sure you want to do this."
+echo "This will irrevokably delete all generated files."
+echo "*******************************************"
+echo ""
+echo "Type 'YES' at the prompt only if you're really sure"
+echo "you want to do this."
 
 read reply
 

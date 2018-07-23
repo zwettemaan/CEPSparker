@@ -13,10 +13,24 @@ cd "$projectHomeDir"
 #
 # Don't even try if the project has not been generated
 #
-if [ -d "./BuildSettings"]; then
+if [ ! -d "./BuildSettings" ]; then
 
+  echo "*******************************************"
+  echo "This is an unconfigured CEPSparker project."
+  echo "Leaving this project untouched."
+  echo "Make sure to read the documentation and then run "
+  echo "CEPSparkerConfig as instructed."
+  echo "*******************************************"
+
+else
+
+  echo "*******************************************"
   echo "***WARNING WARNING WARNING***"
-  echo "This will irrevokably delete all templates files and CEPSparker code generation software."
+  echo "This will irrevokably delete all templates files and"
+  echo "CEPSparker code generation software, which detaches this"
+  echo "project from CEPSparker and the CEPSparker git repo"
+  echo "*******************************************"
+  echo ""
   echo "Type 'YES' at the prompt only if you're really sure you want to do this."
 
   read reply
