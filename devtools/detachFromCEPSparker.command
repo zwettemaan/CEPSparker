@@ -24,6 +24,7 @@ if [ -d "./BuildSettings"]; then
   if [ "$reply" == "YES" ]; then
 
     rm -rf .git  
+    rm -f .gitignore
     rm -f ReadMe.md
     rm -rf ProjectConfig.txt
     rm -rf Templates
