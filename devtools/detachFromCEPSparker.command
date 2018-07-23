@@ -8,23 +8,30 @@ cd $devtoolsDir
 export devtoolsDir=`pwd`
 export projectHomeDir=`dirname "$devtoolsDir"`
 
-echo "***WARNING WARNING WARNING***"
-echo "This will irrevokably delete all templates files and CEPSparker code generation software. 
-echo "Type 'YES' at the prompt only if you're really sure you want to do this."
+cd "$projectHomeDir"
 
-read reply
+#
+# Don't even try if the project has not been generated
+#
+if [ -d "./BuildSettings"]; then
 
-if [ "$reply" == "YES" ]; then
+  echo "***WARNING WARNING WARNING***"
+  echo "This will irrevokably delete all templates files and CEPSparker code generation software. 
+  echo "Type 'YES' at the prompt only if you're really sure you want to do this."
 
-  cd "$projectHomeDir"
+  read reply
 
-  rm -rf .git  
-  rm -f ReadMe.md
-  rm -rf ProjectConfig.txt
-  rm -rf Templates
-  rm -rf ToolSources/CEPSparkerConfig
-  rm -rf Mac/CEPSparkerConfig.app
-  rm -rf Mac/initialSetupConfigApp.command
-  rm -rf $devtoolsDir
+  if [ "$reply" == "YES" ]; then
+
+    rm -rf .git  
+    rm -f ReadMe.md
+    rm -rf ProjectConfig.txt
+    rm -rf Templates
+    rm -rf ToolSources/CEPSparkerConfig
+    rm -rf Mac/CEPSparkerConfig.app
+    rm -rf Mac/initialSetupConfigApp.command
+    rm -rf $devtoolsDir
+
+  fi
 
 fi
