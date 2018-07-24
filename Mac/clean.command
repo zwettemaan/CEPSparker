@@ -14,8 +14,10 @@ cd "$projectHomeDir"
 
 if [ -f "$projectHomeDir/BuildSettings/ExtensionDirName.txt" ]; then
 	export EXTENSION_DIRNAME=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionDirName.txt"`
-	export EXTENSION_HOMEDIR=~/Library/Application\ Support/Adobe/CEP/extensions/"$EXTENSION_DIRNAME"
-	rm -rf "$EXTENSION_HOMEDIR"
+	if [ "%EXTENSION_DIRNAME%" != "" ]; then
+		export EXTENSION_HOMEDIR=~/Library/Application\ Support/Adobe/CEP/extensions/"$EXTENSION_DIRNAME"
+		rm -rf "$EXTENSION_HOMEDIR"
+	fi
 fi
 
 rm -rf LocalLinks
