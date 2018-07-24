@@ -20,9 +20,9 @@ if [ -f  "$projectHomeDir/BuildSettings/CEPVersion.txt" ]; then
         elif [ "$CEP_VERSION" == "5.2" ]; then
             export PLIST_FILE=com.adobe.CSXS.5.plist
         elif [ "$CEP_VERSION" == "6.1" ]; then
-            export PLIST_FILE=com.adobe.CSXS.5.plist
+            export PLIST_FILE=com.adobe.CSXS.6.plist
         elif [ "$CEP_VERSION" == "7.0" ]; then
-            export PLIST_FILE=com.adobe.CSXS.5.plist
+            export PLIST_FILE=com.adobe.CSXS.7.plist
         elif [ "$CEP_VERSION" == "8.0" ]; then
             export PLIST_FILE=com.adobe.CSXS.8.plist
         else
