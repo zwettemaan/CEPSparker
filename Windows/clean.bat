@@ -12,7 +12,7 @@ call %scriptDir%\clearPlayerDebugMode.bat
 if exist %projectHomeDir%\BuildSettings\ExtensionDirName.txt (
 	set /p EXTENSION_DIRNAME=< BuildSettings/ExtensionDirName.txt
 	if not "%EXTENSION_DIRNAME%" == "" (
-		set EXTENSION_HOMEDIR=%APPDATA%\ADobe\CEP\extensions\%EXTENSION_DIRNAME%
+		set EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%
 		rd /s /q %EXTENSION_HOMEDIR%
 	)
 )
