@@ -5,7 +5,7 @@ REM bring the project back to a 'clean slate'.
 REM
 
 SET scriptDir=%~dp0
-PUSHD %scriptDir%..
+PUSHD "%scriptDir%.."
 SET projectHomeDir=%cd%\
 POPD
 
@@ -13,20 +13,23 @@ PUSHD "%projectHomeDir%"
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 
-IF EXIST %BuildSettings\ExtensionDirName.txt (
-
+SET EXTENSION_DIRNAME=
+IF EXIST BuildSettings\ExtensionDirName.txt (
     SET /p EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
-    
-    IF NOT "%EXTENSION_DIRNAME%" == "" (
-    
-        SET EXTENSION_HOMEDIR="%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%\"
-    
-        RD /s /q %EXTENSION_HOMEDIR% > NUL 2>&1
-    
-    )
+)   
+
+SET EXTENSION_HOMEDIR=
+IF "%EXTENSION_DIRNAME%" == "" (
+    ECHO Empty ExtensionDirName. Won't attempt to remove extension directory.
+) ELSE (
+    SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%\
 )
 
-RD /s /q LocalLinks > NUL 2>&1
-RD /s /q build > NUL 2>&1
+IF NOT "%EXTENSION_HOMEDIR%" == "" (    
+    RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
+)
+
+RD /S /Q LocalLinks >NUL 2>&1
+RD /S /Q build >NUL 2>&1
 
 POPD
