@@ -1,26 +1,32 @@
+@ECHO OFF
 REM
 REM Remove locally created, compiled or derived data and attempt to 
 REM bring the project back to a 'clean slate'.
 REM
 
-set scriptDir=%~dp0
-pushd %scriptDir%..
-set projectHomeDir=%cd%
-popd
+SET scriptDir=%~dp0
+PUSHD %scriptDir%..
+SET projectHomeDir=%cd%\
+POPD
 
-pushd %projectHomeDir%
+PUSHD "%projectHomeDir%"
 
-call %scriptDir%\clearPlayerDebugMode.bat
+CALL "%scriptDir%clearPlayerDebugMode.bat"
 
-if exist %projectHomeDir%\BuildSettings\ExtensionDirName.txt (
-	set /p EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
-	if not "%EXTENSION_DIRNAME%" == "" (
-		set EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%
-		rd /s /q %EXTENSION_HOMEDIR%
-	)
+IF EXIST %BuildSettings\ExtensionDirName.txt (
+
+    SET /p EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
+    
+    IF NOT "%EXTENSION_DIRNAME%" == "" (
+    
+        SET EXTENSION_HOMEDIR="%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%\"
+    
+        RD /s /q %EXTENSION_HOMEDIR% > NUL 2>&1
+    
+    )
 )
 
-rd /s /q LocalLinks
-rd /s /q build
+RD /s /q LocalLinks > NUL 2>&1
+RD /s /q build > NUL 2>&1
 
-popd
+POPD

@@ -1,52 +1,53 @@
-rem
-rem Disable debugging
-rem
+@ECHO OFF
+REM
+REM Disable debugging
+REM
 
-set scriptDir=%~dp0
-pushd %scriptDir%..
-set projectHomeDir=%cd%
-popd
+SET scriptDir=%~dp0
+PUSHD %scriptDir%..
+SET projectHomeDir=%cd%\
+POPD
 
-pushd %projectHomeDir%
+PUSHD "%projectHomeDir%"
 
-if exist "%projectHomeDir%\BuildSettings\CEPVersion.txt" (
+IF EXIST BuildSettings\CEPVersion.txt (
 
-    set /p CEP_VERSION=< BuildSettings\CEPVersion.txt
+    SET /p CEP_VERSION=< BuildSettings\CEPVersion.txt
 
-    if not "%CEP_VERSION%" == "" (
+    IF NOT "%CEP_VERSION%" == "" (
     
-        set recognized="NO"
+        SET recognized="NO"
         
-        if "%CEP_VERSION%" == "4.2" (
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.4 /v PlayerDebugMode /t REG_SZ /d 0 /f
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.4 /v LogLevel /t REG_SZ /d 1 /f
-            set recognized="YES"
+        IF "%CEP_VERSION%" == "4.2" (
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.4 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.4 /v LogLevel /t REG_SZ /d 1 /f > NUL
+            SET recognized="YES"
         )
-        if "%CEP_VERSION%" == "5.2" (
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.5 /v PlayerDebugMode /t REG_SZ /d 0 /f
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.5 /v LogLevel /t REG_SZ /d 1 /f
-            set recognized="YES"
+        IF "%CEP_VERSION%" == "5.2" (
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.5 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.5 /v LogLevel /t REG_SZ /d 1 /f > NUL
+            SET recognized="YES"
         )
-        if "%CEP_VERSION%" == "6.1" (
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.6 /v PlayerDebugMode /t REG_SZ /d 0 /f
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.6 /v LogLevel /t REG_SZ /d 1 /f
-            set recognized="YES"
+        IF "%CEP_VERSION%" == "6.1" (
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.6 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.6 /v LogLevel /t REG_SZ /d 1 /f > NUL
+            SET recognized="YES"
         )
-        if "%CEP_VERSION%" == "7.0" (
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.7 /v PlayerDebugMode /t REG_SZ /d 0 /f
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.7 /v LogLevel /t REG_SZ /d 1 /f
-            set recognized="YES"
+        IF "%CEP_VERSION%" == "7.0" (
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.7 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.7 /v LogLevel /t REG_SZ /d 1 /f > NUL
+            SET recognized="YES"
         )
-        if "%CEP_VERSION%" == "8.0" (
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.8 /v PlayerDebugMode /t REG_SZ /d 0 /f
-            reg add HKEY_CURRENT_USER\Software\Adobe\CSXS.8 /v LogLevel /t REG_SZ /d 1 /f
-            set recognized="YES"
+        IF "%CEP_VERSION%" == "8.0" (
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.8 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+            REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.8 /v LogLevel /t REG_SZ /d 1 /f > NUL
+            SET recognized="YES"
         )
 
-        if "%recognized%" == "NO" (
-            echo "Unexpected CEP_VERSION"
+        IF "%recognized%" == "NO" (
+            ECHO "Unexpected CEP_VERSION"
         )
     )
 )
 
-popd
+POPD
