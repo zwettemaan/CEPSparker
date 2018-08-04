@@ -13,6 +13,31 @@
 $if "$$TARGETAPP$$" == "IDSN"
 			<Host Name="$$TARGETAPP$$" Version="[10,99)" />
 $endif			
+$if "$$TARGETAPP$$" == "AICY"
+			<Host Name="$$TARGETAPP$$" Version="[10,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "PHSP"
+			<Host Name="$$TARGETAPP$$" Version="[15,99)" />
+			<Host Name="PHXS" Version="[15,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "ILST"
+			<Host Name="$$TARGETAPP$$" Version="[18,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "PPRO"
+			<Host Name="$$TARGETAPP$$" Version="[8,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "AEFT"
+			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "PRLD"
+			<Host Name="$$TARGETAPP$$" Version="[2,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "FLPR"
+			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "DRWV"
+			<Host Name="$$TARGETAPP$$" Version="[15,99)" />
+$endif		
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />

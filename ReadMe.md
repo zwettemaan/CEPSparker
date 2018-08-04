@@ -1,6 +1,7 @@
 # CEPSparker
 
-  **** NOTE: THIS PROJECT IS INCOMPLETE. USE WITH EXTREME CARE. NO WINDOWS SUPPORT JUST YET
+  *** NOTE: THIS PROJECT IS INCOMPLETE. USE WITH EXTREME CARE. 
+  *** Documentation is highly incomplete.
 
 --
 
@@ -9,7 +10,7 @@ Starter project for developing CEP panels to be used with Adobe applications
 © 2018, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v1.0, June 23, 2018
+v1.0.1, August 4, 2018
 
 ## Preamble
 
@@ -22,7 +23,7 @@ help with tasks like installing, debugging, reading log files...
 The helpers are all written in such a way that they are easy to inspect and 
 analyze. 
 
-They also serve as a way to explain and document the development 
+The helpers also serve as a way to explain and document the development 
 processes.
  
 I know from experience how disheartening it is to find some useful sample code, 
@@ -40,82 +41,88 @@ dependencies:
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
 
+Warning: you must read and ingest the information below. Otherwise,
+you will get stuck.
+
 The CEPSparker.zip file you download from this GitHub repository **does not 
-contain the starter project**.
+provide you with a starter project straight away**. 
 
-Instead, it contains a **precursor** to the project. 
+Instead, the CPESparker.zip file contains a **precursor** to the project. 
 
-To convert the precursor to the project into a real project, you need to run
-the _CEPSparkerConfig_ configuration tool first. On Mac, you first will need to jump 
-through a few preliminary hoops, in order to disable the Mac's security defenses. 
-See 'Getting Started' below. Otherwise it will not allow _CEPSparkerConfig_ to
-run properly.
+To convert the precursor into a real project, you need to run
+the _CEPSparkerConfig_ configuration tool. 
+
+Furthermore, if you are on a Mac, you also will need to jump through an additional  
+hoop, in order to work with the Mac's heightened security defenses. Otherwise the 
+Mac will not allow _CEPSparkerConfig_ to run properly. See 'Whirlwind Start On A Mac'
+further below.
+
+## CEPSparkerConfig
 
 _CEPSparkerConfig_ allows you to select between some options, and to set some preferences. 
 
-Based on these configuration options, _CEPSparkerConfig_ will then set up 
+Based on these configuration options, _CEPSparkerConfig_ will set up 
 a the starter project for you.
 
-After that, the project is then ready to be installed, debugged, tweaked...
+The project is then ready to be installed, debugged, tweaked...
 
 _CEPSparkerConfig_ is a simple-minded convenience app. 
 
-It does not contain esoteric 'magic'; source code is provided.
+It does not contain esoteric 'magic'. Source code to this applicaion is provided
+in the CEPSparker.zip file.
 
-_CEPSparkerConfig_ will read the content of the Templates folder,
+_CEPSparkerConfig_ will parse the content of the Templates subfolder,
 do some simple search-and-replace and some text preprocessing on the text files 
-that live inside the Templates folder, and will set up your starter project.
+that live in this subfolder, and will then set up your starter project.
 
-You will only be able to **run** _CEPSparkerConfig_ **once** for any particular project. 
+Tou can run _CEPSparkerConfig_ **only once** for any particular project. 
 
-If you want to start over with a clean slate, you need to go back to the downloaded .zip file.
+If you want to start over with a clean slate, you need to go back to the downloaded 
+.zip file.
+
+## Getting Started
 
 I attempted to make everything self-explanatory and well documented.
 
-You can start by ignoring most of the stuff in the _CEPSparker_ folder initially 
+You can start by ignoring most of the stuff in the _CEPSparker_ folder  
 (i.e. don't pay attention to the man behind the curtain).
 
 As your familiarity with CEP grows, you can start analyzing the various tools 
 provided, and tweak or replace them with your own.
 
-The panel is set up to run with as wide a range of applications and 
-CEP versions as possible.
+We'll start with a very quick whirlwind tour, to give you a feel for the process.
 
-## Getting Started
+Further down in this document, I (will) have a 'cookbook' section 
+which discusses everything in much more detail, and we'll go through the motions
+a few more times in increasingly more detail.
 
-First a very quick whirlwind tour.
+There are two separate 'whirlwind start' sections below: one for Mac, one for Windows.
 
-Further down in this document, I have a 'cookbook' section 
-which discusses everything in much more detail.
-
-### Getting Started On Mac
+### Whirlwind Start On A Mac
 
 Download and decompress the .zip file from GitHub:
 
 https://github.com/zwettemaan/CEPSparker/archive/master.zip
 
-Look in the _Mac_ subfolder.
-
-On more recent versions of Mac OS X, there are a few hoops to jump through.
-
 #### Security issues
 
-Mac OS X is now very security-conscious, and this starter project triggers a
-few security warnings.
+More recent versions of Mac OS X are very security-conscious, and the tools in the starter 
+project will trigger a few security measures.
 
-Initially, you will need to open each of the .command files provided in this project 
-with 'Right-Click, Open' instead of double-clicking.
+After decompressing the .zip file, any of the .command files are treated as 'suspect'
+by Mac OS X, and you need to run each .command file from the Finder by 'Right-Click, Open' 
+instead of double-clicking.
+
+Subsequent runs of the same .command file will work with just double-clicking their Finder
+icon, but the very first run of each individual .command file from the extracted .zip 
+archive needs to be done through 'Right Click, Open'.
 
 This way, you tell Mac OS you trust that particular .command file, and next time around 
 the same .command file will work with just a double-click.
 
-But every time you (re)download/unzip from GitHub, you will need to 'prime' 
-each and every command-line script in the CEPSparker folder with 'Right-click, 
-Open' instead of double-click. 
-
-Subsequent runs of a 'primed' command file will only need a double-click.
-
 ### De-quarantaine _CEPSparkerConfig_
+
+Look in the _Mac_ subfolder.
 
 Right-click the command-line script
 
@@ -123,15 +130,14 @@ Right-click the command-line script
 
 and select 'Open' from the context menu. 
 
-Allow the script to run (be careful - the buttons are positioned in unexpected places and
-it is easy to get confused and click the 'Cancel' button without noticing).
+Allow the script to run. Be careful - the buttons on the dialog that follows are 
+positioned in unexpected places and it is easy to get confused and inadvertently 
+click the 'Cancel' button without noticing. Close the Terminal window afterwards.
 
 This script will 'de-quarantaine' _CEPSparkerConfig_, telling Mac OS X it is OK to 
-run this app without setting up a protective sandbox. If you forget to do this, 
+run this app without setting up a protective sandbox for it. If you forget to do this, 
 _CEPSparkerConfig_ will end up running in a 'sandbox' where it does not have access
-to the rest of the unzipped information.
-
-You will need to close the Terminal window afterwards.
+to the rest of the unzipped information, and nothing will work.
 
 ### Generate the project from the templates
 
@@ -141,19 +147,25 @@ Double-click the
 
 icon. You will now be presented with a table where you can configure some important values. 
 
-If you're only trying things out, you can leave all options unchanged and click 'Generate' immediately.
+If you're only trying things out, you can leave all options unchanged and click 'Generate' 
+immediately. The default sample will target InDesign.
 
-If you're getting ready to build a 'real' CEP panel, you do need to change the dummy default 
-values into 'real' values. Check the cookbook further down, where I'll discuss all the options 
-in detail.
+If you're getting ready to build a 'real' CEP panel, you will need to change the dummy 
+default values into 'real' values. Check the cookbook further down, where I'll discuss 
+all the options in detail.
 
-One important value to pay attention to is the port number. This port number is used for debugging.
+Two important values to pay attention to are the port number and the target app. 
 
-You might have multiple CEP panels installed, and in order to debug all of them, each needs a
-unique network port number. 
+The default target is InDesign; you need to pick another target app from the popup 
+menu if you want to use another Creative Cloud app.
 
-The default presented is 8888. If you are dealing with multiple panels, make sure to give each 
-panel a different port number.
+The port number is used for debugging.
+
+You might have multiple CEP panels installed, and in order to debug all of them, each 
+panel needs to be assigned a unique network port number.
+
+The default port number presented is 8888. If you are dealing with multiple panels, 
+make sure to use a different port number (e.g. 8889, 8890, 8891...) for each panel.
 
 ### Install the extension
 
@@ -163,13 +175,10 @@ Right-click the
 
 script, and select 'Open'. 
 
-Allow the script to run (be careful - the buttons are positioned in unexpected places and
-it is easy to get confused and click the 'Cancel' button without noticing).  
+Allow the script to run, and close the Terminal window afterwards.
 
-You will need to close the Terminal window afterwards.
-
-This script will set the CEP debug flag, which allows you to run the extension without 
-having a proper code signature.
+First, this script will set the CEP debug flag on your computer, which allows you to run 
+the extension without having a proper code signature.
 
 Then the script will create a subfolder for the extension in
 
@@ -178,16 +187,14 @@ Then the script will create a subfolder for the extension in
 In this subfolder, a number of symbolic links will be created that lead back to
 the source folders for the panel.
 
-This approach avoids making extra copies of the extension source code. 
-
 There is only one copy of the source code files in existence, and it is 
-'hot-linked' to the Adobe extensions folder, so the target app will load 
+'hot-linked' into the Adobe extensions folder, so the target app will load 
 the extension directly from your source code folder when it is restarted.
 
 Launch your target application and check under 'Window - Extensions'. 
 
-The extension should be listed, and the panel should appear when you 
-select the menu item.
+The extension should be listed as 'Rorohiko CEPSparker', and the panel should appear 
+when you select the menu item.
 
 ### Debug the extension
 
