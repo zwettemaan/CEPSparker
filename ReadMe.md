@@ -52,7 +52,7 @@ Instead, the CPESparker.zip file contains a **precursor** to the project.
 To convert the precursor into a real project, you need to run
 the _CEPSparkerConfig_ configuration tool. 
 
-Furthermore, if you are on a Mac, you also will need to jump through an additional  
+Furthermore, if you are on a Mac, you also will need to jump through an additional 
 hoop, in order to work with the Mac's heightened security defenses. Otherwise the 
 Mac will not allow _CEPSparkerConfig_ to run properly. See 'Whirlwind Start On A Mac'
 further below.
@@ -68,7 +68,7 @@ The project is then ready to be installed, debugged, tweaked...
 
 _CEPSparkerConfig_ is a simple-minded convenience app. 
 
-It does not contain esoteric 'magic'. Source code to this applicaion is provided
+It does not contain esoteric 'magic'. Source code to this application is provided
 in the CEPSparker.zip file.
 
 _CEPSparkerConfig_ will parse the content of the Templates subfolder,
