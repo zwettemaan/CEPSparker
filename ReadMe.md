@@ -196,11 +196,96 @@ Launch your target application and check under 'Window - Extensions'.
 The extension should be listed as 'Rorohiko CEPSparker', and the panel should appear 
 when you select the menu item.
 
+### Whirlwind Start On Windows
+
+Download and decompress the .zip file from GitHub:
+
+https://github.com/zwettemaan/CEPSparker/archive/master.zip
+
+#### Security issues
+
+Some .bat scripts will need to be performed from a command line shell with
+administrative permissions.
+
+To make it easier to get such a shell, there is a double-clickable file
+called
+
+  Windows\sudo.bat
+  
+in the CEPSparker project folder.
+
+### Generate the project from the templates
+
+Double-click the
+ 
+    Windows\CEPSparkerConfig.exe
+
+icon. You will now be presented with a table where you can configure some important values. 
+
+If you're only trying things out, you can leave all options unchanged and click 'Generate' 
+immediately. The default sample will target InDesign.
+
+If you're getting ready to build a 'real' CEP panel, you will need to change the dummy 
+default values into 'real' values. Check the cookbook further down, where I'll discuss 
+all the options in detail.
+
+Two important values to pay attention to are the port number and the target app. 
+
+The default target is InDesign; you need to pick another target app from the popup 
+menu if you want to use another Creative Cloud app.
+
+The port number is used for debugging.
+
+You might have multiple CEP panels installed, and in order to debug all of them, each 
+panel needs to be assigned a unique network port number.
+
+The default port number presented is 8888. If you are dealing with multiple panels, 
+make sure to use a different port number (e.g. 8889, 8890, 8891...) for each panel.
+
+### Install the extension
+
+From Windows Explorer, double-click the 
+
+    Windows\sudo.bat
+    
+script to start a shell with administrative permissions.
+
+The current directory should be set to the Windows CEPSparker Windows subdirectory.
+
+In this shell, type 
+
+  localDebugInstall
+  
+which will launch the Windows\localDebugInstall.bat script. 
+
+First, this script will set the CEP debug flag on your computer, which allows you to run 
+the extension without having a proper code signature.
+
+Then the script will create a subdirectory for the extension inside
+
+    %APPDATA%\Adobe\CEP\extensions
+
+In this subdirectory, a number of symbolic links will be created that lead back to
+the source folders for the panel.
+
+There is only one copy of the source code files in existence, and it is 
+'hot-linked' into the above Adobe extensions directory, so the target app will load 
+the extension directly from your source code directory when it is restarted.
+
+Launch your target application and check under 'Window - Extensions'. 
+
+The extension should be listed as 'Rorohiko CEPSparker', and the panel should appear 
+when you select the menu item.
+
 ### Debug the extension
 
 For debugging, the milage will vary: Google Chrome often does not work, 
 and I find myself trying multiple Chrome-based browsers, until I find 
 one that works.
+
+The Adobe collection on GitHub contains versions of cefclient, and the 
+cookbooks for various versions sometimes also contain some tips and tricks
+to handle debugger issues.
 
 Typical issue are blank windows or garbled windows when trying to start
 a debug session.
@@ -222,11 +307,27 @@ Point your Chrome browser or cefclient to http://localhost:8888
 
 ### Uninstall the debug extension
 
+#### Mac
+
 Right-click the
 
     Mac/clean.command
 
 script, and select 'Open'. 
+
+#### Windows
+
+Run the clean.bat script from the shell with administrative permissions.
+
+First double-click 
+
+    Windows/sudo.bat
+
+Then type
+
+    clean
+
+followed by <Enter>
 
 ## CEPSparkerConfig
 
@@ -235,7 +336,7 @@ _CEPSparkerConfig_ is an app written in Xojo.
 For reference, all source code is provided, but the ready-to-run application is included
 in the .zip file; there is no need to build this app yourself.
 
-I used Xojo so I can easily provide WYSIWYG apps for Mac and Windows. 
+I used Xojo so I could provide WYSIWYG apps for Mac and Windows. 
 
 Furthermore, _CEPSparkerConfig_ does not contain any 'secret sauce'. You can easily perform the same
 tasks manually.
@@ -245,30 +346,47 @@ _CEPSparkerConfig_ will:
     - search the text files under _Templates_ for placeholder patterns `$$PLACEHOLDER$$`
     - read the ProjectConfig.txt file to determine what default values to use for placeholders.
     - show the placeholders with their default values to the user
-    - allow the user to tweak stuff
+    - allow the user to tweak various settings and values
     - when the user clicks 'Generate', do a search-and-replace with the user-provided placeholder replacements 
     - depending on the user selection, it will also select between multiple variants of some key files. For example, there are multiple manifest.xml files in the Templates folder, and depending on the CEPVERSION selected, one of them will be picked.
-	- process conditional expressions, very similar to how a C preprocessor works, but using '$include/$if' (with a dollar sign) instead of '#include/#if'. I am using a '$' instead of a '#' prefix to avoid clashes with the use of #include in ExtendScript.
+	  - process conditional expressions, very similar to how a C preprocessor works, but using '$include/$if' (with a dollar sign) instead of '#include/#if'. I am using a '$' instead of a '#' prefix to avoid clashes with the use of #include in ExtendScript.
     
 After this, the project is ready to install and/or tweak.
 
 ## Finding your way around
 
-Before trying to run this panel, you need to be able to find your way 
+Before trying to start editing this panel, you need to be able to find your way 
 around. 
 
 In order to help you with that, there is a script called `setupLocalLinks`
 
-There is a Mac version in the _Mac_ folder and a Windows version in the _Windows_
-folder
+#### Mac
 
-The Mac version is called `setupLocalLinks.command`. The Windows version is 
-called `setupLocalLinks.bat`.
+Right-click the
 
-Double-click the correct one, and you should end up with a new folder called 
-_LocalLinks_. 
+    Mac/setupLocalLinks.command
 
-This folder contains a few aliases or shortcuts to important folder
+script, and select 'Open'.
+
+#### Windows
+
+Run the clean.bat script from the shell with administrative permissions.
+
+First double-click 
+
+    Windows/sudo.bat
+
+Then type
+
+    setupLocalLinks
+
+followed by <Enter>
+
+#### LocalLinks
+
+A LocalLinks folder will be created.
+
+It contains a few aliases or shortcuts to important folder
 on your system. You'll often need to visit these folders, so having quick access
 to them is helpful.
 
