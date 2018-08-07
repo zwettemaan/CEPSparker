@@ -1,4 +1,4 @@
-@ECHO ON
+@ECHO OFF
 
 SETLOCAL EnableDelayedExpansion
 
@@ -48,12 +48,16 @@ CALL "%scriptDir%adjustVersionInManifest.bat"
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
 MKDIR "%EXTENSION_HOMEDIR%"
 
-MKLINK "%EXTENSION_HOMEDIR%.debug" "%projectHomeDir%debug"
-MKLINK /D "%EXTENSION_HOMEDIR%CSS" "%projectHomeDir%CSS"
-MKLINK /D "%EXTENSION_HOMEDIR%CSXS" "%projectHomeDir%CSXS"
-MKLINK /D "%EXTENSION_HOMEDIR%html" "%projectHomeDir%html"
-MKLINK /D "%EXTENSION_HOMEDIR%js" "%projectHomeDir%js"
-MKLINK /D "%EXTENSION_HOMEDIR%jsx" "%projectHomeDir%jsx"
-MKLINK /D "%EXTENSION_HOMEDIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
+MKLINK /H "%EXTENSION_HOMEDIR%.debug" "%projectHomeDir%debug"
+
+MKLINK /J "%EXTENSION_HOMEDIR%CSXS" "%projectHomeDir%CSXS"
+MKLINK /J "%EXTENSION_HOMEDIR%html" "%projectHomeDir%html"
+MKLINK /J "%EXTENSION_HOMEDIR%js" "%projectHomeDir%js"
+MKLINK /J "%EXTENSION_HOMEDIR%jsx" "%projectHomeDir%jsx"
+MKLINK /J "%EXTENSION_HOMEDIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
+
+REM MKDIR "%EXTENSION_HOMEDIR%CSS"
+REM ICACLS "%EXTENSION_HOMEDIR%" /grant Everyone:(OI)(CI)F
+REM FOR /F %%f IN ('DIR /b %projectHomeDir%CSS') DO MKLINK /H %EXTENSION_HOMEDIR%CSS\%%f %projectHomeDir%CSS\%%f
 
 POPD
