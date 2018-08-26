@@ -9,5 +9,6 @@ export scriptDir=`pwd`
 export projectHomeDir=`dirname "$scriptDir"`
 
 xattr -dr com.apple.quarantine CEPSparkerConfig.app
+xattr -dr com.apple.quarantine *.command
 
-echo "CEPSparkerConfig.app is now de-quarantined."
+echo "*.command scripts and CEPSparkerConfig.app are now de-quarantined."

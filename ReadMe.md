@@ -107,20 +107,11 @@ https://github.com/zwettemaan/CEPSparker/archive/master.zip
 #### Security issues
 
 More recent versions of Mac OS X are very security-conscious, and the tools in the starter 
-project will trigger a few security measures.
+project will trigger a few security measures. 
 
-After decompressing the .zip file, any of the .command files are treated as 'suspect'
-by Mac OS X, and you need to run each .command file from the Finder by 'Right-Click, Open' 
-instead of double-clicking.
+The initialSetupConfigApp.command script needs to be run first to avoid these issues.
 
-Subsequent runs of the same .command file will work with just double-clicking their Finder
-icon, but the very first run of each individual .command file from the extracted .zip 
-archive needs to be done through 'Right Click, Open'.
-
-This way, you tell Mac OS you trust that particular .command file, and next time around 
-the same .command file will work with just a double-click.
-
-### De-quarantaine _CEPSparkerConfig_
+### De-quarantaine _CEPSparkerConfig_ and the \*.command scripts
 
 Look in the _Mac_ subfolder.
 
@@ -134,10 +125,11 @@ Allow the script to run. Be careful - the buttons on the dialog that follows are
 positioned in unexpected places and it is easy to get confused and inadvertently 
 click the 'Cancel' button without noticing. Close the Terminal window afterwards.
 
-This script will 'de-quarantaine' _CEPSparkerConfig_, telling Mac OS X it is OK to 
-run this app without setting up a protective sandbox for it. If you forget to do this, 
-_CEPSparkerConfig_ will end up running in a 'sandbox' where it does not have access
-to the rest of the unzipped information, and nothing will work.
+This script will 'de-quarantaine' _CEPSparkerConfig_ and the \*.command scripts, 
+telling Mac OS X it is OK to run them without setting up a protective sandbox. 
+If you forget to do this, _CEPSparkerConfig_ will end up running in a 'sandbox' 
+where it does not have access to the rest of the unzipped information, and nothing 
+will work.
 
 ### Generate the project from the templates
 
@@ -169,11 +161,9 @@ make sure to use a different port number (e.g. 8889, 8890, 8891...) for each pan
 
 ### Install the extension
 
-Right-click the
+Double-click the
 
     Mac/localDebugInstall.command
-
-script, and select 'Open'. 
 
 Allow the script to run, and close the Terminal window afterwards.
 
@@ -309,11 +299,11 @@ Point your Chrome browser or cefclient to http://localhost:8888
 
 #### Mac
 
-Right-click the
+Double-click the
 
     Mac/clean.command
 
-script, and select 'Open'. 
+script.
 
 #### Windows
 
@@ -362,11 +352,11 @@ In order to help you with that, there is a script called `setupLocalLinks`
 
 #### Mac
 
-Right-click the
+Double-click the
 
     Mac/setupLocalLinks.command
 
-script, and select 'Open'.
+script.
 
 #### Windows
 
