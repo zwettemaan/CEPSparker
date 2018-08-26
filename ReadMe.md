@@ -47,7 +47,7 @@ you will get stuck.
 The CEPSparker.zip file you download from this GitHub repository **does not 
 provide you with a starter project straight away**. 
 
-Instead, the CPESparker.zip file contains a **precursor** to the project. 
+Instead, the CEPSparker.zip file contains a **precursor** to the project. 
 
 To convert the precursor into a real project, you need to run
 the _CEPSparkerConfig_ configuration tool. 
