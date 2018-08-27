@@ -1,6 +1,11 @@
-var $$SHORTCODE$$ = {};
+var $$SHORTCODE$$;
+if (! $$SHORTCODE$$) {
+	$$SHORTCODE$$ = {};
+}
 
-$$SHORTCODE$$.C = {}; // stash constants here
+if (! $$SHORTCODE$$.C) {
+	$$SHORTCODE$$.C = {}; // stash constants here	
+}
 
 $$SHORTCODE$$.C.EXTENSION_DIRNAME    = "$$EXTENSION_DIRNAME$$";
 $$SHORTCODE$$.C.DIRNAME_PREFERENCES  = "$$EXTENSION_DIRNAME$$";

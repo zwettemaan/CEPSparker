@@ -9,4 +9,6 @@ else {
     $$SHORTCODE$$.isWindows = true;
 }
 
-$$SHORTCODE$$.dirs = {};
+if (! $$SHORTCODE$$.dirs) {
+	$$SHORTCODE$$.dirs = {};
+}
