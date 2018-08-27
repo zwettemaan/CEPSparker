@@ -10,6 +10,8 @@ $endif
     then(getLocale_PRM).
     then(wireUI_PRM).
     then(readPreferences_PRM).
+    then(passCollectedInfoToExtendScript_PRM).
+    then(savePreferences_PRM).
     then(updateUI_PRM);
 }
 
@@ -126,17 +128,37 @@ function getLocale_PRM() {
     return promise;
 }
 
+function passCollectedInfoToExtendScript_PRM() {
+
+    var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.csInterface.evalScript(
+            "$$SHORTCODE$$.prefs = JSON.parse(" + JSON.stringify($$SHORTCODE$$.prefs) + ");" + 
+            "$$SHORTCODE$$.dirs = JSON.parse(" + JSON.stringify($$SHORTCODE$$.dirs) + ");",
+            function() {
+                resolve();
+            });
+    });
+
+    return promise;
+}
+
 function readPreferences_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
-        var prefsFile = $$SHORTCODE$$.dirs.preferencesDir + TE.C.FILENAME_PREFERENCES;
-        var result = cep.fs.readFile(prefsFile, cep.encoding.UTF8);
         setDefaultPreferences();
-        if (result.err == cep.fs.NO_ERROR) {
-            var loadedPrefs = JSON.parse(result.data);
-            for (var key in loadedPrefs) {
-                $$SHORTCODE$$.prefs[key] = loadedPrefs[key];
+        try {
+            var prefsFile = $$SHORTCODE$$.dirs.preferencesDir + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
+            var result = cep.fs.readFile(prefsFile, cep.encoding.UTF8);
+            if (result.err == cep.fs.NO_ERROR) {
+                var loadedPrefs = JSON.parse(result.data);
+                for (var key in loadedPrefs) {
+                    $$SHORTCODE$$.prefs[key] = loadedPrefs[key];
+                }
             }
+        }
+        catch (err) {
+            $$SHORTCODE$$.logWarning("readPreferences_PRM: throws " + err);
         }
         resolve();
     });

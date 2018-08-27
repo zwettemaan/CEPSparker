@@ -12,7 +12,7 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
     var err = cep.fs.ERR_INVALID_PARAMS;
 
     if (folderPath) {
-        if (path.exists(folderPath)) {
+        if ($$SHORTCODE$$.path.exists(folderPath)) {
             err = cep.fs.NO_ERROR;
         }
         else {

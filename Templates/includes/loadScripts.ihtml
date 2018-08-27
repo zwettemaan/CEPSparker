@@ -16,6 +16,7 @@ $include "restoreNode.ihtml"
     <script src="../js/utils.js"></script>
 
     <script src="../shared_js_jsx/pathUtils.js"></script>
+    <script src="../js/pathUtils.js"></script>
     
     <script src="../shared_js_jsx/init.js"></script>
     <script src="../js/init.js"></script>
