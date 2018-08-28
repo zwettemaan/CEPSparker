@@ -8,7 +8,8 @@ $$SHORTCODE$$.path.dirname = function(filepath, separator) {
 		separator = $$SHORTCODE$$.path.SEPARATOR;
 	}
 
-	var splitPath = filepath.split(separator);
+	// toString() handles cases where filepath is an ExtendScript File/Folder object
+	var splitPath = filepath.toString().split(separator);
 	do {
 		var endSegment = splitPath.pop();	
 	}
@@ -23,7 +24,8 @@ $$SHORTCODE$$.path.basename = function(filepath, separator) {
 		separator = $$SHORTCODE$$.path.SEPARATOR;
 	}
 
-	var splitPath = filepath.split(separator);
+	// toString() handles cases where filepath is an ExtendScript File/Folder object
+	var splitPath = filepath.toString().split(separator);
 	do {
 		var endSegment = splitPath.pop();	
 	}

@@ -197,7 +197,9 @@ function savePreferences_PRM() {
 
 function setDefaultPreferences() {
 
-    $$SHORTCODE$$.prefs = {};
+    if (! $$SHORTCODE$$.prefs) {
+        $$SHORTCODE$$.prefs = {};
+    }
 
     /* provide defaults for whatever preferences you want in $$SHORTCODE$$.prefs */
 }

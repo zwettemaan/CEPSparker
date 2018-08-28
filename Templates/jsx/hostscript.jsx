@@ -1,3 +1,7 @@
+$if "$$TARGETAPP$$" == "IDSN"
+#targetengine $$EXTENSION_ID$$_Engine_Id
+$endif			
+
 #include "json2.jsx"
 
 #include "../shared_js_jsx/globals.js"
