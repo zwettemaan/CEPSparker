@@ -4,7 +4,7 @@
 #
 
 export scriptDir=`dirname "$0"`
-cd $scriptDir
+cd "$scriptDir"
 export scriptDir=`pwd`
 export projectHomeDir=`dirname "$scriptDir"`
 
