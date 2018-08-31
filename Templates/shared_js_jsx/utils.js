@@ -1,3 +1,7 @@
+//
+// This code is shared between CEP/JavaScript and ExtendScript
+//
+
 $$SHORTCODE$$.shallowClone = function(obj) 
 {
 	var retVal = {};

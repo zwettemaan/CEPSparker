@@ -1,3 +1,7 @@
+//
+// This code is shared between CEP/JavaScript and ExtendScript
+//
+
 var $$SHORTCODE$$;
 if (! $$SHORTCODE$$) {
 	$$SHORTCODE$$ = {};

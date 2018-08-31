@@ -1,3 +1,7 @@
+//
+// This file mirrors the API of jsx/utils.jsx
+//
+
 $$SHORTCODE$$.checkMac = function() {
 	return (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
 };

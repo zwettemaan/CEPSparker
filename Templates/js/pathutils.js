@@ -1,3 +1,7 @@
+//
+// This file mirrors the API of jsx/pathUtils.jsx
+//
+
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
@@ -5,6 +9,11 @@ if (! $$SHORTCODE$$.path) {
 $$SHORTCODE$$.path.exists = function(filepath) {
     var stat = cep.fs.stat(filepath);
     return (stat.err == cep.fs.NO_ERROR);
+};
+
+$$SHORTCODE$$.path.isDir = function(filepath) {
+    var isDir = IsDirectory(filepath);
+    return isDir;
 };
 
 $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
@@ -28,7 +37,3 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
     return err;
 };
 
-$$SHORTCODE$$.path.isDir = function(filepath) {
-    var isDir = IsDirectory(filepath);
-    return isDir;
-};

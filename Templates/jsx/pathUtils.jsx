@@ -11,6 +11,15 @@ $$SHORTCODE$$.path.exists = function(filepath) {
     return f.exists;
 };
 
+$$SHORTCODE$$.path.isDir = function(filepath) {
+    
+    // This casts to a File instead of a Folder if the
+    // path references a file
+
+    var folder = Folder(folderPath);
+    return (folder instanceof Folder);
+};
+
 $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
 
     var success = false;
@@ -45,13 +54,4 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
     while (false);
     
     return success;
-};
-
-$$SHORTCODE$$.path.isDir = function(filepath) {
-    
-    // This casts to a File instead of a Folder if the
-    // path references a file
-
-    var folder = Folder(folderPath);
-    return (folder instanceof Folder);
 };

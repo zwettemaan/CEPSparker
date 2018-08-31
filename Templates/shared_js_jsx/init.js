@@ -1,3 +1,7 @@
+//
+// This code is shared between CEP/JavaScript and ExtendScript
+//
+
 if ($$SHORTCODE$$.checkMac()) {
 	$$SHORTCODE$$.path.SEPARATOR = "/";
     $$SHORTCODE$$.isMac = true;

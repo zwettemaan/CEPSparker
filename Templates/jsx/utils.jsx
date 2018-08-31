@@ -2,6 +2,10 @@
 // This file mirrors the API of js/utils.js
 //
 
+$$SHORTCODE$$.checkMac = function() {
+    return $.os.substr(0,3) == "Mac";
+};
+
 $$SHORTCODE$$.logMessage = function(message) {
 
     if (! $$SHORTCODE$$.inLogger) {
@@ -22,7 +26,3 @@ $$SHORTCODE$$.logMessage = function(message) {
 
     $$SHORTCODE$$.inLogger = false;
 }
-
-$$SHORTCODE$$.checkMac = function() {
-    return $.os.substr(0,3) == "Mac";
-};

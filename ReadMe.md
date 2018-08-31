@@ -42,40 +42,55 @@ dependencies:
 - Google Chrome browser, Google Chromium, or cefclient
 
 Warning: you must read and ingest the information below. Otherwise,
-you will get stuck.
+you **will** get stuck.
 
-The CEPSparker.zip file you download from this GitHub repository **does not 
-provide you with a starter project straight away**. 
+The CEPSparker.zip file contains a **precursor** to the project.
 
-Instead, the CEPSparker.zip file contains a **precursor** to the project. 
-
+In other words: the CEPSparker.zip file you download from this GitHub repository 
+**does not provide you with a starter project straight away**.
+ 
 To convert the precursor into a real project, you need to run
 the _CEPSparkerConfig_ configuration tool. 
 
-Furthermore, if you are on a Mac, you also will need to jump through an additional 
-hoop, in order to work with the Mac's heightened security defenses. Otherwise the 
-Mac will not allow _CEPSparkerConfig_ to run properly. See 'Whirlwind Start On A Mac'
-further below.
+## Security Hurdles
+
+### Mac
+
+If you are on a Mac, you also will need to jump through one additional 
+hoop, in order to work with the Mac's heightened security defenses. 
+
+Otherwise the Mac will not allow _CEPSparkerConfig_ to run properly. 
+
+Make sure to correctly run 'initialSetupConfigApp.command'.
+
+See 'Whirlwind Start On A Mac' further below.
+
+### Windows
+
+If you are on a Windows PC, you will need to run most commands from an elevated 
+command prompt ('Run as Administrator'). 
+
+The Windows\sudo.bat file provides you with a quick way to get to such a command prompt.
 
 ## CEPSparkerConfig
 
+_CEPSparkerConfig_ is a simple-minded convenience app. 
+
 _CEPSparkerConfig_ allows you to select between some options, and to set some preferences. 
 
-Based on these configuration options, _CEPSparkerConfig_ will set up 
-a the starter project for you.
+Based on these configuration options, _CEPSparkerConfig_ will read some template files, 
+customize them, and then set up the starter project for you.
 
 The project is then ready to be installed, debugged, tweaked...
 
-_CEPSparkerConfig_ is a simple-minded convenience app. 
+_CEPSparkerConfig_ does not contain esoteric 'magic'. Source code to this application is provided
+in the CEPSparker.zip file ('ToolSources').
 
-It does not contain esoteric 'magic'. Source code to this application is provided
-in the CEPSparker.zip file.
+_CEPSparkerConfig_ will parse the content of the _Templates_ subfolder,
+do some simple search-and-replace, and some text preprocessing on the text files 
+that live in this subfolder, and will then build up your starter project.
 
-_CEPSparkerConfig_ will parse the content of the Templates subfolder,
-do some simple search-and-replace and some text preprocessing on the text files 
-that live in this subfolder, and will then set up your starter project.
-
-Tou can run _CEPSparkerConfig_ **only once** for any particular project. 
+You can run _CEPSparkerConfig_ **only once** for any particular project. 
 
 If you want to start over with a clean slate, you need to go back to the downloaded 
 .zip file.
