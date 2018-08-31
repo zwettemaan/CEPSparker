@@ -4,7 +4,8 @@
 #
 
 export devtoolsDir=`dirname "$0"`
-cd $devtoolsDir
+cd "$devtoolsDir"
+
 export devtoolsDir=`pwd`
 export projectHomeDir=`dirname "$devtoolsDir"`
 
