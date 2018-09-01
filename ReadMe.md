@@ -41,8 +41,10 @@ dependencies:
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
 
-Warning: you must read and ingest the information below. Otherwise,
-you **will** get stuck.
+Warning: you must read and mentally ingest the information below. 
+You should complete the 'whirlwind tour' at least once.
+
+Otherwise, you **will** get stuck.
 
 The CEPSparker.zip file contains a **precursor** to the project.
 
@@ -111,176 +113,25 @@ Further down in this document, I (will) have a 'cookbook' section
 which discusses everything in much more detail, and we'll go through the motions
 a few more times in increasingly more detail.
 
-There are two separate 'whirlwind start' sections below: one for Mac, one for Windows.
+There are two separate 'whirlwind tour' sections below: one for Mac, one for Windows.
 
-### Whirlwind Start On A Mac
+### Whirlwind Tour On A Mac
 
-Download and decompress the .zip file from GitHub:
+Cookbook for generating, installing and running the panel:
 
-https://github.com/zwettemaan/CEPSparker/archive/master.zip
+https://github.com/zwettemaan/CEPSparker/wiki/A-Whirlwind-Tour-on-Mac
 
-#### Security issues
+### Whirlwind Tour On Windows
 
-More recent versions of Mac OS X are very security-conscious, and the tools in the starter 
-project will trigger a few security measures. 
+Cookbook for generating, installing and running the panel:
 
-The initialSetupConfigApp.command script needs to be run first to avoid these issues.
+https://github.com/zwettemaan/CEPSparker/wiki/A-Whirlwind-Tour-on-Windows
 
-### De-quarantaine _CEPSparkerConfig_ and the \*.command scripts
+### Debugging
 
-Look in the _Mac_ subfolder.
+Cookbooks for debugging different aspects of the panel:
 
-Right-click the command-line script
-
-    Mac/initialSetupConfigApp.command
-
-and select 'Open' from the context menu. 
-
-Allow the script to run. Be careful - the buttons on the dialog that follows are 
-positioned in unexpected places and it is easy to get confused and inadvertently 
-click the 'Cancel' button without noticing. Close the Terminal window afterwards.
-
-This script will 'de-quarantaine' _CEPSparkerConfig_ and the \*.command scripts, 
-telling Mac OS X it is OK to run them without setting up a protective sandbox. 
-If you forget to do this, _CEPSparkerConfig_ will end up running in a 'sandbox' 
-where it does not have access to the rest of the unzipped information, and nothing 
-will work.
-
-### Generate the project from the templates
-
-Double-click the
- 
-    CEPSparkerConfig
-
-icon. You will now be presented with a table where you can configure some important values. 
-
-If you're only trying things out, you can leave all options unchanged and click 'Generate' 
-immediately. The default sample will target InDesign.
-
-If you're getting ready to build a 'real' CEP panel, you will need to change the dummy 
-default values into 'real' values. Check the cookbook further down, where I'll discuss 
-all the options in detail.
-
-Two important values to pay attention to are the port number and the target app. 
-
-The default target is InDesign; you need to pick another target app from the popup 
-menu if you want to use another Creative Cloud app.
-
-The port number is used for debugging.
-
-You might have multiple CEP panels installed, and in order to debug all of them, each 
-panel needs to be assigned a unique network port number.
-
-The default port number presented is 8888. If you are dealing with multiple panels, 
-make sure to use a different port number (e.g. 8889, 8890, 8891...) for each panel.
-
-### Install the extension
-
-Double-click the
-
-    Mac/localDebugInstall.command
-
-Allow the script to run, and close the Terminal window afterwards.
-
-First, this script will set the CEP debug flag on your computer, which allows you to run 
-the extension without having a proper code signature.
-
-Then the script will create a subfolder for the extension in
-
-    ~/Library/Application Support/Adobe/CEP/extensions
-
-In this subfolder, a number of symbolic links will be created that lead back to
-the source folders for the panel.
-
-There is only one copy of the source code files in existence, and it is 
-'hot-linked' into the Adobe extensions folder, so the target app will load 
-the extension directly from your source code folder when it is restarted.
-
-Launch your target application and check under 'Window - Extensions'. 
-
-The extension should be listed as 'Rorohiko CEPSparker', and the panel should appear 
-when you select the menu item.
-
-### Whirlwind Start On Windows
-
-Download and decompress the .zip file from GitHub:
-
-https://github.com/zwettemaan/CEPSparker/archive/master.zip
-
-#### Security issues
-
-Some .bat scripts will need to be performed from a command line shell with
-administrative permissions.
-
-To make it easier to get such a shell, there is a double-clickable file
-called
-
-  Windows\sudo.bat
-  
-in the CEPSparker project folder.
-
-### Generate the project from the templates
-
-Double-click the
- 
-    Windows\CEPSparkerConfig.exe
-
-icon. You will now be presented with a table where you can configure some important values. 
-
-If you're only trying things out, you can leave all options unchanged and click 'Generate' 
-immediately. The default sample will target InDesign.
-
-If you're getting ready to build a 'real' CEP panel, you will need to change the dummy 
-default values into 'real' values. Check the cookbook further down, where I'll discuss 
-all the options in detail.
-
-Two important values to pay attention to are the port number and the target app. 
-
-The default target is InDesign; you need to pick another target app from the popup 
-menu if you want to use another Creative Cloud app.
-
-The port number is used for debugging.
-
-You might have multiple CEP panels installed, and in order to debug all of them, each 
-panel needs to be assigned a unique network port number.
-
-The default port number presented is 8888. If you are dealing with multiple panels, 
-make sure to use a different port number (e.g. 8889, 8890, 8891...) for each panel.
-
-### Install the extension
-
-From Windows Explorer, double-click the 
-
-    Windows\sudo.bat
-    
-script to start a shell with administrative permissions.
-
-The current directory should be set to the Windows CEPSparker Windows subdirectory.
-
-In this shell, type 
-
-  localDebugInstall
-  
-which will launch the Windows\localDebugInstall.bat script. 
-
-First, this script will set the CEP debug flag on your computer, which allows you to run 
-the extension without having a proper code signature.
-
-Then the script will create a subdirectory for the extension inside
-
-    %APPDATA%\Adobe\CEP\extensions
-
-In this subdirectory, a number of symbolic links will be created that lead back to
-the source folders for the panel.
-
-There is only one copy of the source code files in existence, and it is 
-'hot-linked' into the above Adobe extensions directory, so the target app will load 
-the extension directly from your source code directory when it is restarted.
-
-Launch your target application and check under 'Window - Extensions'. 
-
-The extension should be listed as 'Rorohiko CEPSparker', and the panel should appear 
-when you select the menu item.
+https://github.com/zwettemaan/CEPSparker/wiki/Debugging-Cookbooks
 
 ### Debug the extension
 
@@ -326,7 +177,7 @@ Run the clean.bat script from the shell with administrative permissions.
 
 First double-click 
 
-    Windows/sudo.bat
+    Windows\sudo.bat
 
 Then type
 
@@ -337,6 +188,10 @@ followed by <Enter>
 ## CEPSparkerConfig
 
 _CEPSparkerConfig_ is an app written in Xojo.
+
+Xojo can be found here:
+
+https://xojo.com
 
 For reference, all source code is provided, but the ready-to-run application is included
 in the .zip file; there is no need to build this app yourself.
@@ -395,18 +250,8 @@ It contains a few aliases or shortcuts to important folder
 on your system. You'll often need to visit these folders, so having quick access
 to them is helpful.
 
-If the links become broken, simply remove the _LocalLinks_ folder and re-run 
+If the links become broken, simply delete the _LocalLinks_ folder and re-run 
 the `setupLocalLinks` script.
-
-## Next Steps
-
-As you get more familiar with the workflow, you'll probably want to 
-abandon the command-line scripts in the _Mac_ and _Windows_ folders,
-and replace them with a more advanced build tool. 
-
-For my own projects I use _ant_, but that's just a matter of personal preference
-and familiarity. You can just as well use a variant of _make_, or _grunt_ or _gulp_
-or whatever build tool works best for you.
 
 ## Debugging
 
@@ -425,3 +270,14 @@ Clearing the whole folder will avoid getting drowned in old log info.
 
 For CC 2013, it is 4.0
 for CC 2014, it is 5.0
+
+## Next Steps
+
+As you get more familiar with the workflow, you'll probably want to 
+abandon the command-line scripts in the _Mac_ and _Windows_ folders,
+and replace them with a more advanced build tool. 
+
+For my own projects I use _ant_, but that's just a matter of personal preference
+and familiarity. You can just as well use a variant of _make_, or _grunt_ or _gulp_
+or whatever build tool works best for you.
+
