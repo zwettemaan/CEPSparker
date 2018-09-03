@@ -183,24 +183,6 @@ to them is helpful.
 If the links become broken, simply delete the _LocalLinks_ folder and re-run 
 the `setupLocalLinks` script.
 
-## Debugging
-
-### Clear the log folder
-
-Before starting a debug session, you might want to clear the contents of the
-_Adobe_LogFiles_ folder (look inside the _LocalLinks_ folder. If you don't see
-_LocalLinks_, run the `SetupLocalLinks` script).
-
-When you try running your panel and things go badly wrong, you might not
-even get to the point where you can use the debugger. 
-
-If and when that happens, there might be some information in this folder.
-
-Clearing the whole folder will avoid getting drowned in old log info.
-
-For CC 2013, it is 4.0
-for CC 2014, it is 5.0
-
 ## Next Steps
 
 As you get more familiar with the workflow, you'll probably want to 
