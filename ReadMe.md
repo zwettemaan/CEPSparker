@@ -65,7 +65,7 @@ Otherwise the Mac will not allow _CEPSparkerConfig_ to run properly.
 
 Make sure to correctly run 'initialSetupConfigApp.command'.
 
-See 'Whirlwind Start On A Mac' further below.
+See 'Whirlwind Tour On A Mac' further below.
 
 ### Windows
 
@@ -73,6 +73,8 @@ If you are on a Windows PC, you will need to run most commands from an elevated
 command prompt ('Run as Administrator'). 
 
 The Windows\sudo.bat file provides you with a quick way to get to such a command prompt.
+
+See 'Whirlwind Tour On Windows' further below.
 
 ## CEPSparkerConfig
 
@@ -133,85 +135,13 @@ Cookbooks for debugging different aspects of the panel:
 
 https://github.com/zwettemaan/CEPSparker/wiki/Debugging-Cookbooks
 
-### Debug the extension
+### Uninstalling the extension
 
-For debugging, the milage will vary: Google Chrome often does not work, 
-and I find myself trying multiple Chrome-based browsers, until I find 
-one that works.
-
-The Adobe collection on GitHub contains versions of cefclient, and the 
-cookbooks for various versions sometimes also contain some tips and tricks
-to handle debugger issues.
-
-Typical issue are blank windows or garbled windows when trying to start
-a debug session.
-
-Some links to other Chrome-based browsers to try:
-
-https://www.chromium.org/getting-involved/download-chromium    
-https://www.google.com/intl/en/chrome/browser/canary.html    
-
-For cefclient: look for .zip files in:
-
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x    
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x    
-https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x    
-
-Point your Chrome browser or cefclient to http://localhost:8888
-
-(replace 8888 with whatever port you used in the _CEPSparkerConfig_ configuration screen).
-
-### Uninstall the debug extension
-
-#### Mac
-
-Double-click the
-
-    Mac/clean.command
-
-script.
-
-#### Windows
-
-Run the clean.bat script from the shell with administrative permissions.
-
-First double-click 
-
-    Windows\sudo.bat
-
-Then type
-
-    clean
-
-followed by <Enter>
+https://github.com/zwettemaan/CEPSparker/wiki/Uninstalling
 
 ## CEPSparkerConfig
 
-_CEPSparkerConfig_ is an app written in Xojo.
-
-Xojo can be found here:
-
-https://xojo.com
-
-For reference, all source code is provided, but the ready-to-run application is included
-in the .zip file; there is no need to build this app yourself.
-
-I used Xojo so I could provide WYSIWYG apps for Mac and Windows. 
-
-Furthermore, _CEPSparkerConfig_ does not contain any 'secret sauce'. You can easily perform the same
-tasks manually.
-
-_CEPSparkerConfig_ will:
-
-    - search the text files under _Templates_ for placeholder patterns `$$PLACEHOLDER$$`
-    - read the ProjectConfig.txt file to determine what default values to use for placeholders.
-    - show the placeholders with their default values to the user
-    - allow the user to tweak various settings and values
-    - when the user clicks 'Generate', do a search-and-replace with the user-provided placeholder replacements 
-    - depending on the user selection, it will also select between multiple variants of some key files. For example, there are multiple manifest.xml files in the Templates folder, and depending on the CEPVERSION selected, one of them will be picked.
-	  - process conditional expressions, very similar to how a C preprocessor works, but using '$include/$if' (with a dollar sign) instead of '#include/#if'. I am using a '$' instead of a '#' prefix to avoid clashes with the use of #include in ExtendScript.
-    
-After this, the project is ready to install and/or tweak.
+https://github.com/zwettemaan/CEPSparker/wiki/CEPSparkerConfig
 
 ## Finding your way around
 
