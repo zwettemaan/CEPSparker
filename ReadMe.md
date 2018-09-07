@@ -24,7 +24,7 @@ help with tasks like installing, debugging, reading log files...
 
 Most of the helper scripts are human-readable command line scripts (.command on Mac, .bat on Windows). 
 
-They helpers are all written in such a way that they are easy to inspect and analyze. They also serve as a way to explain and document the development processes.
+These helpers are all written in such a way that they are easy to inspect and analyze. They also serve as a way to explain and document the development processes.
  
 I know from experience how disheartening it is to find some useful sample code, 
 and then get mired into all kinds of issues trying to install various tools 
@@ -107,7 +107,7 @@ If you want to start over with a clean slate, you need to go back to the downloa
 
 I attempted to make everything self-explanatory and well documented.
 
-You can start by ignoring most of the stuff in the _CEPSparker_ folder  
+You can start by ignoring most of the stuff in the _CEPSparker_ folder 
 (i.e. don't pay attention to the man behind the curtain).
 
 As your familiarity with CEP grows, you can start analyzing the various tools 
