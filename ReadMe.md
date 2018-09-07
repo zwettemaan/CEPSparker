@@ -54,6 +54,10 @@ In other words: the CEPSparker.zip file you download from this GitHub repository
 To convert the precursor into a real project, you need to run
 the _CEPSparkerConfig_ configuration tool. 
 
+Also: make sure to use the Wiki!
+
+https://github.com/zwettemaan/CEPSparker/wiki
+
 ## Security Hurdles
 
 ### Mac
