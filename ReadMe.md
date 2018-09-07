@@ -115,7 +115,7 @@ provided, and tweak or replace them with your own.
 
 We'll start with a very quick whirlwind tour, to give you a feel for the process.
 
-Further down in this document, I (will) have a 'cookbook' section 
+Elsewhere in the documentation, I have a 'cookbook' sections 
 which discusses everything in much more detail, and we'll go through the motions
 a few more times in increasingly more detail.
 

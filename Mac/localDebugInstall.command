@@ -1,5 +1,5 @@
 #
-# Setup the panel so we can run it in a live 
+# Setup the panel so we can run it in a live session of the target application
 #
 
 export scriptDir=`dirname "$0"`

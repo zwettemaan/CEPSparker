@@ -8,22 +8,36 @@ $$SHORTCODE$$.checkMac = function() {
 
 $$SHORTCODE$$.logMessage = function(message) {
 
-    if (! $$SHORTCODE$$.inLogger) {
+   var savedInLogger = $$SHORTCODE$$.inLogger;
 
-        $$SHORTCODE$$.inLogger = true;
-        
-        var prefix = "";
+    do {
+        try {
 
-        if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE && $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-            // Make sure we can tell the difference between the message origins
-            prefix += "JS>>";
+            if ($$SHORTCODE$$.inLogger) {
+                break;
+            }
+
+            $$SHORTCODE$$.inLogger = true;
+            
+            var prefix = "";
+
+            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE && $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
+                // Make sure we can tell the difference between the message origins
+                prefix += "JS>>";
+            }
+
+            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
+                console.log(prefix + s);
+            }
+
+            if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
+                $$SHORTCODE$$.csInterface.evalScript("$.writeln('" + $$SHORTCODE$$.sQ(prefix + s) + "');");
+            }
         }
-
-        if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
-			console.log(s);
-        }   
+        catch (err) {        
+        }
     }
+    while (false);
 
-    $$SHORTCODE$$.inLogger = false;
+    $$SHORTCODE$$.inLogger = savedInLogger;
 }
-

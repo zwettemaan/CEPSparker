@@ -113,7 +113,7 @@ function getJavaScriptExtensionDirs_PRM() {
 function getLocale_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
-        var script = "JSON.stringify({'locale': app.locale })";
+        var script = "JSON.stringify({'locale': app.locale.toString() })";
 
         $$SHORTCODE$$.csInterface.evalScript(
             script,
@@ -133,8 +133,8 @@ function passCollectedInfoToExtendScript_PRM() {
     var promise = new Promise(function(resolve, reject) {
 
         $$SHORTCODE$$.csInterface.evalScript(
-            "$$SHORTCODE$$.prefs = JSON.parse(" + JSON.stringify($$SHORTCODE$$.prefs) + ");" + 
-            "$$SHORTCODE$$.dirs = JSON.parse(" + JSON.stringify($$SHORTCODE$$.dirs) + ");",
+            "$$SHORTCODE$$.prefs = JSON.parse(" + $$SHORTCODE$$.sQ(JSON.stringify($$SHORTCODE$$.prefs)) + ");" + 
+            "$$SHORTCODE$$.dirs = JSON.parse(" + $$SHORTCODE$$.sQ(JSON.stringify($$SHORTCODE$$.dirs)) + ");",
             function() {
                 resolve();
             });
