@@ -17,14 +17,14 @@ v1.0.2, August 27, 2018
 The goal of this project is to reduce the treshold to 'get started' building CEP panels.
 
 The approach I've taken is to provide you with a ready-to-run panel with all its 
-source code, as well as a lot of developer infrastructure code (helpers) which 
+source code.
+
+In addition there is a lot of developer infrastructure code (helpers scripts) which 
 help with tasks like installing, debugging, reading log files...
 
-The helpers are all written in such a way that they are easy to inspect and 
-analyze. 
+Most of the helper scripts are human-readable command line scripts (.command on Mac, .bat on Windows). 
 
-The helpers also serve as a way to explain and document the development 
-processes.
+They helpers are all written in such a way that they are easy to inspect and analyze. They also serve as a way to explain and document the development processes.
  
 I know from experience how disheartening it is to find some useful sample code, 
 and then get mired into all kinds of issues trying to install various tools 
