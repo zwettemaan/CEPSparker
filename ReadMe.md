@@ -174,7 +174,7 @@ Then type
 
     setupLocalLinks
 
-followed by <Enter>
+followed by &lt;Enter&gt;
 
 #### LocalLinks
 
@@ -188,6 +188,10 @@ If the links become broken, simply delete the _LocalLinks_ folder and re-run
 the `setupLocalLinks` script.
 
 ## Next Steps
+
+Please check the Wiki for more cookbooks:
+
+https://github.com/zwettemaan/CEPSparker/wiki
 
 As you get more familiar with the workflow, you'll probably want to 
 abandon the command-line scripts in the _Mac_ and _Windows_ folders,
