@@ -1,7 +1,6 @@
 # CEPSparker
 
-  *** NOTE: THIS PROJECT IS INCOMPLETE. USE WITH EXTREME CARE. 
-  *** Documentation is highly incomplete.
+  *** Note: this is work-in-progress. Documentation is quite incomplete.
 
 --
 
@@ -10,7 +9,7 @@ Starter project for developing CEP panels to be used with Adobe applications
 © 2018, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v1.0.2, August 27, 2018
+v1.0.3, September 11, 2018
 
 ## Preamble
 
