@@ -23,6 +23,7 @@ if [ -f "$projectHomeDir/BuildSettings/ExtensionDirName.txt" ]; then
 
 		rm -rf "$EXTENSION_HOMEDIR"
 		mkdir "$EXTENSION_HOMEDIR"
+		mkdir "$EXTENSION_HOMEDIR/Mac"
 
 		ln -s "$projectHomeDir/debug" "$EXTENSION_HOMEDIR/.debug"
 		ln -s "$projectHomeDir/css" "$EXTENSION_HOMEDIR/css"
@@ -31,6 +32,7 @@ if [ -f "$projectHomeDir/BuildSettings/ExtensionDirName.txt" ]; then
 		ln -s "$projectHomeDir/js" "$EXTENSION_HOMEDIR/js"
 		ln -s "$projectHomeDir/jsx" "$EXTENSION_HOMEDIR/jsx"
 		ln -s "$projectHomeDir/shared_js_jsx" "$EXTENSION_HOMEDIR/shared_js_jsx"
+		ln -s "$projectHomeDir/Mac/launchAIScript.command" "$EXTENSION_HOMEDIR/Mac/launchAIScript.command"
 		
 	fi
 fi

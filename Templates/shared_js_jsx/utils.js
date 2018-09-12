@@ -11,7 +11,7 @@ $$SHORTCODE$$.shallowClone = function(obj)
 	}
 
 	return retVal;
-}
+};
 
 $$SHORTCODE$$.deepClone = function(obj) 
 {
@@ -36,39 +36,51 @@ $$SHORTCODE$$.deepClone = function(obj)
 	}
 
 	return retVal;
-}
+};
 
 // dQ: Wrap a string in double quotes
 $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"') + '"';
-}
+};
 
 // sQ: Wrap a string in single quotes
 $$SHORTCODE$$.sQ = function(s) {
     return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'") + "'";
-}
+};
 
 $$SHORTCODE$$.logError = function(s) {
 	if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
 		$$SHORTCODE$$.logMessage("ERROR  : " + s);
 	}
-}
+};
 
 $$SHORTCODE$$.logWarning = function(s) {
 	if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
 		$$SHORTCODE$$.logMessage("WARNING: " + s);
 	}
-}
+};
 
 $$SHORTCODE$$.logNote = function(s) {
 	if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
 		$$SHORTCODE$$.logMessage("NOTE   : " + s);
 	}
-}
+};
 
 $$SHORTCODE$$.logTrace = function(s) {
 	if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
 		$$SHORTCODE$$.logMessage("TRACE  : " + s);
 	}
-}
+};
+
+$$SHORTCODE$$.newGuid = function() {
+
+	retVal = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/x/g, 
+		function(c) 
+		{
+		    var r = Math.random() * 16|0;
+		    return r.toString(16);
+		});
+
+	return retVal;
+};
 
