@@ -27,11 +27,11 @@ $$SHORTCODE$$.logMessage = function(message) {
             }
 
             if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
-                console.log(prefix + s);
+                console.log(prefix + message);
             }
 
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-                $$SHORTCODE$$.csInterface.evalScript("$.writeln('" + $$SHORTCODE$$.sQ(prefix + s) + "');");
+                $$SHORTCODE$$.csInterface.evalScript("$.writeln('" + $$SHORTCODE$$.sQ(prefix + message) + "');");
             }
         }
         catch (err) {        
