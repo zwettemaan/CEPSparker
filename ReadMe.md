@@ -40,6 +40,10 @@ dependencies:
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
 
+Stuff you need to understand to make sense of things:
+
+https://github.com/zwettemaan/CEPSparker/wiki/The-Lie-Of-The-Land
+
 Warning: you must read and mentally ingest the information below. 
 You should complete the 'whirlwind tour' at least once.
 
