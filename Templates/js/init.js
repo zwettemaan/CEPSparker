@@ -225,3 +225,49 @@ function wireUI_PRM() {
     return promise;
 }
 
+function wireUI_PRM() {
+
+    var promise = new Promise(function(resolve, reject) {
+
+        window.addEventListener('message', handleIFrameMessage);
+
+        resolve();
+    });
+
+    return promise;
+}
+
+
+$if "$$STARTERCODE$$" == "ImageBrowser"
+
+function handleIFrameMessage(event) {
+
+    var message = JSON.parse(event.data);
+
+    var http = require('http');
+    var fs = require('fs');
+
+    function download(url, destinationPath, callback) {
+
+        var file = fs.createWriteStream(destinationPath);
+
+        var request = http.get(url, function(response) {
+            response.pipe(file);
+            file.on('finish', function() {
+              file.close(callback);
+            });
+        }).on('error', function(err) { 
+            fs.unlink(destinationPath);
+            if (cb) callback(err.message);
+        });
+    };
+
+    var imageURL = message.imageURL;
+    var imagePath = "/tmp/" + $SHORTCODE$$.path.basename(url);
+    var width = message.imageWidth;
+    var height = message.imageHeight;
+    $$SHORTCODE$$.csInterface.evalScript("$$SHORTCODE$$.placeImage(" + dQ(imagePath) + "," + dQ(imageURL) + "," + imageWidth + "," + imageHeight + ");");
+    
+}
+        
+$endif
