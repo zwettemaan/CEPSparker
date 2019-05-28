@@ -33,6 +33,7 @@ if "%reply%" == "YES" (
   RD /s /q js >NUL 2>&1
   RD /s /q jsx >NUL 2>&1
   RD /s /q LocalLinks >NUL 2>&1
+  RD /s /q SampleImageServer >NUL 2>&1
   RD /s /q shared_js_jsx >NUL 2>&1
   
 )

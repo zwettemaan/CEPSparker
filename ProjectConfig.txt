@@ -8,7 +8,7 @@ CEPVERSION=4.2
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,SamplePanel"
+SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser"
 
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
 HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"
@@ -50,3 +50,6 @@ HELP_PANELHEIGHT="Panel width in manifest file"
 UI_TYPE="Panel"
 HELP_UI_TYPE="Which type of UI/panel to use"
 SELECT_UI_TYPE="ModalDialog,Panel,Modeless,Invisible"
+
+IMAGEBROWSER_PORT=8000
+HELP_IMAGEBROWSER_PORT="Port number to use for locally running test image-server"

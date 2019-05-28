@@ -511,6 +511,12 @@ End
 		        Exit
 		      end if
 		      
+		      Dim extension as String
+		      extension = GetFileNameExtension(in_textFile)
+		      if IsBinaryFileNameExtension(extension) then
+		        Exit
+		      end if
+		      
 		      Dim tis as TextInputStream
 		      tis = TextInputStream.Open(in_textFile)
 		      if tis = nil then
@@ -788,6 +794,13 @@ End
 		        Exit
 		      end if
 		      
+		      Dim extension as String
+		      extension = GetFileNameExtension(in_sourceItem)
+		      if IsBinaryFileNameExtension(extension) then
+		        in_sourceItem.CopyFileTo in_targetItem
+		        Exit
+		      end if
+		      
 		      Dim sourceText as String
 		      sourceText = ProcessIncludes(in_sourceItem)
 		      
@@ -895,6 +908,61 @@ End
 		    
 		  Loop Until true
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetFileNameExtension(in_file as FolderItem) As String
+		  Dim retVal as String
+		  
+		  do
+		    try 
+		      
+		      if in_file = nil then
+		        LogError CurrentMethodName, "in_file is nil"
+		        Exit
+		      end if
+		      
+		      retVal = GetFileNameExtension(in_file.Name)
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetFileNameExtension(in_fileNameOrPath as String) As String
+		  Dim retVal as String
+		  
+		  do
+		    try 
+		      
+		      if in_fileNameOrPath = "" then
+		        LogError CurrentMethodName, "in_fileNameOrPath empty"
+		        Exit
+		      end if
+		      
+		      Dim components(-1) as String
+		      components = in_fileNameOrPath.Split(".")
+		      
+		      if UBound(components) = 0 then
+		        Exit
+		      end if
+		      
+		      retVal = components(UBound(components))
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop Until true
+		  
+		  return retVal
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -1024,6 +1092,39 @@ End
 		    
 		  Loop until true
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IsBinaryFileNameExtension(in_fileNameExtension as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    try 
+		      
+		      if fBinaryFileExtensionDict = nil then
+		        fBinaryFileExtensionDict = new Dictionary
+		        fBinaryFileExtensionDict.Value("") = true
+		        fBinaryFileExtensionDict.Value("png") = true
+		        fBinaryFileExtensionDict.Value("jpg") = true
+		        fBinaryFileExtensionDict.Value("jpeg") = true
+		        fBinaryFileExtensionDict.Value("pdf") = true
+		        fBinaryFileExtensionDict.Value("tif") = true
+		        fBinaryFileExtensionDict.Value("tiff") = true
+		        fBinaryFileExtensionDict.Value("eps") = true
+		        fBinaryFileExtensionDict.Value("ai") = true
+		        fBinaryFileExtensionDict.Value("indd") = true
+		      end if
+		      
+		      retVal = fBinaryFileExtensionDict.HasKey(in_fileNameExtension)
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop until true
+		  
+		  return retVal
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -1670,6 +1771,10 @@ End
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h0
+		Shared fBinaryFileExtensionDict As Dictionary
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		fCSXSManifestTemplateList() As FolderItem

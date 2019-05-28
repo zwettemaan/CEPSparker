@@ -4,11 +4,11 @@
 
 var $$SHORTCODE$$;
 if (! $$SHORTCODE$$) {
-	$$SHORTCODE$$ = {};
+    $$SHORTCODE$$ = {};
 }
 
 if (! $$SHORTCODE$$.C) {
-	$$SHORTCODE$$.C = {}; // stash constants here	
+    $$SHORTCODE$$.C = {}; // stash constants here   
 }
 
 $$SHORTCODE$$.C.EXTENSION_DIRNAME    = "$$EXTENSION_DIRNAME$$";

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+$include "loadCSS.ihtml"
+$include "loadScripts.ihtml"
+
+<script>
+    function handleImageClick(evt) {
+        
+        var url = window.location.origin;
+
+        var width = evt.naturalWidth;
+        var height = evt.naturalHeight;
+
+        var src = evt.getAttribute('src');
+
+        url += src;
+
+        var message = {
+            opcode: "insertImage",
+            url: url,
+            width: width,
+            height: height
+        };
+
+        var messageJSON = JSON.stringify(message);
+
+        window.top.postMessage(messageJSON, "*");
+    }
+</script>
+
+</head>
+<body>

@@ -242,10 +242,10 @@ $if "$$STARTERCODE$$" == "ImageBrowser"
 
 function handleIFrameMessage(event) {
 
-    var message = JSON.parse(event.data);
+    var fs = require("fs");
+    var http = require("http");
 
-    var http = require('http');
-    var fs = require('fs');
+    var message = JSON.parse(event.data);
 
     function download(url, destinationPath, callback) {
 
@@ -258,15 +258,32 @@ function handleIFrameMessage(event) {
             });
         }).on('error', function(err) { 
             fs.unlink(destinationPath);
-            if (cb) callback(err.message);
+            if (callback) {
+                callback(err.message);
+            }
         });
+        
     };
 
-    var imageURL = message.imageURL;
-    var imagePath = "/tmp/" + $SHORTCODE$$.path.basename(url);
-    var width = message.imageWidth;
-    var height = message.imageHeight;
-    $$SHORTCODE$$.csInterface.evalScript("$$SHORTCODE$$.placeImage(" + dQ(imagePath) + "," + dQ(imageURL) + "," + imageWidth + "," + imageHeight + ");");
+    var url = message.url;
+    var filePath = "/tmp/" + decodeURIComponent($$SHORTCODE$$.path.basename(url));
+    var width = message.width;
+    var height = message.height;
+    var scaledWidth = 100;
+    var scale = scaledWidth / width;
+    var scaledHeight = scale * height;
+    download(url, filePath, function(err) {
+        if (! err) {
+            $$SHORTCODE$$.csInterface.evalScript(
+                "$$SHORTCODE$$.placeImage(" + 
+                    $$SHORTCODE$$.dQ(filePath) + "," + 
+                    $$SHORTCODE$$.dQ(url) + "," + 
+                    scaledWidth + "," + 
+                    scaledHeight + ");"
+            );
+        }
+    });
+
     
 }
         

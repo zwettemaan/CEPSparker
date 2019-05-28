@@ -19,5 +19,5 @@ $endif
 $if "$$STARTERCODE$$" == "ImageBrowser"
 
 //@include "imageBrowser.jsx"
-		
+
 $endif

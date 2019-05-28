@@ -1,1 +1,1 @@
-		<iframe src="localhost:8080/images" />
+		<iframe width="100%" height="100%" src="http://localhost:$$IMAGEBROWSER_PORT$$/images" />

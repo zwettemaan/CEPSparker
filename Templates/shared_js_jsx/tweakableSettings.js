@@ -6,7 +6,7 @@
 //
 
 if (! $$SHORTCODE$$.S) {
-	$$SHORTCODE$$.S = {}; // stash global settings here
+    $$SHORTCODE$$.S = {}; // stash global settings here
 }
 
 $$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_NONE;

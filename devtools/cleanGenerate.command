@@ -32,6 +32,7 @@ if [ "$reply" == "YES" ]; then
   rm -rf js
   rm -rf jsx
   rm -rf LocalLinks
+  rm -rf SampleImageServer
   rm -rf shared_js_jsx
   rm -rf ToolSources/CEPSparkerConfig/Builds*
   rm -rf ToolSources/CEPSparkerConfig/.CEPSparkerConfig.xojo_uistate
