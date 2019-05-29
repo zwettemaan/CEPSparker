@@ -60,9 +60,9 @@ $$SHORTCODE$$.errorBeforeLoggingAvailable = function(error) {
 if (dreamweaver) {
 
 	$$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-		var fullPath = extensionDir + scriptPath;
-		var script = DWfile.read(fullPath);
 		try {
+			var fullPath = extensionDir + scriptPath;
+			var script = DWfile.read(fullPath);
 			eval(script);
 		}
 		catch (err) {			
@@ -74,11 +74,15 @@ if (dreamweaver) {
 else {
 
 	$$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-		var fullPath = extensionDir + scriptPath;
 		try {
-			$.evalFile(fullPath);
+			var fullPath = extensionDir + scriptPath;
+			var file = File(fullPath);
+			file.open("r");
+			var script = file.read();
+			file.close();
+			eval(script);
 		}
-		catch (err) {
+		catch (err) {			
 			$$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);	
 		}
 	}

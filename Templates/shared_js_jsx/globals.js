@@ -2,8 +2,9 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-var $$SHORTCODE$$;
-if (! $$SHORTCODE$$) {
+// Don't use 'var' - some engines call this within a non-global scope
+// if using var we end up defining this in the wrong scope
+if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
