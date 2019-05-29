@@ -2,7 +2,26 @@
 <ExtensionList>
     <Extension Id="$$EXTENSION_ID$$">
         <HostList>          
+$if "$$TARGETAPP$$" == "MULTIPLE"
+		<!-- 
+			Enable and change as needed 
+		-->
+			<Host Name="IDSN" Port="$$DEBUGPORT$$" />
+		<!--
+			<Host Name="AICY" Port="8889" />
+			<Host Name="PHSP" Port="8890" />
+			<Host Name="PHXS" Port="8891" />
+			<Host Name="ILST" Port="8892" />
+			<Host Name="PPRO" Port="8893" />
+			<Host Name="AEFT" Port="8894" />
+			<Host Name="PRLD" Port="8895" />
+			<Host Name="FLPR" Port="8896" />
+			<Host Name="DRWV" Port="8897" />
+			<Host Name="KBRG" Port="8898" />
+		-->
+$else			
             <Host Name="$$TARGETAPP$$" Port="$$DEBUGPORT$$" /> 
+$endif
  		</HostList>
     </Extension>
 </ExtensionList>

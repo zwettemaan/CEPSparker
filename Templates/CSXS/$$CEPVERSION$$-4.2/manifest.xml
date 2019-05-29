@@ -6,6 +6,19 @@
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
+$if "$$TARGETAPP$$" == "MULTIPLE"
+			<Host Name="IDSN" Version="[9,99)" />
+			<Host Name="AICY" Version="[9,99)" />
+			<Host Name="PHSP" Version="[14,99)" />
+			<Host Name="PHXS" Version="[14,99)" />
+			<Host Name="ILST" Version="[17,99)" />
+			<Host Name="PPRO" Version="[7,99)" />
+			<Host Name="AEFT" Version="[12,99)" />
+			<Host Name="PRLD" Version="[2,99)" />
+			<Host Name="FLPR" Version="[13,99)" />
+			<Host Name="DRWV" Version="[13,99)" />
+			<Host Name="KBRG" Version="[5.0,99)" />
+$endif
 $if "$$TARGETAPP$$" == "IDSN"
 			<Host Name="$$TARGETAPP$$" Version="[9,99)" />
 $endif			
@@ -34,6 +47,9 @@ $endif
 $if "$$TARGETAPP$$" == "DRWV"
 			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
 $endif			
+$if "$$TARGETAPP$$" == "KBRG"
+			<Host Name="$$TARGETAPP$$" Version="[5.0,99)" />
+$endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
@@ -53,7 +69,11 @@ $endif
 					<AutoVisible>true</AutoVisible>
 				</Lifecycle>
 				<UI>
+$if "$$TARGETAPP$$" == "KBRG"
+					<Type>ModalDialog</Type>
+$else
 					<Type>$$UI_TYPE$$</Type>
+$endif			
 					<Menu>$$EXTENSION_MENUNAME$$</Menu>
 					<Geometry>
 						<Size>

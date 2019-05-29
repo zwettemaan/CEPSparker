@@ -511,9 +511,7 @@ End
 		        Exit
 		      end if
 		      
-		      Dim extension as String
-		      extension = GetFileNameExtension(in_textFile)
-		      if IsBinaryFileNameExtension(extension) then
+		      if IsBinaryFile(in_textFile) then
 		        Exit
 		      end if
 		      
@@ -794,9 +792,7 @@ End
 		        Exit
 		      end if
 		      
-		      Dim extension as String
-		      extension = GetFileNameExtension(in_sourceItem)
-		      if IsBinaryFileNameExtension(extension) then
+		      if IsBinaryFile(in_sourceItem) then
 		        in_sourceItem.CopyFileTo in_targetItem
 		        Exit
 		      end if
@@ -1092,6 +1088,51 @@ End
 		    
 		  Loop until true
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IsBinaryFile(in_file as FolderItem) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    try 
+		      
+		      retVal = IsBinaryFileName(in_file.Name)
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop until true
+		  
+		  return retVal
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IsBinaryFileName(in_fileName as String) As Boolean
+		  Dim retVal as Boolean
+		  
+		  do
+		    try 
+		      
+		      if in_fileName = "debug" then
+		        Exit
+		      end if
+		      
+		      Dim fileNameExtension as String
+		      fileNameExtension = GetFileNameExtension(in_fileName)
+		      
+		      retVal = IsBinaryFileNameExtension(fileNameExtension)
+		      
+		    catch e as RuntimeException
+		      LogError CurrentMethodName, "Throws " + e.Message
+		    end try
+		    
+		  Loop until true
+		  
+		  return retVal
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

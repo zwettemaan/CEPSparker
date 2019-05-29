@@ -1,12 +1,12 @@
 $$SHORTCODE$$.csInterface = new CSInterface();
+$$SHORTCODE$$.hostEnvironment = JSON.parse(window.__adobe_cep__.getHostEnvironment());
 
 function init() {
 
-    getExtendScriptExtensionDirs_PRM().
-$if "$$TARGETAPP$$" == "IDSN"
+    getJavaScriptExtensionDirs_PRM().
+    then(initHostScript_PRM).
     then(getInDesignInfo_PRM).
-$endif
-    then(getJavaScriptExtensionDirs_PRM).
+    then(getExtendScriptExtensionDirs_PRM).
     then(getLocale_PRM).
     then(wireUI_PRM).
     then(readPreferences_PRM).
@@ -38,59 +38,67 @@ function closeExtension_PRM() {
 function getExtendScriptExtensionDirs_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
-        var script = "JSON.stringify({'home': Folder('~').fsName, 'temp': Folder.temp.fsName })";
+        if ($$SHORTCODE$$.hostEnvironment.appId == "DRWV") {
+            resolve();
+        }
+        else {
+            var script = "JSON.stringify({'home': Folder('~').fsName, 'temp': Folder.temp.fsName })";
 
-        $$SHORTCODE$$.csInterface.evalScript(
-            script,
-            function(data) { 
-                try {
-                    var dirs = JSON.parse(data);
-                    $$SHORTCODE$$.dirs.homeDir = dirs.home;
-                    $$SHORTCODE$$.dirs.tempDir = dirs.temp;
-                    resolve();
-                } 
-                catch (err) {
-                    reject();
+            $$SHORTCODE$$.csInterface.evalScript(
+                script,
+                function(data) { 
+                    try {
+                        var dirs = JSON.parse(data);
+                        $$SHORTCODE$$.dirs.homeDir = dirs.home;
+                        $$SHORTCODE$$.dirs.tempDir = dirs.temp;
+                        resolve();
+                    } 
+                    catch (err) {
+                        reject();
+                    }
                 }
-            }
-        );
+            );
+        }
     });
 
     return promise;
 }
 
-$if "$$TARGETAPP$$" == "IDSN"
 function getInDesignInfo_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
-        var script = 'JSON.stringify({ "version": app.version, "serialNumber" : app.serialNumber });';
-        $$SHORTCODE$$.csInterface.evalScript(
-            script,
-            function(data) { 
-                var info = JSON.parse(data);
-                var version = parseInt(info.version.split(".")[0], 10);
-                if (! $$SHORTCODE$$.inDesignInfo) 
-                {
-                    $$SHORTCODE$$.inDesignInfo = {};
-                }
-                $$SHORTCODE$$.inDesignInfo.version = "CS" + (version - 2);
-                $$SHORTCODE$$.inDesignInfo.serialNumber = info.serialNumber;
-                var applicationDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.HOST_APPLICATION);
-                if ($$SHORTCODE$$.isMac) {
-                    while (applicationDir != "" && $$SHORTCODE$$.path.filenameExtension(applicationDir) != "app") {
-                        applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
+        if ($$SHORTCODE$$.hostEnvironment.appId != "IDSN") {
+            resolve();
+        }
+        else {
+            var script = 'JSON.stringify({ "version": app.version, "serialNumber" : app.serialNumber });';
+            $$SHORTCODE$$.csInterface.evalScript(
+                script,
+                function(data) { 
+                    var info = JSON.parse(data);
+                    var version = parseInt(info.version.split(".")[0], 10);
+                    if (! $$SHORTCODE$$.inDesignInfo) 
+                    {
+                        $$SHORTCODE$$.inDesignInfo = {};
                     }
+                    $$SHORTCODE$$.inDesignInfo.version = "CS" + (version - 2);
+                    $$SHORTCODE$$.inDesignInfo.serialNumber = info.serialNumber;
+                    var applicationDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.HOST_APPLICATION);
+                    if ($$SHORTCODE$$.isMac) {
+                        while (applicationDir != "" && $$SHORTCODE$$.path.filenameExtension(applicationDir) != "app") {
+                            applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
+                        }
+                    }
+                    applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
+                    $$SHORTCODE$$.inDesignInfo.pluginPath = applicationDir + "/Plug-Ins";
+                    resolve();
                 }
-                applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
-                $$SHORTCODE$$.inDesignInfo.pluginPath = applicationDir + "/Plug-Ins";
-                resolve();
-            }
-        );
+            );
+        }
     });
 
     return promise;
 }
-$endif
 
 function getJavaScriptExtensionDirs_PRM() {
 
@@ -113,20 +121,45 @@ function getJavaScriptExtensionDirs_PRM() {
 function getLocale_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
-        var script = "JSON.stringify({'locale': app.locale.toString() })";
+        if (
+            $$SHORTCODE$$.hostEnvironment.appId == "DRWV"
+        ||
+            $$SHORTCODE$$.hostEnvironment.appId == "PPRO"
+        ||
+            $$SHORTCODE$$.hostEnvironment.appId == "AEFT"
+        ) {
+            resolve();
+        }
+        else {
+            var script = "JSON.stringify({'locale': app.locale.toString() })";
 
+            $$SHORTCODE$$.csInterface.evalScript(
+                script,
+                function(data) { 
+                    var locale = JSON.parse(data);
+                    $$SHORTCODE$$.locale = locale;
+                    resolve();
+                }
+            );
+        }
+    });
+
+    return promise;
+}
+
+function initHostScript_PRM() {
+
+    var promise = new Promise(function(resolve, reject) {
+        var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ")";
         $$SHORTCODE$$.csInterface.evalScript(
             script,
-            function(data) { 
-                var locale = JSON.parse(data);
-                $$SHORTCODE$$.locale = locale;
-                resolve();
-            }
+            resolve
         );
     });
 
     return promise;
 }
+
 
 function passCollectedInfoToExtendScript_PRM() {
 
@@ -229,7 +262,17 @@ function wireUI_PRM() {
 
     var promise = new Promise(function(resolve, reject) {
 
-        window.addEventListener('message', handleIFrameMessage);
+$if "$$STARTERCODE$$" == "ImageBrowser"
+
+$include "imageBrowser.ijs"
+        
+$endif
+
+$if "$$STARTERCODE$$" == "ScriptRunner"
+
+$include "scriptRunner.ijs"
+        
+$endif
 
         resolve();
     });
@@ -237,54 +280,3 @@ function wireUI_PRM() {
     return promise;
 }
 
-
-$if "$$STARTERCODE$$" == "ImageBrowser"
-
-function handleIFrameMessage(event) {
-
-    var fs = require("fs");
-    var http = require("http");
-
-    var message = JSON.parse(event.data);
-
-    function download(url, destinationPath, callback) {
-
-        var file = fs.createWriteStream(destinationPath);
-
-        var request = http.get(url, function(response) {
-            response.pipe(file);
-            file.on('finish', function() {
-              file.close(callback);
-            });
-        }).on('error', function(err) { 
-            fs.unlink(destinationPath);
-            if (callback) {
-                callback(err.message);
-            }
-        });
-        
-    };
-
-    var url = message.url;
-    var filePath = "/tmp/" + decodeURIComponent($$SHORTCODE$$.path.basename(url));
-    var width = message.width;
-    var height = message.height;
-    var scaledWidth = 100;
-    var scale = scaledWidth / width;
-    var scaledHeight = scale * height;
-    download(url, filePath, function(err) {
-        if (! err) {
-            $$SHORTCODE$$.csInterface.evalScript(
-                "$$SHORTCODE$$.placeImage(" + 
-                    $$SHORTCODE$$.dQ(filePath) + "," + 
-                    $$SHORTCODE$$.dQ(url) + "," + 
-                    scaledWidth + "," + 
-                    scaledHeight + ");"
-            );
-        }
-    });
-
-    
-}
-        
-$endif

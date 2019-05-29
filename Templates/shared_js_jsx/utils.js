@@ -40,12 +40,12 @@ $$SHORTCODE$$.deepClone = function(obj)
 
 // dQ: Wrap a string in double quotes
 $$SHORTCODE$$.dQ = function(s) {
-    return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"') + '"';
+    return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
 
 // sQ: Wrap a string in single quotes
 $$SHORTCODE$$.sQ = function(s) {
-    return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'") + "'";
+    return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"\\r") + "'";
 }
 
 $$SHORTCODE$$.logError = function(s) {
