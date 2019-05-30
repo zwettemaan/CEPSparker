@@ -38,14 +38,16 @@ else
 
   if [ "$reply" == "YES" ]; then
 
-    rm -rf .git  
     rm -f .gitignore
     rm -f ReadMe.md
-    rm -rf ProjectConfig.txt
+    rm -f ProjectConfig.txt
+    rm -f Mac/initialSetupConfigApp.command
+    rm -f Windows/CEPSparkerConfig.exe
+    rm -rf .git  
+    rm -rf Windows/CEPSparkerConfig\ Libs
     rm -rf Templates
     rm -rf ToolSources/CEPSparkerConfig
     rm -rf Mac/CEPSparkerConfig.app
-    rm -rf Mac/initialSetupConfigApp.command
     rm -rf $devtoolsDir
 
   fi

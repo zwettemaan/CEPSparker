@@ -50,14 +50,16 @@ MKDIR "%EXTENSION_HOMEDIR%"
 
 MKLINK /H "%EXTENSION_HOMEDIR%.debug" "%projectHomeDir%debug"
 
+MKLINK /J "%EXTENSION_HOMEDIR%css" "%projectHomeDir%css"
 MKLINK /J "%EXTENSION_HOMEDIR%CSXS" "%projectHomeDir%CSXS"
 MKLINK /J "%EXTENSION_HOMEDIR%html" "%projectHomeDir%html"
 MKLINK /J "%EXTENSION_HOMEDIR%js" "%projectHomeDir%js"
 MKLINK /J "%EXTENSION_HOMEDIR%jsx" "%projectHomeDir%jsx"
 MKLINK /J "%EXTENSION_HOMEDIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
 
-REM MKDIR "%EXTENSION_HOMEDIR%CSS"
+REM Some sample code to refer to if css dir has subdirs.
+REM MKDIR "%EXTENSION_HOMEDIR%css"
 REM ICACLS "%EXTENSION_HOMEDIR%" /grant Everyone:(OI)(CI)F
-REM FOR /F %%f IN ('DIR /b %projectHomeDir%CSS') DO MKLINK /H %EXTENSION_HOMEDIR%CSS\%%f %projectHomeDir%CSS\%%f
+REM FOR /F %%f IN ('DIR /b %projectHomeDir%css') DO MKLINK /H %EXTENSION_HOMEDIR%css\%%f %projectHomeDir%css\%%f
 
 POPD
