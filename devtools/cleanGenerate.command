@@ -24,6 +24,7 @@ if [ "$reply" == "YES" ]; then
   
   Mac/clean.command
 
+  rm -f "$devtoolsDir"/ZXPSignCmd*
   rm -rf BuildSettings
   rm -rf debug
   rm -rf css

@@ -19,12 +19,13 @@ ECHO ""
 ECHO "Type 'YES' at the prompt only if you're really sure"
 ECHO "you want to do this."
 
-SET /P REPLY=Delete generated fules [YES/NO]?: 
+SET /P REPLY=Delete generated files [YES/NO]?: 
 
 if "%reply%" == "YES" (
   
   CALL Windows\clean.bat
 
+  RD /s /q %devToolsDir%/ZXPSignCmd* >NUL 2>&1
   RD /s /q BuildSettings >NUL 2>&1
   RD /s /q debug >NUL 2>&1
   RD /s /q css >NUL 2>&1
