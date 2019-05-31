@@ -1,5 +1,5 @@
 #
-# Setup the panel so we can run it in a live session of the target application
+# Build a code-signed ZXP file
 #
 
 export scriptDir=`dirname "$0"`
@@ -33,7 +33,7 @@ fi
 
 if [ ! -f "$buildSettingsDir/$certfile" ]; then
 
-	echo "Need to provide a certificate file, or create a self-signed one first."
+	echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
 	exit
 
 fi
@@ -74,6 +74,6 @@ xattr -cr .
 
 cd "$projectHomeDir/build"
 
-$devtoolsDir/ZXPSignCmd -sign CEPSparker CEPSparker.zxp "$buildSettingsDir/$certfile" PASSWORD -tsa $timestampServer
+"$devtoolsDir/ZXPSignCmd" -sign "$EXTENSION_DIRNAME" "$EXTENSION_DIRNAME.zxp" "$buildSettingsDir/$certfile" "$password" -tsa $timestampServer
 
 rm -rf "$EXTENSION_HOMEDIR"
