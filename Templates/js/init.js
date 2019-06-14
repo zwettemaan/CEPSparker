@@ -3,6 +3,8 @@ $$SHORTCODE$$.hostEnvironment = JSON.parse(window.__adobe_cep__.getHostEnvironme
 
 function init() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     getJavaScriptExtensionDirs_PRM().
     then(initHostScript_PRM).
     then(getInDesignInfo_PRM).
@@ -13,6 +15,8 @@ function init() {
     then(passCollectedInfoToExtendScript_PRM).
     then(savePreferences_PRM).
     then(updateUI_PRM);
+
+    $$SHORTCODE$$.logExit(arguments);
 }
 
 if ($$SHORTCODE$$.S.MANUAL_START_FROM_CHROME) {
@@ -26,10 +30,16 @@ else {
 
 function closeExtension_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+        $$SHORTCODE$$.logEntry("closeExtension_PRM callback");
         window.__adobe_cep__.closeExtension();
         resolve();
+        $$SHORTCODE$$.logExit("closeExtension_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 
@@ -37,7 +47,12 @@ function closeExtension_PRM() {
 
 function getExtendScriptExtensionDirs_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("getExtendScriptExtensionDirs_PRM callback");
+
         if ($$SHORTCODE$$.hostEnvironment.appId == "DRWV") {
             resolve();
         }
@@ -47,6 +62,9 @@ function getExtendScriptExtensionDirs_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
+
+                    $$SHORTCODE$$.logEntry("getExtendScriptExtensionDirs_PRM evalScript callback");
+
                     try {
                         var dirs = JSON.parse(data);
                         $$SHORTCODE$$.dirs.homeDir = dirs.home;
@@ -56,17 +74,28 @@ function getExtendScriptExtensionDirs_PRM() {
                     catch (err) {
                         reject();
                     }
+
+                    $$SHORTCODE$$.logExit("getExtendScriptExtensionDirs_PRM evalScript callback");
                 }
             );
         }
+
+        $$SHORTCODE$$.logExit("getExtendScriptExtensionDirs_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function getInDesignInfo_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("getInDesignInfo_PRM callback");
+
         if ($$SHORTCODE$$.hostEnvironment.appId != "IDSN") {
             resolve();
         }
@@ -75,6 +104,9 @@ function getInDesignInfo_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
+
+                    $$SHORTCODE$$.logEntry("getInDesignInfo_PRM evalScript callback");
+
                     var info = JSON.parse(data);
                     var version = parseInt(info.version.split(".")[0], 10);
                     if (! $$SHORTCODE$$.inDesignInfo) 
@@ -92,17 +124,28 @@ function getInDesignInfo_PRM() {
                     applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
                     $$SHORTCODE$$.inDesignInfo.pluginPath = applicationDir + "/Plug-Ins";
                     resolve();
+
+                    $$SHORTCODE$$.logExit("getInDesignInfo_PRM evalScript callback");
                 }
             );
         }
+
+        $$SHORTCODE$$.logExit("getInDesignInfo_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function getJavaScriptExtensionDirs_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("getJavaScriptExtensionDirs_PRM callback");
+
         $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) + "/";
         $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) + "/";
         if ($$SHORTCODE$$.isMac) {
@@ -113,14 +156,23 @@ function getJavaScriptExtensionDirs_PRM() {
         }
         $$SHORTCODE$$.dirs.preferencesDir = $$SHORTCODE$$.dirs.systemPreferencesDir + $$SHORTCODE$$.C.DIRNAME_PREFERENCES + "/";
         resolve();
+
+        $$SHORTCODE$$.logExit("getJavaScriptExtensionDirs_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function getLocale_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("getLocale_PRM callback");
+
         if (
             $$SHORTCODE$$.hostEnvironment.appId == "DRWV"
         ||
@@ -136,26 +188,44 @@ function getLocale_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
+                    $$SHORTCODE$$.logEntry("getLocale_PRM evalScript callback");
+
                     var locale = JSON.parse(data);
                     $$SHORTCODE$$.locale = locale;
                     resolve();
+
+                    $$SHORTCODE$$.logExit("getLocale_PRM evalScript callback");
                 }
             );
+
         }
+        $$SHORTCODE$$.logExit("getLocale_PRM callback");
+
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function initHostScript_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("initHostScript_PRM callback");
+
         var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ")";
         $$SHORTCODE$$.csInterface.evalScript(
             script,
             resolve
         );
+
+        $$SHORTCODE$$.logExit("initHostScript_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
@@ -163,22 +233,40 @@ function initHostScript_PRM() {
 
 function passCollectedInfoToExtendScript_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("passCollectedInfoToExtendScript_PRM callback");
 
         $$SHORTCODE$$.csInterface.evalScript(
             "$$SHORTCODE$$.prefs = JSON.parse(" + $$SHORTCODE$$.sQ(JSON.stringify($$SHORTCODE$$.prefs)) + ");" + 
             "$$SHORTCODE$$.dirs = JSON.parse(" + $$SHORTCODE$$.sQ(JSON.stringify($$SHORTCODE$$.dirs)) + ");",
             function() {
+
+                $$SHORTCODE$$.logEntry("passCollectedInfoToExtendScript_PRM evalScript callback");
+                
                 resolve();
+
+                $$SHORTCODE$$.logExit("passCollectedInfoToExtendScript_PRM evalScript callback");
             });
+
+        $$SHORTCODE$$.logExit("passCollectedInfoToExtendScript_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function readPreferences_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("readPreferences_PRM callback");
+
         setDefaultPreferences();
         try {
             var prefsFile = $$SHORTCODE$$.dirs.preferencesDir + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
@@ -191,17 +279,26 @@ function readPreferences_PRM() {
             }
         }
         catch (err) {
-            $$SHORTCODE$$.logWarning("readPreferences_PRM: throws " + err);
+            $$SHORTCODE$$.logWarning(arguments, "throws " + err);
         }
         resolve();
+
+        $$SHORTCODE$$.logExit("readPreferences_PRM callback");
+
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function savePreferences_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("savePreferences_PRM callback");
 
         var err = cep.fs.NO_ERROR;
 
@@ -222,7 +319,12 @@ function savePreferences_PRM() {
         else {
             reject(result.err);
         }
+
+        $$SHORTCODE$$.logExit("savePreferences_PRM callback");
+
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 
@@ -230,35 +332,59 @@ function savePreferences_PRM() {
 
 function setDefaultPreferences() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     if (! $$SHORTCODE$$.prefs) {
         $$SHORTCODE$$.prefs = {};
     }
 
     /* provide defaults for whatever preferences you want in $$SHORTCODE$$.prefs */
+
+    $$SHORTCODE$$.logExit(arguments);
 }
 
 function updateUI_PRM() {
 
+    $$SHORTCODE$$.logEntry(arguments);
+
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("updateUI_PRM callback");
+
         themeManager.init();
 // TODO
         resolve();
+
+        $$SHORTCODE$$.logExit("updateUI_PRM callback");
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function wireUI_PRM() {
+
+    $$SHORTCODE$$.logEntry(arguments);
 
     var promise = new Promise(function(resolve, reject) {
+
+        $$SHORTCODE$$.logEntry("wireUI_PRM callback");
 // TODO
         resolve();
+
+        $$SHORTCODE$$.logExit("wireUI_PRM callback");
+
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }
 
 function wireUI_PRM() {
+
+    $$SHORTCODE$$.logEntry(arguments);
 
     var promise = new Promise(function(resolve, reject) {
 
@@ -276,6 +402,8 @@ $endif
 
         resolve();
     });
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return promise;
 }

@@ -2,11 +2,13 @@
 
     function handleIFrameMessage(event) {
 
+        $$SHORTCODE$$.logEntry(arguments);
+
         do {
             try {
             
                 if ("undefined" == typeof(require)) {
-                    $$SHORTCODE$$.logError("handleIFrameMessage: require() not defined. Make sure to use at least CEP 6.1");
+                    $$SHORTCODE$$.logError(arguments, "require() not defined. Make sure to use at least CEP 6.1");
                     break;
                 }
 
@@ -17,20 +19,35 @@
 
                 function download(url, destinationPath, callback) {
 
+                    $$SHORTCODE$$.logEntry(arguments);
+
                     var file = fs.createWriteStream(destinationPath);
 
                     var request = http.get(url, function(response) {
+
+                        $$SHORTCODE$$.logEntry("http.get callback");
+
                         response.pipe(file);
                         file.on('finish', function() {
                           file.close(callback);
                         });
+
+                        $$SHORTCODE$$.logExit("http.get callback");
+
                     }).on('error', function(err) { 
+
+                        $$SHORTCODE$$.logEntry("http.get error callback");
+
                         fs.unlink(destinationPath);
                         if (callback) {
-                            $$SHORTCODE$$.logError("handleIFrameMessage: download error " + err.message);
+                            $$SHORTCODE$$.logError(arguments, "download error " + err.message);
                             callback(err.message);
                         }
+
+                        $$SHORTCODE$$.logExit("http.get error callback");
                     });
+
+                    $$SHORTCODE$$.logExit(arguments);
                     
                 };
 
@@ -42,6 +59,9 @@
                 var scale = scaledWidth / width;
                 var scaledHeight = scale * height;
                 download(url, filePath, function(err) {
+
+                    $$SHORTCODE$$.logEntry("download callback");
+
                     if (! err) {
                         $$SHORTCODE$$.csInterface.evalScript(
                             "$$SHORTCODE$$.placeImage(" + 
@@ -51,13 +71,16 @@
                                 scaledHeight + ");"
                         );
                     }
+                    
+                    $$SHORTCODE$$.logExit("download callback");
                 });
             }
             catch (err) {
-                $$SHORTCODE$$.logError("handleIFrameMessage: throws " + err);
+                $$SHORTCODE$$.logError(arguments, "throws " + err);
             }
         }
         while (false);
-        
+
+        $$SHORTCODE$$.logExit(arguments);        
     }
 

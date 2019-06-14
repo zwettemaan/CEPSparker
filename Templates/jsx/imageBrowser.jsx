@@ -2,8 +2,9 @@
 // Simple image handler
 //
 
-$$SHORTCODE$$.placeImage = function(imagePath, imageURL, width, height) {
+$$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, height) {
 
+    $$SHORTCODE$$.logEntry(arguments);
 
     do {
 
@@ -11,13 +12,13 @@ $$SHORTCODE$$.placeImage = function(imagePath, imageURL, width, height) {
 
             var doc = app.activeDocument;
             if (! (doc instanceof Document)) {
-                $$SHORTCODE$$.logWarning("$$SHORTCODE$$.placeImage: no active document");
+                $$SHORTCODE$$.logWarning(arguments, "no active document");
                 break;
             }
 
             var imageFile = File(imagePath);
             if (! imageFile || ! imageFile.exists) {
-                $$SHORTCODE$$.logError("$$SHORTCODE$$.placeImage: no image");
+                $$SHORTCODE$$.logError(arguments, "no image");
                 break;
             }
 
@@ -56,9 +57,12 @@ $$SHORTCODE$$.placeImage = function(imagePath, imageURL, width, height) {
                 
         }
         catch (err) {
-            $$SHORTCODE$$.logError("$$SHORTCODE$$.placeImage throws" + err);            
+            $$SHORTCODE$$.logError(arguments, "throws" + err);            
         }
     }
     while (false);
+
+    $$SHORTCODE$$.logExit(arguments);
+
 };
 

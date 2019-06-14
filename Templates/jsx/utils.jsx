@@ -2,11 +2,18 @@
 // This file mirrors the API of js/utils.js
 //
 
-$$SHORTCODE$$.checkMac = function() {
-    return $.os.substr(0,3) == "Mac";
+$$SHORTCODE$$.checkMac = function checkMac() {
+    
+    $$SHORTCODE$$.logEntry(arguments);
+
+    var retVal = $.os.substr(0,3) == "Mac";
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 
-$$SHORTCODE$$.logMessage = function(message) {
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
 
@@ -26,11 +33,38 @@ $$SHORTCODE$$.logMessage = function(message) {
                 prefix += "ES>>";
             }
 
+            if (! message) {
+
+                  message = reportingFunctionArguments;
+                  reportingFunctionArguments = undefined;
+
+            }
+            else if (reportingFunctionArguments) {
+
+                if ("string" == typeof reportingFunctionArguments) {
+
+                    prefix += reportingFunctionArguments + ": ";
+                    
+                }
+                else {
+
+                    var reportingFunctionName;
+                    try {
+                        reportingFunctionName = reportingFunctionArguments.callee.toString().match(/function ([^\(]+)/)[1];
+                    }
+                    catch (err) {
+                        reportingFunctionName = "[anonymous function]";
+                    }
+                    prefix += reportingFunctionName + ": ";
+
+                }
+            }
+            
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
                 $.writeln(prefix + message); 
-            }        
+            }
         }
-        catch (err) {        
+        catch (err) {
         }
     }
     while (false);

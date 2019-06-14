@@ -2,19 +2,26 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-$$SHORTCODE$$.shallowClone = function(obj) 
+$$SHORTCODE$$.shallowClone = function shallowClone(obj) 
 {
+
+    $$SHORTCODE$$.logEntry(arguments);
+
     var retVal = {};
     for (var x in obj) 
     {
         retVal[x] = obj[x];
     }
 
+    $$SHORTCODE$$.logExit(arguments);
+
     return retVal;
 }
 
-$$SHORTCODE$$.deepClone = function(obj) 
+$$SHORTCODE$$.deepClone = function deepClone(obj) 
 {
+    $$SHORTCODE$$.logEntry(arguments);
+
     var retVal;
     if (obj instanceof Array) {
         retVal = [];
@@ -35,6 +42,8 @@ $$SHORTCODE$$.deepClone = function(obj)
         }
     }
 
+    $$SHORTCODE$$.logExit(arguments);
+
     return retVal;
 }
 
@@ -48,27 +57,55 @@ $$SHORTCODE$$.sQ = function(s) {
     return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"\\r") + "'";
 }
 
-$$SHORTCODE$$.logError = function(s) {
+$$SHORTCODE$$.logEntry = function(reportingFunctionArguments) {
+    if ($$SHORTCODE$$.S.LOG_ENTRY_EXIT) {
+        $$SHORTCODE$$.logTrace(reportingFunctionArguments, "Entry");
+    }
+}
+
+$$SHORTCODE$$.logExit = function(reportingFunctionArguments) {
+    if ($$SHORTCODE$$.S.LOG_ENTRY_EXIT) {
+        $$SHORTCODE$$.logTrace(reportingFunctionArguments, "Exit");
+    }
+}
+
+$$SHORTCODE$$.logError = function(reportingFunctionArguments, s) {
     if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
-        $$SHORTCODE$$.logMessage("ERROR  : " + s);
+        if (! s) {
+            s = reportingFunctionArguments;
+            reportingFunctionArguments = undefined;
+        }
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "ERROR  : " + s);
     }
 }
 
-$$SHORTCODE$$.logWarning = function(s) {
+$$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
     if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
-        $$SHORTCODE$$.logMessage("WARNING: " + s);
+        if (! s) {
+            s = reportingFunctionArguments;
+            reportingFunctionArguments = undefined;
+        }
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARNING: " + s);
     }
 }
 
-$$SHORTCODE$$.logNote = function(s) {
+$$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
     if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
-        $$SHORTCODE$$.logMessage("NOTE   : " + s);
+        if (! s) {
+            s = reportingFunctionArguments;
+            reportingFunctionArguments = undefined;
+        }
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "NOTE   : " + s);
     }
 }
 
-$$SHORTCODE$$.logTrace = function(s) {
+$$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
     if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
-        $$SHORTCODE$$.logMessage("TRACE  : " + s);
+        if (! s) {
+            s = reportingFunctionArguments;
+            reportingFunctionArguments = undefined;
+        }
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "TRACE  : " + s);
     }
 }
 

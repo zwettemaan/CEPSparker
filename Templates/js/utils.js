@@ -2,22 +2,35 @@
 // This file mirrors the API of jsx/utils.jsx
 //
 
-$$SHORTCODE$$.checkMac = function() {
-	return (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
+$$SHORTCODE$$.checkMac = function checkMac() {
+
+    $$SHORTCODE$$.logEntry(arguments);
+
+    var retVal = (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
+
+    $$SHORTCODE$$.logExit(arguments);
+
+	return retVal;
 };
 
-$$SHORTCODE$$.setPhotoshopPersistent = function(in_isPersistent) {
+$$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {
     
+    $$SHORTCODE$$.logEntry(arguments);
+
     if (in_isPersistent) {
         var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
     } else {
         var event = new CSEvent("com.adobe.PhotoshopUnPersistent", "APPLICATION");
     }
+    
     event.extensionId = $$SHORTCODE$$.C.EXTENSION_ID;
+
     $$SHORTCODE$$.csInterface.dispatchEvent(event);
+
+    $$SHORTCODE$$.logExit(arguments);
 }
- 
-$$SHORTCODE$$.logMessage = function(message) {
+
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
    var savedInLogger = $$SHORTCODE$$.inLogger;
 
@@ -37,6 +50,33 @@ $$SHORTCODE$$.logMessage = function(message) {
                 prefix += "JS>>";
             }
 
+            if (! message) {
+
+                  message = reportingFunctionArguments;
+                  reportingFunctionArguments = undefined;
+
+            }
+            else if (reportingFunctionArguments) {
+
+                if ("string" == typeof reportingFunctionArguments) {
+
+                    prefix += reportingFunctionArguments + ": ";
+                    
+                }
+                else {
+
+                    var reportingFunctionName;
+                    try {
+                        reportingFunctionName = reportingFunctionArguments.callee.toString().match(/function ([^\(]+)/)[1];
+                    }
+                    catch (err) {
+                        reportingFunctionName = "[anonymous function]";
+                    }
+                    prefix += reportingFunctionName + ": ";
+
+                }
+            }
+            
             if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
                 console.log(prefix + message);
             }

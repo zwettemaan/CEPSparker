@@ -89,7 +89,7 @@ else {
 
 }
 
-$$SHORTCODE$$.initHostScript = function(extensionDir) {
+$$SHORTCODE$$.initHostScript = function initHostScript(extensionDir) {
 
 	for (var idx = 0; idx < $$SHORTCODE$$.relativeFilePathsToLoad.length; idx++) {
 		var filePath = $$SHORTCODE$$.relativeFilePathsToLoad[idx];

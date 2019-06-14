@@ -12,8 +12,10 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.basename = function(filepath, separator) {
+$$SHORTCODE$$.path.basename = function basename(filepath, separator) {
     
+    $$SHORTCODE$$.logEntry(arguments);
+
     if (! separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
     }
@@ -24,12 +26,16 @@ $$SHORTCODE$$.path.basename = function(filepath, separator) {
         var endSegment = splitPath.pop();   
     }
     while (splitPath.length > 0 && endSegment == "");
+
+    $$SHORTCODE$$.logExit(arguments);
 
     return endSegment;
 };
 
-$$SHORTCODE$$.path.dirname = function(filepath, separator) {
+$$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
     
+    $$SHORTCODE$$.logEntry(arguments);
+
     if (! separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
     }
@@ -41,17 +47,27 @@ $$SHORTCODE$$.path.dirname = function(filepath, separator) {
     }
     while (splitPath.length > 0 && endSegment == "");
 
-    return splitPath.join(separator);
+    var retVal = splitPath.join(separator);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 
-$$SHORTCODE$$.path.filenameExtension = function(filepath, separator) {
+$$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath, separator) {
     
+    $$SHORTCODE$$.logEntry(arguments);
+
     var splitName = $$SHORTCODE$$.path.basename(filepath).split(".");
     var extension = "";
     if (splitName.length > 1) {
         extension = splitName.pop();
     }
 
-    return extension.toLowerCase();
+    var retVal = extension.toLowerCase();
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 

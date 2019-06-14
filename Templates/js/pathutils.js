@@ -6,17 +6,32 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.exists = function(filepath) {
+$$SHORTCODE$$.path.exists = function exists(filepath) {
+
+    $$SHORTCODE$$.logEntry(arguments);
+
     var stat = cep.fs.stat(filepath);
-    return (stat.err == cep.fs.NO_ERROR);
+    var retVal = (stat.err == cep.fs.NO_ERROR);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 
-$$SHORTCODE$$.path.isDir = function(filepath) {
+$$SHORTCODE$$.path.isDir = function isDir(filepath) {
+
+    $$SHORTCODE$$.logEntry(arguments);
+
     var isDir = IsDirectory(filepath);
+
+    $$SHORTCODE$$.logExit(arguments);
+
     return isDir;
 };
 
-$$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
+$$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
+
+    $$SHORTCODE$$.logEntry(arguments);
 
     var err = cep.fs.ERR_INVALID_PARAMS;
 
@@ -34,6 +49,9 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
 
         }
     }
+
+    $$SHORTCODE$$.logExit(arguments);
+    
     return err;
 };
 

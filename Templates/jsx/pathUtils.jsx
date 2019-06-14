@@ -6,28 +6,42 @@ if (! $$SHORTCODE$$.path) {
 	$$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.exists = function(filepath) {
+$$SHORTCODE$$.path.exists = function exists(filepath) {
+
+    $$SHORTCODE$$.logEntry(arguments);
+
     var f = File(filepath);
-    return f.exists;
+    var retVal = f.exists;
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 
-$$SHORTCODE$$.path.isDir = function(filepath) {
+$$SHORTCODE$$.path.isDir = function isDir(filepath) {
+
+    $$SHORTCODE$$.logEntry(arguments);
     
     // This casts to a File instead of a Folder if the
     // path references a file
 
     var folder = Folder(folderPath);
-    return (folder instanceof Folder);
+
+    var retVal = (folder instanceof Folder);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
 };
 
-$$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
+$$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     var success = false;
 
     do {
         try {
             if (! folderPath) {
-                $$SHORTCODE$$.logError("$$SHORTCODE$$.path.mkdir: no folderPath");
+                $$SHORTCODE$$.logError(arguments, "no folderPath");
                 break;
             }
 
@@ -39,7 +53,7 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
             var parentFolderPath = $$SHORTCODE$$.path.dirname(folderPath, separator);
             success = $$SHORTCODE$$.path.mkdir(parentFolderPath, separator);
             if (! success) {
-                $$SHORTCODE$$.logError("$$SHORTCODE$$.path.mkdir: cannot create parent folder");
+                $$SHORTCODE$$.logError(arguments, "cannot create parent folder");
                 break;
             }
 
@@ -48,7 +62,7 @@ $$SHORTCODE$$.path.mkdir = function(folderPath, separator) {
             success = folder.exists;
         }
         catch (err) {
-            $$SHORTCODE$$.logError("$$SHORTCODE$$.path.mkdir throws" + err);       
+            $$SHORTCODE$$.logError(arguments, "throws" + err);       
         }
     }
     while (false);
