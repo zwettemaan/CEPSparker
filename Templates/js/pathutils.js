@@ -8,30 +8,40 @@ if (! $$SHORTCODE$$.path) {
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var stat = cep.fs.stat(filepath);
     var retVal = (stat.err == cep.fs.NO_ERROR);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };
 
 $$SHORTCODE$$.path.isDir = function isDir(filepath) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var isDir = IsDirectory(filepath);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return isDir;
 };
 
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var err = cep.fs.ERR_INVALID_PARAMS;
 
@@ -50,7 +60,9 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
         }
     }
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
     
     return err;
 };

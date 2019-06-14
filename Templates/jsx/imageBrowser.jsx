@@ -4,7 +4,9 @@
 
 $$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, height) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     do {
 
@@ -62,7 +64,9 @@ $$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, heigh
     }
     while (false);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
 };
 

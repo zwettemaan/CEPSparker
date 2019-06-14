@@ -4,11 +4,15 @@
 
 $$SHORTCODE$$.checkMac = function checkMac() {
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var retVal = $.os.substr(0,3) == "Mac";
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };

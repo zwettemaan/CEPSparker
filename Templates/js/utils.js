@@ -4,18 +4,24 @@
 
 $$SHORTCODE$$.checkMac = function checkMac() {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var retVal = (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
 	return retVal;
 };
 
 $$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     if (in_isPersistent) {
         var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
@@ -27,7 +33,9 @@ $$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPers
 
     $$SHORTCODE$$.csInterface.dispatchEvent(event);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 }
 
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {

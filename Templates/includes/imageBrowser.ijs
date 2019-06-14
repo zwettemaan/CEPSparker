@@ -2,7 +2,9 @@
 
     function handleIFrameMessage(event) {
 
+        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry(arguments);
+        $endif
 
         do {
             try {
@@ -19,24 +21,32 @@
 
                 function download(url, destinationPath, callback) {
 
+                    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry(arguments);
+                    $endif
 
                     var file = fs.createWriteStream(destinationPath);
 
                     var request = http.get(url, function(response) {
 
+                        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logEntry("http.get callback");
+                        $endif
 
                         response.pipe(file);
                         file.on('finish', function() {
                           file.close(callback);
                         });
 
+                        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logExit("http.get callback");
 
-                    }).on('error', function(err) { 
+                    })
+                        $endif.on('error', function(err) { 
 
+                        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logEntry("http.get error callback");
+                        $endif
 
                         fs.unlink(destinationPath);
                         if (callback) {
@@ -44,10 +54,14 @@
                             callback(err.message);
                         }
 
+                        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logExit("http.get error callback");
-                    });
+                    })
+                        $endif
 
+                    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logExit(arguments);
+                    $endif
                     
                 };
 
@@ -60,7 +74,9 @@
                 var scaledHeight = scale * height;
                 download(url, filePath, function(err) {
 
+                    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry("download callback");
+                    $endif
 
                     if (! err) {
                         $$SHORTCODE$$.csInterface.evalScript(
@@ -72,8 +88,10 @@
                         );
                     }
                     
+                    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logExit("download callback");
-                });
+                })
+                    $endif
             }
             catch (err) {
                 $$SHORTCODE$$.logError(arguments, "throws " + err);
@@ -81,6 +99,8 @@
         }
         while (false);
 
-        $$SHORTCODE$$.logExit(arguments);        
+        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+        $$SHORTCODE$$.logExit(arguments);
+        $endif        
     }
 

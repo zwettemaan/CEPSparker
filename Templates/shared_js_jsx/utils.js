@@ -5,7 +5,9 @@
 $$SHORTCODE$$.shallowClone = function shallowClone(obj) 
 {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var retVal = {};
     for (var x in obj) 
@@ -13,14 +15,18 @@ $$SHORTCODE$$.shallowClone = function shallowClone(obj)
         retVal[x] = obj[x];
     }
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 }
 
 $$SHORTCODE$$.deepClone = function deepClone(obj) 
 {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var retVal;
     if (obj instanceof Array) {
@@ -42,7 +48,9 @@ $$SHORTCODE$$.deepClone = function deepClone(obj)
         }
     }
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 }

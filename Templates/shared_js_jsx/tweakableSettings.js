@@ -15,6 +15,10 @@ $$SHORTCODE$$.S.MANUAL_START_FROM_CHROME      = false;
 $$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE         = false;
 $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE           = false;
 $$SHORTCODE$$.S.LOG_TO_FILEPATH               = undefined; // file path or undefined
+$if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+$$SHORTCODE$$.S.LOG_ENTRY_EXIT                = true;
+$else
 $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = false;
+$endif
 
 /* Add any global settings, defaults... here */

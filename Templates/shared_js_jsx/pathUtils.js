@@ -14,7 +14,9 @@ if (! $$SHORTCODE$$.path) {
 
 $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     if (! separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
@@ -27,14 +29,18 @@ $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
     }
     while (splitPath.length > 0 && endSegment == "");
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return endSegment;
 };
 
 $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     if (! separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
@@ -49,14 +55,18 @@ $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
 
     var retVal = splitPath.join(separator);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };
 
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath, separator) {
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var splitName = $$SHORTCODE$$.path.basename(filepath).split(".");
     var extension = "";
@@ -66,7 +76,9 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath, sepa
 
     var retVal = extension.toLowerCase();
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };

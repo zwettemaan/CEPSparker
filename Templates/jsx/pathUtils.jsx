@@ -8,19 +8,25 @@ if (! $$SHORTCODE$$.path) {
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     var f = File(filepath);
     var retVal = f.exists;
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };
 
 $$SHORTCODE$$.path.isDir = function isDir(filepath) {
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+    $endif
     
     // This casts to a File instead of a Folder if the
     // path references a file
@@ -29,7 +35,9 @@ $$SHORTCODE$$.path.isDir = function isDir(filepath) {
 
     var retVal = (folder instanceof Folder);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+    $endif
 
     return retVal;
 };
@@ -37,6 +45,10 @@ $$SHORTCODE$$.path.isDir = function isDir(filepath) {
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     var success = false;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     do {
         try {
@@ -66,6 +78,10 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
         }
     }
     while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+    $endif
     
     return success;
 };
