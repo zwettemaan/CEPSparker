@@ -85,12 +85,19 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
                 }
             }
             
-            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
-                console.log(prefix + message);
-            }
+            var chromeLogLine = prefix + message;
+
+            $$SHORTCODE$$.csInterface.evalScript("$$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog()", function(accumulatedESTKToJSLog) {
+                if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
+                    if (accumulatedESTKToJSLog) {
+                        console.log(accumulatedESTKToChromeConsoleLog);
+                    }
+                    console.log(chromeLogLine);
+                }
+            });
 
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-                $$SHORTCODE$$.csInterface.evalScript("$.writeln('" + $$SHORTCODE$$.sQ(prefix + message) + "');");
+                $$SHORTCODE$$.csInterface.evalScript("$.writeln('" + $$SHORTCODE$$.sQ(chromeLogLine) + "');");
             }
         }
         catch (err) {        

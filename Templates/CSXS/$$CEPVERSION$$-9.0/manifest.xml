@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest 
 	Version="6.0" 
 	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
@@ -11,45 +11,45 @@
 	<ExecutionEnvironment>
 		<HostList>
 $if "$$TARGETAPP$$" == "MULTIPLE"
-			<Host Name="IDSN" Version="[13,99)" />
-			<Host Name="AICY" Version="[13,99)" />
-			<Host Name="PHSP" Version="[19,99)" />
-			<Host Name="PHXS" Version="[19,99)" />
-			<Host Name="ILST" Version="[22,99)" />
-			<Host Name="PPRO" Version="[12,99)" />
-			<Host Name="AEFT" Version="[15,99)" />
-			<Host Name="PRLD" Version="[7,99)" />
-			<Host Name="FLPR" Version="[13,99)" />
-			<Host Name="DRWV" Version="[18,99)" />
+			<Host Name="IDSN" Version="[14,99)" />
+			<Host Name="AICY" Version="[14,99)" />
+			<Host Name="PHSP" Version="[20,99)" />
+			<Host Name="PHXS" Version="[20,99)" />
+			<Host Name="ILST" Version="[23,99)" />
+			<Host Name="PPRO" Version="[13,99)" />
+			<Host Name="AEFT" Version="[16,99)" />
+			<Host Name="PRLD" Version="[8,99)" />
+			<Host Name="FLPR" Version="[15,99)" />
+			<Host Name="DRWV" Version="[19,99)" />
 			<Host Name="KBRG" Version="[9.0,99)" />
 $endif
 $if "$$TARGETAPP$$" == "IDSN"
-			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[14,99)" />
 $endif			
 $if "$$TARGETAPP$$" == "AICY"
-			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[14,99)" />
 $endif			
 $if "$$TARGETAPP$$" == "PHSP"
-			<Host Name="$$TARGETAPP$$" Version="[19,99)" />
-			<Host Name="PHXS" Version="[19,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[20,99)" />
+			<Host Name="PHXS" Version="[20,99)" />
 $endif			
 $if "$$TARGETAPP$$" == "ILST"
-			<Host Name="$$TARGETAPP$$" Version="[22,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[23,99)" />
 $endif			
 $if "$$TARGETAPP$$" == "PPRO"
-			<Host Name="$$TARGETAPP$$" Version="[12,99)" />
-$endif			
-$if "$$TARGETAPP$$" == "AEFT"
-			<Host Name="$$TARGETAPP$$" Version="[15,99)" />
-$endif			
-$if "$$TARGETAPP$$" == "PRLD"
-			<Host Name="$$TARGETAPP$$" Version="[7,99)" />
-$endif			
-$if "$$TARGETAPP$$" == "FLPR"
 			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
 $endif			
+$if "$$TARGETAPP$$" == "AEFT"
+			<Host Name="$$TARGETAPP$$" Version="[16,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "PRLD"
+			<Host Name="$$TARGETAPP$$" Version="[8,99)" />
+$endif			
+$if "$$TARGETAPP$$" == "FLPR"
+			<Host Name="$$TARGETAPP$$" Version="[15,99)" />
+$endif			
 $if "$$TARGETAPP$$" == "DRWV"
-			<Host Name="$$TARGETAPP$$" Version="[18,99)" />
+			<Host Name="$$TARGETAPP$$" Version="[19,99)" />
 $endif			
 $if "$$TARGETAPP$$" == "KBRG"
 			<Host Name="$$TARGETAPP$$" Version="[9.0,99)" />
@@ -59,8 +59,7 @@ $endif
 			<Locale Code="All" />
 		</LocaleList>
 		<RequiredRuntimeList>
-			<!-- Keep Version at 7.0, even for CEP 8.0 -->
-			<RequiredRuntime Name="CSXS" Version="7.0" />
+            <RequiredRuntime Name="CSXS" Version="9.0"/> 
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest 
-	Version="7.0" 
+	Version="6.0" 
 	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
 	ExtensionBundleVersion="1.0.0"
 	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 

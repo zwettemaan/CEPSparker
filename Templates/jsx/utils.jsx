@@ -17,6 +17,21 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     return retVal;
 };
 
+if ($$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG === undefined) {
+    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
+}
+
+// Call this from JavaScript side via CSInterface
+
+$$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog = function() {
+
+    var retVal = $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG;
+
+    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
+
+    return retVal;
+};
+
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
@@ -64,9 +79,21 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
                 }
             }
             
+            var estkLogLine = prefix + message;
+                    
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-                $.writeln(prefix + message); 
+                $.writeln(estkLogLine); 
             }
+
+            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
+
+                if ("string" != typeof $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG) {
+                    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
+                }
+
+                $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG += estkLogLine + "\n";
+            }
+
         }
         catch (err) {
         }

@@ -18,12 +18,13 @@ The goal of this project is to reduce the treshold to 'get started' building CEP
 The approach I've taken is to provide you with a ready-to-run panel with all its 
 source code.
 
-In addition there is a lot of developer infrastructure code (helpers scripts) which 
-help with tasks like installing, debugging, reading log files...
+In addition, there is a lot of developer infrastructure code (helpers scripts) which 
+help with tasks like installing, debugging, reading log files, zxp building...
 
 Most of the helper scripts are human-readable command line scripts (.command on Mac, .bat on Windows). 
 
-These helpers are all written in such a way that they are easy to inspect and analyze. They also serve as a way to explain and document the development processes.
+These helpers are all written in such a way that they are easy to inspect and analyze. 
+They also serve as a way to explain and document the development processes.
  
 I know from experience how disheartening it is to find some useful sample code, 
 and then get mired into all kinds of issues trying to install various tools 
@@ -40,7 +41,8 @@ dependencies:
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
 
-Stuff you need to understand to make sense of things:
+Things you need to understand to make sense of it all can be 
+found via the following link:
 
 https://github.com/zwettemaan/CEPSparker/wiki/The-Lie-Of-The-Land
 
