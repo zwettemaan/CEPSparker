@@ -2,7 +2,6 @@ $$SHORTCODE$$.csInterface = new CSInterface();
 $$SHORTCODE$$.hostEnvironment = JSON.parse(window.__adobe_cep__.getHostEnvironment());
 
 function init() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -33,13 +32,11 @@ else {
 // ----------------
 
 function closeExtension_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("closeExtension_PRM callback");
         $endif
@@ -55,19 +52,16 @@ function closeExtension_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 
 }
 
 function getExtendScriptExtensionDirs_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("getExtendScriptExtensionDirs_PRM callback");
         $endif
@@ -81,7 +75,6 @@ function getExtendScriptExtensionDirs_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
-
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry("getExtendScriptExtensionDirs_PRM evalScript callback");
                     $endif
@@ -106,24 +99,20 @@ function getExtendScriptExtensionDirs_PRM() {
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logExit("getExtendScriptExtensionDirs_PRM callback");
         $endif
-
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function getInDesignInfo_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("getInDesignInfo_PRM callback");
         $endif
@@ -136,7 +125,6 @@ function getInDesignInfo_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
-
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry("getInDesignInfo_PRM evalScript callback");
                     $endif
@@ -169,24 +157,20 @@ function getInDesignInfo_PRM() {
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logExit("getInDesignInfo_PRM callback");
         $endif
-
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function getJavaScriptExtensionDirs_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("getJavaScriptExtensionDirs_PRM callback");
         $endif
@@ -205,24 +189,20 @@ function getJavaScriptExtensionDirs_PRM() {
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logExit("getJavaScriptExtensionDirs_PRM callback");
         $endif
-
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function getLocale_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("getLocale_PRM callback");
         $endif
@@ -242,7 +222,6 @@ function getLocale_PRM() {
             $$SHORTCODE$$.csInterface.evalScript(
                 script,
                 function(data) { 
-
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry("getLocale_PRM evalScript callback");
                     $endif
@@ -258,6 +237,7 @@ function getLocale_PRM() {
             )
 
         }
+
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logExit("getLocale_PRM callback");
         $endif
@@ -266,18 +246,15 @@ function getLocale_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function initHostScript_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("initHostScript_PRM callback");
         $endif
@@ -296,19 +273,16 @@ function initHostScript_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 
 function passCollectedInfoToExtendScript_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("passCollectedInfoToExtendScript_PRM callback");
         $endif
@@ -337,18 +311,15 @@ function passCollectedInfoToExtendScript_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function readPreferences_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("readPreferences_PRM callback");
         $endif
@@ -377,18 +348,15 @@ function readPreferences_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function savePreferences_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("savePreferences_PRM callback");
         $endif
@@ -420,14 +388,12 @@ function savePreferences_PRM() {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-    $endif
-
+    $endi
     return promise;
 
 }
 
 function setDefaultPreferences() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -441,17 +407,14 @@ function setDefaultPreferences() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
 }
 
 function updateUI_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("updateUI_PRM callback");
         $endif
@@ -468,18 +431,15 @@ function updateUI_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }
 
 function wireUI_PRM() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("wireUI_PRM callback");
         $endif
@@ -500,13 +460,11 @@ $endif
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logExit("wireUI_PRM callback");
-        $endif
-        
+        $endif       
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return promise;
 }

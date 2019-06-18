@@ -4,7 +4,6 @@
 
 $$SHORTCODE$$.shallowClone = function shallowClone(obj) 
 {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -18,7 +17,6 @@ $$SHORTCODE$$.shallowClone = function shallowClone(obj)
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return retVal;
 }
 
@@ -51,7 +49,6 @@ $$SHORTCODE$$.deepClone = function deepClone(obj)
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return retVal;
 }
 

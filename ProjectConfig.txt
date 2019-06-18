@@ -12,7 +12,7 @@ SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner"
 
 ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
-HELP_EXTENSION_BUNDLEID="Add tracing code for entry/exit into methods"
+HELP_EXTENSION_BUNDLEID="Add verbose tracing code for entry/exit into methods to the generated code"
 
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
 HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"

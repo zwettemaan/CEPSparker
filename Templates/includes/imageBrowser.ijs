@@ -20,7 +20,6 @@
                 var message = JSON.parse(event.data);
 
                 function download(url, destinationPath, callback) {
-
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry(arguments);
                     $endif
@@ -28,7 +27,6 @@
                     var file = fs.createWriteStream(destinationPath);
 
                     var request = http.get(url, function(response) {
-
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logEntry("http.get callback");
                         $endif
@@ -40,10 +38,8 @@
 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logExit("http.get callback");
-
-                    })
-                        $endif.on('error', function(err) { 
-
+                        $endif                        
+                    }).on('error', function(err) { 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logEntry("http.get error callback");
                         $endif
@@ -56,13 +52,12 @@
 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                         $$SHORTCODE$$.logExit("http.get error callback");
-                    })
                         $endif
+                    })
 
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logExit(arguments);
-                    $endif
-                    
+                    $endif                    
                 };
 
                 var url = message.url;
@@ -73,7 +68,6 @@
                 var scale = scaledWidth / width;
                 var scaledHeight = scale * height;
                 download(url, filePath, function(err) {
-
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logEntry("download callback");
                     $endif
@@ -90,8 +84,8 @@
                     
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
                     $$SHORTCODE$$.logExit("download callback");
-                })
                     $endif
+                })
             }
             catch (err) {
                 $$SHORTCODE$$.logError(arguments, "throws " + err);

@@ -3,7 +3,6 @@
 //
 
 $$SHORTCODE$$.checkMac = function checkMac() {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -13,12 +12,10 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
 	return retVal;
 };
 
-$$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {
-    
+$$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {  
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif

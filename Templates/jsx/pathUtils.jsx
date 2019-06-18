@@ -7,7 +7,6 @@ if (! $$SHORTCODE$$.path) {
 }
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -18,12 +17,10 @@ $$SHORTCODE$$.path.exists = function exists(filepath) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return retVal;
 };
 
 $$SHORTCODE$$.path.isDir = function isDir(filepath) {
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -38,14 +35,12 @@ $$SHORTCODE$$.path.isDir = function isDir(filepath) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-
     return retVal;
 };
 
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     var success = false;
-
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -81,7 +76,6 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-    $endif
-    
+    $endif  
     return success;
 };
