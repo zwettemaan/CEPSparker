@@ -388,7 +388,7 @@ function savePreferences_PRM() {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-    $endi
+    $endif
     return promise;
 
 }
