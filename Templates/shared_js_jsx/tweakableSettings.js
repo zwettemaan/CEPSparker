@@ -12,6 +12,12 @@ if (! $$SHORTCODE$$.S) {
 $$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_NONE;
 
 $$SHORTCODE$$.S.MANUAL_START_FROM_CHROME      = false;
+
+// LOG_TO_CHROME_CONSOLE also sends the ESTK log to the Chrome console window, 
+// but I am using a trick: the log accumulates on the ESTK side until the JavaScript
+// logger needs to output something, at which time it will fetch and output the ESTK
+// log info too
+
 $$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE         = false;
 $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE           = false;
 $$SHORTCODE$$.S.LOG_TO_FILEPATH               = undefined; // file path or undefined
