@@ -1,1 +1,8 @@
+$if $$CEPVERSION$$ >= 7.0
+		<p>Run the sample image server from the command line (e.g. 'cd SampleImageServer; node server.js').</p>
 		<iframe width="100%" height="100%" src="http://localhost:$$IMAGEBROWSER_PORT$$/images" />
+$else
+		<p>You need to generate a panel with CEP version 7.0 or higher for this sample code to work.</p>
+		<p>Run devtools/cleanGenerate.</p>
+		<p>Then re-run CEPSparkerConfig.</p>
+$endif
