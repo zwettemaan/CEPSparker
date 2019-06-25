@@ -1,5 +1,24 @@
-    window.addEventListener('message', handleIFrameMessage);
+    $$SHORTCODE$$.sendIFrameMessage = function(messageText) {
 
+        var messageObj = {
+            text: messageText
+        };
+
+        if (window.frames.length > 0) {
+            window.frames[0].postMessage(JSON.stringify(messageObj), "*");
+        }
+        else {
+            var interval = setInterval(function() {
+                if (window.frames.length > 0) {
+                    window.frames[0].postMessage(JSON.stringify(messageObj), "*");
+                    clearInterval(interval);
+                }
+            },
+            1000);
+        }
+    }
+
+    window.addEventListener('message', handleIFrameMessage);
     function handleIFrameMessage(event) {
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -98,3 +117,4 @@
         $endif        
     }
 
+    $$SHORTCODE$$.sendIFrameMessage("This is data sent from the panel to the iFrame");

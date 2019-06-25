@@ -7,6 +7,15 @@ $include "loadCSS.ihtml"
 $include "loadScripts.ihtml"
 
 <script>
+
+    window.addEventListener('message', handlePanelMessage);
+    function handlePanelMessage(event) {
+
+        var messageObj = JSON.parse(event.data);
+        $('#panelMessageText').text(messageObj.text);
+
+    }
+
     function handleImageClick(evt) {
         
         var url = window.location.origin;
@@ -33,3 +42,5 @@ $include "loadScripts.ihtml"
 
 </head>
 <body>
+
+    <div id="panelMessageText"></div>
