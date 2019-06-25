@@ -1,0 +1,6 @@
+Make sure to double-click
+
+  initialSetupConfigApp.command
+
+before anything else. If you don't 
+do that, nothing will work.

@@ -1,0 +1,4 @@
+Make sure to start a CMD command line shell by 
+right-clicking it and selecting 'Run As Administrator...'.
+
+Then run all the .bat files from this command line shell.
