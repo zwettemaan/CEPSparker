@@ -80,7 +80,7 @@
                 };
 
                 var url = message.url;
-                var filePath = $$SHORTCODE$$.dirs.tempDir + decodeURIComponent($$SHORTCODE$$.path.basename(url));
+                var filePath = $$SHORTCODE$$.dirs.tempDir + decodeURIComponent($$SHORTCODE$$.path.basename(url, "/"));
                 var width = message.width;
                 var height = message.height;
                 var scaledWidth = 100;
