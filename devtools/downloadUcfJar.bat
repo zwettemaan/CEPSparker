@@ -6,7 +6,7 @@ SET URL=http://download.macromedia.com/pub/developer/creativesuite/extension-bui
 SET devToolsDir=%~dp0
 PUSHD "%devToolsDir%"
 
-DEL /S/Q signingtoolkit
+RMDIR signingtoolkit /s /q > nul 2>&1
 MKDIR signingtoolkit
 
 powershell.exe -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (new-object System.Net.WebClient).DownloadFile("""%URL%""",'signingtoolkit.zip')
