@@ -26,6 +26,7 @@ if "%reply%" == "YES" (
   CALL Windows\clean.bat
 
   RD /s /q %devToolsDir%/ZXPSignCmd* >NUL 2>&1
+  RD /s /q %devToolsDir%/signingtoolkit >NUL 2>&1
   RD /s /q BuildSettings >NUL 2>&1
   RD /s /q debug >NUL 2>&1
   RD /s /q css >NUL 2>&1
