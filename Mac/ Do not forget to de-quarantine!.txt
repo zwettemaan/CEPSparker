@@ -1,4 +1,4 @@
-Make sure to double-click
+Make sure to right-click, then 'Open'
 
   initialSetupConfigApp.command
 

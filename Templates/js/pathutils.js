@@ -25,7 +25,8 @@ $$SHORTCODE$$.path.isDir = function isDir(filepath) {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    var isDir = IsDirectory(filepath);
+    var stat = cep.fs.stat(filepath);
+    var retVal = (stat.err == cep.fs.NO_ERROR) && stat.data.isDirectory();
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);

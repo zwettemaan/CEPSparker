@@ -87,7 +87,7 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             $$SHORTCODE$$.csInterface.evalScript("$$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog()", function(accumulatedESTKToJSLog) {
                 if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
                     if (accumulatedESTKToJSLog) {
-                        console.log(accumulatedESTKToChromeConsoleLog);
+                        console.log(accumulatedESTKToJSLog);
                     }
                     console.log(chromeLogLine);
                 }

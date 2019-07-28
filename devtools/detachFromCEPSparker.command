@@ -38,17 +38,19 @@ else
 
   if [ "$reply" == "YES" ]; then
 
+    rm -rf .git  
     rm -f .gitignore
     rm -f ReadMe.md
     rm -f ProjectConfig.txt
-    rm -f Mac/initialSetupConfigApp.command
-    rm -f Windows/CEPSparkerConfig.exe
-    rm -rf .git  
-    rm -rf Windows/CEPSparkerConfig\ Libs
+    rm -rf $devtoolsDir
     rm -rf Templates
     rm -rf ToolSources/CEPSparkerConfig
+    rm -f Mac/initialSetupConfigApp.command
     rm -rf Mac/CEPSparkerConfig.app
-    rm -rf $devtoolsDir
+    rm -rf "Mac/ Do not forget to de-quarantine!.txt"
+    rm -f Windows/CEPSparkerConfig.exe
+    rm -rf Windows/CEPSparkerConfig\ Libs
+    rm -rf "Windows/ Run CMD with administrative permissions!.txt"
 
   fi
 

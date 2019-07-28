@@ -1,3 +1,20 @@
+#$$SHORTCODE$$body {
+	width: $$PANELWIDTH$$px;
+	height: $$PANELHEIGHT$$px;
+}
+
+#$$SHORTCODE$$panel {
+	width: 100%;
+	height: 100%;
+}
+
+$if "$$STARTERCODE$$" == "ImageBrowser"
+#$$SHORTCODE$$iframe {
+	width: 100%;
+	height: 100%;
+}
+$endif
+
 body {
 	background-color: #606060;
 	font-family: "Verdana";

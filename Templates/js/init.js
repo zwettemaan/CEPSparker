@@ -1,5 +1,5 @@
 $$SHORTCODE$$.csInterface = new CSInterface();
-$$SHORTCODE$$.hostEnvironment = JSON.parse(window.__adobe_cep__.getHostEnvironment());
+$$SHORTCODE$$.hostEnvironment = $$SHORTCODE$$.csInterface.getHostEnvironment();
 
 function init() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -41,7 +41,7 @@ function closeExtension_PRM() {
         $$SHORTCODE$$.logEntry("closeExtension_PRM callback");
         $endif
 
-        window.__adobe_cep__.closeExtension();
+        $$SHORTCODE.csInterface.closeExtension();
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -443,6 +443,8 @@ function wireUI_PRM() {
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("wireUI_PRM callback");
         $endif
+
+        // $$SHORTCODE$$.csInterface.resizeContent($$PANELWIDTH$$, $$PANELHEIGHT$$);
 
 $if "$$STARTERCODE$$" == "ImageBrowser"
 
