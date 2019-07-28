@@ -1,0 +1,2 @@
+@ECHO OFF
+set SHORTPATH=%~s1

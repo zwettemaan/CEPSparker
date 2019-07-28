@@ -1,4 +1,14 @@
 @ECHO OFF
+REM Usage
+REM 
+REM   zxpBuildUCF
+REM 
+REM or 
+REM 
+REM   zxpBuildUCF debug
+REM
+REM Optional 'debug' parameter: add .debug file into signed ZXP 
+REM
 
 SETLOCAL EnableDelayedExpansion
 
@@ -15,6 +25,7 @@ CD devtools
 SET devtoolsDir=%cd%\
 cd ..\BuildSettings
 SET buildSettingsDir=%cd%\
+
 POPD
 
 PUSHD "%projectHomeDir%"
@@ -99,10 +110,28 @@ XCOPY "%projectHomeDir%html" "%EXTENSION_HOMEDIR%html\" /y /s /e >NUL 2>&1
 XCOPY "%projectHomeDir%js" "%EXTENSION_HOMEDIR%js\" /y /s /e >NUL 2>&1
 XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOMEDIR%jsx\" /y /s /e >NUL 2>&1
 XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOMEDIR%shared_js_jsx\" /y /s /e >NUL 2>&1
+IF "%1" == "debug" (
+    COPY "%projectHomeDir%debug" "%EXTENSION_HOMEDIR%.debug" >NUL 2>&1
+)
 
 CD "%buildDir%"
 
-"%devtoolsDir%ZXPSignCmd" -sign "%EXTENSION_DIRNAME%" "%EXTENSION_DIRNAME%.zxp" "%buildSettingsDir%\%certfile%" "%password%" -tsa "%timestampServer%"
+REM UCF.JAR cannot handle spaces in file path. Convert them to 8.3 file paths
+
+CALL "%scriptDir%shortPath.bat" "%devtoolsDir%signingtoolkit\ucf.jar"
+SET SH83_UCFJAR=%SHORTPATH%
+
+CALL "%scriptDir%shortPath.bat" "%buildSettingsDir%%certfile%"
+SET SH83_CERTFILE=%SHORTPATH%
+
+CALL "%scriptDir%shortPath.bat" "%EXTENSION_HOMEDIR%"
+SET SH83_EXTENSION_HOMEDIR=%SHORTPATH%
+
+IF "%1" == "debug" (
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass %password% -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . -e "%SH83_EXTENSION_HOMEDIR%.debug" "%SH83_EXTENSION_HOMEDIR%.debug"
+) ELSE (
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass %password% -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . 
+)
 
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
 

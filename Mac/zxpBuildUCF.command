@@ -91,7 +91,9 @@ cp -R "$projectHomeDir/html" "$EXTENSION_HOMEDIR/html"
 cp -R "$projectHomeDir/js" "$EXTENSION_HOMEDIR/js"
 cp -R "$projectHomeDir/jsx" "$EXTENSION_HOMEDIR/jsx"
 cp -R "$projectHomeDir/shared_js_jsx" "$EXTENSION_HOMEDIR/shared_js_jsx"
-cp -R "$projectHomeDir/debug" "$EXTENSION_HOMEDIR/.debug"
+if [ "$param" == "debug" ]; then
+	cp -R "$projectHomeDir/debug" "$EXTENSION_HOMEDIR/.debug"
+fi
 
 cd "$EXTENSION_HOMEDIR"
 
