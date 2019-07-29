@@ -76,4 +76,6 @@ cd "$projectHomeDir/build"
 
 "$devtoolsDir/ZXPSignCmd" -sign "$EXTENSION_DIRNAME" "$EXTENSION_DIRNAME.zxp" "$buildSettingsDir/$certfile" "$password" -tsa $timestampServer
 
+mv "$EXTENSION_DIRNAME.zxp" "$EXTENSION_DIRNAME.$EXTENSION_VERSION.zxp"
+
 rm -rf "$EXTENSION_HOMEDIR"

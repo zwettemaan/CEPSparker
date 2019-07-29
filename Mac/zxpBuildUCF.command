@@ -101,12 +101,16 @@ find . -name ".DS_Store" | while read a; do rm "$a"; done
 find . -name "__MACOSX" | while read a; do rm -rf "$a"; done
 xattr -cr .
 
+export EXTENSION_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionVersion.txt"`
+
 cd "$projectHomeDir/build"
 
 if [ "$param" == "debug" ]; then
 	java -jar "$devtoolsDir/signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "$buildSettingsDir/$certfile" -storepass "$password" -tsa $timestampServer "$EXTENSION_DIRNAME.zxp" -C "$EXTENSION_HOMEDIR" . -e "$EXTENSION_HOMEDIR/.debug" .debug
+	mv "$EXTENSION_DIRNAME.zxp" "$EXTENSION_DIRNAME.$EXTENSION_VERSION.debug.zxp"
 else
 	java -jar "$devtoolsDir/signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "$buildSettingsDir/$certfile" -storepass "$password" -tsa $timestampServer "$EXTENSION_DIRNAME.zxp" -C "$EXTENSION_HOMEDIR" .
+	mv "$EXTENSION_DIRNAME.zxp" "$EXTENSION_DIRNAME.$EXTENSION_VERSION.zxp"
 fi
 
 rm -rf "$EXTENSION_HOMEDIR"

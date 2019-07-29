@@ -106,4 +106,8 @@ CD "%buildDir%"
 
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
 
+SET /p EXTENSION_VERSION=< ..\BuildSettings\ExtensionVersion.txt
+
+REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.zxp"
+
 POPD

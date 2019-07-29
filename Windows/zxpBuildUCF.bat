@@ -111,10 +111,8 @@ XCOPY "%projectHomeDir%js" "%EXTENSION_HOMEDIR%js\" /y /s /e >NUL 2>&1
 XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOMEDIR%jsx\" /y /s /e >NUL 2>&1
 XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOMEDIR%shared_js_jsx\" /y /s /e >NUL 2>&1
 IF "%1" == "debug" (
-    COPY "%projectHomeDir%debug" "%EXTENSION_HOMEDIR%.debug" >NUL 2>&1
+    COPY "%projectHomeDir%debug" "%EXTENSION_HOMEDIR%.debug_precursor" >NUL 2>&1
 )
-
-CD "%buildDir%"
 
 REM UCF.JAR cannot handle spaces in file path. Convert them to 8.3 file paths
 
@@ -124,13 +122,19 @@ SET SH83_UCFJAR=%SHORTPATH%
 CALL "%scriptDir%shortPath.bat" "%buildSettingsDir%%certfile%"
 SET SH83_CERTFILE=%SHORTPATH%
 
-CALL "%scriptDir%shortPath.bat" "%EXTENSION_HOMEDIR%"
-SET SH83_EXTENSION_HOMEDIR=%SHORTPATH%
+CALL "%scriptDir%shortPath.bat" "%buildDir%"
+SET SH83_EXTENSION_BUILDIR=%SHORTPATH%
+
+CD "%SH83_EXTENSION_BUILDIR%"
+
+SET /p EXTENSION_VERSION=< ..\BuildSettings\ExtensionVersion.txt
 
 IF "%1" == "debug" (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass %password% -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . -e "%SH83_EXTENSION_HOMEDIR%.debug" "%SH83_EXTENSION_HOMEDIR%.debug"
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . -e "%EXTENSION_DIRNAME%\.debug_precursor" .debug
+    REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.debug.zxp"
 ) ELSE (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass %password% -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . 
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . 
+    REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.zxp"
 )
 
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
