@@ -17,7 +17,10 @@ export scriptDir=`dirname "$0"`
 cd "$scriptDir"
 
 # 
-# Need java runtime 1.7.0_80 installed!
+# Need some older java runtime, e.g. 1.7.0_80 installed!
+#
+# At some point in time (Java 9?) things don't work any more with certificate issues
+#
 # https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html
 #
 
