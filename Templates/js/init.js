@@ -175,15 +175,15 @@ function getJavaScriptExtensionDirs_PRM() {
         $$SHORTCODE$$.logEntry("getJavaScriptExtensionDirs_PRM callback");
         $endif
 
-        $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) + "/";
-        $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) + "/";
+        $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) + $$SHORTCODE$$.path.SEPARATOR;
+        $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) + $$SHORTCODE$$.path.SEPARATOR;
         if ($$SHORTCODE$$.isMac) {
             $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.appSupportDir) + "/Preferences/";
         }
         else {
             $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.dirs.appSupportDir;
         }
-        $$SHORTCODE$$.dirs.preferencesDir = $$SHORTCODE$$.dirs.systemPreferencesDir + $$SHORTCODE$$.C.DIRNAME_PREFERENCES + "/";
+        $$SHORTCODE$$.dirs.preferencesDir = $$SHORTCODE$$.dirs.systemPreferencesDir + $$SHORTCODE$$.C.DIRNAME_PREFERENCES + $$SHORTCODE$$.path.SEPARATOR;
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
