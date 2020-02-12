@@ -59,6 +59,15 @@ IF "%EXTENSION_DIRNAME%" == "" (
     EXIT /B
 )
 
+SET /P EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
+
+IF "%EXTENSION_VERSION%" == "" (
+    ECHO Error: Cannot determine the version for this
+    ECHO extension. Aborting.
+    POPD
+    EXIT /B
+)
+
 IF NOT EXIST "%buildSettingsDir%certinfo.bat" (
     ECHO Error: certinfo.bat not found. 
     ECHO Probably this CEPSparker folder has not been initialized. Make

@@ -47,6 +47,15 @@ if [ "$EXTENSION_DIRNAME" == "" ]; then
 
 fi
 
+export EXTENSION_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionVersion.txt"`
+
+if [ "$EXTENSION_VERSION" == "" ]; then
+
+	echo "Cannot determine version for extension. No file ExtensionVersion.txt or file is empty"
+	exit
+
+fi
+
 if [ ! -d "$buildDir" ]; then
 	mkdir "$buildDir"
 fi
