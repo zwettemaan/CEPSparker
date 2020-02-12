@@ -42,7 +42,10 @@ else
     rm -f .gitignore
     rm -f ReadMe.md
     rm -f ProjectConfig.txt
-    rm -rf $devtoolsDir
+    rm -f $devtoolsDir/cleanGenerate.bat
+    rm -f $devtoolsDir/cleanGenerate.command
+    rm -f $devtoolsDir/detachFromCEPSparker.command
+    rm -f $devtoolsDir/cleanGenerate.command
     rm -rf Templates
     rm -rf ToolSources/CEPSparkerConfig
     rm -f Mac/initialSetupConfigApp.command
