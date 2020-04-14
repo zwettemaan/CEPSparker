@@ -110,7 +110,7 @@ Protected Class CConditionParser
 		      retVal = cps.fOrValue
 		      
 		    catch e as RuntimeException
-		      WndJSXSparker.LogError CurrentMethodName, "Throws " + e.Message
+		      WndCEPSparker.LogError CurrentMethodName, "Throws " + e.Message
 		    end try
 		    
 		  Loop Until true
