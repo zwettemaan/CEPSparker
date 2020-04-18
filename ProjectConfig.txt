@@ -4,7 +4,11 @@
 # will use search-and-replace to create the actual files needed for the project
 #
 
+# CEPVERSION list of options must match CSXS subdirectory contents
+
 CEPVERSION=4.2
+HELP_CEPVERSION="CEP version to target. Lower versions lack features, but support more Adobe CC versions"
+SELECT_CEPVERSION="4.2,5.2,6.1,7.0,8.0,9.0"
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
