@@ -3,12 +3,17 @@
 # local directories for easy access
 #
 
-export scriptDir=`dirname "$0"`
-cd "$scriptDir"
-export scriptDir=`pwd`
-export projectHomeDir=`dirname "$scriptDir"`
+if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
+    export SPRK_COMMANDS_DIR=`dirname "$0"`
+fi
 
-cd "$projectHomeDir"
+pushd "$SPRK_COMMANDS_DIR" > /dev/null
+
+export SPRK_COMMANDS_DIR=`pwd`/
+
+. setTarget.command
+
+cd "$PROJECT_ROOT_DIR"
 
 #
 # Do nothing if the LocalLinks already exists. If you want a clean
@@ -24,3 +29,5 @@ if [ ! -d LocalLinks ]; then
 	ln -s ~/Library/Application\ Support/Adobe/CEP/extensions "Extensions_User"
 
 fi
+
+popd > /dev/null

@@ -13,8 +13,16 @@
 #
 
 export param="$1"
-export scriptDir=`dirname "$0"`
-cd "$scriptDir"
+
+if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
+    export SPRK_COMMANDS_DIR=`dirname "$0"`
+fi
+
+pushd "$SPRK_COMMANDS_DIR" > /dev/null
+
+export SPRK_COMMANDS_DIR=`pwd`/
+
+. setTarget.command
 
 # 
 # Need some older java runtime, e.g. 1.7.0_80 installed!
@@ -36,75 +44,65 @@ fi
 
 export timestampServer="http://timestamp.globalsign.com/scripts/timstamp.dll"
 
-export scriptDir=`pwd`
-export projectHomeDir=`dirname "$scriptDir"`
-export devtoolsDir="$projectHomeDir/devtools"
-export buildDir="$projectHomeDir/build"
-export buildSettingsDir="$projectHomeDir/BuildSettings"
+export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools"
 
-"$scriptDir/clean.command"
+"${SPRK_COMMANDS_DIR}clean.command"
 
-if [ ! -f "$projectHomeDir/BuildSettings/ExtensionDirName.txt" ]; then
+if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
 
 	echo "This is an unconfigured CEPSparker directory. Nothing to build."
 	exit
 
 fi
 
-if [ ! -f "$devtoolsDir/signingtoolkit/ucf.jar" ]; then
+if [ ! -f "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" ]; then
 
-	echo "Need to download ucf.jar first. See 'devtools/downloadUcfJar' scripts"
+	echo "Need to download ucf.jar first. See ${SPRK_DEV_TOOLS_DIR}downloadUcfJar.command script"
 	exit
 
 fi	
 
-. "$buildSettingsDir/certinfo.command"
+. "${BUILD_SETTINGS_DIR}certinfo.command"
 
-if [ ! -f "$buildSettingsDir/$certfile" ]; then
+if [ ! -f "${BUILD_SETTINGS_DIR}${certfile}" ]; then
 
-	echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
+	echo "Need to provide a certificate file, or create a self-signed one first. See ${SPRK_DEV_TOOLS_DIR}makeSelfSignedCert.command"
 	exit
 
 fi
-
-export EXTENSION_DIRNAME=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionDirName.txt"`
 
 if [ "$EXTENSION_DIRNAME" == "" ]; then
 
-	echo "Cannot determine directory name for extension. No file ExtensionDirName.txt or file is empty"
+	echo "Cannot determine directory name for extension. "
 	exit
 
 fi
-
-export EXTENSION_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionVersion.txt"`
 
 if [ "$EXTENSION_VERSION" == "" ]; then
 
-	echo "Cannot determine version for extension. No file ExtensionVersion.txt or file is empty"
+	echo "Cannot determine version for extension."
 	exit
 
 fi
 
-if [ ! -d "$buildDir" ]; then
-	mkdir "$buildDir"
+if [ ! -d "$BUILD_DIR" ]; then
+	mkdir "$BUILD_DIR"
 fi
 
-export EXTENSION_HOMEDIR="$buildDir/$EXTENSION_DIRNAME"
-
-"$scriptDir/clearPlayerDebugMode.command"
-"$scriptDir/adjustVersionInManifest.command"
+"${SPRK_COMMANDS_DIR}clearPlayerDebugMode.command"
+"${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
 rm -rf "$EXTENSION_HOMEDIR"
 mkdir "$EXTENSION_HOMEDIR"
 
-cp -R "$projectHomeDir/css" "$EXTENSION_HOMEDIR/css"
-cp -R "$projectHomeDir/CSXS" "$EXTENSION_HOMEDIR/CSXS"
-cp -R "$projectHomeDir/html" "$EXTENSION_HOMEDIR/html"
-cp -R "$projectHomeDir/js" "$EXTENSION_HOMEDIR/js"
-cp -R "$projectHomeDir/jsx" "$EXTENSION_HOMEDIR/jsx"
-cp -R "$projectHomeDir/shared_js_jsx" "$EXTENSION_HOMEDIR/shared_js_jsx"
+cp -R "${PROJECT_ROOT_DIR}css" "${EXTENSION_HOMEDIR}css"
+cp -R "${PROJECT_ROOT_DIR}CSXS" "${EXTENSION_HOMEDIR}CSXS"
+cp -R "${PROJECT_ROOT_DIR}html" "${EXTENSION_HOMEDIR}html"
+cp -R "${PROJECT_ROOT_DIR}js" "${EXTENSION_HOMEDIR}js"
+cp -R "${PROJECT_ROOT_DIR}jsx" "${EXTENSION_HOMEDIR}jsx"
+cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_HOMEDIR}shared_js_jsx"
 if [ "$param" == "debug" ]; then
-	cp -R "$projectHomeDir/debug" "$EXTENSION_HOMEDIR/.debug"
+	cp -R "${PROJECT_ROOT_DIR}debug" "${EXTENSION_HOMEDIR}.debug"
 fi
 
 cd "$EXTENSION_HOMEDIR"
@@ -113,12 +111,10 @@ find . -name ".DS_Store" | while read a; do rm "$a"; done
 find . -name "__MACOSX" | while read a; do rm -rf "$a"; done
 xattr -cr .
 
-export EXTENSION_VERSION=`head -n 1 "$projectHomeDir/BuildSettings/ExtensionVersion.txt"`
-
-cd "$projectHomeDir/build"
+cd "${PROJECT_ROOT_DIR}build"
 
 if [ "$param" == "debug" ]; then
-	java -jar "$devtoolsDir/signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "$buildSettingsDir/$certfile" -storepass "$password" -tsa $timestampServer "$EXTENSION_DIRNAME.zxp" -C "$EXTENSION_HOMEDIR" . -e "$EXTENSION_HOMEDIR/.debug" .debug
+	java -jar "$devtoolsDir/signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "$buildSettingsDir/$certfile" -storepass "$password" -tsa $timestampServer "$EXTENSION_DIRNAME.zxp" -C "$EXTENSION_HOMEDIR" . -e "${EXTENSION_HOMEDIR}.debug" .debug
 	mv "$EXTENSION_DIRNAME.zxp" "$EXTENSION_DIRNAME.$EXTENSION_VERSION.debug.zxp"
 else
 	java -jar "$devtoolsDir/signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "$buildSettingsDir/$certfile" -storepass "$password" -tsa $timestampServer "$EXTENSION_DIRNAME.zxp" -C "$EXTENSION_HOMEDIR" .
@@ -126,3 +122,5 @@ else
 fi
 
 rm -rf "$EXTENSION_HOMEDIR"
+
+popd > /dev/null
