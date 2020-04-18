@@ -33,9 +33,10 @@ HELP_EXTENSION_ID="A unique identifier for the panel within the extension. It is
 EXTENSION_MENUNAME="Rorohiko CEP Sparker"
 HELP_EXTENSION_MENUNAME="Menu item used to activate the panel from the Adobe application"
 
-TARGETAPP="IDSN"
-HELP_TARGETAPP="4-letter code identifying the target Adobe application. MULTIPLE = all"
-SELECT_TARGETAPP="IDSN,PHSP,AICY,ILST,PPRO,PRLD,AEFT,FLPR,AUDT,DRWV,KBRG,MULTIPLE"
+TARGET_APP="InDesign"
+HELP_TARGET_APP="The target Adobe application. See setTarget command file for 'Any' defaults."
+# For now, I've only tested InDesign and Illustrator. 
+SELECT_TARGET_APP="Any,InDesign,Illustrator,InCopy,Photoshop,Premiere Pro,After Effects,Dreamweaver,Prelude,Audition,Bridge"
 
 SHORTCODE="SPRK"
 HELP_SHORTCODE="Some variable name for global object used to store js/jsx globals. Helps avoiding variable name clashes."

@@ -2,7 +2,7 @@
 <ExtensionList>
     <Extension Id="$$EXTENSION_ID$$">
         <HostList>          
-$if "$$TARGETAPP$$" == "MULTIPLE"
+$if "$$TARGET_APP$$" == "Any"
 		<!-- 
 			Enable and change as needed 
 		-->
@@ -21,11 +21,11 @@ $if "$$TARGETAPP$$" == "MULTIPLE"
 			<Host Name="DRWV" Port="8896" />
 			<Host Name="KBRG" Port="8897" />
 		-->
-$elif "$$TARGETAPP$$" == "PHSP"	
+$elif "$$TARGET_APP$$" == "Photoshop"	
             <Host Name="PHSP" Port="$$DEBUGPORT$$" /> 
             <Host Name="PHXS" Port="$$DEBUGPORT$$" /> 
 $else	
-            <Host Name="$$TARGETAPP$$" Port="$$DEBUGPORT$$" /> 
+            <Host Name="$$TARGET_APP_CODE$$" Port="$$DEBUGPORT$$" /> 
 $endif
  		</HostList>
     </Extension>

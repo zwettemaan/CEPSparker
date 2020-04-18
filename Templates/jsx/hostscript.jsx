@@ -1,10 +1,7 @@
-$if "$$TARGETAPP$$" == "IDSN"
+$if "$$TARGET_APP$$" == "InDesign"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
-$if "$$TARGETAPP$$" == "KBRG"
-//@targetengine $$EXTENSION_ID$$_Engine_Id
-$endif
-$if "$$TARGETAPP$$" == "MULTIPLE"
+$if "$$TARGET_APP$$" == "Bridge"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
 

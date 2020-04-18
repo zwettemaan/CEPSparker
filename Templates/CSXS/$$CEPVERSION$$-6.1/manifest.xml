@@ -10,7 +10,7 @@
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
-$if "$$TARGETAPP$$" == "MULTIPLE"
+$if "$$TARGET_APP$$" == "Any"
 			<Host Name="IDSN" Version="[11,99)" />
 			<Host Name="AICY" Version="[11,99)" />
 			<Host Name="PHSP" Version="[16,99)" />
@@ -23,36 +23,36 @@ $if "$$TARGETAPP$$" == "MULTIPLE"
 			<Host Name="DRWV" Version="[16,99)" />
 			<Host Name="KBRG" Version="[7.0,99)" />
 $endif
-$if "$$TARGETAPP$$" == "IDSN"
-			<Host Name="$$TARGETAPP$$" Version="[11,99)" />
+$if "$$TARGET_APP_CODE$$" == "IDSN"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "AICY"
-			<Host Name="$$TARGETAPP$$" Version="[11,99)" />
+$if "$$TARGET_APP_CODE$$" == "AICY"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "PHSP"
-			<Host Name="$$TARGETAPP$$" Version="[16,99)" />
+$if "$$TARGET_APP_CODE$$" == "PHSP"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
 			<Host Name="PHXS" Version="[16,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "ILST"
-			<Host Name="$$TARGETAPP$$" Version="[19,99)" />
+$if "$$TARGET_APP_CODE$$" == "ILST"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[19,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "PPRO"
-			<Host Name="$$TARGETAPP$$" Version="[9,99)" />
+$if "$$TARGET_APP_CODE$$" == "PPRO"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[9,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "AEFT"
-			<Host Name="$$TARGETAPP$$" Version="[13.5,99)" />
+$if "$$TARGET_APP_CODE$$" == "AEFT"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[13.5,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "PRLD"
-			<Host Name="$$TARGETAPP$$" Version="[2,99)" />
+$if "$$TARGET_APP_CODE$$" == "PRLD"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[2,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "FLPR"
-			<Host Name="$$TARGETAPP$$" Version="[13,99)" />
+$if "$$TARGET_APP_CODE$$" == "FLPR"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[13,99)" />
 $endif			
-$if "$$TARGETAPP$$" == "DRWV"
-			<Host Name="$$TARGETAPP$$" Version="[16,99)" />
+$if "$$TARGET_APP_CODE$$" == "DRWV"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
 $endif		
-$if "$$TARGETAPP$$" == "KBRG"
-			<Host Name="$$TARGETAPP$$" Version="[7.0,99)" />
+$if "$$TARGET_APP_CODE$$" == "KBRG"
+			<Host Name="$$TARGET_APP_CODE$$" Version="[7.0,99)" />
 $endif			
 		</HostList>
 		<LocaleList>
@@ -79,7 +79,7 @@ $endif
 					<AutoVisible>true</AutoVisible>
 				</Lifecycle>
 				<UI>
-$if "$$TARGETAPP$$" == "KBRG"
+$if "$$TARGET_APP_CODE$$" == "KBRG"
 					<Type>ModalDialog</Type>
 $else
 					<Type>$$UI_TYPE$$</Type>
