@@ -1,0 +1,25 @@
+﻿{
+	"defaultForAny": "InDesign",
+	"InDesign":	{
+		"TARGET_APP_CODE": "IDSN",
+		"TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe InDesign/Version $$TARGET_INDESIGN_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
+		"TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\InDesign\\Version $$TARGET_INDESIGN_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
+		"TARGET_CC_VERSION": {
+			"Any": "15.0",
+			"2020": "15.0",
+			"CC 2019": "14.0",
+			"CC 2018": "13.0"
+		}
+	},
+	"Illustrator": {
+		"TARGET_APP_CODE": "ILST",
+		"TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/Presets.localized/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/",
+		"TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe Illustrator $$TARGET_CC_VERSION$$\\Presets\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\",
+		"TARGET_CC_VERSION": {
+			"Any": "24.0",
+			"2020": "24.0",
+			"CC 2019": "23.0",
+			"CC 2018": "22.0"
+		}
+	}
+}
