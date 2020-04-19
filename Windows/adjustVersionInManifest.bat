@@ -11,8 +11,10 @@ POPD
 PUSHD "%projectHomeDir%"
 
 IF NOT EXIST BuildSettings\ExtensionVersion.txt (
+	ECHO.
     ECHO Error: This CEPSparker folder has not been initialized. Make
-    ECHO sure to run the CEPSparkerConfig.exe command first. Aborting.
+    ECHO sure to run the SparkerConfig.exe command first. Aborting.
+	ECHO.
     POPD
     EXIT /B
 )
@@ -20,7 +22,9 @@ IF NOT EXIST BuildSettings\ExtensionVersion.txt (
 SET /p EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
 
 IF "%EXTENSION_VERSION%" == "" (
+	ECHO.
     ECHO Error: Cannot determine extension version number. Aborting.
+	ECHO.
     POPD
     EXIT /B
 )

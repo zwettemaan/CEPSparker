@@ -12,16 +12,20 @@ POPD
 PUSHD "%projectHomeDir%"
 
 IF NOT EXIST "%buildSettingsDir%certinfo.bat" (
+    ECHO.
     ECHO Error: certinfo.bat not found. 
     ECHO Probably this CEPSparker folder has not been initialized. Make
-    ECHO sure to run the CEPSparkerConfig.exe command first. Aborting.
+    ECHO sure to run the SparkerConfig.exe command first. Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
 
 IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
+    ECHO.
     ECHO Error: ZXPSignCmd.exe not found. 
     ECHO Use the downloadZXPSignCmd.bat script to download it. Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
@@ -29,7 +33,9 @@ IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
 CALL "%buildSettingsDir%certinfo.bat"
 
 IF EXIST "%buildSettingsDir%\%certfile%" (
+    ECHO.
     ECHO Error: Certificate file already exists. Aborting. 
+    ECHO.
     POPD
     EXIT /B
 )

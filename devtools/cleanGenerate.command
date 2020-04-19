@@ -8,10 +8,10 @@ cd $devtoolsDir
 export devtoolsDir=`pwd`
 export projectHomeDir=`dirname "$devtoolsDir"`
 
-echo "*******************************************"
-echo "***WARNING WARNING WARNING***"
+echo ""
+echo "*** WARNING WARNING WARNING  ***"
+echo ""
 echo "This will irrevokably delete all generated files."
-echo "*******************************************"
 echo ""
 echo "Type 'YES' at the prompt only if you're really sure"
 echo "you want to do this."
@@ -36,7 +36,5 @@ if [ "$reply" == "YES" ]; then
   rm -rf LocalLinks
   rm -rf SampleImageServer
   rm -rf shared_js_jsx
-  rm -rf ToolSources/CEPSparkerConfig/Builds*
-  rm -rf ToolSources/CEPSparkerConfig/.CEPSparkerConfig.xojo_uistate
   
 fi

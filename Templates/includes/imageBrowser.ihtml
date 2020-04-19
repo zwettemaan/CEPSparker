@@ -4,5 +4,5 @@ $if $$CEPVERSION$$ >= 7.0
 $else
 		<p>You need to generate a panel with CEP version 7.0 or higher for this sample code to work.</p>
 		<p>Run devtools/cleanGenerate.</p>
-		<p>Then re-run CEPSparkerConfig.</p>
+		<p>Then re-run SparkerConfig.</p>
 $endif

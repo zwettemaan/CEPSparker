@@ -36,8 +36,10 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.7.0_80)
 export JAVA_VERSION=`java -version 2>&1 | head -n 1 | sed -E -e "s/^[^\"]*\"|\"$//g"`
 if [ "$JAVA_VERSION" != "1.7.0_80" ]; then
 
+	echo ""
 	echo "Need version 1.7.0_80 of Java runtime installed"
 	echo "Visit https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html"
+	echo ""
 	exit
 
 fi
@@ -50,14 +52,18 @@ export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools"
 
 if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
 
+	echo ""
 	echo "This is an unconfigured CEPSparker directory. Nothing to build."
+	echo ""
 	exit
 
 fi
 
 if [ ! -f "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" ]; then
 
+	echo ""
 	echo "Need to download ucf.jar first. See ${SPRK_DEV_TOOLS_DIR}downloadUcfJar.command script"
+	echo ""
 	exit
 
 fi	
@@ -66,21 +72,27 @@ fi
 
 if [ ! -f "${BUILD_SETTINGS_DIR}${certfile}" ]; then
 
+	echo ""
 	echo "Need to provide a certificate file, or create a self-signed one first. See ${SPRK_DEV_TOOLS_DIR}makeSelfSignedCert.command"
+	echo ""
 	exit
 
 fi
 
 if [ "$EXTENSION_DIRNAME" == "" ]; then
 
+	echo ""
 	echo "Cannot determine directory name for extension. "
+	echo ""
 	exit
 
 fi
 
 if [ "$EXTENSION_VERSION" == "" ]; then
 
+	echo ""
 	echo "Cannot determine version for extension."
+	echo ""
 	exit
 
 fi

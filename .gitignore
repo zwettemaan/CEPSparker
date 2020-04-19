@@ -1,7 +1,4 @@
 .DS_Store
-ToolSources/CEPSparkerConfig/Builds*
-ToolSources/CEPSparkerConfig/*.xojo_uistate
-ToolSources/CEPSparkerConfig/CEPSparkerConfig.debug.app
 /build
 /debug
 /css

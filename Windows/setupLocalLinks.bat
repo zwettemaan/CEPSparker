@@ -17,8 +17,10 @@ NET SESSION >NUL 2>&1
 
 IF NOT %errorLevel% == 0 (
 
+	ECHO.
     ECHO Error: this script must be run from a command line shell
     ECHO with administrative privileges. Aborting.
+	ECHO.
     POPD
     EXIT /B
 )
@@ -29,7 +31,9 @@ REM slate, delete LocalLinks before running this script
 REM
 
 IF EXIST LocalLinks (
+	ECHO.
     ECHO Warning: LocalLinks directory already exists. Aborting.
+	ECHO.
     POPD
     EXIT /B
 ) 

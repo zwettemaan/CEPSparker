@@ -11,11 +11,11 @@ POPD
 
 PUSHD "%projectHomeDir%"
 
-ECHO "*******************************************"
-ECHO "***WARNING WARNING WARNING***"
+ECHO.
+ECHO "***  WARNING WARNING WARNING  ***"
+ECHO.
 ECHO "This will irrevokably delete all generated files."
-ECHO "*******************************************"
-ECHO ""
+ECHO.
 ECHO "Type 'YES' at the prompt only if you're really sure"
 ECHO "you want to do this."
 

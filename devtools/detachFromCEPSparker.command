@@ -16,21 +16,22 @@ cd "$projectHomeDir"
 #
 if [ ! -d "./BuildSettings" ]; then
 
-  echo "*******************************************"
+  echo ""
   echo "This is an unconfigured CEPSparker project."
-  echo "Leaving this project untouched."
   echo "Make sure to read the documentation and then run "
-  echo "CEPSparkerConfig as instructed."
-  echo "*******************************************"
+  echo "SparkerConfig as instructed."
+  echo ""
+  echo "Aborting."
+  echo ""
 
 else
 
-  echo "*******************************************"
-  echo "***WARNING WARNING WARNING***"
+  echo ""
+  echo "***  WARNING WARNING WARNING  ***"
+  echo ""
   echo "This will irrevokably delete all templates files and"
   echo "CEPSparker code generation software, which detaches this"
   echo "project from CEPSparker and the CEPSparker git repo"
-  echo "*******************************************"
   echo ""
   echo "Type 'YES' at the prompt only if you're really sure you want to do this."
 
@@ -46,12 +47,11 @@ else
     rm -f $devtoolsDir/detachFromCEPSparker.command
     rm -f $devtoolsDir/cleanGenerate.command
     rm -rf Templates
-    rm -rf ToolSources/CEPSparkerConfig
     rm -f Mac/initialSetupConfigApp.command
-    rm -rf Mac/CEPSparkerConfig.app
+    rm -rf Mac/SparkerConfig.app
     rm -rf "Mac/ Do not forget to de-quarantine!.txt"
-    rm -f Windows/CEPSparkerConfig.exe
-    rm -rf Windows/CEPSparkerConfig\ Libs
+    rm -f Windows/SparkerConfig.exe
+    rm -rf Windows/SparkerConfig\ Libs
     rm -rf "Windows/ Run CMD with administrative permissions!.txt"
 
   fi

@@ -20,14 +20,18 @@ export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools"
 
 if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
 
+	echo ""
 	echo "This is an unconfigured CEPSparker directory. Nothing to build."
+	echo ""
 	exit
 
 fi
 
 if [ ! -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" ]; then
 
+	echo ""
 	echo "Need to download ZXPSignCmd first. See ${SPRK_DEV_TOOLS_DIR}downloadZXPSignCmd.command script"
+	echo ""
 	exit
 
 fi	
@@ -36,21 +40,27 @@ fi
 
 if [ ! -f "${BUILD_SETTINGS_DIR}${certfile}" ]; then
 
+	echo ""
 	echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
+	echo ""
 	exit
 
 fi
 
 if [ "$EXTENSION_DIRNAME" == "" ]; then
 
+	echo ""
 	echo "Cannot determine directory name for extension."
+	echo ""
 	exit
 
 fi
 
 if [ "$EXTENSION_VERSION" == "" ]; then
 
+	echo ""
 	echo "Cannot determine version for extension."
+	echo ""
 	exit
 
 fi

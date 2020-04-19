@@ -15,4 +15,6 @@ cd ../devtools
 
 xattr -dr com.apple.quarantine *.command
 
+echo ""
 echo '*.command scripts and SparkerConfig.app are now de-quarantined.'
+echo ""

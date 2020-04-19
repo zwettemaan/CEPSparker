@@ -1,7 +1,7 @@
 SPARKER_PROJECT_NAME="CEP Sparker"
 
 #
-# The values below are the default shown when you run the CEPSparkerConfig app
+# The values below are the default shown when you run the SparkerConfig app
 # This app will read the templates, find the placeholder strings in them, and 
 # will use search-and-replace to create the actual files needed for the project
 #

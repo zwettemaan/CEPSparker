@@ -27,7 +27,9 @@ cd "$ZXP_DIR"
 export ZXP_DIR=`pwd`/
 
 if [ -e "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME" ]; then
+	echo ""
 	echo "Extension already installed"
+	echo ""
 else
 	mkdir "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME"
 	cd "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME"

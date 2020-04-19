@@ -24,15 +24,19 @@ REM Check whether we have administrative permissions
 NET SESSION >NUL 2>&1
 
 IF NOT %errorLevel% == 0 (
+    ECHO.
     ECHO Error: this script must be run from a command line shell
     ECHO with administrative privileges. Aborting.
+    ECHO.
     POPD
     EXIT /B
 ) 
 
 IF NOT EXIST BuildSettings\ExtensionDirName.txt (
+    ECHO.
     ECHO Error: This CEPSparker folder has not been initialized. Make
-    ECHO sure to run the CEPSparkerConfig.exe command first. Aborting.
+    ECHO sure to run the SparkerConfig.exe command first. Aborting.
+    ECHO.
     POPD
     EXIT /B
 ) 
@@ -42,8 +46,10 @@ CALL "%scriptDir%clean.bat"
 SET /P EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
 
 IF "%EXTENSION_DIRNAME%" == "" (
+    ECHO.
     ECHO Error: Cannot determine the directory name for this
     ECHO extension. Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
@@ -51,25 +57,31 @@ IF "%EXTENSION_DIRNAME%" == "" (
 SET /P EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
 
 IF "%EXTENSION_VERSION%" == "" (
+    ECHO.
     ECHO Error: Cannot determine the version for this
     ECHO extension. Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
 
 IF NOT EXIST "%buildSettingsDir%certinfo.bat" (
+    ECHO.
     ECHO Error: certinfo.bat not found. 
     ECHO Probably this CEPSparker folder has not been initialized. Make
-    ECHO sure to run the Windows\CEPSparkerConfig.exe command first.
+    ECHO sure to run the Windows\SparkerConfig.exe command first.
     ECHO Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
 
 IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
+    ECHO.
     ECHO Error: ZXPSignCmd.exe not found. 
     ECHO Use the devtools\downloadZXPSignCmd.bat script to download it. 
     ECHO Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
@@ -78,11 +90,13 @@ CALL "%buildSettingsDir%certinfo.bat"
 
 IF NOT EXIST "%buildSettingsDir%\%certfile%" (
 
+    ECHO.
     ECHO Error: certificate file
     ECHO   %buildSettingsDir%\%certfile%
     ECHO not found.
     ECHO Need to provide a certificate file, or create a self-signed one first. See devtools\makeSelfSignedCert.bat
     ECHO Aborting.
+    ECHO.
     POPD
     EXIT /B
 )

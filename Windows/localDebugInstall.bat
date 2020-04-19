@@ -18,15 +18,19 @@ REM Check whether we have administrative permissions
 NET SESSION >NUL 2>&1
 
 IF NOT %errorLevel% == 0 (
+    ECHO.
     ECHO Error: this script must be run from a command line shell
     ECHO with administrative privileges. Aborting.
+    ECHO.
     POPD
     EXIT /B
 ) 
 
 IF NOT EXIST BuildSettings\ExtensionDirName.txt (
+    ECHO.
     ECHO Error: This CEPSparker folder has not been initialized. Make
-    ECHO sure to run the CEPSparkerConfig.exe command first. Aborting.
+    ECHO sure to run the SparkerConfig.exe command first. Aborting.
+    ECHO.
     POPD
     EXIT /B
 ) 
@@ -34,8 +38,10 @@ IF NOT EXIST BuildSettings\ExtensionDirName.txt (
 SET /P EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
 
 IF "%EXTENSION_DIRNAME%" == "" (
+    ECHO.
     ECHO Error: Cannot determine the directory name for this
     ECHO extension. Aborting.
+    ECHO.
     POPD
     EXIT /B
 )
