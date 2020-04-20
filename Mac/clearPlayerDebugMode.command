@@ -19,3 +19,7 @@ defaults write com.adobe.CSXS.9.plist LogLevel 1
 # Force Mac OS to re-read the PLIST file
 #
 killall -u `whoami` cfprefsd
+
+echo ""
+echo "Player Debug mode has been cleared"
+echo ""

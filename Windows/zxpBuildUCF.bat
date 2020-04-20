@@ -54,9 +54,9 @@ IF NOT EXIST BuildSettings\ExtensionDirName.txt (
 
 CALL "%scriptDir%clean.bat"
 
-SET /P EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
+SET /P TARGET_DIRNAME=< BuildSettings\ExtensionDirName.txt
 
-IF "%EXTENSION_DIRNAME%" == "" (
+IF "%TARGET_DIRNAME%" == "" (
     ECHO.
     ECHO Error: Cannot determine the directory name for this
     ECHO extension. Aborting.
@@ -65,9 +65,9 @@ IF "%EXTENSION_DIRNAME%" == "" (
     EXIT /B
 )
 
-SET /P EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
+SET /P PROJECT_VERSION=< BuildSettings\ExtensionVersion.txt
 
-IF "%EXTENSION_VERSION%" == "" (
+IF "%PROJECT_VERSION%" == "" (
     ECHO.
     ECHO Error: Cannot determine the version for this
     ECHO extension. Aborting.
@@ -116,7 +116,7 @@ IF NOT EXIST "%buildDir%" (
     MKDIR "%buildDir%"
 )
 
-SET EXTENSION_HOMEDIR=%buildDir%%EXTENSION_DIRNAME%\
+SET EXTENSION_HOMEDIR=%buildDir%%TARGET_DIRNAME%\
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"
@@ -148,14 +148,14 @@ SET SH83_EXTENSION_BUILDIR=%SHORTPATH%
 
 CD "%SH83_EXTENSION_BUILDIR%"
 
-SET /p EXTENSION_VERSION=< ..\BuildSettings\ExtensionVersion.txt
+SET /p PROJECT_VERSION=< ..\BuildSettings\ExtensionVersion.txt
 
 IF "%1" == "debug" (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . -e "%EXTENSION_DIRNAME%\.debug_precursor" .debug
-    REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.debug.zxp"
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . -e "%TARGET_DIRNAME%\.debug_precursor" .debug
+    REN "%TARGET_DIRNAME%.zxp" "%TARGET_DIRNAME%.%PROJECT_VERSION%.debug.zxp"
 ) ELSE (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%EXTENSION_DIRNAME%.zxp" -C "%EXTENSION_DIRNAME%" . 
-    REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.zxp"
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . 
+    REN "%TARGET_DIRNAME%.zxp" "%TARGET_DIRNAME%.%PROJECT_VERSION%.zxp"
 )
 
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1

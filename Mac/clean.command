@@ -25,3 +25,7 @@ rm -rf "${PROJECT_ROOT_DIR}LocalLinks"
 rm -rf "${PROJECT_ROOT_DIR}build"
 
 popd > /dev/null
+
+echo ""
+echo "Project has been set to a clean slate. Built version and local links removed."
+echo ""

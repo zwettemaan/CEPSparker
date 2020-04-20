@@ -13,16 +13,16 @@ PUSHD "%projectHomeDir%"
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 
-SET EXTENSION_DIRNAME=
+SET TARGET_DIRNAME=
 IF EXIST BuildSettings\ExtensionDirName.txt (
-    SET /p EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
+    SET /p TARGET_DIRNAME=< BuildSettings\ExtensionDirName.txt
 )   
 
 SET EXTENSION_HOMEDIR=
-IF "%EXTENSION_DIRNAME%" == "" (
+IF "%TARGET_DIRNAME%" == "" (
     ECHO Empty ExtensionDirName. Won't attempt to remove extension directory.
 ) ELSE (
-    SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%\
+    SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%TARGET_DIRNAME%\
 )
 
 IF NOT "%EXTENSION_HOMEDIR%" == "" (    

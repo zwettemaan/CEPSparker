@@ -13,27 +13,31 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 export PROJECT_ROOT_DIR=`dirname "$SPRK_COMMANDS_DIR"`/
 
+export USER_HOME_DIR=~/
+
 export BUILD_SETTINGS_DIR="${PROJECT_ROOT_DIR}BuildSettings/"
 export BUILD_DIR="${PROJECT_ROOT_DIR}build/"
 
 #
 # Don't even try if the project has not been generated
 #
-if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
+if [ ! -e "${BUILD_SETTINGS_DIR}configSettings.command" ]; then
 
-  echo ""
-  echo "Run the SparkerConfig first - this project has not been configured."
-  echo "Aborting."
-  echo ""
-  exit
+    echo ""
+    echo "Run the SparkerConfig first - this project has not been configured."
+    echo "Aborting."
+    echo ""
 
-fi
+else 
 
-. "$BUILD_SETTINGS_DIR/buildSettings.command"
+	. "$BUILD_SETTINGS_DIR/configSettings.command"
+	. "$BUILD_SETTINGS_DIR/buildSettings.command"
 
-if [ "$EXTENSION_DIRNAME" != "" ]; then
+	if [ "$TARGET_DIRNAME" != "" ]; then
 
-    export EXTENSION_HOMEDIR=~"/Library/Application Support/Adobe/CEP/extensions/$EXTENSION_DIRNAME/"
+	    export EXTENSION_HOMEDIR="${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions/$TARGET_DIRNAME/"
+	    
+	fi
 
 fi
 

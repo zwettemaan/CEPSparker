@@ -43,9 +43,9 @@ IF NOT EXIST BuildSettings\ExtensionDirName.txt (
 
 CALL "%scriptDir%clean.bat"
 
-SET /P EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
+SET /P TARGET_DIRNAME=< BuildSettings\ExtensionDirName.txt
 
-IF "%EXTENSION_DIRNAME%" == "" (
+IF "%TARGET_DIRNAME%" == "" (
     ECHO.
     ECHO Error: Cannot determine the directory name for this
     ECHO extension. Aborting.
@@ -54,9 +54,9 @@ IF "%EXTENSION_DIRNAME%" == "" (
     EXIT /B
 )
 
-SET /P EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
+SET /P PROJECT_VERSION=< BuildSettings\ExtensionVersion.txt
 
-IF "%EXTENSION_VERSION%" == "" (
+IF "%PROJECT_VERSION%" == "" (
     ECHO.
     ECHO Error: Cannot determine the version for this
     ECHO extension. Aborting.
@@ -107,7 +107,7 @@ IF NOT EXIST "%buildDir%" (
     MKDIR "%buildDir%"
 )
 
-SET EXTENSION_HOMEDIR=%buildDir%%EXTENSION_DIRNAME%\
+SET EXTENSION_HOMEDIR=%buildDir%%TARGET_DIRNAME%\
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"
@@ -125,12 +125,12 @@ XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOMEDIR%shared_js_jsx\" /y /s 
 
 CD "%buildDir%"
 
-"%devtoolsDir%ZXPSignCmd" -sign "%EXTENSION_DIRNAME%" "%EXTENSION_DIRNAME%.zxp" "%buildSettingsDir%\%certfile%" "%password%" -tsa "%timestampServer%"
+"%devtoolsDir%ZXPSignCmd" -sign "%TARGET_DIRNAME%" "%TARGET_DIRNAME%.zxp" "%buildSettingsDir%\%certfile%" "%password%" -tsa "%timestampServer%"
 
 RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
 
-SET /p EXTENSION_VERSION=< ..\BuildSettings\ExtensionVersion.txt
+SET /p PROJECT_VERSION=< ..\BuildSettings\ExtensionVersion.txt
 
-REN "%EXTENSION_DIRNAME%.zxp" "%EXTENSION_DIRNAME%.%EXTENSION_VERSION%.zxp"
+REN "%TARGET_DIRNAME%.zxp" "%TARGET_DIRNAME%.%PROJECT_VERSION%.zxp"
 
 POPD

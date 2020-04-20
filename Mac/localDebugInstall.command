@@ -14,19 +14,23 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 if [ "$EXTENSION_HOMEDIR" != "" ]; then
 
-	"{$SPRK_COMMANDS_DIR}setPlayerDebugMode.command"
-	"{$SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
+	"${SPRK_COMMANDS_DIR}setPlayerDebugMode.command"
+	"${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
 	rm -rf "$EXTENSION_HOMEDIR"
 	mkdir "$EXTENSION_HOMEDIR"
 
-	ln -s "{$SPRK_COMMANDS_DIR}debug" "${EXTENSION_HOMEDIR}.debug"
-	ln -s "{$SPRK_COMMANDS_DIR}css" "${EXTENSION_HOMEDIR}css"
-	ln -s "{$SPRK_COMMANDS_DIR}CSXS" "${EXTENSION_HOMEDIR}CSXS"
-	ln -s "{$SPRK_COMMANDS_DIR}html" "${EXTENSION_HOMEDIR}html"
-	ln -s "{$SPRK_COMMANDS_DIR}js" "${EXTENSION_HOMEDIR}js"
-	ln -s "{$SPRK_COMMANDS_DIR}jsx" "${EXTENSION_HOMEDIR}jsx"
-	ln -s "{$SPRK_COMMANDS_DIR}shared_js_jsx" "${EXTENSION_HOMEDIR}shared_js_jsx"
+	ln -s "${SPRK_COMMANDS_DIR}debug" "${EXTENSION_HOMEDIR}.debug"
+	ln -s "${SPRK_COMMANDS_DIR}css" "${EXTENSION_HOMEDIR}css"
+	ln -s "${SPRK_COMMANDS_DIR}CSXS" "${EXTENSION_HOMEDIR}CSXS"
+	ln -s "${SPRK_COMMANDS_DIR}html" "${EXTENSION_HOMEDIR}html"
+	ln -s "${SPRK_COMMANDS_DIR}js" "${EXTENSION_HOMEDIR}js"
+	ln -s "${SPRK_COMMANDS_DIR}jsx" "${EXTENSION_HOMEDIR}jsx"
+	ln -s "${SPRK_COMMANDS_DIR}shared_js_jsx" "${EXTENSION_HOMEDIR}shared_js_jsx"
+
+	echo ""
+	echo "Symbolic links have been created so this source code will run in the Adobe Creative Cloud apps."
+	echo ""
 	
 fi
 

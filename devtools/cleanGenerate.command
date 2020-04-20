@@ -3,38 +3,59 @@
 # Do not run this unless you're absolutely sure
 #
 
-export devtoolsDir=`dirname "$0"`
-cd $devtoolsDir
-export devtoolsDir=`pwd`
-export projectHomeDir=`dirname "$devtoolsDir"`
+export SPRK_DEV_TOOLS_DIR=`dirname "$0"`
 
-echo ""
-echo "*** WARNING WARNING WARNING  ***"
-echo ""
-echo "This will irrevokably delete all generated files."
-echo ""
-echo "Type 'YES' at the prompt only if you're really sure"
-echo "you want to do this."
+pushd "$SPRK_DEV_TOOLS_DIR" > /dev/null
 
-read reply
+export SPRK_DEV_TOOLS_DIR=`pwd`/
 
-if [ "$reply" == "YES" ]; then
+export PROJECT_ROOT_DIR=`dirname "$SPRK_DEV_TOOLS_DIR"`/
 
-  cd "$projectHomeDir"
-  
-  Mac/clean.command
+export SPRK_COMMANDS_DIR="${PROJECT_ROOT_DIR}Mac/"
 
-  rm -f "$devtoolsDir"/ZXPSignCmd*
-  rm -rf "$devtoolsDir"/signingtoolkit*
-  rm -rf BuildSettings
-  rm -rf debug
-  rm -rf css
-  rm -rf CSXS
-  rm -rf html
-  rm -rf js
-  rm -rf jsx
-  rm -rf LocalLinks
-  rm -rf SampleImageServer
-  rm -rf shared_js_jsx
-  
+#
+# Don't even try if the project has not been generated
+#
+if [ ! -d "${PROJECT_ROOT_DIR}BuildSettings" ]; then
+
+    echo ""
+    echo "This project has not been configured yet - nothing to remove."
+    echo "Aborting."
+    echo ""
+
+else
+
+    echo ""
+    echo "*** WARNING WARNING WARNING  ***"
+    echo ""
+    echo "This will irrevokably delete all generated files."
+    echo ""
+    echo "Type 'YES' at the prompt only if you're really sure"
+    echo "you want to do this."
+
+    read reply
+
+    if [ "$reply" == "YES" ]; then
+
+        cd "$PROJECT_ROOT_DIR"
+        
+        Mac/clean.command
+
+        rm -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd*"
+        rm -rf "${SPRK_DEV_TOOLS_DIR}signingtoolkit*"
+        rm -rf BuildSettings
+        rm -rf debug
+        rm -rf css
+        rm -rf CSXS
+        rm -rf html
+        rm -rf js
+        rm -rf jsx
+        rm -rf LocalLinks
+        rm -rf SampleImageServer
+        rm -rf shared_js_jsx
+      
+    fi
+
 fi
+
+popd > /dev/null

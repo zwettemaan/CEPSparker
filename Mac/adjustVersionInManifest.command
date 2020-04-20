@@ -14,14 +14,18 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 cd "$PROJECT_ROOT_DIR"
 
-if [ "$EXTENSION_VERSION" != "" ]; then
+if [ "$PROJECT_VERSION" != "" ]; then
 
 	#
 	# Update extension version number in manifest
 	#
-	sed -E "s/(<Extension +Id=\"[^\"]*\" +Version=\")([0-9\.]*)(\")/\1$EXTENSION_VERSION\3/" < CSXS/manifest.xml > CSXS/manifest.xml.new
+	sed -E "s/(<Extension +Id=\"[^\"]*\" +Version=\")([0-9\.]*)(\")/\1$PROJECT_VERSION\3/" < CSXS/manifest.xml > CSXS/manifest.xml.new
 
 	mv CSXS/manifest.xml.new CSXS/manifest.xml
+
+	echo ""
+	echo "Extension version in manifest.xml has been updated."
+	echo ""
 
 fi
 

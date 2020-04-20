@@ -35,9 +35,9 @@ IF NOT EXIST BuildSettings\ExtensionDirName.txt (
     EXIT /B
 ) 
 
-SET /P EXTENSION_DIRNAME=< BuildSettings\ExtensionDirName.txt
+SET /P TARGET_DIRNAME=< BuildSettings\ExtensionDirName.txt
 
-IF "%EXTENSION_DIRNAME%" == "" (
+IF "%TARGET_DIRNAME%" == "" (
     ECHO.
     ECHO Error: Cannot determine the directory name for this
     ECHO extension. Aborting.
@@ -46,7 +46,7 @@ IF "%EXTENSION_DIRNAME%" == "" (
     EXIT /B
 )
 
-SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%EXTENSION_DIRNAME%\
+SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%TARGET_DIRNAME%\
 
 CALL "%scriptDir%setPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"

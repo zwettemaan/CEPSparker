@@ -20,13 +20,28 @@ cd "$PROJECT_ROOT_DIR"
 # slate, delete LocalLinks before running this script
 #
 
-if [ ! -d LocalLinks ]; then
+if [ -e LocalLinks ]; then
+
+    echo ""
+    echo "LocalLinks folder already exists."
+    echo "Doing nothing."
+    echo ""
+
+    open LocalLinks
+
+else
 
 	mkdir LocalLinks
 	cd LocalLinks
 	ln -s "/Library/Application Support/Adobe/CEP/extensions" "Extensions_Application"
 	ln -s ~/Library/Logs/CSXS "Adobe_LogFiles"
 	ln -s ~/Library/Application\ Support/Adobe/CEP/extensions "Extensions_User"
+
+    echo ""
+    echo "LocalLinks folder has been created."
+    echo ""
+
+    open .
 
 fi
 

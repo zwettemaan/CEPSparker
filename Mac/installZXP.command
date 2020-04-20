@@ -27,13 +27,22 @@ cd "$ZXP_DIR"
 export ZXP_DIR=`pwd`/
 
 if [ -e "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME" ]; then
+
 	echo ""
 	echo "Extension already installed"
 	echo ""
+
 else
+
 	mkdir "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME"
 	cd "$EXTENSION_HOMEDIR/$ZXP_FOLDER_NAME"
 	unzip "$ZXP_DIR/$ZXP_FILE_NAME"
+
+	echo ""
+	echo "Extension $ZXP_FILE_NAME has been installed. Restart Adobe Creative Cloud app."
+	echo ""
+
 fi
 
 popd > /dev/null
+

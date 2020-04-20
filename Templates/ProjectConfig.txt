@@ -6,11 +6,27 @@ SPARKER_PROJECT_NAME="CEP Sparker"
 # will use search-and-replace to create the actual files needed for the project
 #
 
-# CEPVERSION list of options must match CSXS subdirectory contents
+PROJECT_VERSION="1.0.0"
+HELP_PROJECT_VERSION="Initial version number for the extension"
+IS_BUILDSETTING_PROJECT_VERSION=1
 
 CEPVERSION=4.2
 HELP_CEPVERSION="CEP version to target. Lower versions lack features, but support more Adobe CC versions"
-SELECT_CEPVERSION="4.2,5.2,6.1,7.0,8.0,9.0"
+
+TARGET_APP_CPU_WORD_SIZE="64"
+HELP_TARGET_APP_CPU_WORD_SIZE="CPU word size. Nearly always 64 bit."
+SELECT_TARGET_APP_CPU_WORD_SIZE="64,32"
+IS_ADVANCED_TARGET_APP_CPU_WORD_SIZE=1
+
+TARGET_CC_VERSION="Any"
+HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/includes/appMap.json file to see the 'Any' defaults that will be used."
+SELECT_TARGET_CC_VERSION="Any,2020,CC 2019,CC 2018"
+IS_ADVANCED_TARGET_CC_VERSION=1
+
+TARGET_CC_LANGUAGE_CODE="en_US"
+HELP_TARGET_CC_LANGUAGE_CODE="The target Creative Cloud language code (needed to find the scripts directory). See setTarget command file for 'Any' defaults."
+SELECT_TARGET_CC_LANGUAGE_CODE="en_US,cs_CZ,da_DK,de_DE,es_ES,es_MX,fi_FI,fr_CA,fr_FR,fr_MA,hu_HU,it_IT,ja_JP,ko_KR,nb_NO,nl_NL,pl_PL,pt_BR,ru_RU,sv_SE,tr_TR,uk_UA,zh_CN,zh_TW"
+IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
@@ -20,14 +36,20 @@ ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
 
+TARGET_NAME="CEP Sparker"
+HELP_TARGET_NAME="Human readable extension name (e.g. for use in documentation)."
+
+TARGET_DIRNAME=CEPSparker
+HELP_TARGET_DIRNAME="This is a subfolder name used to store the extension in the local extension folder, and to store preferences in ~/Library/Preferences or %APPDATA%"
+
+PREFS_FILENAME=CEPSparkerPreferences.json
+HELP_PREFS_FILENAME="This is a file name name to store preferences in the preferences subfolder"
+
 EXTENSION_BUNDLEID="com.rorohiko.cepsparker"
 HELP_EXTENSION_BUNDLEID="A unique identifier for the extension. It is recommended to use a reverse domain (DNS) name"
 
 EXTENSION_BUNDLENAME="Rorohiko CEP Sparker"
 HELP_EXTENSION_BUNDLENAME="Descriptive name for the extension"
-
-EXTENSION_VERSION="1.0.0"
-HELP_EXTENSION_VERSION="Initial version number for the extension"
 
 EXTENSION_ID="com.rorohiko.cepsparker.samplepanel"
 HELP_EXTENSION_ID="A unique identifier for the panel within the extension. It is recommended to use a reverse domain (DNS) name"
@@ -45,12 +67,6 @@ HELP_SHORTCODE="Some variable name for global object used to store js/jsx global
 
 DEBUGPORT=8888
 HELP_DEBUGPORT="This is the port to use for debugging with Chrome (e.g. http://localhost:8888)"
-
-EXTENSION_DIRNAME=CEPSparker
-HELP_EXTENSION_DIRNAME="This is a subfolder name used to store the extension in the local extension folder, and to store preferences in ~/Library/Preferences or %APPDATA%"
-
-PREFS_FILENAME=CEPSparkerPreferences.json
-HELP_PREFS_FILENAME="This is a file name name to store preferences in the preferences subfolder"
 
 PANELHEIGHT=600
 HELP_PANELHEIGHT="Panel height in manifest file"

@@ -19,9 +19,9 @@ IF NOT EXIST BuildSettings\ExtensionVersion.txt (
     EXIT /B
 )
 
-SET /p EXTENSION_VERSION=< BuildSettings\ExtensionVersion.txt
+SET /p PROJECT_VERSION=< BuildSettings\ExtensionVersion.txt
 
-IF "%EXTENSION_VERSION%" == "" (
+IF "%PROJECT_VERSION%" == "" (
 	ECHO.
     ECHO Error: Cannot determine extension version number. Aborting.
 	ECHO.
@@ -29,7 +29,7 @@ IF "%EXTENSION_VERSION%" == "" (
     EXIT /B
 )
     
-POWERSHELL -Command "(gc CSXS\manifest.xml) -replace '(<Extension +Id=\"".*?\"" +Version=\"")([0-9\.]*)(\"")', '${1}%EXTENSION_VERSION%${3}' | Out-File CSXS\manifest.xml.new -encoding Utf8"
+POWERSHELL -Command "(gc CSXS\manifest.xml) -replace '(<Extension +Id=\"".*?\"" +Version=\"")([0-9\.]*)(\"")', '${1}%PROJECT_VERSION%${3}' | Out-File CSXS\manifest.xml.new -encoding Utf8"
 
 IF EXIST CSXS\manifest.xml.new (
     DEL CSXS\manifest.xml

@@ -6,7 +6,7 @@
 	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="$$EXTENSION_ID$$" Version="$$EXTENSION_VERSION$$" />
+		<Extension Id="$$EXTENSION_ID$$" Version="$$PROJECT_VERSION$$" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>

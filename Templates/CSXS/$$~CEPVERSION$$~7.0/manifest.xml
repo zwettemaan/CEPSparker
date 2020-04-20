@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest 
 	Version="6.0" 
 	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
@@ -6,60 +6,60 @@
 	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="$$EXTENSION_ID$$" Version="$$EXTENSION_VERSION$$" />
+		<Extension Id="$$EXTENSION_ID$$" Version="$$PROJECT_VERSION$$" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
 $if "$$TARGET_APP$$" == "Any"
-			<Host Name="IDSN" Version="[14,99)" />
-			<Host Name="AICY" Version="[14,99)" />
-			<Host Name="PHSP" Version="[20,99)" />
-			<Host Name="PHXS" Version="[20,99)" />
-			<Host Name="ILST" Version="[23,99)" />
-			<Host Name="PPRO" Version="[13,99)" />
-			<Host Name="AEFT" Version="[16,99)" />
-			<Host Name="PRLD" Version="[8,99)" />
-			<Host Name="FLPR" Version="[15,99)" />
-			<Host Name="DRWV" Version="[19,99)" />
-			<Host Name="KBRG" Version="[9.0,99)" />
+			<Host Name="IDSN" Version="[12,99)" />
+			<Host Name="AICY" Version="[12,99)" />
+			<Host Name="PHSP" Version="[18,99)" />
+			<Host Name="PHXS" Version="[18,99)" />
+			<Host Name="ILST" Version="[21,99)" />
+			<Host Name="PPRO" Version="[11,99)" />
+			<Host Name="AEFT" Version="[14,99)" />
+			<Host Name="PRLD" Version="[6,99)" />
+			<Host Name="FLPR" Version="[13,99)" />
+			<Host Name="DRWV" Version="[17.5,99)" />
+			<Host Name="KBRG" Version="[8.0,99)" />
 $endif
 $if "$$TARGET_APP_CODE$$" == "IDSN"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[14,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[12,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "AICY"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[14,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[12,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "PHSP"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[20,99)" />
-			<Host Name="PHXS" Version="[20,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[18,99)" />
+			<Host Name="PHXS" Version="[18,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "ILST"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[23,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[21,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "PPRO"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[13,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "AEFT"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[14,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "PRLD"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[8,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[6,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "FLPR"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[15,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[13,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "DRWV"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[19,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[17.5,99)" />
 $endif			
 $if "$$TARGET_APP_CODE$$" == "KBRG"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[9.0,99)" />
+			<Host Name="$$TARGET_APP_CODE$$" Version="[8.0,99)" />
 $endif			
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
 		</LocaleList>
 		<RequiredRuntimeList>
-            <RequiredRuntime Name="CSXS" Version="9.0"/> 
+			<RequiredRuntime Name="CSXS" Version="7.0" />
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
