@@ -15,9 +15,9 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 "${SPRK_COMMANDS_DIR}clearPlayerDebugMode.command"
 
-if [ -d "$EXTENSION_HOMEDIR" ]; then
+if [ -d "$EXTENSION_HOME_DIR" ]; then
 
-    rm -rf "$EXTENSION_HOMEDIR"
+    rm -rf "$EXTENSION_HOME_DIR"
 
 fi
 

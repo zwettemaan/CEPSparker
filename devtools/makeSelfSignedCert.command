@@ -1,33 +1,47 @@
-export devtoolsDir=`dirname "$0"`
-cd $devtoolsDir
-export devtoolsDir=`pwd`
-export projectHomeDir=`dirname "$devtoolsDir"`
-export buildSettingsDir="$projectHomeDir/BuildSettings"
 
-if [ ! -f "$buildSettingsDir/certinfo.command" ]; then
+export SPRK_DEV_TOOLS_DIR=`dirname "$0"`/
+
+cd $SPRK_DEV_TOOLS_DIR
+
+export SPRK_DEV_TOOLS_DIR=`pwd`/
+
+export PROJECT_ROOT_DIR=`dirname "$SPRK_DEV_TOOLS_DIR"`/
+
+export BUILD_SETTINGS_DIR="${PROJECT_ROOT_DIR}BuildSettings/"
+
+if [ ! -f "${BUILD_SETTINGS_DIR}certinfo.command" ]; then
 	echo ""
 	echo "certinfo.command not found. Make sure to run Mac/SparkerConfig.app first."
 	echo ""
 	exit
 fi
 
-if [ ! -f "$devtoolsDir/ZXPSignCmd" ]; then
+if [ ! -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" ]; then
 	echo ""
 	echo "ZXPSignCmd not found. Try to run devtools/downloadZXPSignCmd.command"
 	echo ""
 	exit
 fi
 
-cd "$projectHomeDir"
+cd "$PROJECT_ROOT_DIR"
 
-. "$buildSettingsDir/certinfo.command"
+. "${BUILD_SETTINGS_DIR}certinfo.command"
 
-if [ -f "$buildSettingsDir/$certfile" ]; then
+if [ -f "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" ]; then
 	echo ""
 	echo "Certificate file already exists."
 	echo ""
 	exit
 fi
 
-export cmd="\"$devtoolsDir/ZXPSignCmd\" -selfSignedCert \"$countryCode\" \"$stateOrProvince\" \"$organization\" \"$commonName\" \"$password\" \"$buildSettingsDir/$certfile\""
+echo ""
+echo "Using the certificate information from BuildSettings/certinfo.command."
+echo "Edit BuildSettings/certinfo.command before running this script if necessary."
+echo ""
+
+export cmd="\"${SPRK_DEV_TOOLS_DIR}ZXPSignCmd\" -selfSignedCert \"$SPRK_COUNTRY_CODE\" \"$SPRK_STATE_OR_PROVINCE\" \"$SPRK_ORGANIZATION\" \"$SPRK_COMMON_NAME\" \"$SPRK_PASSWORD\" \"${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}\""
 eval $cmd
+
+echo ""
+echo "${BUILD_SETTINGS_DIR}$SPRK_CERTFILE has been generated."
+echo ""

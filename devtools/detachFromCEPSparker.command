@@ -3,18 +3,22 @@
 # so the project becomes stand-alone
 #
 
-export devtoolsDir=`dirname "$0"`
-cd "$devtoolsDir"
+export SPRK_DEV_TOOLS_DIR=`dirname "$0"`
 
-export devtoolsDir=`pwd`
-export projectHomeDir=`dirname "$devtoolsDir"`
+pushd "$SPRK_DEV_TOOLS_DIR" > /dev/null
 
-cd "$projectHomeDir"
+export SPRK_DEV_TOOLS_DIR=`pwd`/
+
+export PROJECT_ROOT_DIR=`dirname "$SPRK_DEV_TOOLS_DIR"`/
+
+export SPRK_COMMANDS_DIR="${PROJECT_ROOT_DIR}Mac/"
+
+pushd "$PROJECT_ROOT_DIR" > /dev/null
 
 #
 # Don't even try if the project has not been generated
 #
-if [ ! -d "./BuildSettings" ]; then
+if [ ! -d "BuildSettings" ]; then
 
   echo ""
   echo "This is an unconfigured CEPSparker project."
@@ -42,10 +46,9 @@ else
     rm -rf .git  
     rm -f .gitignore
     rm -f ReadMe.md
-    rm -f $devtoolsDir/cleanGenerate.bat
-    rm -f $devtoolsDir/cleanGenerate.command
-    rm -f $devtoolsDir/detachFromCEPSparker.command
-    rm -f $devtoolsDir/cleanGenerate.command
+    rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.bat"
+    rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.command"
+    rm -f "${SPRK_DEV_TOOLS_DIR}detachFromCEPSparker.command"
     rm -rf Templates
     rm -f Mac/initialSetupConfigApp.command
     rm -rf Mac/SparkerConfig.app
@@ -57,3 +60,5 @@ else
   fi
 
 fi
+
+popd > /dev/null

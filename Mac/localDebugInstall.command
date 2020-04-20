@@ -12,24 +12,24 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
-if [ "$EXTENSION_HOMEDIR" != "" ]; then
+if [ "$EXTENSION_HOME_DIR" != "" ]; then
 
 	"${SPRK_COMMANDS_DIR}setPlayerDebugMode.command"
 	"${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
-	rm -rf "$EXTENSION_HOMEDIR"
-	mkdir "$EXTENSION_HOMEDIR"
+	rm -rf "$EXTENSION_HOME_DIR"
+	mkdir "$EXTENSION_HOME_DIR"
 
-	ln -s "${SPRK_COMMANDS_DIR}debug" "${EXTENSION_HOMEDIR}.debug"
-	ln -s "${SPRK_COMMANDS_DIR}css" "${EXTENSION_HOMEDIR}css"
-	ln -s "${SPRK_COMMANDS_DIR}CSXS" "${EXTENSION_HOMEDIR}CSXS"
-	ln -s "${SPRK_COMMANDS_DIR}html" "${EXTENSION_HOMEDIR}html"
-	ln -s "${SPRK_COMMANDS_DIR}js" "${EXTENSION_HOMEDIR}js"
-	ln -s "${SPRK_COMMANDS_DIR}jsx" "${EXTENSION_HOMEDIR}jsx"
-	ln -s "${SPRK_COMMANDS_DIR}shared_js_jsx" "${EXTENSION_HOMEDIR}shared_js_jsx"
+	ln -s "${PROJECT_ROOT_DIR}debug"         "${EXTENSION_HOME_DIR}.debug"
+	ln -s "${PROJECT_ROOT_DIR}css"           "${EXTENSION_HOME_DIR}css"
+	ln -s "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_HOME_DIR}CSXS"
+	ln -s "${PROJECT_ROOT_DIR}html"          "${EXTENSION_HOME_DIR}html"
+	ln -s "${PROJECT_ROOT_DIR}js"            "${EXTENSION_HOME_DIR}js"
+	ln -s "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_HOME_DIR}jsx"
+	ln -s "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_HOME_DIR}shared_js_jsx"
 
 	echo ""
-	echo "Symbolic links have been created so this source code will run in the Adobe Creative Cloud apps."
+	echo "Symbolic links have been created so the extension will run in the Adobe Creative Cloud apps."
 	echo ""
 	
 fi

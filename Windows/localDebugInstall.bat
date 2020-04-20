@@ -46,26 +46,26 @@ IF "%TARGET_DIRNAME%" == "" (
     EXIT /B
 )
 
-SET EXTENSION_HOMEDIR=%APPDATA%\Adobe\CEP\extensions\%TARGET_DIRNAME%\
+SET EXTENSION_HOME_DIR=%APPDATA%\Adobe\CEP\extensions\%TARGET_DIRNAME%\
 
 CALL "%scriptDir%setPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"
 
-RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
-MKDIR "%EXTENSION_HOMEDIR%"
+RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
+MKDIR "%EXTENSION_HOME_DIR%"
 
-MKLINK /H "%EXTENSION_HOMEDIR%.debug" "%projectHomeDir%debug"
+MKLINK /H "%EXTENSION_HOME_DIR%.debug" "%projectHomeDir%debug"
 
-MKLINK /J "%EXTENSION_HOMEDIR%css" "%projectHomeDir%css"
-MKLINK /J "%EXTENSION_HOMEDIR%CSXS" "%projectHomeDir%CSXS"
-MKLINK /J "%EXTENSION_HOMEDIR%html" "%projectHomeDir%html"
-MKLINK /J "%EXTENSION_HOMEDIR%js" "%projectHomeDir%js"
-MKLINK /J "%EXTENSION_HOMEDIR%jsx" "%projectHomeDir%jsx"
-MKLINK /J "%EXTENSION_HOMEDIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
+MKLINK /J "%EXTENSION_HOME_DIR%css" "%projectHomeDir%css"
+MKLINK /J "%EXTENSION_HOME_DIR%CSXS" "%projectHomeDir%CSXS"
+MKLINK /J "%EXTENSION_HOME_DIR%html" "%projectHomeDir%html"
+MKLINK /J "%EXTENSION_HOME_DIR%js" "%projectHomeDir%js"
+MKLINK /J "%EXTENSION_HOME_DIR%jsx" "%projectHomeDir%jsx"
+MKLINK /J "%EXTENSION_HOME_DIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
 
 REM Some sample code to refer to if css dir has subdirs.
-REM MKDIR "%EXTENSION_HOMEDIR%css"
-REM ICACLS "%EXTENSION_HOMEDIR%" /grant Everyone:(OI)(CI)F
-REM FOR /F %%f IN ('DIR /b %projectHomeDir%css') DO MKLINK /H %EXTENSION_HOMEDIR%css\%%f %projectHomeDir%css\%%f
+REM MKDIR "%EXTENSION_HOME_DIR%css"
+REM ICACLS "%EXTENSION_HOME_DIR%" /grant Everyone:(OI)(CI)F
+REM FOR /F %%f IN ('DIR /b %projectHomeDir%css') DO MKLINK /H %EXTENSION_HOME_DIR%css\%%f %projectHomeDir%css\%%f
 
 POPD

@@ -1,17 +1,19 @@
 @Echo OFF
 SetLocal EnableDelayedExpansion
 
-SET devToolsDir=%~dp0
+SET SPRK_DEV_TOOLS_DIR=%~dp0
 
-PUSHD "%devToolsDir%.."
-SET projectHomeDir=%cd%\
+PUSHD "%SPRK_DEV_TOOLS_DIR%.."
+
+SET PROJECT_ROOT_DIR=%cd%\
 CD BuildSettings
-SET buildSettingsDir=%cd%\
+SET BUILD_SETTINGS_DIR=%cd%\
+
 POPD
 
-PUSHD "%projectHomeDir%"
+PUSHD "%PROJECT_ROOT_DIR%"
 
-IF NOT EXIST "%buildSettingsDir%certinfo.bat" (
+IF NOT EXIST "%BUILD_SETTINGS_DIR%certinfo.bat" (
     ECHO.
     ECHO Error: certinfo.bat not found. 
     ECHO Probably this CEPSparker folder has not been initialized. Make
@@ -21,7 +23,7 @@ IF NOT EXIST "%buildSettingsDir%certinfo.bat" (
     EXIT /B
 )
 
-IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
+IF NOT EXIST "%SPRK_DEV_TOOLS_DIR%ZXPSignCmd.exe" (
     ECHO.
     ECHO Error: ZXPSignCmd.exe not found. 
     ECHO Use the downloadZXPSignCmd.bat script to download it. Aborting.
@@ -30,9 +32,9 @@ IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
     EXIT /B
 )
 
-CALL "%buildSettingsDir%certinfo.bat"
+CALL "%BUILD_SETTINGS_DIR%certinfo.bat"
 
-IF EXIST "%buildSettingsDir%\%certfile%" (
+IF EXIST "%BUILD_SETTINGS_DIR%%SPRK_CERTFILE%" (
     ECHO.
     ECHO Error: Certificate file already exists. Aborting. 
     ECHO.
@@ -40,6 +42,15 @@ IF EXIST "%buildSettingsDir%\%certfile%" (
     EXIT /B
 )
 
-"%devToolsDir%\ZXPSignCmd.exe" -selfSignedCert "%countryCode%" "%stateOrProvince%" "%organization%" "%commonName%" "%password%" "%buildSettingsDir%\%certfile%"
+ECHO.
+ECHO Using the certificate information from BuildSettings/certinfo.command.
+ECHO Edit BuildSettings/certinfo.command before running this script if necessary.
+ECHO.
+
+"%SPRK_DEV_TOOLS_DIR%ZXPSignCmd.exe" -selfSignedCert "%SPRK_COUNTRY_CODE%" "%SPRK_STATE_OR_PROVINCE%" "%SPRK_ORGANIZATION%" "%SPRK_COMMON_NAME%" "%SPRK_PASSWORD%" "%BUILD_SETTINGS_DIR%%SPRK_CERTFILE%"
+
+ECHO.
+ECHO %BUILD_SETTINGS_DIR%%SPRK_CERTFILE% has been generated.
+ECHO.
 
 POPD

@@ -88,11 +88,11 @@ IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
 
 CALL "%buildSettingsDir%certinfo.bat"
 
-IF NOT EXIST "%buildSettingsDir%\%certfile%" (
+IF NOT EXIST "%buildSettingsDir%\%SPRK_CERTFILE%" (
 
     ECHO.
     ECHO Error: certificate file
-    ECHO   %buildSettingsDir%\%certfile%
+    ECHO   %buildSettingsDir%\%SPRK_CERTFILE%
     ECHO not found.
     ECHO Need to provide a certificate file, or create a self-signed one first. See devtools\makeSelfSignedCert.bat
     ECHO Aborting.
@@ -107,27 +107,27 @@ IF NOT EXIST "%buildDir%" (
     MKDIR "%buildDir%"
 )
 
-SET EXTENSION_HOMEDIR=%buildDir%%TARGET_DIRNAME%\
+SET EXTENSION_HOME_DIR=%buildDir%%TARGET_DIRNAME%\
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"
 
-RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
+RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
 
-MKDIR "%EXTENSION_HOMEDIR%"
+MKDIR "%EXTENSION_HOME_DIR%"
 
-XCOPY "%projectHomeDir%css" "%EXTENSION_HOMEDIR%css\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%CSXS" "%EXTENSION_HOMEDIR%CSXS\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%html" "%EXTENSION_HOMEDIR%html\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%js" "%EXTENSION_HOMEDIR%js\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOMEDIR%jsx\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOMEDIR%shared_js_jsx\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%css" "%EXTENSION_HOME_DIR%css\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%CSXS" "%EXTENSION_HOME_DIR%CSXS\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%html" "%EXTENSION_HOME_DIR%html\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%js" "%EXTENSION_HOME_DIR%js\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOME_DIR%jsx\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOME_DIR%shared_js_jsx\" /y /s /e >NUL 2>&1
 
 CD "%buildDir%"
 
-"%devtoolsDir%ZXPSignCmd" -sign "%TARGET_DIRNAME%" "%TARGET_DIRNAME%.zxp" "%buildSettingsDir%\%certfile%" "%password%" -tsa "%timestampServer%"
+"%devtoolsDir%ZXPSignCmd" -sign "%TARGET_DIRNAME%" "%TARGET_DIRNAME%.zxp" "%buildSettingsDir%\%SPRK_CERTFILE%" "%SPRK_PASSWORD%" -tsa "%timestampServer%"
 
-RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
+RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
 
 SET /p PROJECT_VERSION=< ..\BuildSettings\ExtensionVersion.txt
 

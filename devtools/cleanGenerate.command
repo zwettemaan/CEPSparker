@@ -54,6 +54,10 @@ else
         rm -rf SampleImageServer
         rm -rf shared_js_jsx
       
+        echo ""
+        echo "This project has been reset to an unconfigured, blank state."
+        echo ""
+
     fi
 
 fi

@@ -3,8 +3,8 @@ SetLocal EnableDelayedExpansion
 
 SET URL=http://download.macromedia.com/pub/developer/creativesuite/extension-builder/signingtoolkit.zip
 
-SET devToolsDir=%~dp0
-PUSHD "%devToolsDir%"
+SET SPRK_DEV_TOOLS_DIR=%~dp0
+PUSHD "%SPRK_DEV_TOOLS_DIR%"
 
 RMDIR signingtoolkit /s /q > nul 2>&1
 MKDIR signingtoolkit

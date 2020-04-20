@@ -30,12 +30,13 @@ if [ ! -e "${BUILD_SETTINGS_DIR}configSettings.command" ]; then
 
 else 
 
-	. "$BUILD_SETTINGS_DIR/configSettings.command"
-	. "$BUILD_SETTINGS_DIR/buildSettings.command"
+	. "${BUILD_SETTINGS_DIR}configSettings.command"
+	. "${BUILD_SETTINGS_DIR}buildSettings.command"
 
 	if [ "$TARGET_DIRNAME" != "" ]; then
 
-	    export EXTENSION_HOMEDIR="${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions/$TARGET_DIRNAME/"
+	    export EXTENSION_DIR="${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions/"
+	    export EXTENSION_HOME_DIR="${EXTENSION_DIR}${TARGET_DIRNAME}/"
 	    
 	fi
 

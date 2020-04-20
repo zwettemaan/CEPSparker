@@ -99,10 +99,10 @@ IF NOT EXIST "%devToolsDir%ZXPSignCmd.exe" (
 
 CALL "%buildSettingsDir%certinfo.bat"
 
-IF NOT EXIST "%buildSettingsDir%\%certfile%" (
+IF NOT EXIST "%buildSettingsDir%\%SPRK_CERTFILE%" (
 
     ECHO Error: certificate file
-    ECHO   %buildSettingsDir%\%certfile%
+    ECHO   %buildSettingsDir%\%SPRK_CERTFILE%
     ECHO not found.
     ECHO Need to provide a certificate file, or create a self-signed one first. See devtools\makeSelfSignedCert.bat
     ECHO Aborting.
@@ -116,23 +116,23 @@ IF NOT EXIST "%buildDir%" (
     MKDIR "%buildDir%"
 )
 
-SET EXTENSION_HOMEDIR=%buildDir%%TARGET_DIRNAME%\
+SET EXTENSION_HOME_DIR=%buildDir%%TARGET_DIRNAME%\
 
 CALL "%scriptDir%clearPlayerDebugMode.bat"
 CALL "%scriptDir%adjustVersionInManifest.bat"
 
-RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
+RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
 
-MKDIR "%EXTENSION_HOMEDIR%"
+MKDIR "%EXTENSION_HOME_DIR%"
 
-XCOPY "%projectHomeDir%css" "%EXTENSION_HOMEDIR%css\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%CSXS" "%EXTENSION_HOMEDIR%CSXS\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%html" "%EXTENSION_HOMEDIR%html\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%js" "%EXTENSION_HOMEDIR%js\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOMEDIR%jsx\" /y /s /e >NUL 2>&1
-XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOMEDIR%shared_js_jsx\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%css" "%EXTENSION_HOME_DIR%css\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%CSXS" "%EXTENSION_HOME_DIR%CSXS\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%html" "%EXTENSION_HOME_DIR%html\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%js" "%EXTENSION_HOME_DIR%js\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%jsx" "%EXTENSION_HOME_DIR%jsx\" /y /s /e >NUL 2>&1
+XCOPY "%projectHomeDir%shared_js_jsx" "%EXTENSION_HOME_DIR%shared_js_jsx\" /y /s /e >NUL 2>&1
 IF "%1" == "debug" (
-    COPY "%projectHomeDir%debug" "%EXTENSION_HOMEDIR%.debug_precursor" >NUL 2>&1
+    COPY "%projectHomeDir%debug" "%EXTENSION_HOME_DIR%.debug_precursor" >NUL 2>&1
 )
 
 REM UCF.JAR cannot handle spaces in file path. Convert them to 8.3 file paths
@@ -140,7 +140,7 @@ REM UCF.JAR cannot handle spaces in file path. Convert them to 8.3 file paths
 CALL "%scriptDir%shortPath.bat" "%devtoolsDir%signingtoolkit\ucf.jar"
 SET SH83_UCFJAR=%SHORTPATH%
 
-CALL "%scriptDir%shortPath.bat" "%buildSettingsDir%%certfile%"
+CALL "%scriptDir%shortPath.bat" "%buildSettingsDir%%SPRK_CERTFILE%"
 SET SH83_CERTFILE=%SHORTPATH%
 
 CALL "%scriptDir%shortPath.bat" "%buildDir%"
@@ -151,13 +151,13 @@ CD "%SH83_EXTENSION_BUILDIR%"
 SET /p PROJECT_VERSION=< ..\BuildSettings\ExtensionVersion.txt
 
 IF "%1" == "debug" (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . -e "%TARGET_DIRNAME%\.debug_precursor" .debug
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%SPRK_PASSWORD%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . -e "%TARGET_DIRNAME%\.debug_precursor" .debug
     REN "%TARGET_DIRNAME%.zxp" "%TARGET_DIRNAME%.%PROJECT_VERSION%.debug.zxp"
 ) ELSE (
-    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%password%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . 
+    java -jar "%SH83_UCFJAR%" -package -storetype PKCS12 -keystore "%SH83_CERTFILE%" -storepass "%SPRK_PASSWORD%" -tsa "%timestampServer%" "%TARGET_DIRNAME%.zxp" -C "%TARGET_DIRNAME%" . 
     REN "%TARGET_DIRNAME%.zxp" "%TARGET_DIRNAME%.%PROJECT_VERSION%.zxp"
 )
 
-RD /s /q "%EXTENSION_HOMEDIR%" >NUL 2>&1
+RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
 
 POPD
