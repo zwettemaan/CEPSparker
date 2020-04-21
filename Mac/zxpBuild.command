@@ -20,78 +20,78 @@ export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools/"
 
 if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
 
-	echo ""
-	echo "This is an unconfigured CEPSparker directory. Nothing to build."
-	echo ""
+    echo ""
+    echo "This is an unconfigured CEPSparker directory. Nothing to build."
+    echo ""
 
 elif [ ! -e "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" ]; then
 
-	echo ""
-	echo "Need to download ZXPSignCmd first. See ${SPRK_DEV_TOOLS_DIR}downloadZXPSignCmd.command script"
-	echo ""
+    echo ""
+    echo "Need to download ZXPSignCmd first. See ${SPRK_DEV_TOOLS_DIR}downloadZXPSignCmd.command script"
+    echo ""
 
 else 
 
-	. "${BUILD_SETTINGS_DIR}certinfo.command"
+    . "${BUILD_SETTINGS_DIR}certinfo.command"
 
-	if [ ! -f "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" ]; then
+    if [ ! -f "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" ]; then
 
-		echo ""
-		echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
-		echo ""
+        echo ""
+        echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
+        echo ""
 
-	elif [ "$TARGET_DIRNAME" == "" ]; then
+    elif [ "$TARGET_DIRNAME" == "" ]; then
 
-		echo ""
-		echo "Cannot determine directory name for extension."
-		echo ""
+        echo ""
+        echo "Cannot determine directory name for extension."
+        echo ""
 
-	elif [ "$PROJECT_VERSION" == "" ]; then
+    elif [ "$PROJECT_VERSION" == "" ]; then
 
-		echo ""
-		echo "Cannot determine version for extension."
-		echo ""
+        echo ""
+        echo "Cannot determine version for extension."
+        echo ""
 
-	else 
+    else 
 
-		"${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
+        "${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
-		if [ ! -d "$BUILD_DIR" ]; then
-			mkdir "$BUILD_DIR"
-		fi
+        if [ ! -d "$BUILD_DIR" ]; then
+            mkdir "$BUILD_DIR"
+        fi
 
-		export EXTENSION_BUILD_DIR="${BUILD_DIR}${TARGET_DIRNAME}/"
+        export EXTENSION_BUILD_DIR="${BUILD_DIR}${TARGET_DIRNAME}/"
 
-		rm -rf "$EXTENSION_BUILD_DIR"
-		mkdir "$EXTENSION_BUILD_DIR"
+        rm -rf "$EXTENSION_BUILD_DIR"
+        mkdir "$EXTENSION_BUILD_DIR"
 
-		cp -R "${PROJECT_ROOT_DIR}css"           "${EXTENSION_BUILD_DIR}css"
-		cp -R "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_BUILD_DIR}CSXS"
-		cp -R "${PROJECT_ROOT_DIR}html"          "${EXTENSION_BUILD_DIR}html"
-		cp -R "${PROJECT_ROOT_DIR}js"            "${EXTENSION_BUILD_DIR}js"
-		cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
-		cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
+        cp -R "${PROJECT_ROOT_DIR}css"           "${EXTENSION_BUILD_DIR}css"
+        cp -R "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_BUILD_DIR}CSXS"
+        cp -R "${PROJECT_ROOT_DIR}html"          "${EXTENSION_BUILD_DIR}html"
+        cp -R "${PROJECT_ROOT_DIR}js"            "${EXTENSION_BUILD_DIR}js"
+        cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
+        cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
 
-		cd "$EXTENSION_BUILD_DIR"
+        cd "$EXTENSION_BUILD_DIR"
 
-		find . -name ".DS_Store" | while read a; do rm "$a"; done
-		find . -name "__MACOSX" | while read a; do rm -rf "$a"; done
-		xattr -cr .
+        find . -name ".DS_Store" | while read a; do rm "$a"; done
+        find . -name "__MACOSX" | while read a; do rm -rf "$a"; done
+        xattr -cr .
 
-		cd "${BUILD_DIR}"
+        cd "${BUILD_DIR}"
 
-		"${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER"
+        "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER"
 
-		mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
+        mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
 
-		rm -rf "$EXTENSION_BUILD_DIR"
+        rm -rf "$EXTENSION_BUILD_DIR"
 
-		echo ""
-		echo "Signed extension has been created: $TARGET_DIRNAME.$PROJECT_VERSION.zxp"
-		echo ""
-		
-	fi
+        echo ""
+        echo "Signed extension has been created: $TARGET_DIRNAME.$PROJECT_VERSION.zxp"
+        echo ""
+        
+    fi
 
-fi	
+fi  
 
 popd > /dev/null

@@ -6,66 +6,74 @@ REM
 REM Setup the panel so we can run it in a live debug session 
 REM
 
-SET scriptDir=%~dp0
-PUSHD "%scriptDir%.."
-SET projectHomeDir=%cd%\
+IF "%SPRK_COMMANDS_DIR%" == "" (
+    SET SPRK_COMMANDS_DIR=%~dp0
+)
+
+PUSHD "%SPRK_COMMANDS_DIR%.."
+SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
-PUSHD "%projectHomeDir%"
+CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
+
+PUSHD "%PROJECT_ROOT_DIR%"
 
 REM Check whether we have administrative permissions
 
 NET SESSION >NUL 2>&1
 
 IF NOT %errorLevel% == 0 (
+    
     ECHO.
     ECHO Error: this script must be run from a command line shell
-    ECHO with administrative privileges. Aborting.
+    ECHO with administrative privileges. You can double-click sudo.bat
+    ECHO to launch such a command line shell.
     ECHO.
-    POPD
-    EXIT /B
-) 
+    ECHO Aborting.
+    ECHO.
 
-IF NOT EXIST BuildSettings\ExtensionDirName.txt (
-    ECHO.
-    ECHO Error: This CEPSparker folder has not been initialized. Make
-    ECHO sure to run the SparkerConfig.exe command first. Aborting.
-    ECHO.
-    POPD
-    EXIT /B
-) 
+) ELSE (
 
-SET /P TARGET_DIRNAME=< BuildSettings\ExtensionDirName.txt
+    CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
+    CALL "%SPRK_COMMANDS_DIR%setPlayerDebugMode.bat"
+    CALL "%SPRK_COMMANDS_DIR%adjustVersionInManifest.bat" NESTED
 
-IF "%TARGET_DIRNAME%" == "" (
     ECHO.
-    ECHO Error: Cannot determine the directory name for this
-    ECHO extension. Aborting.
+    ECHO Removing directory "%EXTENSION_HOME_DIR%"
     ECHO.
+
+    RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
+
+    ECHO.
+    ECHO Recreating directory "%EXTENSION_HOME_DIR%"
+    ECHO.
+
+    MKDIR "%EXTENSION_HOME_DIR%"
+
+    ECHO.
+    ECHO Creating temporary symbolic links to the extension
+    ECHO.
+
+    MKLINK /H "%EXTENSION_HOME_DIR%.debug" "%PROJECT_ROOT_DIR%debug"
+
+    MKLINK /J "%EXTENSION_HOME_DIR%css"           "%PROJECT_ROOT_DIR%css"
+    MKLINK /J "%EXTENSION_HOME_DIR%CSXS"          "%PROJECT_ROOT_DIR%CSXS"
+    MKLINK /J "%EXTENSION_HOME_DIR%html"          "%PROJECT_ROOT_DIR%html"
+    MKLINK /J "%EXTENSION_HOME_DIR%js"            "%PROJECT_ROOT_DIR%js"
+    MKLINK /J "%EXTENSION_HOME_DIR%jsx"           "%PROJECT_ROOT_DIR%jsx"
+    MKLINK /J "%EXTENSION_HOME_DIR%shared_js_jsx" "%PROJECT_ROOT_DIR%shared_js_jsx"
+
+    REM Some sample code to refer to if css dir has subdirs.
+    REM MKDIR "%EXTENSION_HOME_DIR%css"
+    REM ICACLS "%EXTENSION_HOME_DIR%" /grant Everyone:(OI)(CI)F
+    REM FOR /F %%f IN ('DIR /b %projectHomeDir%css') DO MKLINK /H %EXTENSION_HOME_DIR%css\%%f %projectHomeDir%css\%%f
+
     POPD
-    EXIT /B
+
+    ECHO.
+    ECHO Symbolic links have been created so the extension will run in the Adobe Creative Cloud apps.
+    ECHO.
 )
 
-SET EXTENSION_HOME_DIR=%APPDATA%\Adobe\CEP\extensions\%TARGET_DIRNAME%\
+SET /P REPLY=Press [Enter] to finalize 
 
-CALL "%scriptDir%setPlayerDebugMode.bat"
-CALL "%scriptDir%adjustVersionInManifest.bat"
-
-RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1
-MKDIR "%EXTENSION_HOME_DIR%"
-
-MKLINK /H "%EXTENSION_HOME_DIR%.debug" "%projectHomeDir%debug"
-
-MKLINK /J "%EXTENSION_HOME_DIR%css" "%projectHomeDir%css"
-MKLINK /J "%EXTENSION_HOME_DIR%CSXS" "%projectHomeDir%CSXS"
-MKLINK /J "%EXTENSION_HOME_DIR%html" "%projectHomeDir%html"
-MKLINK /J "%EXTENSION_HOME_DIR%js" "%projectHomeDir%js"
-MKLINK /J "%EXTENSION_HOME_DIR%jsx" "%projectHomeDir%jsx"
-MKLINK /J "%EXTENSION_HOME_DIR%shared_js_jsx" "%projectHomeDir%shared_js_jsx"
-
-REM Some sample code to refer to if css dir has subdirs.
-REM MKDIR "%EXTENSION_HOME_DIR%css"
-REM ICACLS "%EXTENSION_HOME_DIR%" /grant Everyone:(OI)(CI)F
-REM FOR /F %%f IN ('DIR /b %projectHomeDir%css') DO MKLINK /H %EXTENSION_HOME_DIR%css\%%f %projectHomeDir%css\%%f
-
-POPD
