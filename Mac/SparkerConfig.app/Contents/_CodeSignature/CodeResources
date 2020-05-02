@@ -33,6 +33,15 @@
 			<key>requirement</key>
 			<string>identifier "com.monkeybreadsoftware.xojo.plugins.JSON" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
 		</dict>
+		<key>Frameworks/MBS_Util_UUID_Plugin_20198.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			7DjhNRNLT5RwjCQlvYXQ5elyDdo=
+			</data>
+			<key>requirement</key>
+			<string>identifier "com.monkeybreadsoftware.xojo.plugins.UUID" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
+		</dict>
 		<key>Frameworks/RegEx.dylib</key>
 		<dict>
 			<key>cdhash</key>

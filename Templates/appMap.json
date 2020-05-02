@@ -1,25 +1,88 @@
 ﻿{
-	"defaultForAny": "InDesign",
-	"InDesign":	{
-		"TARGET_APP_CODE": "IDSN",
-		"TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe InDesign/Version $$TARGET_INDESIGN_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
-		"TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\InDesign\\Version $$TARGET_INDESIGN_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
-		"TARGET_CC_VERSION": {
-			"Any": "15.0",
-			"2020": "15.0",
-			"CC 2019": "14.0",
-			"CC 2018": "13.0"
-		}
-	},
-	"Illustrator": {
-		"TARGET_APP_CODE": "ILST",
-		"TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/Presets.localized/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/",
-		"TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe Illustrator $$TARGET_CC_VERSION$$\\Presets\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\",
-		"TARGET_CC_VERSION": {
-			"Any": "24.0",
-			"2020": "24.0",
-			"CC 2019": "23.0",
-			"CC 2018": "22.0"
-		}
-	}
+    "defaultForAny": "InDesign",
+    "Bridge":   {
+        "TARGET_APP_CODE": "KBRG",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%ProgramFiles%\\Adobe\\Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$\\",
+        "TARGET_CC_VERSION": {
+            "Any": "10.0",
+            "2020": "10.0",
+            "CC 2019": "9.0",
+            "CC 2018": "8.0"
+        }
+    },
+    "Dreamweaver": {
+        "TARGET_APP_CODE": "DRWV",
+        "TARGET_FILENAME_EXTENSION": "js",
+        "TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/configuration/Commands/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$\\configuration\\Commands\\",
+        "TARGET_CC_VERSION": {
+            "Any": "20.0",
+            "2020": "20.0",
+            "CC 2019": "19.0",
+            "CC 2018": "18.0"
+        }
+    },
+    "InCopy":   {
+        "TARGET_APP_CODE": "AICY",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe $$TARGET_APP$$/Version $$TARGET_INCOPY_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\$$TARGET_APP$$\\Version $$TARGET_INCOPY_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
+        "DOC_LINKS": [
+            "https://www.adobe.io/apis/creativecloud/bridge.html"
+        ],
+        "TARGET_CC_VERSION": {
+            "Any": "15.0",
+            "2020": "15.0",
+            "CC 2019": "14.0",
+            "CC 2018": "13.0"
+        }
+    },
+    "InDesign": {
+        "TARGET_APP_CODE": "IDSN",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe $$TARGET_APP$$/Version $$TARGET_INDESIGN_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\$$TARGET_APP$$\\Version $$TARGET_INDESIGN_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
+        "TARGET_CC_VERSION": {
+            "Any": "15.0",
+            "2020": "15.0",
+            "CC 2019": "14.0",
+            "CC 2018": "13.0"
+        }
+    },
+    "Illustrator": {
+        "TARGET_APP_CODE": "ILST",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/Presets.localized/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$\\Presets\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\",
+        "TARGET_CC_VERSION": {
+            "Any": "24.0",
+            "2020": "24.0",
+            "CC 2019": "23.0",
+            "CC 2018": "22.0"
+        }
+    },
+    "Photoshop": {
+        "TARGET_APP_CODE": "PHSH",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/Presets/Scripts/",
+        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$\\Presets\\Scripts\\",
+        "TARGET_CC_VERSION": {
+            "Any": "21.0",
+            "2020": "21.0",
+            "CC 2019": "20.0",
+            "CC 2018": "19.0"
+        }
+    },
+    "Premiere Pro": {
+        "TARGET_APP_CODE": "PPRO",
+        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_CC_VERSION": {
+            "Any": "14.0",
+            "2020": "14.0",
+            "CC 2019": "13.0",
+            "CC 2018": "12.0"
+        }
+    }
 }
