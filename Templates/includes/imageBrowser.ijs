@@ -29,7 +29,9 @@
             try {
             
                 if ("undefined" == typeof(require)) {
-                    $$SHORTCODE$$.logError(arguments, "require() not defined. Make sure to use at least CEP 6.1");
+                    var errorMsg = "require() not defined. Make sure to use at least CEP 6.1";
+                    $$SHORTCODE$$.logError(arguments, errorMsg);
+                    alert(errorMsg);
                     break;
                 }
 

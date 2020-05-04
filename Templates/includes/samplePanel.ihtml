@@ -1,8 +1,8 @@
-        <div class="box">
-            <div id="lblSomePrompt1" class="boxleft">
+        <div class="$$SHORTCODE$$box">
+            <div id="lblSomePrompt1" class="$$SHORTCODE$$boxleft">
                 Some Prompt:&nbsp;
             </div>
-            <div class="boxright">
+            <div class="$$SHORTCODE$$boxright">
                 <form id="fmSomeForm1">
                     <input id="rbnSomeSettingChoice1" type="radio" name="someSetting" value="choice1" />
                     <label id="lblSomeSettingChoice1">Choice 1</label>
@@ -13,14 +13,14 @@
                 </form>
             </div>
         </div>
-        <div class="box">
+        <div class="$$SHORTCODE$$box">
             <div id="lblSomePrompt2">
                 Some other prompt:
             </div>
             <form id="fmSomeForm2">
                 <span id="lblSomeInput">Some Input:</span>
-                <input id="txtSomeInput" class="someTextField" type="text"/>
+                <input id="txtSomeInput" class="$$SHORTCODE$$textField" type="text"/>
             </form>
         </div>
-        <button id="btnSomeAction" disabled class="actionButton">SomeAction</button>
-        <button id="btnCancel" disabled class="actionButton">Cancel</button>
+        <button id="btnSomeAction" disabled class="$$SHORTCODE$$actionButton">SomeAction</button>
+        <button id="btnCancel" disabled class="$$SHORTCODE$$actionButton">Cancel</button>

@@ -10,15 +10,15 @@
 }
 
 $if "$$STARTERCODE$$" == "ScriptRunner"
-.fullwidth {
+.$$SHORTCODE$$fullwidth {
 	width: 100%;
 }
 
-select.fullwidth {
+select.$$SHORTCODE$$fullwidth {
     width: calc(100% - 20px);
 }
 
-.hidden {
+.$$SHORTCODE$$hidden {
 	display: none;
 }
 $endif
@@ -35,12 +35,12 @@ body {
 	line-height: 21px;
 }
 
-.panel {
+.$$SHORTCODE$$panel {
 	padding: 5px;
 	overflow: hidden;
 }
 
-.box {
+.$$SHORTCODE$$box {
 	padding: 5px;
 	margin-bottom: 5px;
 	border-top: 1px solid #535353;
@@ -50,29 +50,26 @@ body {
 	color: #FFFFFF;
 	float: left;
 }
-.boxleft {
+.$$SHORTCODE$$boxleft {
 	width: 100px;
 	float: left;
 	text-align: right;
 }
 
-.boxright {
+.$$SHORTCODE$$boxright {
 	overflow: hidden;
 }
-.actionButton {
+.$$SHORTCODE$$actionButton {
 	width: 110px;
 	margin-left: 5px;
 	padding: 4px;
 	overflow: hidden;
 }
-.hidden {
-	display: none;
-}
 
-.fieldDisabled {
+.$$SHORTCODE$$fieldDisabled {
 	color: #808080;
 	background-color: #C0C0C0;
 }
-.labelDisabled {
+.$$SHORTCODE$$labelDisabled {
 	color: #808080;
 }

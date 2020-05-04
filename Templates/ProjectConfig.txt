@@ -10,7 +10,7 @@ PROJECT_VERSION="1.0.0"
 HELP_PROJECT_VERSION="Initial version number for the extension"
 IS_BUILDSETTING_PROJECT_VERSION=1
 
-CEPVERSION=4.2
+CEPVERSION=6.1
 HELP_CEPVERSION="CEP version to target. Lower versions lack features, but support more Adobe CC versions"
 
 TARGET_APP_CPU_WORD_SIZE="64"
@@ -80,3 +80,6 @@ SELECT_UI_TYPE="ModalDialog,Panel,Modeless,Invisible"
 
 IMAGEBROWSER_PORT=8000
 HELP_IMAGEBROWSER_PORT="Port number to use for locally running test image-server"
+
+APP_MAPPER_SCRIPT=
+IS_INTERNAL_APP_MAPPER_SCRIPT=1

@@ -106,7 +106,7 @@ function getExtendScriptExtensionDirs_PRM() {
 
                         $$SHORTCODE$$.dirs.appScriptsDir = 
                             $$SHORTCODE$$.dirs.adobeScriptsDir + 
-                            "$$TARGET_APP$$" + 
+                            $$SHORTCODE$$.C.appName + 
                             $$SHORTCODE$$.path.SEPARATOR;
 
                         resolve();
@@ -318,15 +318,25 @@ function initHostScript_PRM() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
+    // Function mapAppId(): convert short app code to readable app name 
+    // Auto-generated from appMap.json data
+
+    $$APP_MAPPER_SCRIPT$$
+
     var promise = new Promise(function(resolve, reject) {
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("initHostScript_PRM callback");
         $endif
 
+        // Convert short code to readable app name based on appMap.json data
+
         var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ")";
         $$SHORTCODE$$.csInterface.evalScript(
             script,
-            resolve
+            function() {
+                $$SHORTCODE$$.C.appName = mapAppId($$SHORTCODE$$.hostEnvironment.appId);
+                resolve();
+            }
         );
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -518,7 +528,6 @@ $endif
 $if "$$STARTERCODE$$" == "ScriptRunner"
 $include "scriptRunner_wireUI.ijs"        
 $endif
-
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"

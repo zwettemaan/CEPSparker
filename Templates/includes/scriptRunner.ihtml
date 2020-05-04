@@ -1,22 +1,22 @@
-    <div id="$$SHORTCODE$$listPanel" class="fullwidth">
+    <div id="$$SHORTCODE$$listPanel" class="$$SHORTCODE$$fullwidth">
 
-        <div class="fullwidth">
-            <select id="$$SHORTCODE$$list" class="fullwidth"></select>
+        <div class="$$SHORTCODE$$fullwidth">
+            <select id="$$SHORTCODE$$list" class="$$SHORTCODE$$fullwidth"></select>
         </div>
-        <div class="fullwidth">
-            <button id="btnRunSelected" class="actionButton">Run</button>
+        <div class="$$SHORTCODE$$fullwidth">
+            <button id="$$SHORTCODE$$btnRunSelected" class="$$SHORTCODE$$actionButton">Run</button>
         </div>
 
     </div>
-    <div id="$$SHORTCODE$$immediatePanel" class="fullwidth hidden">
+    <div id="$$SHORTCODE$$immediatePanel" class="$$SHORTCODE$$fullwidth $$SHORTCODE$$hidden">
 
         <style>
-            #txtReturnData {
+            #$$SHORTCODE$$txtReturnData {
                 font-family: monospace;
                 width: 100%;
                 height: 150px;
             }
-            #txtScript {
+            #$$SHORTCODE$$txtScript {
                 font-family: monospace;
                 width: 100%;
                 height: 150px;
@@ -24,10 +24,10 @@
         </style>
 
         <p>Script To Run:</p>
-        <textarea id="txtScript" ></textarea>
-        <button id="btnRun" class="actionButton">Run</button>
+        <textarea id="$$SHORTCODE$$txtScript" ></textarea>
+        <button id="$$SHORTCODE$$btnRun" class="$$SHORTCODE$$actionButton">Run</button>
 
         <p>Returned data:</p>
-        <textarea id="txtReturnData" disabled ></textarea>  
+        <textarea id="$$SHORTCODE$$txtReturnData" disabled ></textarea>  
         
     </div>

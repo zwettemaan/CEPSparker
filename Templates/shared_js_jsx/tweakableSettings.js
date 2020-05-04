@@ -25,6 +25,9 @@ $$SHORTCODE$$.S.MANUAL_START_FROM_CHROME      = false;
 $$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE         = false;
 $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE           = false;
 $$SHORTCODE$$.S.LOG_TO_FILEPATH               = undefined; // file path or undefined
+$if "$$STARTERCODE$$" == "ScriptRunner"
+$$SHORTCODE$$.S.CHECK_SCRIPT_FOLDER_INTERVAL  = 3000; // MS
+$endif
 $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = true;
 $else

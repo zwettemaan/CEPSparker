@@ -1,4 +1,4 @@
-        $("#btnRun").click(function(evt) {
+        $("#$$SHORTCODE$$btnRun").click(function(evt) {
         	var scriptText = $("#txtScript").val();
             var quotedScriptText = $$SHORTCODE$$.dQ(scriptText);
             var scriptReturningJSONOfEval = "JSON.stringify(eval(" + quotedScriptText + "))";
@@ -14,7 +14,7 @@
             });
         });
 
-        $("#btnRunSelected").click(function(evt) {
+        $("#$$SHORTCODE$$btnRunSelected").click(function(evt) {
             var selectedScriptID = $("#$$SHORTCODE$$list option:selected").attr('id');
             // e.g. ScriptFile_12 
             var selectedScriptIdx = parseInt(selectedScriptID.split("_")[1], 10);
@@ -40,9 +40,20 @@
             $$SHORTCODE$$.csInterface.evalScript(script);
         });
 
-        $$SHORTCODE$$.csInterface.addEventListener(
-            "applicationActivate",
-            function() {
+        // Some apps don't have an application activate event
+        if (
+            $$SHORTCODE$$.hostEnvironment.appId == "PPRO"
+        ) {
+            setInterval(function() {
                 updateUI_PRM().then();
-            }
-        );
+            },
+            $$SHORTCODE$$.S.CHECK_SCRIPT_FOLDER_INTERVAL);
+        }
+        else {
+            $$SHORTCODE$$.csInterface.addEventListener(
+                "applicationActivate",
+                function() {
+                    updateUI_PRM().then();
+                }
+            );
+        }
