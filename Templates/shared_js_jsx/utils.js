@@ -2,6 +2,12 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function(){
+
 $$SHORTCODE$$.shallowClone = function shallowClone(obj) 
 {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -114,3 +120,4 @@ $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
     }
 }
 
+})();

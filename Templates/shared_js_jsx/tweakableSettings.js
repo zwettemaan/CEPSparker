@@ -5,6 +5,10 @@
 // Tweakable Settings
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
 if (! $$SHORTCODE$$.S) {
     $$SHORTCODE$$.S = {}; // stash global settings here
 }

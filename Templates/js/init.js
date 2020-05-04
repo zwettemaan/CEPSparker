@@ -1,3 +1,7 @@
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
 $$SHORTCODE$$.csInterface = new CSInterface();
 $$SHORTCODE$$.hostEnvironment = $$SHORTCODE$$.csInterface.getHostEnvironment();
 
@@ -8,7 +12,9 @@ function init() {
 
     getJavaScriptExtensionDirs_PRM().
     then(initHostScript_PRM).
+$if "$$TARGET_APP$$" == "InDesign"    
     then(getInDesignInfo_PRM).
+$endif    
     then(getExtendScriptExtensionDirs_PRM).
     then(getLocale_PRM).
     then(wireUI_PRM).
@@ -81,8 +87,28 @@ function getExtendScriptExtensionDirs_PRM() {
 
                     try {
                         var dirs = JSON.parse(data);
-                        $$SHORTCODE$$.dirs.homeDir = dirs.home;
-                        $$SHORTCODE$$.dirs.tempDir = dirs.temp;
+                        
+                        $$SHORTCODE$$.dirs.homeDir = 
+                            $$SHORTCODE$$.path.addTrailingSeparator(dirs.home);
+
+                        $$SHORTCODE$$.dirs.tempDir = 
+                            $$SHORTCODE$$.path.addTrailingSeparator(dirs.temp);
+
+                        $$SHORTCODE$$.dirs.documentsDir = 
+                            $$SHORTCODE$$.dirs.homeDir + 
+                            "Documents" + 
+                            $$SHORTCODE$$.path.SEPARATOR;
+
+                        $$SHORTCODE$$.dirs.adobeScriptsDir = 
+                            $$SHORTCODE$$.dirs.documentsDir + 
+                            "Adobe Scripts" + 
+                            $$SHORTCODE$$.path.SEPARATOR;
+
+                        $$SHORTCODE$$.dirs.appScriptsDir = 
+                            $$SHORTCODE$$.dirs.adobeScriptsDir + 
+                            "$$TARGET_APP$$" + 
+                            $$SHORTCODE$$.path.SEPARATOR;
+
                         resolve();
                     } 
                     catch (err) {
@@ -107,6 +133,7 @@ function getExtendScriptExtensionDirs_PRM() {
     return promise;
 }
 
+$if "$$TARGET_APP$$" == "InDesign"
 function getInDesignInfo_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -137,14 +164,12 @@ function getInDesignInfo_PRM() {
                     }
                     $$SHORTCODE$$.inDesignInfo.version = "CS" + (version - 2);
                     $$SHORTCODE$$.inDesignInfo.serialNumber = info.serialNumber;
-                    var applicationDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.HOST_APPLICATION);
-                    if ($$SHORTCODE$$.isMac) {
-                        while (applicationDir != "" && $$SHORTCODE$$.path.filenameExtension(applicationDir) != "app") {
-                            applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
-                        }
-                    }
-                    applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
-                    $$SHORTCODE$$.inDesignInfo.pluginPath = applicationDir + "/Plug-Ins";
+
+                    $$SHORTCODE$$.inDesignInfo.pluginPath = 
+                        $$SHORTCODE$$.dirs.applicationDir + 
+                        "Plug-Ins" +
+                        $$SHORTCODE$$.path.SEPARATOR;
+
                     resolve();
 
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -164,6 +189,7 @@ function getInDesignInfo_PRM() {
     $endif
     return promise;
 }
+$endif
 
 function getJavaScriptExtensionDirs_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -171,29 +197,67 @@ function getJavaScriptExtensionDirs_PRM() {
     $endif
 
     var promise = new Promise(function(resolve, reject) {
+
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
         $$SHORTCODE$$.logEntry("getJavaScriptExtensionDirs_PRM callback");
         $endif
 
-        $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) + $$SHORTCODE$$.path.SEPARATOR;
-        $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) + $$SHORTCODE$$.path.SEPARATOR;
+        $$SHORTCODE$$.dirs.extensionDir = 
+            $$SHORTCODE$$.path.addTrailingSeparator(
+                $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) +
+                    $$SHORTCODE$$.path.SEPARATOR
+            );
+
+        $$SHORTCODE$$.dirs.appSupportDir = 
+            $$SHORTCODE$$.path.addTrailingSeparator(
+                $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) +
+                    $$SHORTCODE$$.path.SEPARATOR
+            );
+
         if ($$SHORTCODE$$.isMac) {
-            $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.appSupportDir) + "/Preferences/";
+            $$SHORTCODE$$.dirs.systemPreferencesDir = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.appSupportDir) +
+                    $$SHORTCODE$$.path.SEPARATOR +
+                    "Preferences" +
+                    $$SHORTCODE$$.path.SEPARATOR;
         }
         else {
-            $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.dirs.appSupportDir;
+            $$SHORTCODE$$.dirs.systemPreferencesDir = 
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.appSupportDir);
         }
-        $$SHORTCODE$$.dirs.preferencesDir = $$SHORTCODE$$.dirs.systemPreferencesDir + $$SHORTCODE$$.C.DIRNAME_PREFERENCES + $$SHORTCODE$$.path.SEPARATOR;
+
+        $$SHORTCODE$$.dirs.preferencesDir = 
+            $$SHORTCODE$$.dirs.systemPreferencesDir +
+            $$SHORTCODE$$.C.DIRNAME_PREFERENCES +
+            $$SHORTCODE$$.path.SEPARATOR;
+
+        var applicationDir = $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.HOST_APPLICATION);
+        if ($$SHORTCODE$$.isMac) {
+            while (
+                applicationDir != "" 
+            && 
+                $$SHORTCODE$$.path.filenameExtension(applicationDir) != "app"
+            ) {
+                applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
+            }
+        }
+        applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
+
+        $$SHORTCODE$$.dirs.applicationDir = 
+            applicationDir + 
+            $$SHORTCODE$$.path.SEPARATOR;
+
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-        $$SHORTCODE$$.logExit("getJavaScriptExtensionDirs_PRM callback");
+        $$SHORTCODE$$.logExit(arguments);
         $endif
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
+
     return promise;
 }
 
@@ -419,8 +483,9 @@ function updateUI_PRM() {
         $$SHORTCODE$$.logEntry("updateUI_PRM callback");
         $endif
 
-        themeManager.init();
-// TODO
+$if "$$STARTERCODE$$" == "ScriptRunner"
+$include "scriptRunner_updateUI.ijs"    
+$endif
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -444,18 +509,14 @@ function wireUI_PRM() {
         $$SHORTCODE$$.logEntry("wireUI_PRM callback");
         $endif
 
+        themeManager.init();
+
         // $$SHORTCODE$$.csInterface.resizeContent($$PANELWIDTH$$, $$PANELHEIGHT$$);
-
 $if "$$STARTERCODE$$" == "ImageBrowser"
-
-$include "imageBrowser.ijs"
-        
+$include "imageBrowser.ijs"    
 $endif
-
 $if "$$STARTERCODE$$" == "ScriptRunner"
-
-$include "scriptRunner.ijs"
-        
+$include "scriptRunner_wireUI.ijs"        
 $endif
 
         resolve();

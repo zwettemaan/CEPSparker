@@ -4,11 +4,13 @@
 
 if ($$SHORTCODE$$.checkMac()) {
     $$SHORTCODE$$.path.SEPARATOR = "/";
+    $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR = "\\";
     $$SHORTCODE$$.isMac = true;
     $$SHORTCODE$$.isWindows = false;
 }
 else {
     $$SHORTCODE$$.path.SEPARATOR = "\\";
+    $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR = "/";
     $$SHORTCODE$$.isMac = false;
     $$SHORTCODE$$.isWindows = true;
 }

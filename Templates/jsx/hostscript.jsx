@@ -8,8 +8,7 @@ $endif
 var dreamweaver;
 var app;
 
-var $$SHORTCODE$$;
-if (! $$SHORTCODE$$) {
+if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 

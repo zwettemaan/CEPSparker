@@ -1,26 +1,26 @@
-		<div class="box">
-			<div id="lblSomePrompt1" class="boxleft">
-				Some Prompt:&nbsp;
-			</div>
-			<div class="boxright">
-				<form id="fmSomeForm1">
-					<input id="rbnSomeSettingChoice1" type="radio" name="someSetting" value="choice1" />
-					<label id="lblSomeSettingChoice1">Choice 1</label>
-					<br/>
-					<input id="rbnSomeSettingChoice2" type="radio" name="someSetting" value="choice2" />
-					<label id="lblSomeSettingChoice2">Choice 2</label>
-					<br/>
-				</form>
-			</div>
-		</div>
-		<div class="box">
-			<div id="lblSomePrompt2">
-				Some other prompt:
-			</div>
-			<form id="fmSomeForm2">
-				<span id="lblSomeInput">Some Input:</span>
-				<input id="txtSomeInput" class="someTextField" type="text"/>
-			</form>
-		</div>
-		<button id="btnSomeAction" disabled class="actionButton">SomeAction</button>
-		<button id="btnCancel" disabled class="actionButton">Cancel</button>
+        <div class="box">
+            <div id="lblSomePrompt1" class="boxleft">
+                Some Prompt:&nbsp;
+            </div>
+            <div class="boxright">
+                <form id="fmSomeForm1">
+                    <input id="rbnSomeSettingChoice1" type="radio" name="someSetting" value="choice1" />
+                    <label id="lblSomeSettingChoice1">Choice 1</label>
+                    <br/>
+                    <input id="rbnSomeSettingChoice2" type="radio" name="someSetting" value="choice2" />
+                    <label id="lblSomeSettingChoice2">Choice 2</label>
+                    <br/>
+                </form>
+            </div>
+        </div>
+        <div class="box">
+            <div id="lblSomePrompt2">
+                Some other prompt:
+            </div>
+            <form id="fmSomeForm2">
+                <span id="lblSomeInput">Some Input:</span>
+                <input id="txtSomeInput" class="someTextField" type="text"/>
+            </form>
+        </div>
+        <button id="btnSomeAction" disabled class="actionButton">SomeAction</button>
+        <button id="btnCancel" disabled class="actionButton">Cancel</button>

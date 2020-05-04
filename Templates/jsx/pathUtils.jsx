@@ -2,8 +2,14 @@
 // This file mirrors the API of js/pathUtils.js
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function() {
+
 if (! $$SHORTCODE$$.path) {
-	$$SHORTCODE$$.path = {};
+    $$SHORTCODE$$.path = {};
 }
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
@@ -79,3 +85,5 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     $endif  
     return success;
 };
+
+})();

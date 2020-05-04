@@ -2,12 +2,65 @@
 // This file mirrors the API of jsx/utils.jsx
 //
 
-$$SHORTCODE$$.checkMac = function checkMac() {
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function() {
+
+$$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
+    var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    var retVal = (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
+    do {
+        try {
+
+            var scriptFilePathList = [];
+
+            if (! $$SHORTCODE$$.path.isDir($$SHORTCODE$$.dirs.appScriptsDir)) {
+                break;
+            }
+
+            var readdirData = window.cep.fs.readdir($$SHORTCODE$$.dirs.appScriptsDir);
+            if (readdirData.err) {
+                break;
+            }
+
+            for (var fileIdx = 0; fileIdx < readdirData.data.length; fileIdx++) {
+                var fileName = readdirData.data[fileIdx];
+                var extension = $$SHORTCODE$$.path.filenameExtension(fileName);
+                if (extension == "jsx" || extension == "js") {
+                    scriptFilePathList.push($$SHORTCODE$$.dirs.appScriptsDir + fileName);
+                }
+            }
+
+            if (scriptFilePathList.length == 0) {
+                break;
+            }
+
+            retVal = scriptFilePathList;
+        }
+        catch (err) {
+           $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+    $endif
+    return retVal;
+};
+
+$$SHORTCODE$$.checkMac = function checkMac() {
+    var retVal;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    retVal = (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -104,3 +157,5 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
+
+})();

@@ -2,6 +2,12 @@
 // This file mirrors the API of js/utils.js
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function() {
+
 $$SHORTCODE$$.checkMac = function checkMac() {
     
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -102,3 +108,5 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
+
+})();

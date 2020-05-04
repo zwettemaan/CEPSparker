@@ -1,6 +1,7 @@
 #$$SHORTCODE$$body {
 	width: $$PANELWIDTH$$px;
 	height: $$PANELHEIGHT$$px;
+	overflow: hidden;
 }
 
 #$$SHORTCODE$$panel {
@@ -8,13 +9,25 @@
 	height: 100%;
 }
 
+$if "$$STARTERCODE$$" == "ScriptRunner"
+.fullwidth {
+	width: 100%;
+}
+
+select.fullwidth {
+    width: calc(100% - 20px);
+}
+
+.hidden {
+	display: none;
+}
+$endif
 $if "$$STARTERCODE$$" == "ImageBrowser"
 #$$SHORTCODE$$iframe {
 	width: 100%;
 	height: 100%;
 }
 $endif
-
 body {
 	background-color: #606060;
 	font-family: "Verdana";

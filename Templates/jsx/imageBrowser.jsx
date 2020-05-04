@@ -2,6 +2,12 @@
 // Simple image handler
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function(){
+
 $$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, height) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -68,3 +74,4 @@ $$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, heigh
     $endif
 };
 
+})();

@@ -2,17 +2,24 @@
 // This file mirrors the API of jsx/pathUtils.jsx
 //
 
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+(function() {
+    
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
+    var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var stat = cep.fs.stat(filepath);
-    var retVal = (stat.err == cep.fs.NO_ERROR);
+    retVal = (stat.err == cep.fs.NO_ERROR);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -62,3 +69,4 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     return err;
 };
 
+})();

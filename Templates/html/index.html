@@ -10,26 +10,18 @@ $include "loadScripts.ihtml"
 
 <body id="$$SHORTCODE$$body">
    <div id="$$SHORTCODE$$panel" class="panel">
-
 $if "$$STARTERCODE$$" == "HelloWorld"
 
         Hello World!
 
 $elif "$$STARTERCODE$$" == "SamplePanel"
-
 $include "samplePanel.ihtml"
-		
 $elif "$$STARTERCODE$$" == "ImageBrowser"
-
-$include "imageBrowser.ihtml"
-		
+$include "imageBrowser.ihtml"    
 $elif "$$STARTERCODE$$" == "ScriptRunner"
-
 $include "scriptRunner.ihtml"
-		
 $endif
-
-   </div>
+    </div>
 </body>
 
 </html>
