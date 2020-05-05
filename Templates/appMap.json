@@ -4,8 +4,7 @@
         "TARGET_APP_CODE": "KBRG",
         "TARGET_APP_SPECIFIER": "bridge",
         /* 
-        * No TARGET_APP_SPECIFIER, TARGET_APP_FULL_SPECIFIER. Dreamweaver does not 
-        * support ExtendScript or ESTK/VSCode
+        * TARGET_APP_FULL_SPECIFIER: need a '64' suffix with Bridge
         */
         "TARGET_APP_FULL_SPECIFIER": "$$TARGET_APP_SPECIFIER$$-$$TARGET_APP_SPECIFIER_VERSION$$64",
         "TARGET_FILENAME_EXTENSION": "jsx",
