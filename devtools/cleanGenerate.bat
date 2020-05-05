@@ -38,7 +38,7 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 
     IF "!REPLY!" == "YES" (
         
-        CALL Windows\clean.bat "NESTED"
+        CALL Windows\clean.bat NESTED
 
         RD /s /q %SPRK_DEV_TOOLS_DIR%ZXPSignCmd* >NUL 2>&1
         RD /s /q %SPRK_DEV_TOOLS_DIR%signingtoolkit >NUL 2>&1
