@@ -1,41 +1,43 @@
 @ECHO OFF
+SETLOCAL EnableDelayedExpansion
+
 REM
 REM Undo the generation step. This will remove all your hard work.
 REM Do not run this unless you're absolutely sure
 REM
 
-ECHO.
-ECHO ***  WARNING WARNING WARNING  ***
-ECHO.
-ECHO This will irrevokably delete all generated files.
-ECHO.
-ECHO Type 'YES' at the prompt only if you're really sure
-ECHO you want to do this.
+SET SPRK_DEV_TOOLS_DIR=%~dp0
 
-SET /P REPLY=Delete generated files [YES/NO]?: 
+PUSHD %SPRK_DEV_TOOLS_DIR%..
 
-IF "%REPLY%" == "YES" (
-    
-    SET SPRK_DEV_TOOLS_DIR=%~dp0
+SET PROJECT_ROOT_DIR=%cd%\
 
-    PUSHD %SPRK_DEV_TOOLS_DIR%..
+POPD
 
-    SET PROJECT_ROOT_DIR=%cd%\
+PUSHD "%PROJECT_ROOT_DIR%"
 
-    POPD
+SET BUILD_SETTINGS_DIR=%PROJECT_ROOT_DIR%BuildSettings\
 
-    PUSHD "%PROJECT_ROOT_DIR%"
+IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 
-    SET BUILD_SETTINGS_DIR=%PROJECT_ROOT_DIR%BuildSettings\
+    ECHO.
+    ECHO This project has not been configured. Aborting.
+    ECHO.
 
-    IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
+) ELSE (
 
-        ECHO.
-        ECHO This project has not been configured. Aborting.
-        ECHO.
+    ECHO.
+    ECHO ***  WARNING WARNING WARNING  ***
+    ECHO.
+    ECHO This will irrevokably delete all generated files.
+    ECHO.
+    ECHO Type 'YES' at the prompt only if you're really sure
+    ECHO you want to do this.
 
-    ) ELSE (
+    SET /P REPLY=Delete generated files [YES/NO]?: 
 
+    IF "!REPLY!" == "YES" (
+        
         CALL Windows\clean.bat "NESTED"
 
         RD /s /q %SPRK_DEV_TOOLS_DIR%ZXPSignCmd* >NUL 2>&1
@@ -60,4 +62,5 @@ IF "%REPLY%" == "YES" (
 
 POPD
 
+ECHO.
 SET /P REPLY=Press [Enter] to finalize 

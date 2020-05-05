@@ -46,6 +46,7 @@ else
     rm -rf .git  
     rm -f .gitignore
     rm -f ReadMe.md
+    rm -f LICENSE
     rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.bat"
     rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.command"
     rm -f "${SPRK_DEV_TOOLS_DIR}detachFromCEPSparker.command"
