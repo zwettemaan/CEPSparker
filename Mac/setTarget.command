@@ -14,6 +14,9 @@ export SPRK_COMMANDS_DIR=`pwd`/
 export PROJECT_ROOT_DIR=`dirname "$SPRK_COMMANDS_DIR"`/
 
 export USER_HOME_DIR=~/
+export EXTENSION_DIR="${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions/"
+export DOCUMENTS_DIR="${USER_HOME_DIR}Documents/"
+export ADOBE_SCRIPTS_DIR="${DOCUMENTS_DIR}Adobe Scripts"
 
 export BUILD_SETTINGS_DIR="${PROJECT_ROOT_DIR}BuildSettings/"
 export BUILD_DIR="${PROJECT_ROOT_DIR}build/"
@@ -35,7 +38,6 @@ else
 
     if [ "$TARGET_DIRNAME" != "" ]; then
 
-        export EXTENSION_DIR="${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions/"
         export EXTENSION_HOME_DIR="${EXTENSION_DIR}${TARGET_DIRNAME}/"
         
     fi
