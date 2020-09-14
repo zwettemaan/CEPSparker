@@ -26,7 +26,7 @@ $$SHORTCODE$$.path.exists = function exists(filepath) {
     return retVal;
 };
 
-$$SHORTCODE$$.path.isDir = function isDir(filepath) {
+$$SHORTCODE$$.path.isDir = function isDir(folderPath) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
