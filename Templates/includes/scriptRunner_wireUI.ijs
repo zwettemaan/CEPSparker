@@ -42,7 +42,7 @@
 
         // Some apps don't have an application activate event
         if (
-            $$SHORTCODE$$.hostEnvironment.appId == "PPRO"
+            $$SHORTCODE$$.hostEnvironment.appId == $$SHORTCODE$$.C.APP_CODE_PREMIERE_PRO
         ) {
             setInterval(function() {
                 updateUI_PRM().then();

@@ -144,7 +144,12 @@ function getInDesignInfo_PRM() {
         $$SHORTCODE$$.logEntry("getInDesignInfo_PRM callback");
         $endif
 
-        if ($$SHORTCODE$$.hostEnvironment.appId != "IDSN") {
+        if 
+        (
+            $$SHORTCODE$$.hostEnvironment.appId != $$SHORTCODE$$.C.APP_CODE_INDESIGN
+        &&
+            $$SHORTCODE$$.hostEnvironment.appId != $$SHORTCODE$$.C.APP_CODE_INCOPY
+        ) {
             resolve();
         }
         else {
