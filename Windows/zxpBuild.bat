@@ -79,12 +79,12 @@ IF NOT %errorLevel% == 0 (
             RD /s /q "%EXTENSION_BUILD_DIR%" >NUL 2>&1
             MKDIR "%EXTENSION_BUILD_DIR%"
 
-            XCOPY "%PROJECT_ROOT_DIR%css"           "%EXTENSION_BUILD_DIR%css\" /y /s /e >NUL 2>&1
-            XCOPY "%PROJECT_ROOT_DIR%CSXS"          "%EXTENSION_BUILD_DIR%CSXS\" /y /s /e >NUL 2>&1
-            XCOPY "%PROJECT_ROOT_DIR%html"          "%EXTENSION_BUILD_DIR%html\" /y /s /e >NUL 2>&1
-            XCOPY "%PROJECT_ROOT_DIR%js"            "%EXTENSION_BUILD_DIR%js\" /y /s /e >NUL 2>&1
-            XCOPY "%PROJECT_ROOT_DIR%jsx"           "%EXTENSION_BUILD_DIR%jsx\" /y /s /e >NUL 2>&1
-            XCOPY "%PROJECT_ROOT_DIR%shared_js_jsx" "%EXTENSION_BUILD_DIR%shared_js_jsx\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%css"           "%EXTENSION_BUILD_DIR%\css\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%CSXS"          "%EXTENSION_BUILD_DIR%\CSXS\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%html"          "%EXTENSION_BUILD_DIR%\html\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%js"            "%EXTENSION_BUILD_DIR%\js\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%jsx"           "%EXTENSION_BUILD_DIR%\jsx\" /y /s /e >NUL 2>&1
+            XCOPY "%PROJECT_ROOT_DIR%shared_js_jsx" "%EXTENSION_BUILD_DIR%\shared_js_jsx\" /y /s /e >NUL 2>&1
 
             CD "%BUILD_DIR%"
 

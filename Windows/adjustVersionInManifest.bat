@@ -15,7 +15,7 @@ CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
 
 PUSHD "%PROJECT_ROOT_DIR%"
 
-POWERSHELL -Command "(gc CSXS\manifest.xml) -replace '(<Extension +Id=\"".*?\"" +Version=\"")([0-9\.]*)(\"")', '${1}%PROJECT_VERSION%${3}' | Out-File CSXS\manifest.xml.new -encoding Utf8"
+POWERSHELL -Command "((gc CSXS\manifest.xml) -replace '(<Extension +Id=\"".*?\"" +Version=\"")([0-9\.]*)(\"")', '${1}%PROJECT_VERSION%${3}') -replace '(ExtensionBundleVersion=\"")([0-9\.]*)(\"")', '${1}%PROJECT_VERSION%${3}' | Out-File CSXS\manifest.xml.new -encoding Utf8"
 
 IF EXIST CSXS\manifest.xml.new (
     DEL CSXS\manifest.xml
