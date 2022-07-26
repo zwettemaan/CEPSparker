@@ -12,7 +12,10 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
-export SPRK_TIMESTAMP_SERVER="http://timestamp.globalsign.com/scripts/timstamp.dll"
+# KC 20220726: this server worked, found it in a list
+# https://kbpdfstudio.qoppa.com/list-of-timestamp-servers-for-signing-pdf/
+
+export SPRK_TIMESTAMP_SERVER="http://timestamp.digicert.com"
 
 export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools/"
 
