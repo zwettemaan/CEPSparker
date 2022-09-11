@@ -26,6 +26,7 @@ if [ "$EXTENSION_HOME_DIR" != "" ]; then
     ln -s "${PROJECT_ROOT_DIR}html"          "${EXTENSION_HOME_DIR}html"
     ln -s "${PROJECT_ROOT_DIR}js"            "${EXTENSION_HOME_DIR}js"
     ln -s "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_HOME_DIR}jsx"
+    ln -s "${PROJECT_ROOT_DIR}node_modules"  "${EXTENSION_HOME_DIR}node_modules"
     ln -s "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_HOME_DIR}shared_js_jsx"
 
     echo ""
