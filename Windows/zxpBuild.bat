@@ -93,6 +93,7 @@ XCOPY "%PROJECT_ROOT_DIR%CSXS"          "%EXTENSION_BUILD_DIR%\CSXS\" /y /s /e >
 XCOPY "%PROJECT_ROOT_DIR%html"          "%EXTENSION_BUILD_DIR%\html\" /y /s /e >NUL 2>&1
 XCOPY "%PROJECT_ROOT_DIR%js"            "%EXTENSION_BUILD_DIR%\js\" /y /s /e >NUL 2>&1
 XCOPY "%PROJECT_ROOT_DIR%jsx"           "%EXTENSION_BUILD_DIR%\jsx\" /y /s /e >NUL 2>&1
+DEL "%EXTENSION_BUILD_DIR%\jsx\manually*.jsx" >NUL 2>&1
 XCOPY "%PROJECT_ROOT_DIR%shared_js_jsx" "%EXTENSION_BUILD_DIR%\shared_js_jsx\" /y /s /e >NUL 2>&1
 
 CD "%BUILD_DIR%"
