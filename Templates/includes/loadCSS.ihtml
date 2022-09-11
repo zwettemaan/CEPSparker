@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="../css/jquery-ui.min.css" />
-<link rel="stylesheet" href="../css/topcoat-desktop-dark.css"/>
+<link class="theme" rel="stylesheet" href="../css/topcoat-desktop-dark.css"/>
 <link rel="stylesheet" href="../css/panel.css"/>
 

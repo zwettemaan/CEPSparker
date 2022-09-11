@@ -34,8 +34,8 @@ $endif
     then(readPreferences_PRM).
     then(passCollectedInfoToExtendScript_PRM).
     then(savePreferences_PRM).
-    then(jsInterfaceInit_PRM).
-    then(updateUI_PRM);
+    then(updateUI_PRM).
+    then(jsInterfaceInit_PRM);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -369,18 +369,18 @@ function initHostScript_PRM() {
     return promise;
 }
 
-$$SHORTCODE$$.jsInterfaceInit_PRM = function jsInterfaceInit_PRM() {
+function jsInterfaceInit_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var promise = new Promise(function(resolve, reject) {
-        $$SHORTCODE$$.logEntry("$$SHORTCODE$$.jsInterfaceInit_PRM callback");
+        $$SHORTCODE$$.logEntry("jsInterfaceInit_PRM callback");
 
         $$SHORTCODE$$.jsInterface.init();
         resolve();
 
-        $$SHORTCODE$$.logExit("$$SHORTCODE$$.jsInterfaceInit_PRM callback");
+        $$SHORTCODE$$.logExit("jsInterfaceInit_PRM callback");
     });
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
