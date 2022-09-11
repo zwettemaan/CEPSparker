@@ -1,0 +1,15 @@
+ADOBE SYSTEMS INCORPORATED
+
+SOFTWARE LICENSE AGREEMENT
+
+Name of software: PlugPlugExternalObject
+
+By using the above-identified software made available by Adobe Systems Incorporated or its subsidiaries (collectively "Adobe"), you agree to the following terms and conditions; if you do not agree, do not use the software. The terms of any end user license agreement accompanying a particular software file upon installation or download of the software shall supersede the terms presented below.
+
+The export and re-export of Adobe software products are controlled by the United States Export Administration Regulations. By downloading or using any Adobe software product, you are certifying that you are not a national of Cuba, Iran, North Korea, Sudan, or Syria, or any other country to which the United States embargoes goods, and that you are not a person on the Table of Denial Orders, the Entity List, or the List of Specially Designated Nationals.
+
+If the software is designed for use with an application software product ("Host Application") published by Adobe; Adobe grants you a non-exclusive license to use such software with the Host Application only, provided you possess a valid license from Adobe for the Host Application. Except as set forth below, such software is licensed to you subject to the terms and conditions of the End User License Agreement from Adobe governing your use of the Host Application.
+
+Disclaimer of Warranties. The software is being provided to you "as is", without warranty of any kind. Adobe makes no express warranties to you regarding the software and Adobe disclaims all warranties with regard to the software, whether express or implied, including, without limitation, any implied warranties of fitness for a particular purpose, merchantability, or noninfringement of third party rights. Some states or jurisdictions do not allow the exclusion of implied warranties, so the above limitations may not apply to you.
+
+Limit of Liability. In no event will Adobe be liable to you for any loss of use, interruption of business, or any direct, indirect, special, incidental, or consequential damages of any kind (including lost profits) regardless of the form of action whether in contract, tort (including negligence), strict product liability or otherwise, even if Adobe has been advised of the possibility of such damages. Some states or jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so the above limitation or exclusion may not apply to you.
