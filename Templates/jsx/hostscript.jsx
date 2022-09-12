@@ -12,10 +12,21 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
+if (! $$SHORTCODE$$.C) {
+    $$SHORTCODE$$.C = {};
+}
+
+$$SHORTCODE$$.C.JAVASCRIPT = "JavaScript";
+$$SHORTCODE$$.C.EXTENDSCRIPT = "ExtendScript";
+
+$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
+
+//@include "json2.jsx"
+//@include "JSInterface.jsx", 
+
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
-		"jsx/json2.jsx",
 		"shared_js_jsx/globals.js",
 		"shared_js_jsx/tweakableSettings.js",
 		"shared_js_jsx/utils.js",

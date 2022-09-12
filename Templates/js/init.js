@@ -2,10 +2,23 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
+(function() {
+
+if (! $$SHORTCODE$$.C) {
+    $$SHORTCODE$$.C = {};
+}
+
+$$SHORTCODE$$.C.JAVASCRIPT = "JavaScript";
+$$SHORTCODE$$.C.EXTENDSCRIPT = "ExtendScript";
+
+$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.JAVASCRIPT;
+
+$$SHORTCODE$$.jsInterface = require("JSInterface");
+
 $$SHORTCODE$$.csInterface = new CSInterface();
 $$SHORTCODE$$.hostEnvironment = $$SHORTCODE$$.csInterface.getHostEnvironment();
 
-function init() {
+$$SHORTCODE$$.init = function init() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -21,7 +34,8 @@ $endif
     then(readPreferences_PRM).
     then(passCollectedInfoToExtendScript_PRM).
     then(savePreferences_PRM).
-    then(updateUI_PRM);
+    then(updateUI_PRM).
+    then(jsInterfaceInit_PRM);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -32,7 +46,7 @@ if ($$SHORTCODE$$.S.MANUAL_START_FROM_CHROME) {
     console.log("Running in debug mode. Must call init() from the Chrome console");
 }
 else {
-    init();
+    $$SHORTCODE$$.init();
 }
 
 // ----------------
@@ -355,7 +369,26 @@ function initHostScript_PRM() {
     return promise;
 }
 
+function jsInterfaceInit_PRM() {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
+    var promise = new Promise(function(resolve, reject) {
+        $$SHORTCODE$$.logEntry("jsInterfaceInit_PRM callback");
+
+        $$SHORTCODE$$.jsInterface.init();
+        resolve();
+
+        $$SHORTCODE$$.logExit("jsInterfaceInit_PRM callback");
+    });
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+    $endif
+    return promise;
+}
+ 
 function passCollectedInfoToExtendScript_PRM() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -545,3 +578,5 @@ $endif
     $endif
     return promise;
 }
+
+})();

@@ -50,7 +50,9 @@ else
         rm -rf html
         rm -rf js
         rm -rf jsx
+        rm -rf node_modules
         rm -rf LocalLinks
+        rm -rf VSCode
         rm -rf SampleImageServer
         rm -rf shared_js_jsx
       

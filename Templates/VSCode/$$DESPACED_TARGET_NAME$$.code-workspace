@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+    ],
+    "settings": {},
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "extendscript-debug",
+                "request": "attach",
+                "engineName": "$$EXTENSION_ID$$_Engine_Id",
+                "name": "Attach to $$TARGET_NAME$$ ES engine in IDS 2022",
+                "hostAppSpecifier": "indesign-17.064"
+            },
+            {
+                "type": "extendscript-debug",
+                "request": "launch",
+                "script": "${workspaceFolder}/jsx/manuallyPreloadIDSN_ES_EngineFromDebugger.jsx",
+                "engineName": "$$EXTENSION_ID$$_Engine_Id",
+                "name": "Launch manuallyPreload... in IDS 2022",
+                "hostAppSpecifier": "indesign-17.064"
+            },
+            {
+                "type": "extendscript-debug",
+                "request": "launch",
+                "script": "${workspaceFolder}/jsx/manuallyClearGlobalsIDSN_ES_FromDebugger.jsx",
+                "engineName": "$$EXTENSION_ID$$_Engine_Id",
+                "name": "Launch manuallyClearGlobals... in IDS 2022",
+                "hostAppSpecifier": "indesign-17.064"
+            }
+        ]
+    }
+}

@@ -73,6 +73,8 @@ else
         cp -R "${PROJECT_ROOT_DIR}html"          "${EXTENSION_BUILD_DIR}html"
         cp -R "${PROJECT_ROOT_DIR}js"            "${EXTENSION_BUILD_DIR}js"
         cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
+        rm -f "${EXTENSION_BUILD_DIR}jsx/manually*.jsx"
+        cp -R "${PROJECT_ROOT_DIR}node_modules"  "${EXTENSION_BUILD_DIR}node_modules"
         cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
 
         cd "$EXTENSION_BUILD_DIR"
