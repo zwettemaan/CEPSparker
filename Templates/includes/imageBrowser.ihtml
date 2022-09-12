@@ -1,5 +1,6 @@
 $if $$CEPVERSION$$ >= 7.0
-        <p>Run the sample image server from the command line (e.g. 'cd SampleImageServer; node server.js').</p>
+        <p>Before launching the panel, run the sample image server from the command line (e.g. 'cd SampleImageServer; node server.js').</p>
+        <p>Then open a document, and open this panel. Clicking an image in the panel will place the image into the document.</p>
         <iframe id="$$SHORTCODE$$iframe" src="http://localhost:$$IMAGEBROWSER_PORT$$/images" />
 $else
         <p>You need to generate a panel with CEP version 7.0 or higher for this sample code to work.</p>
