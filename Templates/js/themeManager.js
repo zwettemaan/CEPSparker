@@ -44,12 +44,6 @@ var themeManager = (function () {
     // console.log(appSkinInfo)
     var panelBgColor = appSkinInfo.panelBackgroundColor.color;
     var bgdColor = toHex(panelBgColor);
-    // KC20220912 Actual BG colors measured on my Mac, dark to light
-    // These seem to be different than what appSkinInfo has
-    // 323232
-    // 535353
-    // b9b9b9
-    // F0F0F0
     var fontColor = "F0F0F0";
     if (panelBgColor.red > 122) {
       fontColor = "000000";
