@@ -3,8 +3,8 @@
 #
 
 if [ "$1" == "" ]; then
-	echo "Usage: $0 <pathToZXP>"
-	exit
+    echo "Usage: $0 <pathToZXP>"
+    exit
 fi
 
 export ZXP_RELATIVE_FILE_PATH="$1"
@@ -28,19 +28,19 @@ export ZXP_DIR=`pwd`/
 
 if [ -e "${EXTENSION_DIR}${ZXP_FOLDER_NAME}" ]; then
 
-	echo ""
-	echo "Extension already installed"
-	echo ""
+    echo ""
+    echo "Extension already installed"
+    echo ""
 
 else
 
-	mkdir "${EXTENSION_DIR}${ZXP_FOLDER_NAME}"
-	cd "${EXTENSION_DIR}${ZXP_FOLDER_NAME}"
-	unzip "${ZXP_DIR}${ZXP_FILE_NAME}"
+    mkdir "${EXTENSION_DIR}${ZXP_FOLDER_NAME}"
+    cd "${EXTENSION_DIR}${ZXP_FOLDER_NAME}"
+    unzip "${ZXP_DIR}${ZXP_FILE_NAME}"
 
-	echo ""
-	echo "Extension $ZXP_FILE_NAME has been installed. Restart Adobe Creative Cloud app."
-	echo ""
+    echo ""
+    echo "Extension $ZXP_FILE_NAME has been installed. Restart Adobe Creative Cloud app."
+    echo ""
 
 fi
 
