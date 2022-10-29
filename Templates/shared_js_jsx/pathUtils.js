@@ -27,7 +27,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
         }
 
         var lastChar = filePath.substr(-1);        
-        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.OTHER_PLATFORM_SEPARATOR) {
+        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
             break;
         }
 
@@ -127,7 +127,7 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
 
         var lastChar = filePath.substr(-1);        
         if (! separator) {
-            if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.OTHER_PLATFORM_SEPARATOR) {
+            if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
                 retVal = filePath.substr(0, filePath.length - 1); 
             }
         }
