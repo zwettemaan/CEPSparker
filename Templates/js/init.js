@@ -61,7 +61,7 @@ function closeExtension_PRM() {
         $$SHORTCODE$$.logEntry("closeExtension_PRM callback");
         $endif
 
-        $$SHORTCODE.csInterface.closeExtension();
+        $$SHORTCODE$$.csInterface.closeExtension();
         resolve();
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
