@@ -25,7 +25,7 @@ $include "restoreNode.ihtml"
     
     <script src="../shared_js_jsx/init.js"></script>
     <script src="../shared_js/init.js"></script>
-    <script src="../CEP_js/iFrame.js"></script>
+    <script src="../shared_js/iFrame.js"></script>
     <script src="../CEP_js/init.js"></script>
 
     <script src="../CEP_js/Tests/CEP_js.js"></script>

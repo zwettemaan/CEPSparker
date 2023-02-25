@@ -4,11 +4,12 @@
 /css
 /CSXS
 /html
-/js
 /jsx
-/js_jsx
-/node_modules
+/CEP_js
+/node_js
+/shared_js
 /shared_js_jsx
+/node_modules
 /LocalLinks
 /BuildSettings
 /SampleImageServer

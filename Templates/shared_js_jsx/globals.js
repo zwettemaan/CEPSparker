@@ -14,7 +14,7 @@ if (! $$SHORTCODE$$.C) {
 
 $$SHORTCODE$$.C.HTML_ID_IFRAME                           = "$$SHORTCODE$$_iFrame";
 $$SHORTCODE$$.C.HTML_ID_IFRAME_CONTAINER                 = "$$SHORTCODE$$_iFrameWrapper";
-$$SHORTCODE$$.C.HTML_SRC_IFRAME                          = "localhost:$$IFRAME_UI_PORT$$/panelUI.html";
+$$SHORTCODE$$.C.HTML_SRC_IFRAME                          = "http://localhost:$$IFRAME_UI_PORT$$/panelUI.html";
 
 $$SHORTCODE$$.C.BROWSER_JAVASCRIPT                       = "Browser JavaScript";
 $$SHORTCODE$$.C.CEP_JAVASCRIPT                           = "CEP JavaScript";
