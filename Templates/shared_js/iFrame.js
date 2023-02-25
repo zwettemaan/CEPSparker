@@ -518,20 +518,10 @@ $$SHORTCODE$$.setupIFrameInCEPPanel = function setupIFrameInCEPPanel() {
 
         try {
 
-            if (! $$SHORTCODE$$.prefs.sharedPrefs.BASE_URL_DATA) {
-                $$SHORTCODE$$.logError(arguments, "need $$SHORTCODE$$.prefs.sharedPrefs.BASE_URL_DATA");
-                break;
-            }
-
-            if (! $$SHORTCODE$$.prefs.sharedPrefs.RELATIVE_URL_SRC_IFRAME) {
-                $$SHORTCODE$$.logError(arguments, "need $$SHORTCODE$$.prefs.sharedPrefs.RELATIVE_URL_SRC_IFRAME");
-                break;
-            }
-
             $('#' + $$SHORTCODE$$.C.HTML_ID_IFRAME_CONTAINER).html(
                 '<iframe' + 
                 ' id="' + $$SHORTCODE$$.C.HTML_ID_IFRAME + '"' + 
-                ' src="' + $$SHORTCODE$$.prefs.sharedPrefs.BASE_URL_DATA + "/" + $$SHORTCODE$$.prefs.sharedPrefs.RELATIVE_URL_SRC_IFRAME + '?' + $$SHORTCODE$$.randomGUID() + '"' +
+                ' src="' + $$SHORTCODE$$.C.HTML_SRC_IFRAME + '?' + $$SHORTCODE$$.randomGUID() + '"' +
                 '>' + '</iframe>');
 
             window.addEventListener("message", $$SHORTCODE$$.receiveMessageFromIFrameToCEP, false);

@@ -1,11 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../css/jquery-ui.min.css" />
+<link id="theme" rel="stylesheet" href="../css/topcoat-desktop-dark.css"/>
+<link id="hostStyle" rel="stylesheet" href="../css/panel.css"/>
+
+
     <script src="../CEP_js/CSInterface.js"></script>
 
     <script src="../shared_js/promiscuous/promiscuous-browser.js"></script>
 
-$include "hideNode.ihtml"
+    <script type="text/javascript">
+        window.nodeRequire = window.require || function () {}; 
+        window.nodeModule = window.module; 
+        delete window.module; 
+        window.nodeGlobal = window.global; 
+        delete window.global;
+    </script>
     <script src="../shared_js/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../shared_js/jQuery/jquery-ui.min.js"></script>
-$include "restoreNode.ihtml"
+    <script type="text/javascript">
+        window.module = window.nodeModule; 
+        window.global = window.nodeGlobal;
+    </script>
 
     <script src="../shared_js/bootstrap/js/bootstrap.min.js"></script>
 
@@ -25,7 +45,6 @@ $include "restoreNode.ihtml"
     
     <script src="../shared_js_jsx/init.js"></script>
     <script src="../shared_js/init.js"></script>
-    <script src="../CEP_js/iFrame.js"></script>
     <script src="../CEP_js/init.js"></script>
 
     <script src="../CEP_js/Tests/CEP_js.js"></script>
@@ -36,3 +55,30 @@ $include "restoreNode.ihtml"
     <script src="../shared_js/Tests/shared_js.js"></script>
 
     <script src="../shared_js_jsx/tests.js"></script>
+
+
+</head>
+
+<body id="SPRKbody">
+
+    <script>
+        SPRK.init();
+        
+        if (SPRK.S.RUN_TESTS) {
+            
+            console.log("Start tests - test results (if any) follow:");
+            
+            var testResults = SPRK.runTests();
+            if (testResults) console.log(testResults);
+                        
+            console.log("Completed tests");
+        }
+    </script>
+
+   <div id="SPRKpanel" class="SPRKpanel">
+<div id="SPRK_iFrameWrapper"><div>
+
+    </div>
+</body>
+
+</html>

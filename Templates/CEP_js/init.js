@@ -642,6 +642,9 @@ function wireUI_PRM() {
 $if "$$STARTERCODE$$" == "ImageBrowser"
 $include "imageBrowser.ijs"    
 $endif
+$if "$$STARTERCODE$$" == "IFrameUIServer"
+$include "iFrameUIClient.ijs"    
+$endif
 $if "$$STARTERCODE$$" == "ScriptRunner"
 $include "scriptRunner_wireUI.ijs"        
 $endif

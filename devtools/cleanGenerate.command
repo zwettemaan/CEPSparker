@@ -52,13 +52,14 @@ else
         rm -rf node_modules
         rm -rf LocalLinks
         rm -rf VSCode
-        rm -rf SampleImageServer
         rm -rf jsx
         rm -rf CEP_js
         rm -rf browser_js
         rm -rf node_js
         rm -rf shared_js
         rm -rf shared_js_jsx
+        rm -rf SampleImageServer
+        rm -rf IFrameUIServer
       
         echo ""
         echo "This project has been reset to an unconfigured, blank state."

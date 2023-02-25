@@ -2,7 +2,7 @@ var http = require('http');
 var url = require('url');
 var path = require('path');
 var fs = require('fs');
-var port = process.argv[2] || $$IFRAME_UI_PORT$$;
+var port = process.argv[2] || 8001;
 
 var serverDir = process.cwd();
 var rootDir = path.join(serverDir, "root");
