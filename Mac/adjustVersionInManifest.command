@@ -16,16 +16,16 @@ cd "$PROJECT_ROOT_DIR"
 
 if [ "$PROJECT_VERSION" != "" ]; then
 
-	#
-	# Update extension version number in manifest
-	#
-	sed -E "s/(<Extension +Id=\"[^\"]*\" +Version=\")([0-9\.]*)(\")/\1$PROJECT_VERSION\3/" < CSXS/manifest.xml | sed -E "s/(ExtensionBundleVersion=\")([0-9\.]*)(\")/\1$PROJECT_VERSION\3/" > CSXS/manifest.xml.new
+    #
+    # Update extension version number in manifest
+    #
+    sed -E "s/(<Extension +Id=\"[^\"]*\" +Version=\")([0-9\.]*)(\")/\1$PROJECT_VERSION\3/" < CSXS/manifest.xml | sed -E "s/(ExtensionBundleVersion=\")([0-9\.]*)(\")/\1$PROJECT_VERSION\3/" > CSXS/manifest.xml.new
 
-	mv CSXS/manifest.xml.new CSXS/manifest.xml
+    mv CSXS/manifest.xml.new CSXS/manifest.xml
 
-	echo ""
-	echo "Extension version in manifest.xml has been updated."
-	echo ""
+    echo ""
+    echo "Extension version in manifest.xml has been updated."
+    echo ""
 
 fi
 

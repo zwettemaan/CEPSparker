@@ -47,13 +47,17 @@ else
         rm -rf debug
         rm -rf css
         rm -rf CSXS
-        rm -rf html
-        rm -rf js
-        rm -rf jsx
+        rm -rf CEP_html
+        rm -rf browser_html
         rm -rf node_modules
         rm -rf LocalLinks
         rm -rf VSCode
         rm -rf SampleImageServer
+        rm -rf jsx
+        rm -rf CEP_js
+        rm -rf browser_js
+        rm -rf node_js
+        rm -rf shared_js
         rm -rf shared_js_jsx
       
         echo ""

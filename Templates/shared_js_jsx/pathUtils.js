@@ -14,9 +14,11 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {    
+$$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
+
     var retVal = filePath;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -27,7 +29,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
         }
 
         var lastChar = filePath.substr(-1);        
-        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.OTHER_PLATFORM_SEPARATOR) {
+        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
             break;
         }
 
@@ -41,13 +43,16 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.basename = function basename(filePath, separator) {    
+
     var endSegment;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -64,13 +69,16 @@ $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return endSegment;
 };
 
 $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {    
+
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -89,13 +97,16 @@ $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, separator) {
+
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -109,13 +120,16 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, sepa
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(filePath, separator) {    
+
     var retVal = filePath;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -127,7 +141,7 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
 
         var lastChar = filePath.substr(-1);        
         if (! separator) {
-            if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.OTHER_PLATFORM_SEPARATOR) {
+            if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
                 retVal = filePath.substr(0, filePath.length - 1); 
             }
         }
@@ -142,6 +156,7 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };

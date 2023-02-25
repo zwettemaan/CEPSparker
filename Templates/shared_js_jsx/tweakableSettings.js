@@ -13,7 +13,11 @@ if (! $$SHORTCODE$$.S) {
     $$SHORTCODE$$.S = {}; // stash global settings here
 }
 
+// for hashing function
+$$SHORTCODE$$.S.SALT_HASH                     = "dswa4343trtwer";
+
 $$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_NONE;
+$$SHORTCODE$$.S.RUN_TESTS                     = true;
 
 $$SHORTCODE$$.S.MANUAL_START_FROM_CHROME      = false;
 

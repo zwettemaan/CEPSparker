@@ -19,8 +19,8 @@ SELECT_TARGET_APP_CPU_WORD_SIZE="64,32"
 IS_ADVANCED_TARGET_APP_CPU_WORD_SIZE=1
 
 TARGET_CC_VERSION="Any"
-HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/includes/appMap.json file to see the 'Any' defaults that will be used."
-SELECT_TARGET_CC_VERSION="Any,2020,CC 2019,CC 2018"
+HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/appMap.json file to see the 'Any' defaults that will be used."
+SELECT_TARGET_CC_VERSION="Any,2023,2022"
 IS_ADVANCED_TARGET_CC_VERSION=1
 
 TARGET_CC_LANGUAGE_CODE="en_US"

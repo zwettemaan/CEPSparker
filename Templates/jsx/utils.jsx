@@ -1,5 +1,5 @@
 ﻿//
-// This file mirrors the API of js/utils.js
+// This file mirrors the API of CEP_js/utils.js or shared_js/utils.js
 //
 
 if ("undefined" == typeof $$SHORTCODE$$) {
@@ -9,8 +9,8 @@ if ("undefined" == typeof $$SHORTCODE$$) {
 (function() {
 
 $$SHORTCODE$$.checkMac = function checkMac() {
-    
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -18,8 +18,8 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-    $endif
 
+    $endif
     return retVal;
 };
 
@@ -107,6 +107,37 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
     while (false);
 
     $$SHORTCODE$$.inLogger = savedInLogger;
+}
+
+$$SHORTCODE$$.upcast = function upcast(pageItem) {
+
+    var retVal = pageItem;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            if (! (retVal instanceof PageItem)) {
+                break;          
+            }
+
+            retVal = pageItem.getElements()[0];
+        }
+        catch (err) 
+        {
+            retVal = pageItem;
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
 }
 
 })();

@@ -12,24 +12,24 @@
                 "type": "extendscript-debug",
                 "request": "attach",
                 "engineName": "$$EXTENSION_ID$$_Engine_Id",
-                "name": "Attach. Select, then click 'Play' to attach to $$TARGET_NAME$$ ES engine in IDS 2022",
-                "hostAppSpecifier": "indesign-17.064"
+                "name": "Attach. Select, then click 'Play' to attach to $$TARGET_NAME$$ ES engine in IDS 2023",
+                "hostAppSpecifier": "indesign-18.064"
             },
             {
                 "type": "extendscript-debug",
                 "request": "launch",
                 "script": "${workspaceFolder}/jsx/manuallyPreloadIDSN_ES_EngineFromDebugger.jsx",
                 "engineName": "$$EXTENSION_ID$$_Engine_Id",
-                "name": "Preload Engine. Select, then click 'Play' to run manuallyPreload... in IDS 2022",
-                "hostAppSpecifier": "indesign-17.064"
+                "name": "Preload Engine. Select, then click 'Play' to run manuallyPreload... in IDS 2023",
+                "hostAppSpecifier": "indesign-18.064"
             },
             {
                 "type": "extendscript-debug",
                 "request": "launch",
                 "script": "${workspaceFolder}/jsx/manuallyClearGlobalsIDSN_ES_FromDebugger.jsx",
                 "engineName": "$$EXTENSION_ID$$_Engine_Id",
-                "name": "Clear Globals. Select, then click 'Play' to manuallyClearGlobals... in IDS 2022",
-                "hostAppSpecifier": "indesign-17.064"
+                "name": "Clear Globals. Select, then click 'Play' to manuallyClearGlobals... in IDS 2023",
+                "hostAppSpecifier": "indesign-18.064"
             }
         ]
     }
