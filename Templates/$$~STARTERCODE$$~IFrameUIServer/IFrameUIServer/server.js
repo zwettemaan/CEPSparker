@@ -2,12 +2,14 @@ var http = require('http');
 var url = require('url');
 var path = require('path');
 var fs = require('fs');
-var port = process.argv[2] || $$IMAGEBROWSER_PORT$$;
+var port = process.argv[2] || $$IFRAME_UI_PORT$$;
 
 var serverDir = process.cwd();
 var rootDir = path.join(serverDir, "root");
 var includesDir = path.join(serverDir, "includes");
-var jsDir = path.join(serverDir, "../js");
+var nodeJSDir = path.join(serverDir, "../node_js");
+var sharedJSDir = path.join(serverDir, "../shared_js");
+var sharedJSJSXDir = path.join(serverDir, "../shared_js_jsx");
 
 var htmlPrefixFilePath = path.join(includesDir, "prefix.ihtml");
 var htmlPrefix = fs.readFileSync(htmlPrefixFilePath, "utf8");
@@ -70,39 +72,6 @@ http.createServer(function (request, response) {
         sendFile(outFileName);
     } 
 
-    function showImagesInDir(encodedURI, dirPath) {
-
-        fs.readdir(dirPath, function(err, files) {
-            if (err) {
-                errorPage();
-            }
-            else {
-
-                var htmlOutput = htmlPrefix + "\n";
-
-                for (var idx = 0; idx < files.length; idx++) {
-                    var fileName = files[idx];
-                    if (fileName.charAt(0) != ".") {
-                        htmlOutput += 
-                            "<p><img src=\"" + 
-                            encodedURI + "/" + 
-                            encodeURIComponent(files[idx]) + 
-                            "\" width=\"64\" onclick=\"handleImageClick(this);\"/></p>\n";
-                    }
-                }
-
-                htmlOutput += htmlSuffix + "\n";
-
-                response.writeHead(200, {'Content-Type': 'text/html'});
-                response.write(htmlOutput + '\n');
-                response.end();
-            }
-        });
-
-
-    }
-
-
     do {
 
         var encodedURI = url.parse(request.url).pathname
@@ -123,7 +92,7 @@ http.createServer(function (request, response) {
         }
 
         var baseDir = rootDir;
-        if (startsWith(cleanedURI, "/css/") || startsWith(cleanedURI, "/shared_js_jsx/") || startsWith(cleanedURI, "/shared_js/")) {
+        if (startsWith(cleanedURI, "/css/") || startsWith(cleanedURI, "/browser_js/") || startsWith(cleanedURI, "/shared_js_jsx/") || startsWith(cleanedURI, "/shared_js/")) {
             baseDir = serverDir + "/../";
         }
 
@@ -139,7 +108,7 @@ http.createServer(function (request, response) {
                 sendFile(fileOrDirPath);
             }
             else {
-                showImagesInDir(encodedURI, fileOrDirPath);
+                errorPage();
             }
         });
 
