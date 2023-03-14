@@ -54,7 +54,7 @@ IF NOT %errorLevel% == 0 (
     ECHO Creating temporary symbolic links to the extension
     ECHO.
 
-    MKLINK /H "%EXTENSION_HOME_DIR%.debug" "%PROJECT_ROOT_DIR%debug"
+    MKLINK /H "%EXTENSION_HOME_DIR%.debug"        "%PROJECT_ROOT_DIR%debug"
 
     MKLINK /J "%EXTENSION_HOME_DIR%css"           "%PROJECT_ROOT_DIR%css"
     MKLINK /J "%EXTENSION_HOME_DIR%CSXS"          "%PROJECT_ROOT_DIR%CSXS"
