@@ -8,6 +8,19 @@ if ("undefined" == typeof $$SHORTCODE$$) {
 
 (function() {
 
+$$SHORTCODE$$.appendLineToUTF8TextFile = function(filePath, line) {
+
+    try {
+        var textFile = File(filePath);
+        textFile.open("a");
+        textFile.encoding = "UTF8";
+        textFile.writeln(line);
+        textFile.close();
+    }
+    catch (err) {        
+    }
+}
+
 $$SHORTCODE$$.checkMac = function checkMac() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
@@ -87,6 +100,10 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             
             var estkLogLine = prefix + message;
                     
+            if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
+                $$SHORTCODE$$.appendLineToUTF8TextFile($$SHORTCODE$$.S.LOG_TO_FILEPATH, estkLogLine);
+            }
+
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
                 $.writeln(estkLogLine); 
             }
