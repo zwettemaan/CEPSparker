@@ -48,19 +48,20 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
     IF "!REPLY!" == "YES" (
         
         RD /s /q .git  
-        RD /s /q .gitignore
-        RD /q ReadMe.md
-        RD /q LICENSE
-        RD /q %SPRK_DEV_TOOLS_DIR%cleanGenerate.bat
-        RD /q %SPRK_DEV_TOOLS_DIR%cleanGenerate.command
-        RD /q %SPRK_DEV_TOOLS_DIR%detachFromCEPSparker.command
+        DEL /q .gitignore
+        DEL /q ReadMe.md
+        DEL /q LICENSE
+        DEL /q %SPRK_DEV_TOOLS_DIR%cleanGenerate.bat
+        DEL /q %SPRK_DEV_TOOLS_DIR%cleanGenerate.command
+        DEL /q %SPRK_DEV_TOOLS_DIR%detachFromCEPSparker.command
+        DEL /q %SPRK_DEV_TOOLS_DIR%detachFromCEPSparker.bat
         RD /s /q Templates
-        RD /q Mac\initialSetupConfigApp.command
+        DEL /q Mac\initialSetupConfigApp.command
         RD /s /q Mac\SparkerConfig.app
-        RD /q "Mac\ Do not forget to de-quarantine!.txt"
-        RD /q Windows\SparkerConfig.exe
-        RD /s /q "Windows\SparkerConfig\ Libs"
-        RD /q "Windows\ Run CMD with administrative permissions!.txt"
+        DEL /q "Mac\ Do not forget to de-quarantine!.txt"
+        DEL /q Windows\SparkerConfig.exe
+        RD /s /q "Windows\SparkerConfig Libs"
+        DEL /q "Windows\ Run CMD with administrative permissions!.txt"
         
     )
 )
