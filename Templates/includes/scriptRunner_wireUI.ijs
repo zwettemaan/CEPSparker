@@ -1,5 +1,5 @@
         $("#$$SHORTCODE$$btnRun").click(function(evt) {
-        	var scriptText = $("#txtScript").val();
+            var scriptText = $("#txtScript").val();
             var quotedScriptText = $$SHORTCODE$$.dQ(scriptText);
             var scriptReturningJSONOfEval = "JSON.stringify(eval(" + quotedScriptText + "))";
             $$SHORTCODE$$.csInterface.evalScript(scriptReturningJSONOfEval, function(dataJSON) {

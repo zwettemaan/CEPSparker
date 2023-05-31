@@ -65,7 +65,7 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
     $endif
-	return retVal;
+    return retVal;
 };
 
 $$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {  

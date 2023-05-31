@@ -27,81 +27,81 @@ $$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
-		"shared_js_jsx/globals.js",
-		"shared_js_jsx/tweakableSettings.js",
-		"shared_js_jsx/utils.js",
-		"jsx/utils.jsx",
-		"jsx/shared_js_jsx/pathUtils.js",
-		"jsx/pathUtils.jsx",
-		"jsx/shared_js_jsx/init.js",
-		"jsx/init.jsx"
+    "shared_js_jsx/globals.js",
+    "shared_js_jsx/tweakableSettings.js",
+    "shared_js_jsx/utils.js",
+    "jsx/utils.jsx",
+    "jsx/shared_js_jsx/pathUtils.js",
+    "jsx/pathUtils.jsx",
+    "jsx/shared_js_jsx/init.js",
+    "jsx/init.jsx"
 ];
 
 $$SHORTCODE$$.errorBeforeLoggingAvailable = function(error) {
 
-	if ($$SHORTCODE$$.logError) {
-		$$SHORTCODE$$.logError(error);
-	}
-	else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
+    if ($$SHORTCODE$$.logError) {
+        $$SHORTCODE$$.logError(error);
+    }
+    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
 
-		try {
+        try {
 
-			var f = File(Folder.desktop + "/criticalErrors.log");
-			f.open("a");
-			f.writeln(error);
-			f.close();
+            var f = File(Folder.desktop + "/criticalErrors.log");
+            f.open("a");
+            f.writeln(error);
+            f.close();
 
-		}
-		catch (err) {
+        }
+        catch (err) {
 
-			try {
-				console.log(error);
-			}
-			catch (err) {	
-			}
+            try {
+                console.log(error);
+            }
+            catch (err) {   
+            }
 
-		}
-	}
+        }
+    }
 }
 
 if (dreamweaver) {
 
-	$$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-		try {
-			var fullPath = extensionDir + scriptPath;
-			var script = DWfile.read(fullPath);
-			eval(script);
-		}
-		catch (err) {			
-			$$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);	
-		}
-	}
+    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
+        try {
+            var fullPath = extensionDir + scriptPath;
+            var script = DWfile.read(fullPath);
+            eval(script);
+        }
+        catch (err) {           
+            $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
+        }
+    }
 
 }
 else {
 
-	$$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-		try {
-			var fullPath = extensionDir + scriptPath;
-			var file = File(fullPath);
-			file.open("r");
-			var script = file.read();
-			file.close();
-			eval(script);
-		}
-		catch (err) {			
-			$$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);	
-		}
-	}
+    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
+        try {
+            var fullPath = extensionDir + scriptPath;
+            var file = File(fullPath);
+            file.open("r");
+            var script = file.read();
+            file.close();
+            eval(script);
+        }
+        catch (err) {           
+            $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
+        }
+    }
 
 }
 
 $$SHORTCODE$$.initHostScript = function initHostScript(extensionDir) {
 
-	for (var idx = 0; idx < $$SHORTCODE$$.relativeFilePathsToLoad.length; idx++) {
-		var filePath = $$SHORTCODE$$.relativeFilePathsToLoad[idx];
-		$$SHORTCODE$$.loadScript(extensionDir, filePath);
-	}
+    for (var idx = 0; idx < $$SHORTCODE$$.relativeFilePathsToLoad.length; idx++) {
+        var filePath = $$SHORTCODE$$.relativeFilePathsToLoad[idx];
+        $$SHORTCODE$$.loadScript(extensionDir, filePath);
+    }
 
 }
 
