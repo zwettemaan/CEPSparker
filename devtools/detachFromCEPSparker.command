@@ -50,6 +50,7 @@ else
     rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.bat"
     rm -f "${SPRK_DEV_TOOLS_DIR}cleanGenerate.command"
     rm -f "${SPRK_DEV_TOOLS_DIR}detachFromCEPSparker.command"
+    rm -f "${SPRK_DEV_TOOLS_DIR}detachFromCEPSparker.bat"
     rm -rf Templates
     rm -f Mac/initialSetupConfigApp.command
     rm -rf Mac/SparkerConfig.app
