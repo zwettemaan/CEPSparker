@@ -31,11 +31,11 @@ if [ -e LocalLinks ]; then
 
 else
 
-	mkdir LocalLinks
-	cd LocalLinks
-	ln -s "/Library/Application Support/Adobe/CEP/extensions" "Extensions_Application"
-	ln -s ~/Library/Logs/CSXS "Adobe_LogFiles"
-	ln -s ~/Library/Application\ Support/Adobe/CEP/extensions "Extensions_User"
+    mkdir LocalLinks
+    cd LocalLinks
+    ln -s "/Library/Application Support/Adobe/CEP/extensions" "Extensions_Application"
+    ln -s ~/Library/Logs/CSXS "Adobe_LogFiles"
+    ln -s ~/Library/Application\ Support/Adobe/CEP/extensions "Extensions_User"
 
     echo ""
     echo "LocalLinks folder has been created."

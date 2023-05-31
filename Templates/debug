@@ -3,30 +3,30 @@
     <Extension Id="$$EXTENSION_ID$$">
         <HostList>          
 $if "$$TARGET_APP$$" == "Any"
-		<!-- 
-			Enable and change as needed 
-		-->
-			<Host Name="IDSN" Port="$$DEBUGPORT$$" />
-		<!--
-			<Host Name="AICY" Port="8889" />
+        <!-- 
+            Enable and change as needed 
+        -->
+            <Host Name="IDSN" Port="$$DEBUGPORT$$" />
+        <!--
+            <Host Name="AICY" Port="8889" />
 
-			<Host Name="PHSP" Port="8890" />
-			<Host Name="PHXS" Port="8890" />
+            <Host Name="PHSP" Port="8890" />
+            <Host Name="PHXS" Port="8890" />
 
-			<Host Name="ILST" Port="8891" />
-			<Host Name="PPRO" Port="8892" />
-			<Host Name="AEFT" Port="8893" />
-			<Host Name="PRLD" Port="8894" />
-			<Host Name="FLPR" Port="8895" />
-			<Host Name="DRWV" Port="8896" />
-			<Host Name="KBRG" Port="8897" />
-		-->
-$elif "$$TARGET_APP$$" == "Photoshop"	
+            <Host Name="ILST" Port="8891" />
+            <Host Name="PPRO" Port="8892" />
+            <Host Name="AEFT" Port="8893" />
+            <Host Name="PRLD" Port="8894" />
+            <Host Name="FLPR" Port="8895" />
+            <Host Name="DRWV" Port="8896" />
+            <Host Name="KBRG" Port="8897" />
+        -->
+$elif "$$TARGET_APP$$" == "Photoshop"   
             <Host Name="PHSP" Port="$$DEBUGPORT$$" /> 
             <Host Name="PHXS" Port="$$DEBUGPORT$$" /> 
-$else	
+$else   
             <Host Name="$$TARGET_APP_CODE$$" Port="$$DEBUGPORT$$" /> 
 $endif
- 		</HostList>
+        </HostList>
     </Extension>
 </ExtensionList>

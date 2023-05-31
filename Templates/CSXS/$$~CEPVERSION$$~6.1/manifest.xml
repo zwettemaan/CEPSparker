@@ -1,106 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest 
-	Version="6.0" 
-	ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
-	ExtensionBundleVersion="1.0.0"
-	ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<ExtensionList>
-		<Extension Id="$$EXTENSION_ID$$" Version="$$PROJECT_VERSION$$" />
-	</ExtensionList>
-	<ExecutionEnvironment>
-		<HostList>
+    Version="6.0" 
+    ExtensionBundleId="$$EXTENSION_BUNDLEID$$" 
+    ExtensionBundleVersion="1.0.0"
+    ExtensionBundleName="$$EXTENSION_BUNDLENAME$$" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ExtensionList>
+        <Extension Id="$$EXTENSION_ID$$" Version="$$PROJECT_VERSION$$" />
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
 $if "$$TARGET_APP$$" == "Any"
-			<Host Name="IDSN" Version="[11,99)" />
-			<Host Name="AICY" Version="[11,99)" />
-			<Host Name="PHSP" Version="[16,99)" />
-			<Host Name="PHXS" Version="[16,99)" />
-			<Host Name="ILST" Version="[19,99)" />
-			<Host Name="PPRO" Version="[9,99)" />
-			<Host Name="AEFT" Version="[13.5,99)" />
-			<Host Name="PRLD" Version="[2,99)" />
-			<Host Name="FLPR" Version="[13,99)" />
-			<Host Name="DRWV" Version="[16,99)" />
-			<Host Name="KBRG" Version="[7.0,99)" />
+            <Host Name="IDSN" Version="[11,99)" />
+            <Host Name="AICY" Version="[11,99)" />
+            <Host Name="PHSP" Version="[16,99)" />
+            <Host Name="PHXS" Version="[16,99)" />
+            <Host Name="ILST" Version="[19,99)" />
+            <Host Name="PPRO" Version="[9,99)" />
+            <Host Name="AEFT" Version="[13.5,99)" />
+            <Host Name="PRLD" Version="[2,99)" />
+            <Host Name="FLPR" Version="[13,99)" />
+            <Host Name="DRWV" Version="[16,99)" />
+            <Host Name="KBRG" Version="[7.0,99)" />
 $endif
 $if "$$TARGET_APP_CODE$$" == "IDSN"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "AICY"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[11,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "PHSP"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
-			<Host Name="PHXS" Version="[16,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
+            <Host Name="PHXS" Version="[16,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "ILST"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[19,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[19,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "PPRO"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[9,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[9,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "AEFT"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[13.5,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[13.5,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "PRLD"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[2,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[2,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "FLPR"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[13,99)" />
-$endif			
+            <Host Name="$$TARGET_APP_CODE$$" Version="[13,99)" />
+$endif          
 $if "$$TARGET_APP_CODE$$" == "DRWV"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
-$endif		
+            <Host Name="$$TARGET_APP_CODE$$" Version="[16,99)" />
+$endif      
 $if "$$TARGET_APP_CODE$$" == "KBRG"
-			<Host Name="$$TARGET_APP_CODE$$" Version="[7.0,99)" />
-$endif			
-		</HostList>
-		<LocaleList>
-			<Locale Code="All" />
-		</LocaleList>
-		<RequiredRuntimeList>		
-			<RequiredRuntime Name="CSXS" Version="6.0" />
-		</RequiredRuntimeList>
-	</ExecutionEnvironment>
-	<DispatchInfoList>
-		<Extension Id="$$EXTENSION_ID$$">
-			<DispatchInfo>
-				<Resources>
-					<MainPath>./CEP_html/index.html</MainPath>
-					<ScriptPath>./jsx/hostscript.jsx</ScriptPath>		
-					<CEFCommandLine>
-						<Parameter>--allow-file-access</Parameter>
-						<Parameter>--allow-file-access-from-files</Parameter>
-						<Parameter>--enable-nodejs</Parameter>
-						<Parameter>--mixed-context</Parameter>
-					</CEFCommandLine>
-				</Resources>
-				<Lifecycle>
-					<AutoVisible>true</AutoVisible>
-				</Lifecycle>
-				<UI>
+            <Host Name="$$TARGET_APP_CODE$$" Version="[7.0,99)" />
+$endif          
+        </HostList>
+        <LocaleList>
+            <Locale Code="All" />
+        </LocaleList>
+        <RequiredRuntimeList>       
+            <RequiredRuntime Name="CSXS" Version="6.0" />
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="$$EXTENSION_ID$$">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./CEP_html/index.html</MainPath>
+                    <ScriptPath>./jsx/hostscript.jsx</ScriptPath>       
+                    <CEFCommandLine>
+                        <Parameter>--allow-file-access</Parameter>
+                        <Parameter>--allow-file-access-from-files</Parameter>
+                        <Parameter>--enable-nodejs</Parameter>
+                        <Parameter>--mixed-context</Parameter>
+                    </CEFCommandLine>
+                </Resources>
+                <Lifecycle>
+                    <AutoVisible>true</AutoVisible>
+                </Lifecycle>
+                <UI>
 $if "$$TARGET_APP_CODE$$" == "KBRG"
-					<Type>ModalDialog</Type>
+                    <Type>ModalDialog</Type>
 $else
-					<Type>$$UI_TYPE$$</Type>
-$endif			
-					<Menu>$$EXTENSION_MENUNAME$$</Menu>
-					<Geometry>
-						<Size>
-							<Height>$$PANELHEIGHT$$</Height>
-							<Width>$$PANELWIDTH$$</Width>
-						</Size>
-						<MinSize>
-							<Height>$$PANELHEIGHT$$</Height>
-							<Width>$$PANELWIDTH$$</Width>
-						</MinSize>
-						<MaxSize>
-							<Height>$$PANELHEIGHT$$</Height>
-							<Width>$$PANELWIDTH$$</Width>
-						</MaxSize>
-					</Geometry>
-				</UI>
-			</DispatchInfo>
-		</Extension>
-	</DispatchInfoList>
+                    <Type>$$UI_TYPE$$</Type>
+$endif          
+                    <Menu>$$EXTENSION_MENUNAME$$</Menu>
+                    <Geometry>
+                        <Size>
+                            <Height>$$PANELHEIGHT$$</Height>
+                            <Width>$$PANELWIDTH$$</Width>
+                        </Size>
+                        <MinSize>
+                            <Height>$$PANELHEIGHT$$</Height>
+                            <Width>$$PANELWIDTH$$</Width>
+                        </MinSize>
+                        <MaxSize>
+                            <Height>$$PANELHEIGHT$$</Height>
+                            <Width>$$PANELWIDTH$$</Width>
+                        </MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
 </ExtensionManifest>

@@ -10,17 +10,17 @@ export PROJECT_ROOT_DIR=`dirname "$SPRK_DEV_TOOLS_DIR"`/
 export BUILD_SETTINGS_DIR="${PROJECT_ROOT_DIR}BuildSettings/"
 
 if [ ! -f "${BUILD_SETTINGS_DIR}certinfo.command" ]; then
-	echo ""
-	echo "certinfo.command not found. Make sure to run Mac/SparkerConfig.app first."
-	echo ""
-	exit
+    echo ""
+    echo "certinfo.command not found. Make sure to run Mac/SparkerConfig.app first."
+    echo ""
+    exit
 fi
 
 if [ ! -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" ]; then
-	echo ""
-	echo "ZXPSignCmd not found. Try to run devtools/downloadZXPSignCmd.command"
-	echo ""
-	exit
+    echo ""
+    echo "ZXPSignCmd not found. Try to run devtools/downloadZXPSignCmd.command"
+    echo ""
+    exit
 fi
 
 cd "$PROJECT_ROOT_DIR"
@@ -28,10 +28,10 @@ cd "$PROJECT_ROOT_DIR"
 . "${BUILD_SETTINGS_DIR}certinfo.command"
 
 if [ -f "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" ]; then
-	echo ""
-	echo "Certificate file already exists."
-	echo ""
-	exit
+    echo ""
+    echo "Certificate file already exists."
+    echo ""
+    exit
 fi
 
 echo ""
