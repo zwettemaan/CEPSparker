@@ -54,6 +54,7 @@ else
         rm -rf LocalLinks
         rm -rf VSCode
         rm -rf SampleImageServer
+        rm -rf shared_js
         rm -rf shared_js_jsx
       
         echo ""
