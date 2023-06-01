@@ -6,47 +6,47 @@
 	<dict/>
 	<key>files2</key>
 	<dict>
+		<key>Frameworks/Crypto.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			XnTOCPSVLcKL1HSnd6Rt1uC5Y1c=
+			</data>
+			<key>requirement</key>
+			<string>identifier Crypto and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
+		</dict>
 		<key>Frameworks/InternetEncodings.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			5gblDInoYhNrENrw+/mrRJzdTlA=
+			mrDQI4RniERC04TAX+gEJHafHEs=
 			</data>
 			<key>requirement</key>
 			<string>identifier InternetEncodings and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
 		</dict>
-		<key>Frameworks/MBS_Main_Registration_Plugin_20198.dylib</key>
+		<key>Frameworks/MBS_Main_Registration_Plugin_20946.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			TfCPw3+Dbc2qkc9+7ESHQaB1rbA=
+			9k7HrT2ya9l+aOml9iAljiidzV0=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.monkeybreadsoftware.xojo.plugins.Registration" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
 		</dict>
-		<key>Frameworks/MBS_Util_JSON_Plugin_20198.dylib</key>
+		<key>Frameworks/MBS_Util_JSON_Plugin_20946.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			PCszARQZY1CYFgGRgC9sRE7PWGM=
+			Vpixn3U9+ZsMRnZCGY2taKuHB+M=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.monkeybreadsoftware.xojo.plugins.JSON" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
-		</dict>
-		<key>Frameworks/MBS_Util_UUID_Plugin_20198.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			7DjhNRNLT5RwjCQlvYXQ5elyDdo=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.monkeybreadsoftware.xojo.plugins.UUID" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
 		</dict>
 		<key>Frameworks/RegEx.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			YmuIdUUvsaP/vHGBSxMNuDfY4ms=
+			THJeqkng2dBTDy9tb8TB/he6gTw=
 			</data>
 			<key>requirement</key>
 			<string>identifier RegEx and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
@@ -55,10 +55,19 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			eNZIGL9oexgyTVdMSrQ7hYFL8EU=
+			ymhPCTFEJXSo33s2/dIenQFCrps=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.xojo.XojoFramework" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
+		</dict>
+		<key>Frameworks/libGzip.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			ydtID37kekCx/Pz/frkK65zt8XI=
+			</data>
+			<key>requirement</key>
+			<string>identifier libGzip and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = UF54MCK725</string>
 		</dict>
 	</dict>
 	<key>rules</key>

@@ -42,7 +42,8 @@ else
         Mac/clean.command
 
         rm -f "tsconfig.json"
-        rm -f "package*.json"
+        rm -f "package.json"
+        rm -f "package-lock.json"
         rm -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd*"
         rm -rf "${SPRK_DEV_TOOLS_DIR}signingtoolkit*"
         rm -rf BuildSettings
