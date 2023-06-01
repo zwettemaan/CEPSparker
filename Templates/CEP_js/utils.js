@@ -57,43 +57,6 @@ $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
     return retVal;
 };
 
-<<<<<<< HEAD:Templates/js/utils.js
-$$SHORTCODE$$.checkMac = function checkMac() {
-    var retVal;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    retVal = (window.navigator.platform.substr(0,3).toLowerCase() == "mac");
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-    $endif
-    return retVal;
-};
-
-$$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPersistent) {  
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    if (in_isPersistent) {
-        var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
-    } else {
-        var event = new CSEvent("com.adobe.PhotoshopUnPersistent", "APPLICATION");
-    }
-    
-    event.extensionId = $$SHORTCODE$$.C.EXTENSION_ID;
-
-    $$SHORTCODE$$.csInterface.dispatchEvent(event);
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-    $endif
-}
-
-=======
->>>>>>> CEPSparker_v2:Templates/CEP_js/utils.js
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
    var savedInLogger = $$SHORTCODE$$.inLogger;
