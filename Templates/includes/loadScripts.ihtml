@@ -3,7 +3,7 @@
     <script src="../js/promiscuous/promiscuous-browser.js"></script>
 
 $include "hideNode.ihtml"
-    <script src="../js/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/jQuery/jquery-3.7.0.min.js"></script>
     <script src="../js/jQuery/jquery-ui.min.js"></script>
 $include "restoreNode.ihtml"
 
