@@ -6,10 +6,10 @@
 
 Starter project for developing CEP panels to be used with Adobe applications
 
-© 2018-2022, Rorohiko Ltd. - Kris Coppieters
+© 2018-2023, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v1.1.0, September 12, 2022
+v1.1.1, June 1, 2023
 
 ## Preamble
 
