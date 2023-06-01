@@ -21,9 +21,11 @@ cd ../node_install
 
 npm pack jsinterface
 mv jsinterface*.tgz jsinterface.tgz
+rm -rf jsinterface
 
 npm pack runtests
 mv runtests*.tgz runtests.tgz
+rm -rf runtests
 
 cd ..
 
