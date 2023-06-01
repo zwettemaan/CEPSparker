@@ -41,6 +41,8 @@ else
         
         Mac/clean.command
 
+        rm -f "tsconfig.json"
+        rm -f "package.json"
         rm -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd*"
         rm -rf "${SPRK_DEV_TOOLS_DIR}signingtoolkit*"
         rm -rf BuildSettings
@@ -49,6 +51,7 @@ else
         rm -rf CSXS
         rm -rf CEP_html
         rm -rf browser_html
+        rm -rf node_install
         rm -rf node_modules
         rm -rf LocalLinks
         rm -rf VSCode

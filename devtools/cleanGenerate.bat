@@ -40,7 +40,9 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         
         CALL Windows\clean.bat NESTED
 
-        RD /s /q %SPRK_DEV_TOOLS_DIR%ZXPSignCmd* >NUL 2>&1
+        DEL tsconfig.json >NUL 2>&1
+        DEL package.json >NUL 2>&1
+        DEL /q %SPRK_DEV_TOOLS_DIR%ZXPSignCmd* >NUL 2>&1
         RD /s /q %SPRK_DEV_TOOLS_DIR%signingtoolkit >NUL 2>&1
         RD /s /q BuildSettings >NUL 2>&1
         RD /s /q debug >NUL 2>&1
@@ -48,6 +50,7 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         RD /s /q CSXS >NUL 2>&1
         RD /s /q CEP_html >NUL 2>&1
         RD /s /q browser_html >NUL 2>&1
+        RD /s /q node_install >NUL 2>&1
         RD /s /q node_modules >NUL 2>&1
         RD /s /q LocalLinks >NUL 2>&1
         RD /s /q VSCode >NUL 2>&1
