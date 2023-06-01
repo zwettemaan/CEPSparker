@@ -14,13 +14,16 @@
         "esModuleInterop": true,        
         "allowSyntheticDefaultImports": true
     },
-    "include":
-        [
+    "include": [
             "CEP_js/**/*", 
             "jsx/**/*", 
             "node_js/**/*", 
             "shared_js/**/*", 
             "shared_js_jsx/**/*", 
             "node_modules/**/*"
-        ]
+    ],
+    "typeRoots": [
+        "./node_modules/@types",
+        "./node_modules/types-for-adobe/InDesign/2018"
+    ]
 }
