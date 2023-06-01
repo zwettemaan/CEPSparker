@@ -24,8 +24,8 @@
 /shared_js_jsx
 /SampleImageServer
 /VSCode
-devtools/ZXPSignCmd-64bit.dmg
-package-lock.json
-package.json
-tsconfig.json
-node_install
+/devtools/ZXPSignCmd-64bit.dmg
+/node_install
+/package-lock.json
+/package.json
+/tsconfig.json

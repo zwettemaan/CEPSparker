@@ -10,22 +10,9 @@ pushd "$SPRK_COMMANDS_DIR" > /dev/null
 
 export SPRK_COMMANDS_DIR=`pwd`/
 
-. setTarget.command
+. ./setTarget.command
 
-if ! command -v npm &> /dev/null; then
-    echo "ERROR, cannot install. Node.js needs to be installed (node and npm command line commands need to be available)."
-    exit
-fi
-
-cd ..
-
-#
-# Need to install node modules used for development as well as JSInterface
-#
-
-npm install .
-
-cd "${SPRK_COMMANDS_DIR}"
+./nodeSetup.command
 
 if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe" ]; then
     mkdir "${USER_HOME_DIR}Library/Application Support/Adobe"
