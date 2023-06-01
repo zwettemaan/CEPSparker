@@ -1,0 +1,12 @@
+{
+    "name": "$$EXTENSION_BUNDLEID$$",
+    "version": "0.0.1",
+    "description": "$$TARGET_NAME$$",
+    "main": "CEP_js/init.js",
+    "dependencies": {
+        "jsinterface": "file:./node_install/jsinterface.tgz",
+        "runtests": "file:./node_install/runtests.tgz",
+        "@types/node": "^20.2.5",
+        "types-for-adobe": "^7.0.12"
+    }
+}
