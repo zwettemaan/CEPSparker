@@ -12,6 +12,33 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
+if ! command -v npm &> /dev/null; then
+    echo "ERROR, cannot install. Node.js needs to be installed (node and npm command line commands need to be available)."
+    exit
+fi
+
+cd ..
+
+#
+# Need to install node modules used for development as well as JSInterface
+#
+
+npm install .
+
+cd "${SPRK_COMMANDS_DIR}"
+
+if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe" ]; then
+    mkdir "${USER_HOME_DIR}Library/Application Support/Adobe"
+fi
+
+if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe/CEP" ]; then
+    mkdir "${USER_HOME_DIR}Library/Application Support/Adobe/CEP"
+fi
+
+if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions" ]; then
+    mkdir "${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions"
+fi
+
 if [ "$EXTENSION_HOME_DIR" != "" ]; then
 
     "${SPRK_COMMANDS_DIR}setPlayerDebugMode.command"

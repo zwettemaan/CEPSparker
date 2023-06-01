@@ -6,6 +6,12 @@ REM
 REM Setup the panel so we can run it in a live debug session 
 REM
 
+WHERE /q npm
+IF ERRORLEVEL 1 (
+    ECHO ERROR, cannot install. Node.js needs to be installed; node and npm command line commands need to be available.
+    GOTO DONE
+)
+
 IF "%SPRK_COMMANDS_DIR%" == "" (
     SET SPRK_COMMANDS_DIR=%~dp0
 )
@@ -33,6 +39,12 @@ IF NOT %errorLevel% == 0 (
     ECHO.
 
 ) ELSE (
+
+    REM
+    REM Need to install node modules used for development as well as JSInterface
+    REM
+
+    npm install %PROJECT_ROOT_DIR%
 
     CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
     CALL "%SPRK_COMMANDS_DIR%setPlayerDebugMode.bat"

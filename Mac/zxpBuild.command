@@ -12,6 +12,14 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
+pushd "${PROJECT_ROOT_DIR}" > /dev/null
+
+#
+# Need to install node modules used for development as well as JSInterface
+#
+
+npm install .
+
 # KC 20220726: this server worked, found it in a list
 # https://kbpdfstudio.qoppa.com/list-of-timestamp-servers-for-signing-pdf/
 
