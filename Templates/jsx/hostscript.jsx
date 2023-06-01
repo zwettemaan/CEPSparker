@@ -5,7 +5,6 @@ $if "$$TARGET_APP$$" == "Bridge"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
 
-var dreamweaver;
 var app;
 
 if ("undefined" == typeof $$SHORTCODE$$) {
@@ -16,9 +15,6 @@ if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
 
-$$SHORTCODE$$.C.JAVASCRIPT = "JavaScript";
-$$SHORTCODE$$.C.EXTENDSCRIPT = "ExtendScript";
-
 $$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
 
 //@include "json2.jsx"
@@ -27,14 +23,20 @@ $$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
-    "shared_js_jsx/globals.js",
-    "shared_js_jsx/tweakableSettings.js",
-    "shared_js_jsx/utils.js",
-    "jsx/utils.jsx",
-    "jsx/shared_js_jsx/pathUtils.js",
-    "jsx/pathUtils.jsx",
-    "jsx/shared_js_jsx/init.js",
-    "jsx/init.jsx"
+        "shared_js_jsx/globals.js",
+        "shared_js_jsx/tweakableSettings.js",
+        "shared_js_jsx/Tests/utils_Test.js",
+        "shared_js_jsx/utils.js",
+        "jsx/utils.jsx",
+        "jsx/shared_js_jsx/pathUtils.js",
+        "jsx/pathUtils.jsx",
+        "shared_js_jsx/protectedObject.js",
+        "jsx/shared_js_jsx/init.js",
+        "jsx/init.jsx"
+];
+
+$$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad = [
+        "jsx/idUtils.jsx"
 ];
 
 $$SHORTCODE$$.errorBeforeLoggingAvailable = function(error) {
@@ -64,43 +66,57 @@ $$SHORTCODE$$.errorBeforeLoggingAvailable = function(error) {
     }
 }
 
-if (dreamweaver) {
+$$SHORTCODE$$.loadScript = function(extensionDir, scriptPath, appId) {
 
-    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-        try {
-            var fullPath = extensionDir + scriptPath;
+    if (appId) {
+        $$SHORTCODE$$.C.APP_ID = appId;
+    }
+
+    try {
+        var fullPath = extensionDir + scriptPath;
+        if (appId == "DRWV") {
             var script = DWfile.read(fullPath);
             eval(script);
         }
-        catch (err) {           
-            $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
+        else if ($$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INDESIGN || $$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INCOPY) {
+            var file = File(fullPath);
+            app.doScript(file, ScriptLanguage.JAVASCRIPT, [], UndoModes.FAST_ENTIRE_SCRIPT);
         }
-    }
-
-}
-else {
-
-    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-        try {
-            var fullPath = extensionDir + scriptPath;
+        else {
             var file = File(fullPath);
             file.open("r");
             var script = file.read();
             file.close();
             eval(script);
         }
-        catch (err) {           
-            $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
-        }
     }
-
+    catch (err) {           
+        $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
+    }
 }
 
-$$SHORTCODE$$.initHostScript = function initHostScript(extensionDir) {
+$$SHORTCODE$$.initHostScript = function initHostScript(appId, extensionDir, disableTests) {
 
     for (var idx = 0; idx < $$SHORTCODE$$.relativeFilePathsToLoad.length; idx++) {
         var filePath = $$SHORTCODE$$.relativeFilePathsToLoad[idx];
-        $$SHORTCODE$$.loadScript(extensionDir, filePath);
+        $$SHORTCODE$$.loadScript(extensionDir, filePath, appId);
+    }
+
+    if (appId == $$SHORTCODE$$.C.APP_CODE_INDESIGN || appId == $$SHORTCODE$$.C.APP_CODE_INCOPY) {
+        for (var idx = 0; idx < $$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad.length; idx++) {
+            var filePath = $$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad[idx];
+            $$SHORTCODE$$.loadScript(extensionDir, filePath, appId);
+        }
+    }
+
+    if ($$SHORTCODE$$.S.RUN_TESTS && ! disableTests) {
+
+        $.writeln("Start tests - test results (if any) follow:\n");
+
+        var testResults = $$SHORTCODE$$.runTests();
+        if (testResults) $.writeln(testResults);
+
+        $.writeln("Completed tests");    
     }
 
 }

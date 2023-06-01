@@ -103,9 +103,12 @@ else
 
             cp -R "${PROJECT_ROOT_DIR}css"           "${EXTENSION_BUILD_DIR}css"
             cp -R "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_BUILD_DIR}CSXS"
-            cp -R "${PROJECT_ROOT_DIR}html"          "${EXTENSION_BUILD_DIR}html"
-            cp -R "${PROJECT_ROOT_DIR}js"            "${EXTENSION_BUILD_DIR}js"
+            cp -R "${PROJECT_ROOT_DIR}CEP_html"      "${EXTENSION_BUILD_DIR}CEP_html"
+            cp -R "${PROJECT_ROOT_DIR}node_modules"  "${EXTENSION_BUILD_DIR}node_modules"
             cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
+            rm -f "${EXTENSION_BUILD_DIR}jsx/manually*.jsx"
+            cp -R "${PROJECT_ROOT_DIR}CEP_js"        "${EXTENSION_BUILD_DIR}CEP_js"
+            cp -R "${PROJECT_ROOT_DIR}shared_js"     "${EXTENSION_BUILD_DIR}shared_js"
             cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
 
             cd "$EXTENSION_BUILD_DIR"

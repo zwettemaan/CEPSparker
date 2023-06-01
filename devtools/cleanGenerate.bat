@@ -46,15 +46,19 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         RD /s /q debug >NUL 2>&1
         RD /s /q css >NUL 2>&1
         RD /s /q CSXS >NUL 2>&1
-        RD /s /q html >NUL 2>&1
-        RD /s /q js >NUL 2>&1
-        RD /s /q jsx >NUL 2>&1
+        RD /s /q CEP_html >NUL 2>&1
+        RD /s /q browser_html >NUL 2>&1
         RD /s /q node_modules >NUL 2>&1
         RD /s /q LocalLinks >NUL 2>&1
         RD /s /q VSCode >NUL 2>&1
-        RD /s /q SampleImageServer >NUL 2>&1
+        RD /s /q jsx >NUL 2>&1
+        RD /s /q CEP_js >NUL 2>&1
+        RD /s /q browser_js >NUL 2>&1
+        RD /s /q node_js >NUL 2>&1
         RD /s /q shared_js >NUL 2>&1
         RD /s /q shared_js_jsx >NUL 2>&1
+        RD /s /q SampleImageServer >NUL 2>&1
+        RD /s /q IFrameUIServer >NUL 2>&1
         
         ECHO.
         ECHO This project has been reset to an unconfigured, blank state.

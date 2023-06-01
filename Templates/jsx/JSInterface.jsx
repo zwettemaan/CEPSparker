@@ -14,6 +14,13 @@ JSInterface.loadPlugPlugLibrary = function(filePathJSONStr) {
         return;
     }
 
+    try {
+        JSInterface.externalLibrary = new ExternalObject("lib:PlugPlugExternalObject");
+        return;
+    }
+    catch (err) {        
+    }
+
     var filePath;
     if (filePathJSONStr) {
         filePath = JSON.parse(filePathJSONStr);

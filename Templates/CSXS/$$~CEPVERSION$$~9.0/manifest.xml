@@ -19,7 +19,7 @@ $if "$$TARGET_APP$$" == "Any"
             <Host Name="PPRO" Version="[13,99)" />
             <Host Name="AEFT" Version="[16,99)" />
             <Host Name="PRLD" Version="[8,99)" />
-            <Host Name="FLPR" Version="[15,99)" />
+            <Host Name="FLPR" Version="[19,99)" />
             <Host Name="DRWV" Version="[19,99)" />
             <Host Name="KBRG" Version="[9.0,99)" />
 $endif
@@ -66,7 +66,7 @@ $endif
         <Extension Id="$$EXTENSION_ID$$">
             <DispatchInfo>
                 <Resources>
-                    <MainPath>./html/index.html</MainPath>
+                    <MainPath>./CEP_html/index.html</MainPath>
                     <ScriptPath>./jsx/hostscript.jsx</ScriptPath>       
                     <CEFCommandLine>
                         <Parameter>--allow-file-access</Parameter>

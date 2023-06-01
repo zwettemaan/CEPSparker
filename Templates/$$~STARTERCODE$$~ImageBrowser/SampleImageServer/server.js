@@ -7,7 +7,9 @@ var port = process.argv[2] || $$IMAGEBROWSER_PORT$$;
 var serverDir = process.cwd();
 var rootDir = path.join(serverDir, "root");
 var includesDir = path.join(serverDir, "includes");
-var jsDir = path.join(serverDir, "../js");
+var nodeJSDir = path.join(serverDir, "../node_js");
+var sharedJSDir = path.join(serverDir, "../shared_js");
+var sharedJSJSXDir = path.join(serverDir, "../shared_js_jsx");
 
 var htmlPrefixFilePath = path.join(includesDir, "prefix.ihtml");
 var htmlPrefix = fs.readFileSync(htmlPrefixFilePath, "utf8");
@@ -123,7 +125,7 @@ http.createServer(function (request, response) {
         }
 
         var baseDir = rootDir;
-        if (startsWith(cleanedURI, "/js/") || startsWith(cleanedURI, "/css/") || startsWith(cleanedURI, "/shared_js_jsx/")) {
+        if (startsWith(cleanedURI, "/css/") || startsWith(cleanedURI, "/browser_js/") || startsWith(cleanedURI, "/shared_js_jsx/") || startsWith(cleanedURI, "/shared_js/")) {
             baseDir = serverDir + "/../";
         }
 

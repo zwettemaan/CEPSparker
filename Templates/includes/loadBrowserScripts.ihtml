@@ -1,0 +1,36 @@
+    <script src="/shared_js/promiscuous/promiscuous-browser.js"></script>
+
+$include "hideNode.ihtml"
+    <script src="/shared_js/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/shared_js/jQuery/jquery-ui.min.js"></script>
+$include "restoreNode.ihtml"
+
+    <script src="/shared_js/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="/browser_js/environment.js"></script>
+    <script src="/shared_js/themeManager.js"></script>
+
+    <script src="/shared_js_jsx/globals.js"></script>
+    <script src="/shared_js_jsx/tweakableSettings.js"></script>
+
+    <script src="/shared_js_jsx/utils.js"></script>
+    <script src="/shared_js/utils.js"></script>
+    <script src="/browser_js/utils.js"></script>
+
+    <script src="/shared_js_jsx/pathUtils.js"></script>
+    <script src="/shared_js/pathUtils.js"></script>
+    
+    <script src="/shared_js_jsx/init.js"></script>
+    <script src="/shared_js/init.js"></script>
+    <script src="/browser_js/init.js"></script>
+
+    <script src="/shared_js_jsx/tests.js"></script>
+
+    <script src="/browser_js/Tests/browser_js.js"></script>
+
+    <script src="/shared_js_jsx/Tests/utils_Test.js"></script>
+    <script src="/shared_js_jsx/Tests/shared_js_jsx.js"></script>
+
+    <script src="/shared_js/Tests/shared_js.js"></script>
+
+    <script src="/shared_js_jsx/tests.js"></script>

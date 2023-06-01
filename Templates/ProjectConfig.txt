@@ -19,8 +19,8 @@ SELECT_TARGET_APP_CPU_WORD_SIZE="64,32"
 IS_ADVANCED_TARGET_APP_CPU_WORD_SIZE=1
 
 TARGET_CC_VERSION="Any"
-HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/includes/appMap.json file to see the 'Any' defaults that will be used."
-SELECT_TARGET_CC_VERSION="Any,2020,CC 2019,CC 2018"
+HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/appMap.json file to see the 'Any' defaults that will be used."
+SELECT_TARGET_CC_VERSION="Any,2023,2022"
 IS_ADVANCED_TARGET_CC_VERSION=1
 
 TARGET_CC_LANGUAGE_CODE="en_US"
@@ -30,7 +30,7 @@ IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner"
+SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer"
 
 ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
@@ -80,6 +80,9 @@ SELECT_UI_TYPE="ModalDialog,Panel,Modeless,Invisible"
 
 IMAGEBROWSER_PORT=8000
 HELP_IMAGEBROWSER_PORT="Port number to use for locally running test image-server"
+
+IFRAME_UI_PORT=8001
+HELP_IFRAMEUI_PORT="Port number to use for locally running test IFrame UI server"
 
 APP_MAPPER_SCRIPT=
 IS_INTERNAL_APP_MAPPER_SCRIPT=1

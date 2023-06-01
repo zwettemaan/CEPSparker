@@ -14,9 +14,11 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {    
+$$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
+
     var retVal = filePath;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -41,13 +43,16 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.basename = function basename(filePath, separator) {    
+
     var endSegment;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -64,13 +69,16 @@ $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return endSegment;
 };
 
 $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {    
+
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -89,13 +97,16 @@ $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, separator) {
+
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -109,13 +120,16 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, sepa
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };
 
 $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(filePath, separator) {    
+
     var retVal = filePath;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -142,6 +156,7 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 };

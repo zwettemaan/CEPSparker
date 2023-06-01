@@ -67,7 +67,7 @@ $endif
         <Extension Id="$$EXTENSION_ID$$">
             <DispatchInfo>
                 <Resources>
-                    <MainPath>./html/index.html</MainPath>
+                    <MainPath>./CEP_html/index.html</MainPath>
                     <ScriptPath>./jsx/hostscript.jsx</ScriptPath>       
                     <CEFCommandLine>
                         <Parameter>--allow-file-access</Parameter>

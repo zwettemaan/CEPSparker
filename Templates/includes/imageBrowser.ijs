@@ -47,9 +47,9 @@
 
                     var file = fs.createWriteStream(destinationPath);
 
-                    var request = http.get(url, function(response) {
+                    var request = http.get(url, function httpGetCallback(response) {
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                        $$SHORTCODE$$.logEntry("http.get callback");
+                        $$SHORTCODE$$.logEntry(arguments);
                         $endif
 
                         response.pipe(file);
@@ -58,11 +58,11 @@
                         });
 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                        $$SHORTCODE$$.logExit("http.get callback");
+                        $$SHORTCODE$$.logExit(arguments);
                         $endif                        
-                    }).on('error', function(err) { 
+                    }).on('error', function httpOnErrorCallback(err) { 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                        $$SHORTCODE$$.logEntry("http.get error callback");
+                        $$SHORTCODE$$.logEntry(arguments);
                         $endif
 
                         fs.unlink(destinationPath);
@@ -72,7 +72,7 @@
                         }
 
                         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                        $$SHORTCODE$$.logExit("http.get error callback");
+                        $$SHORTCODE$$.logExit(arguments);
                         $endif
                     })
 
@@ -88,9 +88,9 @@
                 var scaledWidth = 100;
                 var scale = scaledWidth / width;
                 var scaledHeight = scale * height;
-                download(url, filePath, function(err) {
+                download(url, filePath, function downloadCallback(err) {
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                    $$SHORTCODE$$.logEntry("download callback");
+                    $$SHORTCODE$$.logEntry(arguments);
                     $endif
 
                     if (! err) {
@@ -104,7 +104,7 @@
                     }
                     
                     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-                    $$SHORTCODE$$.logExit("download callback");
+                    $$SHORTCODE$$.logExit(arguments);
                     $endif
                 })
             }

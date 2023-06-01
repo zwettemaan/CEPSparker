@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
 
-$include "loadCSS.ihtml"
-$include "loadScripts.ihtml"
+$include "loadBrowserCSS.ihtml"
+$include "loadBrowserScripts.ihtml"
 
 <script>
 

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+$include "loadCEPCSS.ihtml"
+$include "loadCEPScripts.ihtml"
+
+</head>
+
+<body id="$$SHORTCODE$$body">
+
+    <script>
+        $$SHORTCODE$$.init();
+        
+        if ($$SHORTCODE$$.S.RUN_TESTS) {
+            
+            console.log("Start tests - test results (if any) follow:");
+            
+            var testResults = $$SHORTCODE$$.runTests();
+            if (testResults) console.log(testResults);
+                        
+            console.log("Completed tests");
+        }
+    </script>
+
+   <div id="$$SHORTCODE$$panel" class="$$SHORTCODE$$panel">
+$if "$$STARTERCODE$$" == "HelloWorld"
+
+        Hello World!
+
+$elif "$$STARTERCODE$$" == "SamplePanel"
+$include "samplePanel.ihtml"
+$elif "$$STARTERCODE$$" == "ImageBrowser"
+$include "imageBrowser.ihtml"    
+$elif "$$STARTERCODE$$" == "ScriptRunner"
+$include "scriptRunner.ihtml"
+$elif "$$STARTERCODE$$" == "IFrameUIServer"
+$include "iFrameUIClient.ihtml"    
+$endif
+    </div>
+</body>
+
+</html>

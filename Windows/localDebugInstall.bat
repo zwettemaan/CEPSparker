@@ -54,14 +54,15 @@ IF NOT %errorLevel% == 0 (
     ECHO Creating temporary symbolic links to the extension
     ECHO.
 
-    MKLINK /H "%EXTENSION_HOME_DIR%.debug" "%PROJECT_ROOT_DIR%debug"
+    MKLINK /H "%EXTENSION_HOME_DIR%.debug"        "%PROJECT_ROOT_DIR%debug"
 
     MKLINK /J "%EXTENSION_HOME_DIR%css"           "%PROJECT_ROOT_DIR%css"
     MKLINK /J "%EXTENSION_HOME_DIR%CSXS"          "%PROJECT_ROOT_DIR%CSXS"
-    MKLINK /J "%EXTENSION_HOME_DIR%html"          "%PROJECT_ROOT_DIR%html"
-    MKLINK /J "%EXTENSION_HOME_DIR%js"            "%PROJECT_ROOT_DIR%js"
-    MKLINK /J "%EXTENSION_HOME_DIR%jsx"           "%PROJECT_ROOT_DIR%jsx"
+    MKLINK /J "%EXTENSION_HOME_DIR%CEP_html"      "%PROJECT_ROOT_DIR%CEP_html"
     MKLINK /J "%EXTENSION_HOME_DIR%node_modules"  "%PROJECT_ROOT_DIR%node_modules"
+    MKLINK /J "%EXTENSION_HOME_DIR%jsx"           "%PROJECT_ROOT_DIR%jsx"
+    MKLINK /J "%EXTENSION_HOME_DIR%CEP_js"        "%PROJECT_ROOT_DIR%CEP_js"
+    MKLINK /J "%EXTENSION_HOME_DIR%shared_js"     "%PROJECT_ROOT_DIR%shared_js"
     MKLINK /J "%EXTENSION_HOME_DIR%shared_js_jsx" "%PROJECT_ROOT_DIR%shared_js_jsx"
 
     REM Some sample code to refer to if css dir has subdirs.
