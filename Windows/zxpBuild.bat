@@ -6,12 +6,6 @@ REM
 REM Setup the panel so we can run it in a live debug session 
 REM
 
-WHERE /q npm
-IF ERRORLEVEL 1 (
-    ECHO ERROR, cannot build. Node.js needs to be installed; node and npm command line commands need to be available.
-    GOTO DONE
-)
-
 REM KC 20220726: this server worked, found it in a list
 REM https://kbpdfstudio.qoppa.com/list-of-timestamp-servers-for-signing-pdf/
 
@@ -47,7 +41,7 @@ REM
 REM Need to install node modules used for development as well as JSInterface
 REM
 
-npm install %PROJECT_ROOT_DIR%
+CALL "%SPRK_COMMANDS_DIR%nodeSetup.bat"
 
 CALL "%SPRK_COMMANDS_DIR%clean.bat" NESTED
 

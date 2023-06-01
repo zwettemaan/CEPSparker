@@ -2,6 +2,12 @@
 
 SETLOCAL EnableDelayedExpansion
 
+WHERE /q npm
+IF ERRORLEVEL 1 (
+    ECHO ERROR, cannot run. Node.js needs to be installed; node and npm command line commands need to be available.
+    GOTO DONE
+)
+
 IF "%SPRK_COMMANDS_DIR%" == "" (
     SET SPRK_COMMANDS_DIR=%~dp0
 )
@@ -25,3 +31,5 @@ REN runtests*.tgz runtests.tgz
 RD /S /Q runtests >NUL 2>&1
 
 POPD
+
+:DONE
