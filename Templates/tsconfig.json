@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "noLib": true,
+        "target": "es3",
+        "ignoreDeprecations": "5.0",
+        "declaration": true,
+        "emitDeclarationOnly": true, 
+        "outDir": "./types",       
+        "module": "commonjs",
+        "allowJs": true,
+        "checkJs": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "esModuleInterop": true,        
+        "allowSyntheticDefaultImports": true
+    },
+    "include":
+        [
+            "CEP_js/**/*", 
+            "jsx/**/*", 
+            "node_js/**/*", 
+            "shared_js/**/*", 
+            "shared_js_jsx/**/*", 
+            "node_modules/**/*"
+        ]
+}
