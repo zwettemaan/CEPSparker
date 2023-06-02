@@ -18,20 +18,20 @@ POPD
 
 CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
 
-PUSHD "%PROJECT_ROOT_DIR%"
-
-CD node_install
+PUSHD "%PROJECT_ROOT_DIR%node_install"
 
 IF NOT EXIST jsinterface.tgz (
     DEL jsinterface*.tgz >NUL 2>&1
-    npm pack jsinterface
+    CALL npm pack jsinterface
+    cd "%PROJECT_ROOT_DIR%node_install"
     REN jsinterface*.tgz jsinterface.tgz
     RD /S /Q jsinterface >NUL 2>&1
 )
 
 IF NOT EXIST runtests.tgz (
     DEL runtests*.tgz >NUL 2>&1
-    npm pack runtests
+    CALL npm pack runtests
+    cd "%PROJECT_ROOT_DIR%node_install"
     REN runtests*.tgz runtests.tgz
     RD /S /Q runtests >NUL 2>&1
 )
