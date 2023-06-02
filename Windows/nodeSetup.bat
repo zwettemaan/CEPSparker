@@ -22,13 +22,23 @@ PUSHD "%PROJECT_ROOT_DIR%"
 
 CD node_install
 
-npm pack jsinterface
-REN jsinterface*.tgz jsinterface.tgz
-RD /S /Q jsinterface >NUL 2>&1
+IF NOT EXIST jsinterface.tgz (
+    DEL jsinterface*.tgz >NUL 2>&1
+    npm pack jsinterface
+    REN jsinterface*.tgz jsinterface.tgz
+    RD /S /Q jsinterface >NUL 2>&1
+)
 
-npm pack runtests
-REN runtests*.tgz runtests.tgz
-RD /S /Q runtests >NUL 2>&1
+IF NOT EXIST runtests.tgz (
+    DEL runtests*.tgz >NUL 2>&1
+    npm pack runtests
+    REN runtests*.tgz runtests.tgz
+    RD /S /Q runtests >NUL 2>&1
+)
+
+CD ..
+
+npm install .
 
 POPD
 

@@ -14,7 +14,7 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 pushd "${PROJECT_ROOT_DIR}" > /dev/null
 
-./nodeSetup.command
+./Mac/nodeSetup.command
 
 # KC 20220726: this server worked, found it in a list
 # https://kbpdfstudio.qoppa.com/list-of-timestamp-servers-for-signing-pdf/

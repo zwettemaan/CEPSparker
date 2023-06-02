@@ -19,13 +19,19 @@ fi
 
 cd ../node_install
 
-npm pack jsinterface
-mv jsinterface*.tgz jsinterface.tgz
-rm -rf jsinterface
+if [ ! -e jsinterface.tgz ]; then
+    rm -f jsinterface*.tgz
+    npm pack jsinterface
+    mv jsinterface*.tgz jsinterface.tgz
+    rm -rf jsinterface
+fi
 
-npm pack runtests
-mv runtests*.tgz runtests.tgz
-rm -rf runtests
+if [ ! -e runtests.tgz ]; then
+    rm -f runtests*.tgz
+    npm pack runtests
+    mv runtests*.tgz runtests.tgz
+    rm -rf runtests
+fi
 
 cd ..
 
