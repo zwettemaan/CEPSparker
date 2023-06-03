@@ -7,8 +7,16 @@ $include "loadBrowserCSS.ihtml"
 $include "loadBrowserScripts.ihtml"
 
 <script>
+var messageID;
+var handlePanelMessageListenerAdded;
 
-    window.addEventListener('message', handlePanelMessage);
+(function () {
+
+    if (! handlePanelMessageListenerAdded) {
+        handlePanelMessageListenerAdded = true;
+        window.addEventListener('message', handlePanelMessage);
+    }
+
     function handlePanelMessage(event) {
 
         var messageObj = JSON.parse(event.data);
@@ -27,17 +35,23 @@ $include "loadBrowserScripts.ihtml"
 
         url += src;
 
+        if (! messageID) {
+            messageID = 0;
+        }
+
+        messageID++;
         var message = {
             opcode: "insertImage",
+            messageID: mnessageID,
             url: url,
             width: width,
             height: height
         };
 
         var messageJSON = JSON.stringify(message);
-
         window.top.postMessage(messageJSON, "*");
     }
+})();
 </script>
 
 </head>
