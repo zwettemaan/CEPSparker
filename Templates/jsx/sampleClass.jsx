@@ -2,8 +2,6 @@
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.SampleClass = SampleClass;
 
 var ProtectedObjectClass = ParentClass;
@@ -90,5 +88,4 @@ $$SHORTCODE$$.SampleClass.prototype.sampleMethod = function sampleMethod(param) 
     return retVal;
 }
 
-})();
 

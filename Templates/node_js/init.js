@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
@@ -91,6 +89,3 @@ $$SHORTCODE$$.init = function init() {
 
     $endif
 }
-
-
-})();

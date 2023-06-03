@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
 
     var retVal;
@@ -162,4 +160,3 @@ $$SHORTCODE$$.setPhotoshopPersistent = function setPhotoshopPersistent(in_isPers
     $endif
 }
 
-})();

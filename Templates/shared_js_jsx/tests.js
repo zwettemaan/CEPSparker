@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function(){
-
 $$SHORTCODE$$.runTests = function runTests() {
 
     var testResults = "";
@@ -37,5 +35,3 @@ $$SHORTCODE$$.runTests = function runTests() {
 
     return testResults;
 }
-
-})();

@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
@@ -663,4 +661,3 @@ $endif
     return promise;
 }
 
-})();

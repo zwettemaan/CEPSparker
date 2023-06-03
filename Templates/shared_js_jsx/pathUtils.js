@@ -8,8 +8,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function(){
-
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
@@ -161,4 +159,3 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
     return retVal;
 };
 
-})();

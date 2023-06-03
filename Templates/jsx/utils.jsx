@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.appendLineToUTF8TextFile = function(filePath, line) {
 
     try {
@@ -156,5 +154,3 @@ $$SHORTCODE$$.upcast = function upcast(pageItem) {
     $endif
     return retVal;
 }
-
-})();

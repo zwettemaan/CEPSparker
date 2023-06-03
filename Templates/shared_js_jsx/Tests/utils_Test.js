@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.Utils_Test = {};
 
 function formattedGUID_test(input, expectedOutput) {
@@ -231,5 +229,3 @@ $$SHORTCODE$$.Utils_Test.runTests = function runTests() {
 
     return testResults;
 }
-
-})();

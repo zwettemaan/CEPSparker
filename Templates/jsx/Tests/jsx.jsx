@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.Tests) {
     $$SHORTCODE$$.Tests = {};
 }
@@ -22,5 +20,3 @@ jsx.runTests = function runTests() {
 
     return testResults;
 }
-
-})();

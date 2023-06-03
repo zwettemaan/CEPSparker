@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.PROJECT_SENTINEL_FOLDER_NAME = "shared_js";
 
 $$SHORTCODE$$.checkMac = function checkMac() {
@@ -77,5 +75,3 @@ $$SHORTCODE$$.searchProjectRoot = function searchProjectRoot(startDir) {
     $endif
     return retVal;
 }
-
-})();

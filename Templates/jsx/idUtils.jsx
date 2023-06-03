@@ -2,8 +2,6 @@
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.upcast = function upcast(pageItem) {
 
     var retVal = pageItem;
@@ -35,4 +33,3 @@ $$SHORTCODE$$.upcast = function upcast(pageItem) {
     return retVal;
 }
 
-})();

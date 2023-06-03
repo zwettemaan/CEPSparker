@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
@@ -59,7 +57,5 @@ function setupIFrameFromServer() {
     return promise;
 
 }
-
-})();
 
 $$SHORTCODE$$.init();

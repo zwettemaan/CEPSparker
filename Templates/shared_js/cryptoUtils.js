@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.crypto) {
     $$SHORTCODE$$.crypto = require('crypto');
 }
@@ -33,6 +31,3 @@ $$SHORTCODE$$.hashString = function hashString(s) {
     $endif
     return retVal;
 }
-
-
-})();

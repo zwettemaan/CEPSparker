@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.receiveEventFromCEPToIFrame = function receiveEventFromCEPToIFrame(event) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
@@ -538,5 +536,3 @@ $$SHORTCODE$$.setupIFrameInCEPPanel = function setupIFrameInCEPPanel() {
 
     $endif
 }
-
-})();

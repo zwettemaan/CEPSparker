@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.Tests) {
     $$SHORTCODE$$.Tests = {};
 }
@@ -21,4 +19,3 @@ CEP_js.runTests = function runTests() {
     return testResults;
 }
 
-})();

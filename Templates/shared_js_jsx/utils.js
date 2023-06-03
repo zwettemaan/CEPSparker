@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function(){
-
 $$SHORTCODE$$.CANONICAL_NUMBER_DIGITS            = 10;
 $$SHORTCODE$$.CANONICAL_GUID_DIGITS              = 32;
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENTS            = [8,4,4,4,12];
@@ -205,7 +203,19 @@ $$SHORTCODE$$.deepClone = function deepClone(obj) {
     return retVal;
 }
 
-// dQ: Wrap a string in double quotes
+/**
+ * Wrap a string in double quotes, which is handy to pass a string through CSInterface
+ * or JSInterface.
+ * If `a = 'a"a\''`, then `$$SHORTCODE$$.dQ(a)` is `"a\\"a'"` and `eval($$SHORTCODE$$.dQ(a)) == a`
+ * We can send `$$SHORTCODE$$.dQ(a)` through an interface, and at the other end, execute `eval()` on the
+ * data to reconstitute the original string `a`
+ * 
+ * @function $$SHORTCODE$$.dQ
+ * 
+ * @param {string} s - The string we want to double quote
+ * @return A string prefixed and suffixed with double quotes, which we can eval() back to s
+ */
+
 $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
@@ -803,5 +813,3 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits) {
     $endif
     return retVal;
 }
-
-})();
