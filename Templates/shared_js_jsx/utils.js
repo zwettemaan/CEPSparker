@@ -415,6 +415,51 @@ $$SHORTCODE$$.formattedGUID = function formattedGUID(guid) {
     return retVal;   
 }
 
+$$SHORTCODE$$.getFunctionName = function getFunctionName(ftnArguments) {
+
+    var retVal = undefined;
+
+    $$SHORTCODE$$.logEntry(arguments);
+
+    do {
+
+        try {
+            if (! ftnArguments) {
+                $$SHORTCODE$$.logError(arguments, "need ftnArguments");
+                break;
+            }
+
+            var functionName;
+            try {
+                functionName = ftnArguments.callee.toString();
+                if (functionName) {
+                    functionName = functionName.match(/function ([^\(]+)/);
+                    if (functionName) {
+                        functionName = functionName[1];                                
+                    }
+                }
+            }
+            catch (err) {
+                functionName = undefined;
+            }
+
+            if (! functionName) {
+                functionName = "[anonymous function]";
+            }
+
+            retVal = functionName;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
+}
+
 $$SHORTCODE$$.jsEqual = function jsEqual(obj1, obj2) {
 
     var retVal = true;

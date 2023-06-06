@@ -1,5 +1,5 @@
 ﻿//
-// Low-level REST API implementation for ExtendScript
+// API implementation for ExtendScript
 //
 // This API is implemented in JavaScript, and the ExtendScript implementation
 // uses JSInterface to call on the JavaScript implementation
@@ -7,8 +7,7 @@
 // This source file only contains glue code to mix and match the two API implementations
 // 
 // No mocks in this implementation: it is layered on top of the JavaScript 
-// implementation, and the mocks are there. For mocks, see
-// js/libs/restAPI.js
+// implementation, and the mocks, if any, are there. 
 //
 
 if ("undefined" == typeof $$SHORTCODE$$) {
@@ -19,11 +18,11 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$.impl = {};
 }
 
-if (! $$SHORTCODE$$.impl.restAPI) {
-    $$SHORTCODE$$.impl.restAPI = {};
+if (! $$SHORTCODE$$.impl.getURLAPI) {
+    $$SHORTCODE$$.impl.getURLAPI = {};
 }
 
-$$SHORTCODE$$.impl.restAPI.getURL = function getURL(url, authorization, completedCallback) { 
+$$SHORTCODE$$.impl.getURLAPI.getURL = function getURL(url, authorization, completedCallback) { 
 
     $$SHORTCODE$$.logEntry(arguments);
 
@@ -39,7 +38,7 @@ $$SHORTCODE$$.impl.restAPI.getURL = function getURL(url, authorization, complete
                 "var data = JSInterface.getData();" +
                 "var pendingCommand = JSInterface.getPendingCommand();" +
                 "pendingCommand.requestAsyncHandling();" +
-                "$$SHORTCODE$$.restAPI.getURL(data.url, data.authorization, function(error, data) {" +
+                "$$SHORTCODE$$.getURLAPI.getURL(data.url, data.authorization, function(error, data) {" +
                     "pendingCommand.completionCallBack({" +
                         "error: error," + 
                         "data: data" +
@@ -63,7 +62,7 @@ $$SHORTCODE$$.impl.restAPI.getURL = function getURL(url, authorization, complete
 
 }
 
-$$SHORTCODE$$.impl.restAPI.postURL = function postURL(url, authorization, postData, completedCallback) { 
+$$SHORTCODE$$.impl.getURLAPI.postURL = function postURL(url, authorization, postData, completedCallback) { 
 
     $$SHORTCODE$$.logEntry(arguments);
 
@@ -80,7 +79,7 @@ $$SHORTCODE$$.impl.restAPI.postURL = function postURL(url, authorization, postDa
                 "var data = JSInterface.getData();" +
                 "var pendingCommand = JSInterface.getPendingCommand();" +
                 "pendingCommand.requestAsyncHandling();" +
-                "$$SHORTCODE$$.restAPI.postURL(data.url, data.authorization, data.postData, function(error, data) {" +
+                "$$SHORTCODE$$.getURLAPI.postURL(data.url, data.authorization, data.postData, function(error, data) {" +
                     "pendingCommand.completionCallBack({" +
                         "error: error," + 
                         "data: data" +

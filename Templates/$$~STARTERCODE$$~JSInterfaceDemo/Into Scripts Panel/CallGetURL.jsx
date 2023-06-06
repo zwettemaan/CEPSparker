@@ -1,9 +1,9 @@
 ﻿// Need to run in a persistent engine for callbacks to work
 // Make sure to add JSInterface.jsx and json2.jsx
 
-#targetengine TestSomewhere
-#include "json2.jsx"
-#include "JSInterface.jsx"
+//@targetengine TestSomewhere
+//@include "json2.jsx"
+//@include "JSInterface.jsx"
 
 // Some sample ExtendScript code. Fetch a URL over https and display in an alert
 
