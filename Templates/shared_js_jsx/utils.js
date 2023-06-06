@@ -146,6 +146,135 @@ $$SHORTCODE$$.canonicalNumber = function canonicalNumber(input) {
     return retVal;
 }
 
+/**
+ * Run a script in both CEP/JS and ExtendScript
+ * 
+ * @function $$SHORTCODE$$.crossRunScript
+ * 
+ * @param {string} script - script to execute twice
+ * @param {function} callback - `function({esResult: esResult, esError: esError, jsResult: jsResult, jsError: jsError})`
+ */
+
+$$SHORTCODE$$.crossRunScript = function crossRunScript(script, callback) {
+
+    var retVal;
+    var finallyCallback = callback;
+    
+    $$SHORTCODE$$.logEntry(arguments);
+
+    do {
+        try {
+
+            retVal = {
+                esResult: undefined,
+                esError: "has not been run",
+                jsResult: undefined,
+                jsError: "has not been run"
+            };
+
+            if (! script) {
+                break;
+            }
+
+            var handOverCallback = finallyCallback;
+            finallyCallback = undefined;
+
+            if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.JAVASCRIPT) {
+
+                try {
+                    retVal.jsResult = eval(script);
+                    retVal.jsError = "";
+                }
+                catch (err) {
+                    retVal.jsError = "throws " + err;
+                }
+
+                try {
+                    $$SHORTCODE$$.csInterface.evalScript(
+                        "var result = {};" +
+                        "try {" +
+                          "result.esResult = eval(" + $$SHORTCODE$$.dQ(script) + ");" +
+                          "result.esError = '';" +
+                        "}" +  
+                        "catch (err) {" +
+                            "result.esError = 'throws ' + err;" +
+                        "}" +
+                        "JSON.stringify(result)",
+                        function(resultJSON) {
+                            try {
+                                var result = {};
+                                eval("result=" + resultJSON);
+                                if (result) {
+                                    retVal.esResult = result.esResult;
+                                    retVal.esError = result.esError;
+                                }
+                                else {
+                                    retVal.esResult = "undefined result";
+                                    retVal.esError = "undefined result";
+                                }
+                            }
+                            catch (err) {
+                                retVal.esError = "throws " + err;
+                            }
+                            if (handOverCallback) {
+                                handOverCallback(retVal);
+                            }
+                        }
+                    );
+                }
+                catch (err) {
+                    retVal.esError = "throws " + err;
+                }
+
+            }
+
+            else {
+
+                try {
+                    retVal.esResult = eval(script);
+                    retVal.esError = "";
+                }
+                catch (err) {
+                    retVal.esError = "throws " + err;
+                }
+                
+                JSInterface.evalScript(
+                    "var pendingCommand = JSInterface.getPendingCommand();" +
+                    "pendingCommand.requestAsyncHandling();" +
+                    "var result = {};" +
+                    "try {" +
+                      "result.jsResult = eval(" + $$SHORTCODE$$.dQ(script) + ");" +
+                      "result.jsError = '';" +
+                    "}" +  
+                    "catch (err) {" +
+                        "result.jsError = 'throws ' + err;" +
+                    "}" +
+                    "pendingCommand.completionCallBack(result);",
+                    function(result) {
+                        if (handOverCallback) {
+                            retVal.jsResult = result.jsResult;
+                            retVal.jsError = result.jsError;
+                            handOverCallback(retVal);
+                        }
+                    }
+                );
+            }
+
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    if (finallyCallback) {
+        finallyCallback(retVal);
+    }
+
+}
+
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
 
     var retVal = undefined;

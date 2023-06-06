@@ -23,16 +23,22 @@ $$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
-        "shared_js_jsx/globals.js",
-        "shared_js_jsx/tweakableSettings.js",
-        "shared_js_jsx/Tests/utils_Test.js",
-        "shared_js_jsx/utils.js",
-        "jsx/utils.jsx",
-        "jsx/shared_js_jsx/pathUtils.js",
-        "jsx/pathUtils.jsx",
-        "shared_js_jsx/protectedObject.js",
-        "jsx/shared_js_jsx/init.js",
-        "jsx/init.jsx"
+    "shared_js_jsx/globals.js",
+    "shared_js_jsx/tweakableSettings.js",
+    "shared_js_jsx/Tests/utils_Test.js",
+    "shared_js_jsx/utils.js",
+    "jsx/utils.jsx",
+    "jsx/shared_js_jsx/pathUtils.js",
+    "jsx/pathUtils.jsx",
+    "shared_js_jsx/protectedObject.js",
+
+    "shared_js_jsx/mockRouterAPI.js",
+    
+    "shared_js_jsx/getURLAPI.js",
+    "jsx/impl/getURLAPI.jsx",
+    
+    "shared_js_jsx/init.js",
+    "jsx/init.jsx"
 ];
 
 $$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad = [
