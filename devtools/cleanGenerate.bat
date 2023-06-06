@@ -51,6 +51,7 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         RD /s /q CSXS >NUL 2>&1
         RD /s /q CEP_html >NUL 2>&1
         RD /s /q browser_html >NUL 2>&1
+        RD /s /q "Into Scripts Panel" >NUL 2>&1
         RD /s /q node_install >NUL 2>&1
         RD /s /q node_modules >NUL 2>&1
         RD /s /q LocalLinks >NUL 2>&1

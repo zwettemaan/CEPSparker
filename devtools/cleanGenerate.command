@@ -47,18 +47,19 @@ else
         rm -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd*"
         rm -rf "${SPRK_DEV_TOOLS_DIR}signingtoolkit*"
         rm -rf BuildSettings
-        rm -rf debug
+        rm -rf browser_html
+        rm -rf browser_js
         rm -rf css
         rm -rf CSXS
         rm -rf CEP_html
-        rm -rf browser_html
+        rm -rf CEP_js
+        rm -rf debug
+        rm -rf "Into Scripts Panel"
+        rm -rf jsx
+        rm -rf LocalLinks
         rm -rf node_install
         rm -rf node_modules
-        rm -rf LocalLinks
         rm -rf VSCode
-        rm -rf jsx
-        rm -rf CEP_js
-        rm -rf browser_js
         rm -rf node_js
         rm -rf shared_js
         rm -rf shared_js_jsx

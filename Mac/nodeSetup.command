@@ -26,6 +26,13 @@ if [ ! -e jsinterface.tgz ]; then
     rm -rf jsinterface
 fi
 
+if [ ! -e geturl.tgz ]; then
+    rm -f geturl*.tgz
+    npm pack ./geturl
+    mv geturl*.tgz geturl.tgz
+    rm -rf geturl
+fi
+
 if [ ! -e runtests.tgz ]; then
     rm -f runtests*.tgz
     npm pack ./runtests

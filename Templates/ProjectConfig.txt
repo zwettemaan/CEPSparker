@@ -30,7 +30,7 @@ IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer"
+SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer,JSInterface"
 
 ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
