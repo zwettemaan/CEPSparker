@@ -28,6 +28,14 @@ IF NOT EXIST jsinterface.tgz (
     RD /S /Q jsinterface >NUL 2>&1
 )
 
+IF NOT EXIST geturl.tgz (
+    DEL geturl*.tgz >NUL 2>&1
+    CALL npm pack .\geturl
+    cd "%PROJECT_ROOT_DIR%node_install"
+    REN geturl*.tgz geturl.tgz
+    RD /S /Q geturl >NUL 2>&1
+)
+
 IF NOT EXIST runtests.tgz (
     DEL runtests*.tgz >NUL 2>&1
     CALL npm pack .\runtests
