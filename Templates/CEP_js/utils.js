@@ -19,11 +19,11 @@ $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
 
             var scriptFilePathList = [];
 
-            if (! $$SHORTCODE$$.path.isDir($$SHORTCODE$$.dirs.appScriptsDir)) {
+            if (! $$SHORTCODE$$.path.isDir($$SHORTCODE$$.dirs.APP_SCRIPTS)) {
                 break;
             }
 
-            var readdirData = window.cep.fs.readdir($$SHORTCODE$$.dirs.appScriptsDir);
+            var readdirData = window.cep.fs.readdir($$SHORTCODE$$.dirs.APP_SCRIPTS);
             if (readdirData.err) {
                 break;
             }
@@ -32,7 +32,7 @@ $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
                 var fileName = readdirData.data[fileIdx];
                 var extension = $$SHORTCODE$$.path.filenameExtension(fileName);
                 if (extension == "jsx" || extension == "js") {
-                    scriptFilePathList.push($$SHORTCODE$$.dirs.appScriptsDir + fileName);
+                    scriptFilePathList.push($$SHORTCODE$$.dirs.APP_SCRIPTS + fileName);
                 }
             }
 

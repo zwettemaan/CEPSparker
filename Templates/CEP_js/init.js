@@ -113,27 +113,30 @@ function getExtendScriptExtensionDirs_PRM() {
                     try {
                         var dirs = JSON.parse(data);
                         
-                        $$SHORTCODE$$.dirs.homeDir = 
+                        $$SHORTCODE$$.dirs.HOME = 
                             $$SHORTCODE$$.path.addTrailingSeparator(dirs.home);
 
-                        $$SHORTCODE$$.dirs.tempDir = 
+                        $$SHORTCODE$$.dirs.TEMP = 
                             $$SHORTCODE$$.path.addTrailingSeparator(dirs.temp);
 
-                        $$SHORTCODE$$.dirs.documentsDir = 
-                            $$SHORTCODE$$.dirs.homeDir + 
+                        $$SHORTCODE$$.dirs.DOCUMENTS = 
+                            $$SHORTCODE$$.dirs.HOME + 
                             "Documents" + 
                             $$SHORTCODE$$.path.SEPARATOR;
 
-                        $$SHORTCODE$$.dirs.adobeScriptsDir = 
-                            $$SHORTCODE$$.dirs.documentsDir + 
+                        $$SHORTCODE$$.dirs.ADOBE_SCRIPT = 
+                            $$SHORTCODE$$.dirs.DOCUMENTS + 
                             "Adobe Scripts" + 
                             $$SHORTCODE$$.path.SEPARATOR;
 
-                        $$SHORTCODE$$.dirs.appScriptsDir = 
-                            $$SHORTCODE$$.dirs.adobeScriptsDir + 
+                        $$SHORTCODE$$.dirs.APP_SCRIPTS = 
+                            $$SHORTCODE$$.dirs.ADOBE_SCRIPT + 
                             $$SHORTCODE$$.C.APP_NAME + 
                             $$SHORTCODE$$.path.SEPARATOR;
 
+                        $$SHORTCODE$$.dirs.PROJECT_ROOT = 
+                            File($.fileName).fsName + "/";
+                            
                         resolve();
                     } 
                     catch (err) {
@@ -202,7 +205,7 @@ function getInDesignInfo_PRM() {
                     $$SHORTCODE$$.inDesignInfo.serialNumber = info.serialNumber;
 
                     $$SHORTCODE$$.inDesignInfo.pluginPath = 
-                        $$SHORTCODE$$.dirs.applicationDir + 
+                        $$SHORTCODE$$.dirs.ADOBE_APPLICATION + 
                         "Plug-Ins" +
                         $$SHORTCODE$$.path.SEPARATOR;
 
@@ -249,32 +252,32 @@ function getJavaScriptExtensionDirs_PRM() {
             $$SHORTCODE$$.dirs.projectRootDir = $$SHORTCODE$$.searchProjectRoot(__dirname);
         }
 
-        $$SHORTCODE$$.dirs.extensionDir = 
+        $$SHORTCODE$$.dirs.EXTENSIONS = 
             $$SHORTCODE$$.path.addTrailingSeparator(
                 $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.EXTENSION) +
                     $$SHORTCODE$$.path.SEPARATOR
             );
 
-        $$SHORTCODE$$.dirs.appSupportDir = 
+        $$SHORTCODE$$.dirs.APPLICATION_SUPPORT = 
             $$SHORTCODE$$.path.addTrailingSeparator(
                 $$SHORTCODE$$.csInterface.getSystemPath(SystemPath.USER_DATA) +
                     $$SHORTCODE$$.path.SEPARATOR
             );
 
         if ($$SHORTCODE$$.isMac) {
-            $$SHORTCODE$$.dirs.systemPreferencesDir = 
-                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.appSupportDir) +
+            $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.APPLICATION_SUPPORT) +
                     $$SHORTCODE$$.path.SEPARATOR +
                     "Preferences" +
                     $$SHORTCODE$$.path.SEPARATOR;
         }
         else {
-            $$SHORTCODE$$.dirs.systemPreferencesDir = 
-                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.appSupportDir);
+            $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = 
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.APPLICATION_SUPPORT);
         }
 
-        $$SHORTCODE$$.dirs.preferencesDir = 
-            $$SHORTCODE$$.dirs.systemPreferencesDir +
+        $$SHORTCODE$$.dirs.PREFERENCES = 
+            $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES +
             $$SHORTCODE$$.C.DIRNAME_PREFERENCES +
             $$SHORTCODE$$.path.SEPARATOR;
 
@@ -290,7 +293,7 @@ function getJavaScriptExtensionDirs_PRM() {
         }
         applicationDir = $$SHORTCODE$$.path.dirname(applicationDir);
 
-        $$SHORTCODE$$.dirs.applicationDir = 
+        $$SHORTCODE$$.dirs.ADOBE_APPLICATION = 
             applicationDir + 
             $$SHORTCODE$$.path.SEPARATOR;
 
@@ -389,7 +392,7 @@ function initHostScript_PRM() {
 
         // Convert short code to readable app name based on appMap.json data
 
-        var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.C.APP_ID) + "," + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ", true)";
+        var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.C.APP_ID) + "," + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.EXTENSIONS) + ", true)";
         $$SHORTCODE$$.csInterface.evalScript(
             script,
             function initHostScriptCallback() {
@@ -504,7 +507,7 @@ function readPreferences_PRM() {
 
         setDefaultPreferences();
         try {
-            var prefsFile = $$SHORTCODE$$.dirs.preferencesDir + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
+            var prefsFile = $$SHORTCODE$$.dirs.PREFERENCES + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
             var result = cep.fs.readFile(prefsFile, cep.encoding.UTF8);
             if (result.err == cep.fs.NO_ERROR) {
                 var loadedPrefs = JSON.parse(result.data);
@@ -545,12 +548,12 @@ function savePreferences_PRM() {
 
         var err = cep.fs.NO_ERROR;
 
-        if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.preferencesDir)) {
-            err = $$SHORTCODE$$.path.mkdir($$SHORTCODE$$.dirs.preferencesDir);
+        if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.PREFERENCES)) {
+            err = $$SHORTCODE$$.path.mkdir($$SHORTCODE$$.dirs.PREFERENCES);
         }
 
         if (err == cep.fs.NO_ERROR) {
-            var prefsFile = $$SHORTCODE$$.dirs.preferencesDir + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
+            var prefsFile = $$SHORTCODE$$.dirs.PREFERENCES + $$SHORTCODE$$.C.FILENAME_PREFERENCES;
             var jsonPrefs = JSON.stringify($$SHORTCODE$$.prefs);       
             var result = cep.fs.writeFile(prefsFile, jsonPrefs, cep.encoding.UTF8);
             err = result.err;

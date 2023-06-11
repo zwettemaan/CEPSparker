@@ -7,7 +7,7 @@ if (! $$SHORTCODE$$.dirs) {
 }
 
 $$SHORTCODE$$.PROJECT_NAME = ""
-$$SHORTCODE$$.dirs.extensionDir = 
+$$SHORTCODE$$.dirs.EXTENSIONS = 
     Folder(
         Folder.userData + "/" + 
         "Adobe" + "/" + 
@@ -16,7 +16,7 @@ $$SHORTCODE$$.dirs.extensionDir =
         "$$TARGET_DIRNAME$$"
     ).fsName + "/";
     
-$$SHORTCODE$$.dirs.tempDir = Folder.temp.fsName + "/";
+$$SHORTCODE$$.dirs.TEMP = Folder.temp.fsName + "/";
 
 (function() {
     if ($.fileName) {
