@@ -29,13 +29,15 @@ function runTests() {
 
     $$SHORTCODE$$.init();
 
-    console.log("Start tests - list of failures (if any) follows:\n");
+    $$SHORTCODE$$.logNote(arguments, "Start tests - list of failures (if any) follows:\n");
 
     var testResults;
 
     testResults = $$SHORTCODE$$.runTests();
-    if (testResults) console.log(testResults);
+    if (testResults) {
+        $$SHORTCODE$$.logNote(arguments, testResults);
+    }
 
-    console.log("Completed tests");
+    $$SHORTCODE$$.logNote(arguments, "Completed tests");
 
 }

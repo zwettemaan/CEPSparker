@@ -3,4 +3,4 @@
 
 app.documents.everyItem().close(SaveOptions.NO);
 
-$$SHORTCODE$$.initHostScript($$SHORTCODE$$.dirs.projectDir);
+$$SHORTCODE$$.initHostScript( $$SHORTCODE$$.C.APP_CODE_INDESIGN, $$SHORTCODE$$.dirs.projectDir);

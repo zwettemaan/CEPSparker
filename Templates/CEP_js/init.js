@@ -389,7 +389,7 @@ function initHostScript_PRM() {
 
         // Convert short code to readable app name based on appMap.json data
 
-        var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.C.APP_ID) + "," + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ")";
+        var script = "$$SHORTCODE$$.initHostScript(" + $$SHORTCODE$$.dQ($$SHORTCODE$$.C.APP_ID) + "," + $$SHORTCODE$$.dQ($$SHORTCODE$$.dirs.extensionDir) + ", true)";
         $$SHORTCODE$$.csInterface.evalScript(
             script,
             function initHostScriptCallback() {
@@ -641,7 +641,7 @@ function runTests_PRM() {
         
                             $$SHORTCODE$$.crossRunScript(
                                 "$$SHORTCODE$$.popLogLevel()",
-                                function() {                
+                                function restoreLogLevel() {                
                                     
                                     $$SHORTCODE$$.logNote(arguments, combinedTestResults);
                                     $$SHORTCODE$$.logNote(arguments, "Completed tests");      

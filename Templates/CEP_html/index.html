@@ -12,9 +12,11 @@ $include "loadCEPScripts.ihtml"
 
    <div id="$$SHORTCODE$$panel" class="$$SHORTCODE$$panel">
 $if "$$STARTERCODE$$" == "HelloWorld"
-
         Hello World!
-
+$elif "$$STARTERCODE$$" == "JSInterfaceDemo"
+        Listening for JSInterface requests...
+$elif "$$STARTERCODE$$" == "XAPIDemo"
+        XAPI Demo...
 $elif "$$STARTERCODE$$" == "SamplePanel"
 $include "samplePanel.ihtml"
 $elif "$$STARTERCODE$$" == "ImageBrowser"
@@ -23,14 +25,6 @@ $elif "$$STARTERCODE$$" == "ScriptRunner"
 $include "scriptRunner.ihtml"
 $elif "$$STARTERCODE$$" == "IFrameUIServer"
 $include "iFrameUIClient.ihtml"    
-$elif "$$STARTERCODE$$" == "JSInterfaceDemo"
-
-        Listening for JSInterface requests...
-
-$elif "$$STARTERCODE$$" == "XAPIDemo"
-
-        XAPI Demo...
-
 $endif
     </div>
 </body>

@@ -11,10 +11,10 @@ $$SHORTCODE$$.PLACEHOLDER_END                    = "}";
 
 if (! $$SHORTCODE$$.utils) {
     $$SHORTCODE$$.utils = {};
-    $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
-    $$SHORTCODE$$.utils.LOG_LEVEL_STACK = [];
-
 }
+
+$$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.S.LOG_LEVEL;
+$$SHORTCODE$$.utils.LOG_LEVEL_STACK = [];
 
 $$SHORTCODE$$.canonicalGUID = function canonicalGUID(guid) {
 
