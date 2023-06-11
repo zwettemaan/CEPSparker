@@ -2,16 +2,19 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 $$SHORTCODE$$.CANONICAL_NUMBER_DIGITS            = 10;
 $$SHORTCODE$$.CANONICAL_GUID_DIGITS              = 32;
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENTS            = [8,4,4,4,12];
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENT_SEPARATOR   = "-";
 $$SHORTCODE$$.PLACEHOLDER_START                  = "{";
 $$SHORTCODE$$.PLACEHOLDER_END                    = "}";
+
+if (! $$SHORTCODE$$.utils) {
+    $$SHORTCODE$$.utils = {};
+    $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
+    $$SHORTCODE$$.utils.LOG_LEVEL_STACK = [];
+
+}
 
 $$SHORTCODE$$.canonicalGUID = function canonicalGUID(guid) {
 
@@ -179,7 +182,7 @@ $$SHORTCODE$$.crossRunScript = function crossRunScript(script, callback) {
             var handOverCallback = finallyCallback;
             finallyCallback = undefined;
 
-            if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.JAVASCRIPT) {
+            if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.CEP_JAVASCRIPT) {
 
                 try {
                     retVal.jsResult = eval(script);
@@ -228,7 +231,7 @@ $$SHORTCODE$$.crossRunScript = function crossRunScript(script, callback) {
 
             }
 
-            else {
+            else if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.EXTENDSCRIPT) {
 
                 try {
                     retVal.esResult = eval(script);
@@ -460,6 +463,13 @@ $$SHORTCODE$$.getFunctionName = function getFunctionName(ftnArguments) {
     return retVal;
 }
 
+$$SHORTCODE$$.getLogLevel = function getLogLevel() {
+
+    var retVal = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
+
+    return retVal;
+}
+
 $$SHORTCODE$$.jsEqual = function jsEqual(obj1, obj2) {
 
     var retVal = true;
@@ -537,7 +547,7 @@ $$SHORTCODE$$.logEntry = function(reportingFunctionArguments) {
 }
 
 $$SHORTCODE$$.logError = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -553,7 +563,7 @@ $$SHORTCODE$$.logExit = function(reportingFunctionArguments) {
 }
 
 $$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -563,7 +573,7 @@ $$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
 }
 
 $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -573,7 +583,7 @@ $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
 }
 
 $$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -726,6 +736,30 @@ $$SHORTCODE$$.padRight = function padRight(s, c, len) {
 
     $endif
     return retVal;
+}
+
+$$SHORTCODE$$.popLogLevel = function popLogLevel() {
+
+    if ($$SHORTCODE$$.utils.LOG_LEVEL_STACK.length > 0) {
+        $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.LOG_LEVEL_STACK.pop();
+    }
+    else {
+        $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
+    }
+    
+    var retVal = $$SHORTCODE$$.getLogLevel();
+
+    return retVal;
+}
+
+$$SHORTCODE$$.pushLogLevel = function pushLogLevel(newLogLevel) {
+
+    var oldLogLevel = $$SHORTCODE$$.getLogLevel();
+
+    $$SHORTCODE$$.utils.LOG_LEVEL_STACK.push(oldLogLevel);
+    $$SHORTCODE$$.utils.CUR_LOG_LEVEL = newLogLevel;
+
+    return oldLogLevel;
 }
 
 $$SHORTCODE$$.randomGUID = function randomGUID() {

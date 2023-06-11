@@ -39,7 +39,8 @@ $$SHORTCODE$$.init = function init() {
     then(passCollectedInfoToExtendScript_PRM).
     then(savePreferences_PRM).
     then(updateUI_PRM).
-    then(jsInterfaceInit_PRM);
+    then(jsInterfaceInit_PRM).
+    then(runTests_PRM);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -48,7 +49,7 @@ $$SHORTCODE$$.init = function init() {
 }
 
 if ($$SHORTCODE$$.S.MANUAL_START_FROM_CHROME) {
-    console.log("Running in debug mode. Must call init() from the Chrome console");
+    console.log("Running in debug mode. Must call $$SHORTCODE$$.init() from the Chrome console");
 }
 else {
     $$SHORTCODE$$.init();
@@ -592,6 +593,78 @@ function setDefaultPreferences() {
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
+}
+
+function runTests_PRM() {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    var promise = new Promise(function runTests(resolve, reject) {
+
+        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+        $$SHORTCODE$$.logEntry(arguments);
+        $endif
+
+        if (! $$SHORTCODE$$.S.RUN_TESTS) {
+            resolve();
+        }
+        else {
+            
+            var combinedTestResults = "";
+
+            $$SHORTCODE$$.logNote(arguments, "Start tests - test results (if any) follow");
+
+            $$SHORTCODE$$.crossRunScript(
+                "$$SHORTCODE$$.pushLogLevel($$SHORTCODE$$.C.LOG_NONE)",
+                function() {
+            
+                    var testResults = $$SHORTCODE$$.runTests();
+                    if (testResults) {
+                        combinedTestResults += "CEP/JS tests:\n" + testResults + "\n";
+                    }
+                    else {
+                        combinedTestResults += "CEP/JS tests: nothing to report\n";
+                    }
+                    
+                    $$SHORTCODE$$.csInterface.evalScript(
+                        "$$SHORTCODE$$.runTests()", 
+                        function extendScriptTestResultsCallback(testResults) {
+        
+                            if (testResults) {
+                                combinedTestResults += "ExtendScript Tests:\n" + testResults + "\n";
+                            }
+                            else {
+                                combinedTestResults += "ExtendScript Tests: nothing to report\n";
+                            }
+        
+                            $$SHORTCODE$$.crossRunScript(
+                                "$$SHORTCODE$$.popLogLevel()",
+                                function() {                
+                                    
+                                    $$SHORTCODE$$.logNote(arguments, combinedTestResults);
+                                    $$SHORTCODE$$.logNote(arguments, "Completed tests");      
+
+                                    resolve();
+                                }
+                            );
+                        }
+                    );
+                }
+            )            
+        }
+
+        $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+        $$SHORTCODE$$.logExit(arguments);
+        $endif
+    });
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return promise;
 }
 
 function updateUI_PRM() {

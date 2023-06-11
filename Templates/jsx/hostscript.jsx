@@ -28,14 +28,15 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "shared_js_jsx/Tests/utils_Test.js",
     "shared_js_jsx/utils.js",
     "jsx/utils.jsx",
-    "jsx/shared_js_jsx/pathUtils.js",
+    "shared_js_jsx/pathUtils.js",
     "jsx/pathUtils.jsx",
     "shared_js_jsx/protectedObject.js",
 
-    "shared_js_jsx/mockRouterAPI.js",
-    
+$if "$$STARTERCODE$$" == "XAPIDemo"
+    "shared_js_jsx/mockRouterAPI.js",    
     "shared_js_jsx/getURLAPI.js",
     "jsx/impl/getURLAPI.jsx",
+$endif
     
     "shared_js_jsx/init.js",
     "jsx/init.jsx"
