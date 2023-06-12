@@ -34,7 +34,22 @@ if [ ! -e "${BUILD_SETTINGS_DIR}configSettings.command" ]; then
 else 
 
     . "${BUILD_SETTINGS_DIR}configSettings.command"
-    . "${BUILD_SETTINGS_DIR}buildSettings.command"
+
+    # Convert Windows build settings for Mac; strip CR at end of each line.
+
+    rm -f "${BUILD_SETTINGS_DIR}buildSettings.command"
+    echo "# This file is auto-generated from buildSettings.bat."      > "${BUILD_SETTINGS_DIR}buildSettings.command"
+    echo "# Make any adjustments in buildSettings.bat and they will" >> "${BUILD_SETTINGS_DIR}buildSettings.command"
+    echo "# automatically be copied into this file."                 >> "${BUILD_SETTINGS_DIR}buildSettings.command"
+    echo ""                                                          >> "${BUILD_SETTINGS_DIR}buildSettings.command"
+    
+    cat "${BUILD_SETTINGS_DIR}buildSettings.bat" | while read line || [ -n "$line" ]; do
+
+        cmd=`echo "$line" | perl -pe "s/^\s*SET\s+(.*)=(.*?)\r?$/export \1=\"\2\"/"`
+        echo $cmd >> "${BUILD_SETTINGS_DIR}buildSettings.command"
+        eval $cmd
+
+    done
 
     if [ "$TARGET_DIRNAME" != "" ]; then
 
