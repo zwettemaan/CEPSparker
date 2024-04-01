@@ -24,21 +24,8 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
-# 
-# Need some older java runtime, e.g. 1.7.0_80 installed!
-#
-# At some point in time (Java 9?) things don't work any more with certificate issues
-#
-# https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html
-#
-# I got it to work with zulu7
-#
-# brew install --cask homebrew/cask-versions/zulu7
-# The version installed is 1.7.0_352 (run `java -version`)
-#
-
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7.0_352)
-export JAVA_VERSION=`java -version 2>&1 | head -n 1 | sed -E -e "s/^[^\"]*\"|\"$//g"`
+export JAVA_HOME=$(/usr/libexec/java_home -v 22)
+export JAVA_VERSION=`java -version 2>&1 | head -n 1 | sed -E -e "s/^[^\"]*\"|\".*$//g"`
 
 export SPRK_TIMESTAMP_SERVER="http://timestamp.digicert.com"
 
