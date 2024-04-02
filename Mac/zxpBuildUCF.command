@@ -24,6 +24,19 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
+# 
+# Need some older java runtime, e.g. 1.7.0_80 installed!
+#
+# At some point in time (Java 9?) things don't work any more with certificate issues
+#
+# https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html
+#
+# I got it to work with zulu7
+#
+# brew install --cask homebrew/cask-versions/zulu7
+# The version installed is 1.7.0_352 (run `java -version`)
+#
+
 export JAVA_HOME=$(/usr/libexec/java_home -v 22)
 export JAVA_VERSION=`java -version 2>&1 | head -n 1 | sed -E -e "s/^[^\"]*\"|\".*$//g"`
 
@@ -104,7 +117,7 @@ else
 
         if [ "$param" == "debug" ]; then
 
-            java -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" . -e "${EXTENSION_BUILD_DIR}.debug" .debug
+            java -classpath "/Library/Java/JavaVirtualMachines/zulu-7.jdk/Contents/Home/jre/lib/ext" -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" . -e "${EXTENSION_BUILD_DIR}.debug" .debug
 
             mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.debug.zxp"
 
@@ -114,7 +127,7 @@ else
         
         else
 
-            java -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" .
+            java -classpath "/Library/Java/JavaVirtualMachines/zulu-7.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar;/Library/Java/JavaVirtualMachines/zulu-7.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar;/Library/Java/JavaVirtualMachines/zulu-7.jdk/Contents/Home/jre/lib/ext/sunec.jar" -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" .
 
             mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
 
