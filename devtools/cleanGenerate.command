@@ -56,6 +56,7 @@ else
         rm -rf debug
         rm -rf "Into Scripts Panel"
         rm -rf jsx
+        rm -rf js
         rm -rf LocalLinks
         rm -rf node_install
         rm -rf node_modules

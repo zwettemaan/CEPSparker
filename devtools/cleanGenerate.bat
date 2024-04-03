@@ -57,6 +57,7 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         RD /s /q LocalLinks >NUL 2>&1
         RD /s /q VSCode >NUL 2>&1
         RD /s /q jsx >NUL 2>&1
+        RD /s /q js >NUL 2>&1
         RD /s /q CEP_js >NUL 2>&1
         RD /s /q browser_js >NUL 2>&1
         RD /s /q node_js >NUL 2>&1
