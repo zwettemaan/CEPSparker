@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.os) {
     $$SHORTCODE$$.os = require('os');
 }
@@ -102,4 +100,3 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
 
-})();

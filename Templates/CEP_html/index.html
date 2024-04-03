@@ -10,25 +10,13 @@ $include "loadCEPScripts.ihtml"
 
 <body id="$$SHORTCODE$$body">
 
-    <script>
-        $$SHORTCODE$$.init();
-        
-        if ($$SHORTCODE$$.S.RUN_TESTS) {
-            
-            console.log("Start tests - test results (if any) follow:");
-            
-            var testResults = $$SHORTCODE$$.runTests();
-            if (testResults) console.log(testResults);
-                        
-            console.log("Completed tests");
-        }
-    </script>
-
    <div id="$$SHORTCODE$$panel" class="$$SHORTCODE$$panel">
 $if "$$STARTERCODE$$" == "HelloWorld"
-
         Hello World!
-
+$elif "$$STARTERCODE$$" == "JSInterfaceDemo"
+        Listening for JSInterface requests...
+$elif "$$STARTERCODE$$" == "XAPIDemo"
+        XAPI Demo...
 $elif "$$STARTERCODE$$" == "SamplePanel"
 $include "samplePanel.ihtml"
 $elif "$$STARTERCODE$$" == "ImageBrowser"

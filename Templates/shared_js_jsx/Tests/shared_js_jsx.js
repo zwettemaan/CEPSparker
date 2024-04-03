@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.Tests) {
     $$SHORTCODE$$.Tests = {};
 }
@@ -23,4 +21,3 @@ shared_js_jsx.runTests = function runTests() {
     return testResults;
 };
 
-})();

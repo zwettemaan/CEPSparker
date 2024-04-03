@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
    var savedInLogger = $$SHORTCODE$$.inLogger;
@@ -60,5 +58,3 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
-
-})();

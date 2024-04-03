@@ -1,6 +1,6 @@
 @ECHO OFF
 REM
-REM Read BuildSettings/ExtensionVersion.txt and adjust the manifest
+REM Read BuildSettings/buildSettings.bat and adjust the manifest
 REM
 
 IF "%SPRK_COMMANDS_DIR%" == "" (

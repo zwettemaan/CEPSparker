@@ -20,8 +20,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function(){
-
 var FNV = function () {
   this.offset_basis = 2166136261;    // The prime, 32 bit offset_basis = 2,166,136,261 = 0x811C9DC5.    
 };
@@ -54,5 +52,3 @@ FNV.prototype.fnv_1a = function ( data ) {
   return hashint >>> 0;    // unsigned 32 bit integer.
 
 }
-
-})();

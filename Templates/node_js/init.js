@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
@@ -47,42 +45,42 @@ $$SHORTCODE$$.init = function init() {
         }
     }
 
-    $$SHORTCODE$$.dirs.homeDir = 
+    $$SHORTCODE$$.dirs.HOME = 
         $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.os.homedir());
 
-    $$SHORTCODE$$.dirs.tempDir = 
+    $$SHORTCODE$$.dirs.TEMP = 
         $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.os.tmpdir());
 
-    $$SHORTCODE$$.dirs.documentsDir = 
-        $$SHORTCODE$$.dirs.homeDir + 
+    $$SHORTCODE$$.dirs.DOCUMENTS = 
+        $$SHORTCODE$$.dirs.HOME + 
         "Documents" + 
         $$SHORTCODE$$.path.SEPARATOR;
 
-    $$SHORTCODE$$.dirs.adobeScriptsDir = 
-        $$SHORTCODE$$.dirs.documentsDir + 
+    $$SHORTCODE$$.dirs.ADOBE_SCRIPT = 
+        $$SHORTCODE$$.dirs.DOCUMENTS + 
         "Adobe Scripts" + 
         $$SHORTCODE$$.path.SEPARATOR;
 
-    $$SHORTCODE$$.dirs.appScriptsDir = 
-        $$SHORTCODE$$.dirs.adobeScriptsDir + 
+    $$SHORTCODE$$.dirs.APP_SCRIPTS = 
+        $$SHORTCODE$$.dirs.ADOBE_SCRIPT + 
         $$SHORTCODE$$.C.APP_NAME + 
         $$SHORTCODE$$.path.SEPARATOR;
 
     if ($$SHORTCODE$$.checkMac()) {
-        $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.dirs.homeDir + "Library/Application Support/"
-        $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.dirs.appSupportDir + "Adobe/CEP/extensions/";
-        $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.dirs.homeDir + "Library/";
-        $$SHORTCODE$$.dirs.applicationDir = "/Applications/Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "/";
+        $$SHORTCODE$$.dirs.APPLICATION_SUPPORT = $$SHORTCODE$$.dirs.HOME + "Library/Application Support/"
+        $$SHORTCODE$$.dirs.EXTENSIONS = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT + "Adobe/CEP/extensions/";
+        $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = $$SHORTCODE$$.dirs.HOME + "Library/";
+        $$SHORTCODE$$.dirs.ADOBE_APPLICATION = "/Applications/Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "/";
     }
     else {
-        $$SHORTCODE$$.dirs.appSupportDir = $$SHORTCODE$$.dirs.homeDir + "AppData\\Roaming\\"
-        $$SHORTCODE$$.dirs.extensionDir = $$SHORTCODE$$.dirs.appSupportDir + "Adobe\\CEP\\extensions\\";
-        $$SHORTCODE$$.dirs.systemPreferencesDir = $$SHORTCODE$$.dirs.appSupportDir;
-        $$SHORTCODE$$.dirs.applicationDir = "C:\\Program Files\\Adobe\\Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "\\";
+        $$SHORTCODE$$.dirs.APPLICATION_SUPPORT = $$SHORTCODE$$.dirs.HOME + "AppData\\Roaming\\"
+        $$SHORTCODE$$.dirs.EXTENSIONS = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT + "Adobe\\CEP\\extensions\\";
+        $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT;
+        $$SHORTCODE$$.dirs.ADOBE_APPLICATION = "C:\\Program Files\\Adobe\\Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "\\";
     }
 
-    $$SHORTCODE$$.dirs.preferencesDir = 
-        $$SHORTCODE$$.dirs.systemPreferencesDir +
+    $$SHORTCODE$$.dirs.PREFERENCES = 
+        $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES +
         $$SHORTCODE$$.C.DIRNAME_PREFERENCES +
         $$SHORTCODE$$.path.SEPARATOR;
 
@@ -91,6 +89,3 @@ $$SHORTCODE$$.init = function init() {
 
     $endif
 }
-
-
-})();

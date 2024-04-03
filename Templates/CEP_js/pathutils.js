@@ -6,8 +6,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-    
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
@@ -234,4 +232,3 @@ $$SHORTCODE$$.path.writeFile = function writeFile(path, contents, optionalEncodi
     $endif
     return retVal;
 }
-})();

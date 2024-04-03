@@ -7,37 +7,45 @@ $include "loadBrowserCSS.ihtml"
 $include "loadBrowserScripts.ihtml"
 
 <script>
-
+if (! window.handlePanelMessageListenerAdded) {
+    window.handlePanelMessageListenerAdded = true;
     window.addEventListener('message', handlePanelMessage);
-    function handlePanelMessage(event) {
+}
 
-        var messageObj = JSON.parse(event.data);
-        $('#panelMessageText').text(messageObj.text);
+function handlePanelMessage(event) {
 
+    var messageObj = JSON.parse(event.data);
+    $('#panelMessageText').text(messageObj.text);
+
+}
+
+function handleImageClick(evt) {
+    
+    var url = window.location.origin;
+
+    var width = evt.naturalWidth;
+    var height = evt.naturalHeight;
+
+    var src = evt.getAttribute('src');
+
+    url += src;
+
+    if (! window.messageID) {
+        window.messageID = 0;
     }
 
-    function handleImageClick(evt) {
-        
-        var url = window.location.origin;
+    window.messageID++;
+    var message = {
+        opcode: "insertImage",
+        messageID: window.messageID,
+        url: url,
+        width: width,
+        height: height
+    };
 
-        var width = evt.naturalWidth;
-        var height = evt.naturalHeight;
-
-        var src = evt.getAttribute('src');
-
-        url += src;
-
-        var message = {
-            opcode: "insertImage",
-            url: url,
-            width: width,
-            height: height
-        };
-
-        var messageJSON = JSON.stringify(message);
-
-        window.top.postMessage(messageJSON, "*");
-    }
+    var messageJSON = JSON.stringify(message);
+    window.top.postMessage(messageJSON, "*");
+}
 </script>
 
 </head>

@@ -2,18 +2,19 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
-(function(){
-
 $$SHORTCODE$$.CANONICAL_NUMBER_DIGITS            = 10;
 $$SHORTCODE$$.CANONICAL_GUID_DIGITS              = 32;
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENTS            = [8,4,4,4,12];
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENT_SEPARATOR   = "-";
 $$SHORTCODE$$.PLACEHOLDER_START                  = "{";
 $$SHORTCODE$$.PLACEHOLDER_END                    = "}";
+
+if (! $$SHORTCODE$$.utils) {
+    $$SHORTCODE$$.utils = {};
+}
+
+$$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.S.LOG_LEVEL;
+$$SHORTCODE$$.utils.LOG_LEVEL_STACK = [];
 
 $$SHORTCODE$$.canonicalGUID = function canonicalGUID(guid) {
 
@@ -148,6 +149,135 @@ $$SHORTCODE$$.canonicalNumber = function canonicalNumber(input) {
     return retVal;
 }
 
+/**
+ * Run a script in both CEP/JS and ExtendScript
+ * 
+ * @function $$SHORTCODE$$.crossRunScript
+ * 
+ * @param {string} script - script to execute twice
+ * @param {function} callback - `function({esResult: esResult, esError: esError, jsResult: jsResult, jsError: jsError})`
+ */
+
+$$SHORTCODE$$.crossRunScript = function crossRunScript(script, callback) {
+
+    var retVal;
+    var finallyCallback = callback;
+    
+    $$SHORTCODE$$.logEntry(arguments);
+
+    do {
+        try {
+
+            retVal = {
+                esResult: undefined,
+                esError: "has not been run",
+                jsResult: undefined,
+                jsError: "has not been run"
+            };
+
+            if (! script) {
+                break;
+            }
+
+            var handOverCallback = finallyCallback;
+            finallyCallback = undefined;
+
+            if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.CEP_JAVASCRIPT) {
+
+                try {
+                    retVal.jsResult = eval(script);
+                    retVal.jsError = "";
+                }
+                catch (err) {
+                    retVal.jsError = "throws " + err;
+                }
+
+                try {
+                    $$SHORTCODE$$.csInterface.evalScript(
+                        "var result = {};" +
+                        "try {" +
+                          "result.esResult = eval(" + $$SHORTCODE$$.dQ(script) + ");" +
+                          "result.esError = '';" +
+                        "}" +  
+                        "catch (err) {" +
+                            "result.esError = 'throws ' + err;" +
+                        "}" +
+                        "JSON.stringify(result)",
+                        function(resultJSON) {
+                            try {
+                                var result = {};
+                                eval("result=" + resultJSON);
+                                if (result) {
+                                    retVal.esResult = result.esResult;
+                                    retVal.esError = result.esError;
+                                }
+                                else {
+                                    retVal.esResult = "undefined result";
+                                    retVal.esError = "undefined result";
+                                }
+                            }
+                            catch (err) {
+                                retVal.esError = "throws " + err;
+                            }
+                            if (handOverCallback) {
+                                handOverCallback(retVal);
+                            }
+                        }
+                    );
+                }
+                catch (err) {
+                    retVal.esError = "throws " + err;
+                }
+
+            }
+
+            else if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.EXTENDSCRIPT) {
+
+                try {
+                    retVal.esResult = eval(script);
+                    retVal.esError = "";
+                }
+                catch (err) {
+                    retVal.esError = "throws " + err;
+                }
+                
+                JSInterface.evalScript(
+                    "var pendingCommand = JSInterface.getPendingCommand();" +
+                    "pendingCommand.requestAsyncHandling();" +
+                    "var result = {};" +
+                    "try {" +
+                      "result.jsResult = eval(" + $$SHORTCODE$$.dQ(script) + ");" +
+                      "result.jsError = '';" +
+                    "}" +  
+                    "catch (err) {" +
+                        "result.jsError = 'throws ' + err;" +
+                    "}" +
+                    "pendingCommand.completionCallBack(result);",
+                    function(result) {
+                        if (handOverCallback) {
+                            retVal.jsResult = result.jsResult;
+                            retVal.jsError = result.jsError;
+                            handOverCallback(retVal);
+                        }
+                    }
+                );
+            }
+
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    if (finallyCallback) {
+        finallyCallback(retVal);
+    }
+
+}
+
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
 
     var retVal = undefined;
@@ -205,7 +335,19 @@ $$SHORTCODE$$.deepClone = function deepClone(obj) {
     return retVal;
 }
 
-// dQ: Wrap a string in double quotes
+/**
+ * Wrap a string in double quotes, which is handy to pass a string through CSInterface
+ * or JSInterface.
+ * If `a = 'a"a\''`, then `$$SHORTCODE$$.dQ(a)` is `"a\\"a'"` and `eval($$SHORTCODE$$.dQ(a)) == a`
+ * We can send `$$SHORTCODE$$.dQ(a)` through an interface, and at the other end, execute `eval()` on the
+ * data to reconstitute the original string `a`
+ * 
+ * @function $$SHORTCODE$$.dQ
+ * 
+ * @param {string} s - The string we want to double quote
+ * @return A string prefixed and suffixed with double quotes, which we can eval() back to s
+ */
+
 $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
@@ -274,6 +416,58 @@ $$SHORTCODE$$.formattedGUID = function formattedGUID(guid) {
 
     $endif
     return retVal;   
+}
+
+$$SHORTCODE$$.getFunctionName = function getFunctionName(ftnArguments) {
+
+    var retVal = undefined;
+
+    $$SHORTCODE$$.logEntry(arguments);
+
+    do {
+
+        try {
+            if (! ftnArguments) {
+                $$SHORTCODE$$.logError(arguments, "need ftnArguments");
+                break;
+            }
+
+            var functionName;
+            try {
+                functionName = ftnArguments.callee.toString();
+                if (functionName) {
+                    functionName = functionName.match(/function ([^\(]+)/);
+                    if (functionName) {
+                        functionName = functionName[1];                                
+                    }
+                }
+            }
+            catch (err) {
+                functionName = undefined;
+            }
+
+            if (! functionName) {
+                functionName = "[anonymous function]";
+            }
+
+            retVal = functionName;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $$SHORTCODE$$.logExit(arguments);
+
+    return retVal;
+}
+
+$$SHORTCODE$$.getLogLevel = function getLogLevel() {
+
+    var retVal = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
+
+    return retVal;
 }
 
 $$SHORTCODE$$.jsEqual = function jsEqual(obj1, obj2) {
@@ -353,7 +547,7 @@ $$SHORTCODE$$.logEntry = function(reportingFunctionArguments) {
 }
 
 $$SHORTCODE$$.logError = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_ERROR) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -369,7 +563,7 @@ $$SHORTCODE$$.logExit = function(reportingFunctionArguments) {
 }
 
 $$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_NOTE) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -379,7 +573,7 @@ $$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
 }
 
 $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_TRACE) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -389,7 +583,7 @@ $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
 }
 
 $$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
+    if ($$SHORTCODE$$.utils.CUR_LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
         if (! s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
@@ -542,6 +736,30 @@ $$SHORTCODE$$.padRight = function padRight(s, c, len) {
 
     $endif
     return retVal;
+}
+
+$$SHORTCODE$$.popLogLevel = function popLogLevel() {
+
+    if ($$SHORTCODE$$.utils.LOG_LEVEL_STACK.length > 0) {
+        $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.LOG_LEVEL_STACK.pop();
+    }
+    else {
+        $$SHORTCODE$$.utils.CUR_LOG_LEVEL = $$SHORTCODE$$.utils.CUR_LOG_LEVEL;
+    }
+    
+    var retVal = $$SHORTCODE$$.getLogLevel();
+
+    return retVal;
+}
+
+$$SHORTCODE$$.pushLogLevel = function pushLogLevel(newLogLevel) {
+
+    var oldLogLevel = $$SHORTCODE$$.getLogLevel();
+
+    $$SHORTCODE$$.utils.LOG_LEVEL_STACK.push(oldLogLevel);
+    $$SHORTCODE$$.utils.CUR_LOG_LEVEL = newLogLevel;
+
+    return oldLogLevel;
 }
 
 $$SHORTCODE$$.randomGUID = function randomGUID() {
@@ -803,5 +1021,3 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits) {
     $endif
     return retVal;
 }
-
-})();

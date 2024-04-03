@@ -18,7 +18,11 @@
         }
     }
 
-    window.addEventListener('message', handleIFrameMessage);
+    if (! window.handleIFrameMessageInstalled) {
+        window.handleIFrameMessageInstalled = true;        
+        window.addEventListener('message', handleIFrameMessage);
+    }
+    
     function handleIFrameMessage(event) {
 
         $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -82,7 +86,7 @@
                 };
 
                 var url = message.url;
-                var filePath = $$SHORTCODE$$.dirs.tempDir + decodeURIComponent($$SHORTCODE$$.path.basename(url, "/"));
+                var filePath = $$SHORTCODE$$.dirs.TEMP + decodeURIComponent($$SHORTCODE$$.path.basename(url, "/"));
                 var width = message.width;
                 var height = message.height;
                 var scaledWidth = 100;

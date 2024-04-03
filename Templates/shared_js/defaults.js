@@ -8,8 +8,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function(){
-
 $$SHORTCODE$$.Defaults = {};
 
 $$SHORTCODE$$.Defaults.init = function init(initDefaults) {
@@ -32,5 +30,3 @@ $$SHORTCODE$$.Defaults.init = function init(initDefaults) {
     $endif
     return retVal;
 }
-
-})();

@@ -1,5 +1,5 @@
 #
-# Read BuildSettings/buildSettings.command and adjust the manifest
+# Read BuildSettings/buildSettings.bat and adjust the manifest
 #
 
 if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then

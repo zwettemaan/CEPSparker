@@ -6,6 +6,7 @@
     "dependencies": {
         "jsinterface": "file:./node_install/jsinterface.tgz",
         "runtests": "file:./node_install/runtests.tgz",
+        "geturl": "file:./node_install/geturl.tgz",
         "@types/node": "^20.2.5",
         "types-for-adobe": "^7.0.12"
     }

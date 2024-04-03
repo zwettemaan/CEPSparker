@@ -5,8 +5,6 @@
 if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
-
-(function() {
     
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
@@ -92,5 +90,3 @@ if ($$SHORTCODE$$.C.PLATFORM == $$SHORTCODE$$.C.CEP_JAVASCRIPT || $$SHORTCODE$$.
     }
 
 }
-
-})();

@@ -46,11 +46,20 @@ $$SHORTCODE$$.C.APP_CODE_BRIDGE                          = "KBRG";
 
 $$SHORTCODE$$.C.ENCODING_UTF8                            = "utf8";
 
+$if "$$STARTERCODE$$" == "IFrameUIServer"
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_PLACEHOLDERS_EXCHANGE  = "placeholdersExchange";
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_PLACEHOLDERS_REQUEST   = "placeholdersRequest";
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_SHARED_PREFS_EXCHANGE  = "sharedPrefsExchange";
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_SHARED_PREFS_REQUEST   = "sharedPrefsRequest";
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_THEME_CHANGE           = "themeChange";
 $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_THEME_REQUEST          = "themeRequest";
+$$SHORTCODE$$.C.IFRAME_EVENT_TYPE_NEW_DOCUMENT           = "newdocument";
+
+// Adjust EVENT_ORIGIN_UI_SERVER to the real server info.
+$$SHORTCODE$$.C.EVENT_ORIGIN_UI_SERVER        = "http://localhost:$$IFRAME_UI_PORT$$";
+$$SHORTCODE$$.C.EVENT_ORIGIN_UI_DEBUG_SERVER  = "http://localhost:$$IFRAME_UI_PORT$$";
+$$SHORTCODE$$.C.EVENT_ORIGIN_CEP_PANEL        = "";
+
+$endif
 
 /* Add any global constants */

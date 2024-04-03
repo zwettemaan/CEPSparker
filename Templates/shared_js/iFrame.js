@@ -2,8 +2,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-(function() {
-
 $$SHORTCODE$$.receiveEventFromCEPToIFrame = function receiveEventFromCEPToIFrame(event) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
@@ -115,6 +113,12 @@ $$SHORTCODE$$.receiveEventFromIFrameToCEP = function receiveEventFromIFrameToCEP
                     $$SHORTCODE$$.logError(arguments, "unhandled event type");
                 }
                 break;
+            case $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_NEW_DOCUMENT:
+                {
+                    var esScript = "app.documents.add()";
+                    $$SHORTCODE$$.csInterface.evalScript(esScript);
+                }
+                break;                                
             case $$SHORTCODE$$.C.IFRAME_EVENT_TYPE_THEME_REQUEST:
                 {
                     $$SHORTCODE$$.requestThemeInfo();
@@ -538,5 +542,3 @@ $$SHORTCODE$$.setupIFrameInCEPPanel = function setupIFrameInCEPPanel() {
 
     $endif
 }
-
-})();

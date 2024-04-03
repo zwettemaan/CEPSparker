@@ -23,13 +23,18 @@ $include "restoreNode.ihtml"
     <script src="../shared_js/pathUtils.js"></script>
     <script src="../CEP_js/pathUtils.js"></script>
     
+$if "$$STARTERCODE$$" == "XAPIDemo"
+    <script src="../shared_js_jsx/mockRouterAPI.js"></script>
+    <script src="../shared_js_jsx/getURLAPI.js"></script>
+    <script src="../CEP_js/impl/getURLAPI.js"></script>
+$endif
+
     <script src="../shared_js_jsx/init.js"></script>
     <script src="../shared_js/init.js"></script>
     <script src="../shared_js/iFrame.js"></script>
     <script src="../CEP_js/init.js"></script>
 
     <script src="../CEP_js/Tests/CEP_js.js"></script>
-
     <script src="../shared_js_jsx/Tests/utils_Test.js"></script>
     <script src="../shared_js_jsx/Tests/shared_js_jsx.js"></script>
 

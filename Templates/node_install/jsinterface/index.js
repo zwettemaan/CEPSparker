@@ -47,12 +47,11 @@ var os = require("os");
 var fs = require("fs");
 var process = require("process");
 
+var JSInterface = {};
+
 var gCSInterface = new CSInterface();
 var gInitialized = false;
-var gPendingCommand = undefined;
 var gPluginList = [];
-
-var JSInterface = {};
 
 module.exports = JSInterface;
 
@@ -72,12 +71,12 @@ function init() {
 
 JSInterface.getData = getData;
 function getData() {
-    return (gPendingCommand ? gPendingCommand.data: undefined);
+    return (window.jsInterface_pendingCommand ? window.jsInterface_pendingCommand.data: undefined);
 }
 
 JSInterface.getPendingCommand = getPendingCommand;
 function getPendingCommand() {
-    return gPendingCommand;
+    return window.jsInterface_pendingCommand;
 }
 
 function loadPlugPlugLibrary() {
@@ -160,10 +159,10 @@ function setupJSInterfaceCommandListener() {
                     while (false);
                 };
 
-                var savedPendingCommand = gPendingCommand;
-                gPendingCommand = pendingCommand;
+                var savedPendingCommand = window.jsInterface_pendingCommand;
+                window.jsInterface_pendingCommand = pendingCommand;
                 var returnData = eval(pendingCommand.scriptText);
-                gPendingCommand = savedPendingCommand;
+                window.jsInterface_pendingCommand = savedPendingCommand;
 
                 if (! pendingCommand.willTriggerCompletion) {
                     pendingCommand.completionCallBack(returnData);
