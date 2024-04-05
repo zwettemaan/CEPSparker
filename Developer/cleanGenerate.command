@@ -42,6 +42,7 @@ else
         Mac/clean.command
 
         rm -f "tsconfig.json"
+        rm -f "CRDT_manifest.json"
         rm -f "package.json"
         rm -f "package-lock.json"
         rm -rf BuildSettings

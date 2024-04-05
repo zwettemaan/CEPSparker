@@ -13,15 +13,10 @@
           "sign": true,
           "encrypt": true
         },
-        // By default, sign don't encrypt all .js files
-        { 
-          "regExp": "/^.*\\.js$/i",  
-          "sign": true,
-          "encrypt": false
-        },
         // But only sign, don't encrypt
-        // - the hostscript.jsx file that initializes the panel
+        // - the hostscript.jsx and json2.jsx files
         // - the .nzip file 
+        // - html, css, js
         { 
           "regExp": "/^jsx\\/hostscript\\.jsx$/i",  
           "sign": true,
@@ -34,6 +29,21 @@
         },
         { 
           "regExp": "/^CreativeDeveloperTools_ES\\.nzip$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^.*\\.js$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^.*\\.html$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^.*\\.css$/i",  
           "sign": true,
           "encrypt": false
         },
