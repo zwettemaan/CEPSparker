@@ -30,11 +30,14 @@ IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer,JSInterfaceDemo,XAPIDemo"
+SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer"
 
 ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
+
+TARGET_PRODUCT_CODE_FOR_CRDT="CEPSparker"
+HELP_PRODUCT_CODE_FOR_CRDT="Product code as used in Creative Developer Tools"
 
 TARGET_NAME="CEP Sparker"
 HELP_TARGET_NAME="Human readable extension name (e.g. for use in documentation)."

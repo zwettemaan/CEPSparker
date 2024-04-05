@@ -15,7 +15,7 @@ export PROJECT_ROOT_DIR=`dirname "$SPRK_COMMANDS_DIR"`/
 xattr -dr com.apple.quarantine SparkerConfig.app
 xattr -dr com.apple.quarantine *.command
 
-cd "${PROJECT_ROOT_DIR}devtools"
+cd "${PROJECT_ROOT_DIR}Developer"
 
 xattr -dr com.apple.quarantine *.command
 

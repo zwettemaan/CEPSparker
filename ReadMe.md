@@ -6,10 +6,10 @@
 
 Starter project for developing CEP panels to be used with Adobe applications
 
-© 2018-2022, Rorohiko Ltd. - Kris Coppieters
+© 2018-2024, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v1.1.0, September 12, 2022
+v1.1.1, Aril 6, 2024
 
 ## Preamble
 
@@ -36,7 +36,7 @@ to the absolute minimum.
 This package should allow you to get going with the following minimal 
 dependencies:
 
-- Adobe Creative Cloud CC 2014 or higher
+- Adobe Creative Cloud CC 2024 or higher
 - Mac OS X 10.9 or Windows 7.x or higher
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
@@ -202,7 +202,4 @@ As you get more familiar with the workflow, you'll probably want to
 abandon the command-line scripts in the _Mac_ and _Windows_ folders,
 and replace them with a more advanced build tool. 
 
-For my own projects I use _ant_, but that's just a matter of personal preference
-and familiarity. You can just as well use a variant of _make_, or _grunt_ or _gulp_
-or whatever build tool works best for you.
 

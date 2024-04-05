@@ -1,0 +1,59 @@
+{
+    "productCode": "$$TARGET_PRODUCT_CODE_FOR_CRDT$$",
+    "version": "$$PROJECT_VERSION$$",
+    "targets": [
+      {
+        "method": "EXTENSION"
+      }
+    ],
+    "filters": [
+        // By default, sign and encrypt all .jsx files
+        { 
+          "regExp": "/^.*\\.jsx$/i",  
+          "sign": true,
+          "encrypt": true
+        },
+        // By default, sign don't encrypt all .js files
+        { 
+          "regExp": "/^.*\\.js$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        // But only sign, don't encrypt
+        // - the hostscript.jsx file that initializes the panel
+        // - the .nzip file 
+        { 
+          "regExp": "/^jsx\\/hostscript\\.jsx$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^jsx\\/json2.jsx$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^CreativeDeveloperTools_ES\\.nzip$/i",  
+          "sign": true,
+          "encrypt": false
+        },
+        // Omit developer-only files
+        { 
+          "regExp": "/^(debug|package.json|package-lock.json|tsconfig.json)\\/$/i",
+          "omit": true
+        },
+        { 
+          "regExp": "/^(CreativeDeveloperTools_ES|Templates|Developer|Mac|ToolSources|Windows|build|BuildSettings|LocalLinks|VSCode|node_install)\\/$/i",
+          "omit": true
+        },
+        { 
+          "regExp": "/^.*\\.tpkg$/i",  
+          "omit": true
+        },
+        { 
+          // Invisible files
+          "regExp": "/^\\..*$/i",  
+          "omit": true
+        }
+    ]
+}

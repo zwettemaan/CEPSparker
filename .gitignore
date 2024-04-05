@@ -7,12 +7,6 @@
 /CEP_html
 /CEP_js
 /debug
-/devtools/.rnd
-/devtools/ZXPSignCmd
-/devtools/ZXPSignCmd.dmg
-/devtools/ZXPSignCmd-64.dmg
-/devtools/ZXPSignCmd.exe
-/devtools/signingtoolkit
 /css
 /CSXS
 /jsx
@@ -24,11 +18,9 @@
 /shared_js_jsx
 /SampleImageServer
 /VSCode
-/devtools/ZXPSignCmd-64bit.dmg
 /node_install
 /package-lock.json
 /package.json
 /tsconfig.json
-Into Scripts Panel/CallGetURL.jsx
-Into Scripts Panel/JSInterface.jsx
-Into Scripts Panel/json2.jsx
+CreativeDeveloperTools_ES
+CreativeDeveloperTools_ES.nzip

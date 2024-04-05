@@ -135,7 +135,7 @@ JSInterface.commandCompletion = function(retValJSONStr) {
 
 ExtendExtendScript (EES) project
 
-(c) 2017-2022 Rorohiko Ltd. - Kris Coppieters - kris@rorohiko.com
+(c) 2017-2024 Rorohiko Ltd. - Kris Coppieters - kris@rorohiko.com
 
 File: JSInterface.jsx
 

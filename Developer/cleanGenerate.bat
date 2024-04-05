@@ -44,14 +44,11 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         DEL package.json >NUL 2>&1
         DEL package-lock.json >NUL 2>&1
         DEL debug >NUL 2>&1
-        DEL /q %SPRK_DEV_TOOLS_DIR%ZXPSignCmd* >NUL 2>&1
-        RD /s /q %SPRK_DEV_TOOLS_DIR%signingtoolkit >NUL 2>&1
         RD /s /q BuildSettings >NUL 2>&1
         RD /s /q css >NUL 2>&1
         RD /s /q CSXS >NUL 2>&1
         RD /s /q CEP_html >NUL 2>&1
         RD /s /q browser_html >NUL 2>&1
-        RD /s /q "Into Scripts Panel" >NUL 2>&1
         RD /s /q node_install >NUL 2>&1
         RD /s /q node_modules >NUL 2>&1
         RD /s /q LocalLinks >NUL 2>&1

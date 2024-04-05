@@ -44,8 +44,6 @@ else
         rm -f "tsconfig.json"
         rm -f "package.json"
         rm -f "package-lock.json"
-        rm -f "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd*"
-        rm -rf "${SPRK_DEV_TOOLS_DIR}signingtoolkit*"
         rm -rf BuildSettings
         rm -rf browser_html
         rm -rf browser_js
@@ -54,7 +52,6 @@ else
         rm -rf CEP_html
         rm -rf CEP_js
         rm -rf debug
-        rm -rf "Into Scripts Panel"
         rm -rf jsx
         rm -rf js
         rm -rf LocalLinks
