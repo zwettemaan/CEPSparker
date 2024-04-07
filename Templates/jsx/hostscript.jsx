@@ -1,3 +1,6 @@
+//@include "CreativeDeveloperTools_ES/crdtesDLLLoader.jsx"
+//@include "CreativeDeveloperTools_ES/crdtes.jsx"
+
 $if "$$TARGET_APP$$" == "InDesign"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
@@ -75,21 +78,8 @@ $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath, appId) {
 
     try {
         var fullPath = extensionDir + scriptPath;
-        if (appId == "DRWV") {
-            var script = DWfile.read(fullPath);
-            eval(script);
-        }
-        else if ($$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INDESIGN || $$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INCOPY) {
-            var file = File(fullPath);
-            app.doScript(file, ScriptLanguage.JAVASCRIPT, [], UndoModes.FAST_ENTIRE_SCRIPT);
-        }
-        else {
-            var file = File(fullPath);
-            file.open("r");
-            var script = file.read();
-            file.close();
-            eval(script);
-        }
+        var file = File(fullPath);
+        crdtes.evalScript(file, $.fileName);
     }
     catch (err) {           
         $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  

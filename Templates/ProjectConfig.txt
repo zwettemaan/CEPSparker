@@ -36,7 +36,7 @@ ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
 
-TARGET_PRODUCT_CODE_FOR_CRDT="CEPSparker"
+TARGET_PRODUCT_CODE_FOR_CRDT="CEPSparkerTest"
 HELP_PRODUCT_CODE_FOR_CRDT="Product code as used in Creative Developer Tools"
 
 TARGET_NAME="CEP Sparker"
@@ -63,7 +63,7 @@ HELP_EXTENSION_MENUNAME="Menu item used to activate the panel from the Adobe app
 TARGET_APP="InDesign"
 HELP_TARGET_APP="The target Adobe application. See setTarget command file for 'Any' defaults."
 # For now, I've only tested InDesign and Illustrator. 
-SELECT_TARGET_APP="Any,InDesign,Illustrator,InCopy,Photoshop,Premiere Pro,After Effects,Dreamweaver,Prelude,Audition,Bridge"
+SELECT_TARGET_APP="Any,InDesign,Illustrator,InCopy,Photoshop,Premiere Pro,After Effects,Prelude,Audition,Bridge"
 
 SHORTCODE="SPRK"
 HELP_SHORTCODE="Some variable name for global object used to store js/jsx globals. Helps avoiding variable name clashes."

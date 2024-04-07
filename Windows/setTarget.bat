@@ -24,15 +24,17 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
     ECHO.
     ECHO Run the SparkerConfig first - this project has not been configured.
     ECHO.
+    GOTO DONE
 
-) ELSE (
+) 
 
-    CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
-    CALL "%BUILD_SETTINGS_DIR%buildSettings.bat"
-
-)
 
 SET EXTENSION_HOME_DIR=
 IF NOT "%TARGET_DIRNAME%" == "" (
     SET EXTENSION_HOME_DIR=%EXTENSION_DIR%%TARGET_DIRNAME%\
 )
+
+CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
+CALL "%BUILD_SETTINGS_DIR%buildSettings.bat"
+
+:DONE

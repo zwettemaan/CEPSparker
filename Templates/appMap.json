@@ -21,26 +21,6 @@
             "CC 2018": "8.0"
         }
     },
-    "Dreamweaver": {
-        "TARGET_APP_CODE": "DRWV",
-        "TARGET_FILENAME_EXTENSION": "js",
-        /* 
-        * No TARGET_APP_SPECIFIER, TARGET_APP_FULL_SPECIFIER. Dreamweaver does not 
-        * support ExtendScript or ESTK/VSCode
-        */
-        "TARGET_APP_SCRIPT_DIR_MAC": "/Applications/Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$/configuration/Commands/",
-        "TARGET_APP_SCRIPT_DIR_WINDOWS": "%PROGRAMFILES%\\Adobe\\Adobe $$TARGET_APP$$ $$TARGET_CC_VERSION$$\\configuration\\Commands\\",
-        /*
-        * TARGET_APP_SPECIFIER_VERSION matches TARGET_CC_VERSION, so no need to have a separate
-        * entry for TARGET_APP_SPECIFIER_VERSION
-        */
-        "TARGET_CC_VERSION": {
-            "Any": "20.0",
-            "2020": "20.0",
-            "CC 2019": "19.0",
-            "CC 2018": "18.0"
-        }
-    },
     "InCopy":   {
         "TARGET_APP_CODE": "AICY",
         "TARGET_APP_SPECIFIER": "incopy",

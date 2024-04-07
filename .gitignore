@@ -22,5 +22,8 @@
 /package-lock.json
 /package.json
 /tsconfig.json
-CreativeDeveloperTools_ES
-CreativeDeveloperTools_ES.nzip
+/CreativeDeveloperTools_ES
+/CreativeDeveloperTools_ES.nzip
+/CRDT_manifest.json
+*_trackingGUID.json
+*.tpkg
