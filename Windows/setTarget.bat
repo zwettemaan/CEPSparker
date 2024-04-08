@@ -28,6 +28,13 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 
 ) 
 
+SET CRDT_MANIFEST="CRDT_manifest.json"
+
+SET cmd="$PROJECT_VERSION = (Get-Content -Path 'CRDT_manifest.json' | ConvertFrom-Json) ; ($machineInfo.pluginInstallerPath | out-file -encoding ASCII 'C:\Users\ADMINI~1\AppData\Local\Temp\2\pluginInstallerPath.txt')"
+
+PowerShell %cmd%
+REM FOR /F "delims=" %%x in (%TEMP%\pluginInstallerPath.txt) do set PLUGIN_INSTALLER=%%x
+SET /P PLUGIN_INSTALLER=<%TEMP%\pluginInstallerPath.txt
 
 SET EXTENSION_HOME_DIR=
 IF NOT "%TARGET_DIRNAME%" == "" (

@@ -37,7 +37,7 @@
           "encrypt": false
         },
         { 
-          "regExp": "/^CreativeDeveloperTools_ES\\.nzip$/i",  
+          "regExp": "/^jsx\\/CreativeDeveloperTools_ES\\.nzip$/i",  
           "sign": true,
           "encrypt": false
         },
@@ -67,11 +67,15 @@
           "omit": true
         },
         { 
-          "regExp": "/^(CreativeDeveloperTools_ES|Templates|Developer|Mac|ToolSources|Windows|build|BuildSettings|LocalLinks|VSCode|node_install)\\/$/i",
+          "regExp": "/^(Templates|Developer|Mac|ToolSources|Windows|build|BuildSettings|LocalLinks|VSCode|node_install)\\/$/i",
           "omit": true
         },
         { 
           "regExp": "/^jsx\\/libs\\/$/i",
+          "omit": true
+        },
+        { 
+          "regExp": "/^jsx\\/CreativeDeveloperTools_ES\\/$/i",
           "omit": true
         },
         {

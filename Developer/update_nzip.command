@@ -3,7 +3,6 @@ if [ `uname` != "Darwin" ]; then
     exit
 fi
 
-
 export SCRIPT_DIR=`dirname $0`
 cd $SCRIPT_DIR
 export SCRIPT_DIR=`pwd`/
@@ -27,21 +26,41 @@ echo "update_nzip started"
 
 export CREATIVE_DEVELOPER_TOOLS_ES="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES"
 if [ ! -d "${CREATIVE_DEVELOPER_TOOLS_ES}" ]; then
-    echo "Cannot update nzip file. SizeLabels repo needs to be installed alongside CRDT_ES repo"
-    exit
+
+    echo "Cannot refresh nzip file. SizeLabels repo needs to be installed alongside CRDT_ES repo"
+
+else
+
+    pushd "${CEP_SPARKER_DIR}Templates/jsx" > /dev/null
+
+    rm -rf "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES"
+
+    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}Templates/jsx"
+
+    zip -y -r CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES
+
+    rm -rf CreativeDeveloperTools_ES
+
+    mv CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES.nzip
+
+    popd > /dev/null
+
 fi
 
-rm -rf jsx/CreativeDeveloperTools_ES
-rm -f jsx/CreativeDeveloperTools_ES.nzip
-rm -f jsx/CreativeDeveloperTools_ES.zip
+if [ -d "${CEP_SPARKER_DIR}/jsx" ]; then
 
-cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}jsx"
+    if [ -f "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES.nzip" ]; then
 
-cd jsx
+        pushd "${CEP_SPARKER_DIR}jsx" > /dev/null
 
-zip -y -r CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES
-mv CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES.nzip
+        rm -rf CreativeDeveloperTools_ES
 
-cd ..
- 
+        cp "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES.nzip" CreativeDeveloperTools_ES.nzip
+        
+        unzip CreativeDeveloperTools_ES.nzip
 
+        popd > /dev/null
+
+    fi
+
+fi
