@@ -11,6 +11,8 @@ PUSHD "%SPRK_COMMANDS_DIR%.."
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
+IF NOT EXIST %PROJECT_ROOT_DIR%\configSettings.bat GOTO DONE
+
 CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
 
 PUSHD "%PROJECT_ROOT_DIR%"
@@ -31,3 +33,5 @@ ECHO.
 IF NOT "%1" == "NESTED" (
     SET /P REPLY=Press [Enter] to finalize 
 )
+
+:DONE

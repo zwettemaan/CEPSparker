@@ -31,13 +31,17 @@ if [ ! -d "${CREATIVE_DEVELOPER_TOOLS_ES}" ]; then
     exit
 fi
 
-rm -rf CreativeDeveloperTools_ES
-rm -f CreativeDeveloperTools_ES.nzip
-rm -f CreativeDeveloperTools_ES.zip
+rm -rf jsx/CreativeDeveloperTools_ES
+rm -f jsx/CreativeDeveloperTools_ES.nzip
+rm -f jsx/CreativeDeveloperTools_ES.zip
 
-cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}"
+cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}jsx"
+
+cd jsx
 
 zip -y -r CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES
 mv CreativeDeveloperTools_ES.zip CreativeDeveloperTools_ES.nzip
 
+cd ..
+ 
 
