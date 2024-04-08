@@ -27,7 +27,7 @@ echo "update_nzip started"
 export CREATIVE_DEVELOPER_TOOLS_ES="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES"
 if [ ! -d "${CREATIVE_DEVELOPER_TOOLS_ES}" ]; then
 
-    echo "Cannot refresh nzip file. SizeLabels repo needs to be installed alongside CRDT_ES repo"
+    echo "Cannot refresh from repo. CEPSparker repo needs to be installed alongside CRDT_ES repo"
 
 else
 
