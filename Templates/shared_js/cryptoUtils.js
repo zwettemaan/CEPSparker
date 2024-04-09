@@ -2,9 +2,11 @@
 // This file contains js code shared between web browser and CEP panel
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
+var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
+if (! xGlobal.$$SHORTCODE$$) {
+    xGlobal.$$SHORTCODE$$ = {};
 }
+var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
 
 if (! $$SHORTCODE$$.crypto) {
     $$SHORTCODE$$.crypto = require('crypto');

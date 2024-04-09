@@ -8,11 +8,13 @@ $if "$$TARGET_APP$$" == "Bridge"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
 
-var app;
-
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
+var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
+if (! xGlobal.$$SHORTCODE$$) {
+    xGlobal.$$SHORTCODE$$ = {};
 }
+var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+
+var app = xGlobal.app;
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
@@ -20,8 +22,8 @@ if (! $$SHORTCODE$$.C) {
 
 $$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
 
-//@include "json2.jsx"
-//@include "JSInterface.jsx", 
+crdtes.evalScript("json2.jsx", $.fileName);
+crdtes.evalScript("JSInterface.jsx", $.fileName);
 
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 

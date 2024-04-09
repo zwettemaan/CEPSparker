@@ -1,5 +1,5 @@
-﻿//@include "Tests/standaloneInitDirs.jsx"
-//@include "hostscript.jsx"
+﻿crdtes.evalScript("Tests/standaloneInitDirs.jsx", $.fileName);
+crdtes.evalScript("hostscript.jsx", $.fileName);
 
 app.documents.everyItem().close(SaveOptions.NO);
 

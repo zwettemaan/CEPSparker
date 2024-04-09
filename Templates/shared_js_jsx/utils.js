@@ -2,6 +2,12 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
+var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
+if (! xGlobal.$$SHORTCODE$$) {
+    xGlobal.$$SHORTCODE$$ = {};
+}
+var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+
 $$SHORTCODE$$.CANONICAL_NUMBER_DIGITS            = 10;
 $$SHORTCODE$$.CANONICAL_GUID_DIGITS              = 32;
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENTS            = [8,4,4,4,12];

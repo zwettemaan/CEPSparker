@@ -6,7 +6,10 @@
 //
 // engine, which is initiated from the ExtendScriptExtender extension.
 
-var JSInterface = {};
+if (! $.global.JSInterface) {
+    $.global.JSInterface = {};
+}
+var JSInterface = $.global.JSInterface;
 
 JSInterface.loadPlugPlugLibrary = function(filePathJSONStr) {
 

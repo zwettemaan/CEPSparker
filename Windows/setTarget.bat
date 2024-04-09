@@ -3,8 +3,6 @@ REM
 REM Set up a bunch of environment variables
 REM
 
-SETLOCAL EnableDelayedExpansion
-
 IF "%SPRK_COMMANDS_DIR%" == "" (
     SET SPRK_COMMANDS_DIR=%~dp0
 )
@@ -33,16 +31,20 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 SET CRDT_MANIFEST=%PROJECT_ROOT_DIR%CRDT_manifest.json
 SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -replace '\/\/.*$','' } | ConvertFrom-Json); echo $manifest.version"
 
+SETLOCAL EnableDelayedExpansion
+
 FOR /f "DELIMS=" %%a IN ('PowerShell %CMD%') DO SET PROJECT_VERSION=%%a
 
 ECHO SET PROJECT_VERSION=!PROJECT_VERSION!> "%BUILD_SETTINGS_DIR%buildSettings.bat"
 ECHO export PROJECT_VERSION="!PROJECT_VERSION!"> "%BUILD_SETTINGS_DIR%buildSettings.command"
 
+ENDLOCAL
+
+CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
+
 SET EXTENSION_HOME_DIR=
 IF NOT "%TARGET_DIRNAME%" == "" (
     SET EXTENSION_HOME_DIR=%EXTENSION_DIR%%TARGET_DIRNAME%\
 )
-
-CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
 
 :DONE
