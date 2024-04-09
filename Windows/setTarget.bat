@@ -3,6 +3,8 @@ REM
 REM Set up a bunch of environment variables
 REM
 
+SETLOCAL EnableDelayedExpansion
+
 IF "%SPRK_COMMANDS_DIR%" == "" (
     SET SPRK_COMMANDS_DIR=%~dp0
 )
@@ -28,13 +30,13 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 
 ) 
 
-SET CRDT_MANIFEST="CRDT_manifest.json"
+SET CRDT_MANIFEST=%PROJECT_ROOT_DIR%CRDT_manifest.json
+SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -replace '\/\/.*$','' } | ConvertFrom-Json); echo $manifest.version"
 
-SET cmd="$PROJECT_VERSION = (Get-Content -Path 'CRDT_manifest.json' | ConvertFrom-Json) ; ($machineInfo.pluginInstallerPath | out-file -encoding ASCII 'C:\Users\ADMINI~1\AppData\Local\Temp\2\pluginInstallerPath.txt')"
+FOR /f "DELIMS=" %%a IN ('PowerShell %CMD%') DO SET PROJECT_VERSION=%%a
 
-PowerShell %cmd%
-REM FOR /F "delims=" %%x in (%TEMP%\pluginInstallerPath.txt) do set PLUGIN_INSTALLER=%%x
-SET /P PLUGIN_INSTALLER=<%TEMP%\pluginInstallerPath.txt
+ECHO SET PROJECT_VERSION=!PROJECT_VERSION!> "%BUILD_SETTINGS_DIR%buildSettings.bat"
+ECHO export PROJECT_VERSION="!PROJECT_VERSION!"> "%BUILD_SETTINGS_DIR%buildSettings.command"
 
 SET EXTENSION_HOME_DIR=
 IF NOT "%TARGET_DIRNAME%" == "" (
@@ -42,6 +44,5 @@ IF NOT "%TARGET_DIRNAME%" == "" (
 )
 
 CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
-CALL "%BUILD_SETTINGS_DIR%buildSettings.bat"
 
 :DONE
