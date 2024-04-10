@@ -14,13 +14,11 @@ if (! xGlobal.$$SHORTCODE$$) {
 }
 var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
 
-var app = xGlobal.app;
-
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
+$$SHORTCODE$$.C.PLATFORM = "ExtendScript";
 
 crdtes.evalScript("json2.jsx", $.fileName);
 crdtes.evalScript("JSInterface.jsx", $.fileName);
