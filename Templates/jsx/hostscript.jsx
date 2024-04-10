@@ -1,12 +1,12 @@
-//@include "CreativeDeveloperTools_ES/crdtesDLLLoader.jsx"
-//@include "CreativeDeveloperTools_ES/crdtes.jsx"
-
 $if "$$TARGET_APP$$" == "InDesign"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
 $if "$$TARGET_APP$$" == "Bridge"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
+
+//@include "CreativeDeveloperTools_ES/crdtesDLLLoader.jsx"
+//@include "CreativeDeveloperTools_ES/crdtes.jsx"
 
 var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
