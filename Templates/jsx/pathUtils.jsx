@@ -2,11 +2,7 @@
 // This file mirrors the API of CEP_js/pathUtils.js or shared_js/utils.js
 //
 
-var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
-if (! xGlobal.$$SHORTCODE$$) {
-    xGlobal.$$SHORTCODE$$ = {};
-}
-var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};

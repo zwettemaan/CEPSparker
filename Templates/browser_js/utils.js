@@ -2,11 +2,7 @@
 // This file contains js code for web browser
 //
 
-var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
-if (! xGlobal.$$SHORTCODE$$) {
-    xGlobal.$$SHORTCODE$$ = {};
-}
-var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 

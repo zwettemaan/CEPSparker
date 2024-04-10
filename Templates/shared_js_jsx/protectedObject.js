@@ -2,11 +2,7 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
-if (! xGlobal.$$SHORTCODE$$) {
-    xGlobal.$$SHORTCODE$$ = {};
-}
-var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 var Class = Function; // Alias for readability - ... instanceof Class instead of ... instanceof Function
 

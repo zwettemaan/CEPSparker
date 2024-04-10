@@ -14,11 +14,7 @@
 //
 // This code is shared between CEP/JavaScript and ExtendScript
 //
-var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
-if (! xGlobal.$$SHORTCODE$$) {
-    xGlobal.$$SHORTCODE$$ = {};
-}
-var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 var FNV = function () {
   this.offset_basis = 2166136261;    // The prime, 32 bit offset_basis = 2,166,136,261 = 0x811C9DC5.    

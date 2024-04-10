@@ -1,8 +1,18 @@
-var xGlobal = {}; if ("undefined" != typeof global) { xGlobal = global; } else if ("undefined" != typeof $) { xGlobal = $.global; }
-if (! xGlobal.$$SHORTCODE$$) {
-    xGlobal.$$SHORTCODE$$ = {};
+function getPlatformGlobals() {
+    return window;
 }
-var $$SHORTCODE$$ = xGlobal.$$SHORTCODE$$;
+
+var platformGlobals = getPlatformGlobals();
+platformGlobals.getPlatformGlobals = getPlatformGlobals;
+platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
+    if (! platformGlobals[globalName]) {
+        platformGlobals[globalName] = {};
+    }
+    return platformGlobals[globalName];
+}
+
+
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
