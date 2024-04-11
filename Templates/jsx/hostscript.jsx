@@ -42,16 +42,20 @@ $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 $$SHORTCODE$$.relativeFilePathsToLoad = [
     "shared_js_jsx/globals.js",
     "shared_js_jsx/tweakableSettings.js",
-    "shared_js_jsx/Tests/utils_Test.js",
     "shared_js_jsx/utils.js",
     "jsx/utils.jsx",
     "shared_js_jsx/pathUtils.js",
     "jsx/pathUtils.jsx",
     "shared_js_jsx/protectedObject.js",
+    "jsx/Tests/jsx.jsx",
+    "jsx/Tests/sampleClass_Test.jsx",
+    "shared_js_jsx/Tests/shared_js_jsx.js",
+    "shared_js_jsx/Tests/utils_Test.js",
     "shared_js_jsx/tests.js",
     "shared_js_jsx/init.js",
     "jsx/init.jsx"
 ];
+
 
 $$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad = [
         "jsx/idUtils.jsx"
