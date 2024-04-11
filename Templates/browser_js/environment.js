@@ -21,6 +21,7 @@ $$SHORTCODE$$.C.CSS_ROOT                                 = "/css"
 $$SHORTCODE$$.C.JS_ROOT                                  = "/js"
 $$SHORTCODE$$.C.SHARED_JS_ROOT                           = "/id_js"
 $$SHORTCODE$$.C.SHARED_JS_JSX_ROOT                       = "/id_js_jsx"
+
 $$SHORTCODE$$.C.BROWSER_JAVASCRIPT                       = "Browser JavaScript";
 $$SHORTCODE$$.C.CEP_JAVASCRIPT                           = "CEP JavaScript";
 $$SHORTCODE$$.C.EXTENDSCRIPT                             = "ExtendScript";

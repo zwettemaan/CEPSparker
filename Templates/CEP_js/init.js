@@ -13,7 +13,6 @@ if (! $$SHORTCODE$$.cepFS) {
     }
 }
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.CEP_JAVASCRIPT;
 $$SHORTCODE$$.C.DIRECTORY_PATH_INIT_JS   = __dirname;
 
 $$SHORTCODE$$.jsInterface = require("JSInterface");
