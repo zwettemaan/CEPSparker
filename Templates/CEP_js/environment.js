@@ -1,5 +1,5 @@
 function getPlatformGlobals() {
-    return window;
+    return global;
 }
 
 var platformGlobals = getPlatformGlobals();
