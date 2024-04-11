@@ -91,7 +91,7 @@ $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath, appId) {
     }
 
     try {
-        crdtes.evalScript(scriptPath, extensionDir + "/dummy.jsx");
+        crdtes.evalScript(scriptPath, extensionDir + "/dummyScriptInProjectDir.jsx");
     }
     catch (err) {           
         $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
