@@ -12,11 +12,6 @@ $$SHORTCODE$$.C.HTML_ID_IFRAME                           = "$$SHORTCODE$$_iFrame
 $$SHORTCODE$$.C.HTML_ID_IFRAME_CONTAINER                 = "$$SHORTCODE$$_iFrameWrapper";
 $$SHORTCODE$$.C.HTML_SRC_IFRAME                          = "http://localhost:$$IFRAME_UI_PORT$$/panelUI.html";
 
-$$SHORTCODE$$.C.BROWSER_JAVASCRIPT                       = "Browser JavaScript";
-$$SHORTCODE$$.C.CEP_JAVASCRIPT                           = "CEP JavaScript";
-$$SHORTCODE$$.C.EXTENDSCRIPT                             = "ExtendScript";
-$$SHORTCODE$$.C.NODE_JAVASCRIPT                          = "Node JavaScript";
-
 $$SHORTCODE$$.C.TARGET_DIRNAME                           = "$$TARGET_DIRNAME$$";
 $$SHORTCODE$$.C.DIRNAME_PREFERENCES                      = "$$TARGET_DIRNAME$$";
 $$SHORTCODE$$.C.FILENAME_PREFERENCES                     = "$$PREFS_FILENAME$$";

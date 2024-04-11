@@ -1,16 +1,3 @@
-function getPlatformGlobals() {
-    return window;
-}
-
-var platformGlobals = getPlatformGlobals();
-platformGlobals.getPlatformGlobals = getPlatformGlobals;
-platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
-    if (! platformGlobals[globalName]) {
-        platformGlobals[globalName] = {};
-    }
-    return platformGlobals[globalName];
-}
-
 var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
@@ -31,10 +18,8 @@ if (! $$SHORTCODE$$.url) {
 
 $$SHORTCODE$$.DIRECTORY_PATH_INIT_JS = __dirname;
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.NODE_JAVASCRIPT;
-
 // TODO needs to be a parameter on the command line
-$$SHORTCODE$$.C.APP_NAME = "InDesign";
+$$SHORTCODE$$.C.APP_NAME         = "InDesign";
 $$SHORTCODE$$.C.VERSION_INDESIGN = "2023";
 
 $$SHORTCODE$$.init = function init() {

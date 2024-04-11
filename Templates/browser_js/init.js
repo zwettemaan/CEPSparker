@@ -1,24 +1,8 @@
-function getPlatformGlobals() {
-    return window;
-}
-
-var platformGlobals = getPlatformGlobals();
-platformGlobals.getPlatformGlobals = getPlatformGlobals;
-platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
-    if (! platformGlobals[globalName]) {
-        platformGlobals[globalName] = {};
-    }
-    return platformGlobals[globalName];
-}
-
-
 var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
-
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.BROWSER_JAVASCRIPT;
 
 $$SHORTCODE$$.C.TIME_INTERVAL_WAIT_FOR_CODE_MILLISECONDS = 1000;
 

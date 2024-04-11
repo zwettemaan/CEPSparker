@@ -1,16 +1,3 @@
-function getPlatformGlobals() {
-    return window;
-}
-
-var platformGlobals = getPlatformGlobals();
-platformGlobals.getPlatformGlobals = getPlatformGlobals;
-platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
-    if (! platformGlobals[globalName]) {
-        platformGlobals[globalName] = {};
-    }
-    return platformGlobals[globalName];
-}
-
 var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
@@ -40,18 +27,23 @@ $$SHORTCODE$$.init = function init() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    getJavaScriptExtensionDirs_PRM().
-    then(initHostScript_PRM).
-    then(getInDesignInfo_PRM).
-    then(getExtendScriptExtensionDirs_PRM).
-    then(getLocale_PRM).
-    then(wireUI_PRM).
-    then(readPreferences_PRM).
-    then(passCollectedInfoToExtendScript_PRM).
-    then(savePreferences_PRM).
-    then(updateUI_PRM).
-    then(jsInterfaceInit_PRM).
-    then(runTests_PRM);
+    $$SHORTCODE$$.csInterface.evalScript(
+        "$$SHORTCODE$$.triggerHostScriptJsxLoad()", 
+        function() {
+            getJavaScriptExtensionDirs_PRM().
+            then(initHostScript_PRM).
+            then(getInDesignInfo_PRM).
+            then(getExtendScriptExtensionDirs_PRM).
+            then(getLocale_PRM).
+            then(wireUI_PRM).
+            then(readPreferences_PRM).
+            then(passCollectedInfoToExtendScript_PRM).
+            then(savePreferences_PRM).
+            then(updateUI_PRM).
+            then(jsInterfaceInit_PRM).
+            then(runTests_PRM);
+        }
+    );
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
