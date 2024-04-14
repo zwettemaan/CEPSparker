@@ -21,8 +21,6 @@ fi
 
 . ./setTarget.command
 
-./nodeSetup.command
-
 if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe" ]; then
     mkdir "${USER_HOME_DIR}Library/Application Support/Adobe"
 fi
