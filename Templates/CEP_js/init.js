@@ -13,7 +13,7 @@ if (! $$SHORTCODE$$.cepFS) {
     }
 }
 
-$$SHORTCODE$$.C.DIRECTORY_PATH_INIT_JS   = __dirname;
+$$SHORTCODE$$.C.DIRECTORY_PATH_INIT_JS = __dirname;
 
 $$SHORTCODE$$.jsInterface = require("JSInterface");
 
@@ -137,7 +137,11 @@ function getExtendScriptExtensionDirs_PRM() {
                             $$SHORTCODE$$.path.SEPARATOR;
 
                         $$SHORTCODE$$.dirs.PROJECT_ROOT = 
-                            File($.fileName).fsName + "/";
+                            $$SHORTCODE$$.path.dirname(
+                                $$SHORTCODE$$.path.dirname(
+                                    location.pathname
+                                )
+                            ) + "/";
                             
                         resolve();
                     } 

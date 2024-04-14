@@ -4,7 +4,6 @@
 
 var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
-
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }

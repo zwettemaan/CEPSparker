@@ -105,11 +105,12 @@ echo "# automatically be copied into this file."                    >> "${BUILD_
 echo ""                                                             >> "${BUILD_SETTINGS_DIR}buildSettings.command"
 echo "export PROJECT_VERSION=\"${CRDT_VERSION}\""                   >> "${BUILD_SETTINGS_DIR}buildSettings.command"
 
+. "${BUILD_SETTINGS_DIR}configSettings.command"
+. "${BUILD_SETTINGS_DIR}buildSettings.command"
+
 if [ "$TARGET_DIRNAME" != "" ]; then
 
     export EXTENSION_HOME_DIR="${EXTENSION_DIR}${TARGET_DIRNAME}/"
     
 fi
 
-. "${BUILD_SETTINGS_DIR}configSettings.command"
-. "${BUILD_SETTINGS_DIR}buildSettings.command"
