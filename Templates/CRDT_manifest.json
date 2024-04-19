@@ -1,13 +1,17 @@
 {
     "productCode": "$$TARGET_PRODUCT_CODE_FOR_CRDT$$",
     "version": "$$PROJECT_VERSION$$",
+    "prePackageScriptMac": "Mac/adjustVersionInManifest.command",
+    "prePackageScriptWindows": "Windows/adjustVersionInManifest.bat",
+    "postPackageScriptMac": "",
+    "postPackageScriptWindows": "",
     "targets": [
       {
         "method": "EXTENSION",
-        "prePackageScriptMac": "Mac/adjustVersionInManifest.command",
-        "prePackageScriptWindows": "Windows/adjustVersionInManifest.bat",
-        "postPackageScriptMac": "",
-        "postPackageScriptWindows": "",
+        "preInstallScriptMac": "",
+        "preInstallScriptWindows": "",
+        "postInstallScriptMac": "",
+        "postInstallScriptWindows": "",
         "needsDebugMode": false,
         "csxsManifestFile": "CSXS/manifest.xml"
       }
