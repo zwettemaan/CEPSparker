@@ -66,7 +66,7 @@ fi
 
 export CRDT_MANIFEST="CRDT_manifest.json"
 
-export CRDT_VERSION=`cat "${PROJECT_ROOT_DIR}${CRDT_MANIFEST}" | sed -E "s/^(.*)\/\/.*$/\\1/" | "${PYTHON}" -c "${PYTHON_FILTER}"`
+export CRDT_VERSION=`cat "${PROJECT_ROOT_DIR}${CRDT_MANIFEST}" | sed -E "s/^[ \t]*\/\/.*$//" | "${PYTHON}" -c "${PYTHON_FILTER}"`
 if [ "${CRDT_VERSION}" = "" ]; then
     echo "Cannot access version number"
     exit

@@ -1,10 +1,18 @@
+// You can add comments to this file, but all comments have to start with
+// double slash, not #, and comments should not be added to lines with JSON data
 {
     "productCode": "$$TARGET_PRODUCT_CODE_FOR_CRDT$$",
     "version": "$$PROJECT_VERSION$$",
-    "prePackageScriptMac": "Mac/adjustVersionInManifest.command",
-    "prePackageScriptWindows": "Windows/adjustVersionInManifest.bat",
-    "postPackageScriptMac": "",
-    "postPackageScriptWindows": "",
+    "selfSignedCodeSignCertificateFileName": "selfSignedCodeSignCert.p12",
+    "selfSignedCodeSignCertificateName": "Self Signed Certificate for $$TARGET_PRODUCT_CODE_FOR_CRDT$$",
+    "selfSignedCodeSignCertificatePassword": "password",
+    "selfSignedCodeSignCertificateCountryCode": "US",
+    "selfSignedCodeSignCertificateLifetimeDays": 4000,
+    "timestampServer": "http://timestamp.digicert.com",
+    "prePackageScriptMac": "",
+    "prePackageScriptWindows": "",
+    "postPackageScriptMac": "Mac/postPackage.command",
+    "postPackageScriptWindows": "Windows/postPackage.bat",
     "targets": [
       {
         "method": "EXTENSION",
@@ -106,6 +114,14 @@
         },
         { 
           "regExp": "/^.*\\.tpkg$/i",  
+          "omit": true
+        },
+        { 
+          "regExp": "/^.*\\.zxp$/i",  
+          "omit": true
+        },
+        { 
+          "regExp": "/^.*\\.p12$/i",  
           "omit": true
         },
         { 

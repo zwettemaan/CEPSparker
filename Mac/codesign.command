@@ -1,34 +1,51 @@
 #
-# Build a code-signed ZXP file
+# Build a code-signed package folder, which can be compressed into a .ZXP or a .tpkg
 #
 # Usage: 
 #
-#   zxpBuildUCF.command
-#
-# or
-#
-#   zxpBuildUCF.command debug
+#   codeSign.command cepPackageFolder pluginInstallerResourcesFolderPath
 #
 # Optional 'debug' parameter: add .debug file into signed ZXP 
 #
 
-export param="$1"
+export CEP_PACKAGE_FOLDER="$1"
+export PLUGIN_INSTALLER_RESOURCES_FOLDER="$2"
 
-if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
-    export SPRK_COMMANDS_DIR=`dirname "$0"`
+if [ "${CEP_PACKAGE_FOLDER}" == "" -o ! -d "{CEP_PACKAGE_FOLDER}" ]; then
+    echo "CEP_PACKAGE_FOLDER is not a directory"
+    exit
+fi
+
+if [ "${PLUGIN_INSTALLER_RESOURCES_FOLDER}" == "" -o ! -d "${PLUGIN_INSTALLER_RESOURCES_FOLDER}" ]; then
+    echo "PLUGIN_INSTALLER_RESOURCES_FOLDER is not a directory"
+    exit
+fi
+
+if [ ! -e "${PLUGIN_INSTALLER_RESOURCES_FOLDER}/UCF.app"]; then
+
+    if [ ! -e "${PLUGIN_INSTALLER_RESOURCES_FOLDER}/UCF.app.zip"]; then
+        echo "Cannot find UCF.app.zip"
+        exit
+    fi
+
+    unzip "${PLUGIN_INSTALLER_RESOURCES_FOLDER}/UCF.app.zip"
+
+fi
+
+if [ ! -e "${PLUGIN_INSTALLER_RESOURCES_FOLDER}/UCF.app/Contents/MacOS/UCF"]; then
+    echo "Cannot find UCF executable"
+    exit
 fi
 
 pushd "$SPRK_COMMANDS_DIR" > /dev/null
 
 export SPRK_COMMANDS_DIR=`pwd`/
 
-. ./setTarget.command
+. setTarget.command
 
-export SPRK_TIMESTAMP_SERVER="http://timestamp.digicert.com"
+export SPRK_TIMESTAMP_SERVER="http://timestamp.globalsign.com/scripts/timstamp.dll"
 
 export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools/"
-
-"${SPRK_COMMANDS_DIR}clean.command"
 
 if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
 
@@ -46,21 +63,19 @@ else
         echo "Need to provide a certificate file, or create a self-signed one first. See ${SPRK_DEV_TOOLS_DIR}makeSelfSignedCert.command"
         echo ""
 
-    elif [ "$TARGET_DIRNAME" = "" ]; then
+    elif [ "$TARGET_DIRNAME" == "" ]; then
 
         echo ""
         echo "Cannot determine directory name for extension. "
         echo ""
 
-    elif [ "$PROJECT_VERSION" = "" ]; then
+    elif [ "$PROJECT_VERSION" == "" ]; then
 
         echo ""
         echo "Cannot determine version for extension."
         echo ""
 
     else
-
-        "${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
         if [ ! -d "$BUILD_DIR" ]; then
             mkdir "$BUILD_DIR"
@@ -77,12 +92,9 @@ else
 
         cp -R "${PROJECT_ROOT_DIR}css"           "${EXTENSION_BUILD_DIR}css"
         cp -R "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_BUILD_DIR}CSXS"
-        cp -R "${PROJECT_ROOT_DIR}CEP_html"      "${EXTENSION_BUILD_DIR}CEP_html"
-        cp -R "${PROJECT_ROOT_DIR}node_modules"  "${EXTENSION_BUILD_DIR}node_modules"
+        cp -R "${PROJECT_ROOT_DIR}html"          "${EXTENSION_BUILD_DIR}html"
+        cp -R "${PROJECT_ROOT_DIR}js"            "${EXTENSION_BUILD_DIR}js"
         cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
-        rm -f "${EXTENSION_BUILD_DIR}jsx/manually*.jsx"
-        cp -R "${PROJECT_ROOT_DIR}CEP_js"        "${EXTENSION_BUILD_DIR}CEP_js"
-        cp -R "${PROJECT_ROOT_DIR}shared_js"     "${EXTENSION_BUILD_DIR}shared_js"
         cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
 
         cd "$EXTENSION_BUILD_DIR"
@@ -95,7 +107,7 @@ else
 
         if [ "$param" == "debug" ]; then
 
-            "${SPRK_DEV_TOOLS_DIR}/UCF.app/Contents/MacOS/UCF" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" . -e "${EXTENSION_BUILD_DIR}.debug" .debug
+            java -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" . -e "${EXTENSION_BUILD_DIR}.debug" .debug
 
             mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.debug.zxp"
 
@@ -105,7 +117,7 @@ else
         
         else
 
-            "${SPRK_DEV_TOOLS_DIR}/UCF.app/Contents/MacOS/UCF" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" .
+            java -jar "${SPRK_DEV_TOOLS_DIR}signingtoolkit/ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER" "$TARGET_DIRNAME.zxp" -C "$EXTENSION_BUILD_DIR" .
 
             mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
 
