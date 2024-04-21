@@ -40,6 +40,8 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
         
         CALL Windows\clean.bat NESTED
 
+        DEL *.tpkg >NUL 2>&1
+        DEL Developer\*_trackingGUID.json >NUL 2>&1
         DEL CRDT_manifest.json >NUL 2>&1
         DEL tsconfig.json >NUL 2>&1
         DEL package.json >NUL 2>&1
