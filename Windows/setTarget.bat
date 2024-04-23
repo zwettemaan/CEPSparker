@@ -29,7 +29,7 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
 ) 
 
 SET CRDT_MANIFEST=%PROJECT_ROOT_DIR%CRDT_manifest.json
-SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -replace '\/\/.*$','' } | ConvertFrom-Json); echo $manifest.version"
+SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -replace '^^\s*\/\/.*$','' } | ConvertFrom-Json); echo $manifest.version"
 
 SETLOCAL EnableDelayedExpansion
 
