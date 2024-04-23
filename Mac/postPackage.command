@@ -15,8 +15,6 @@ export CPU_ARCHITECTURE=`uname -p`
 export PACKAGE_NAME=`basename "${TARGET_PACKAGE_FOLDER}"`
 export PACKAGE_PARENT_DIR=`dirname "${TARGET_PACKAGE_FOLDER}"`
 export UCF_TEMP_DIR=/tmp/CRDT_Temp_UCF/
-export FILE_PATH_UCF_TOOL="${UCF_TEMP_DIR}UCF.app/Contents/MacOS/UCF"
-export TARGET_PACKAGE_PRECURSOR_FOLDER=${TARGET_PACKAGE_FOLDER}.precursor
 
 pushd "${SPRK_COMMANDS_DIR}" > /dev/null
 
@@ -44,18 +42,30 @@ export JAVA_HOME="${UCF_TEMP_DIR}/jre/Contents/Home"
 
 cd "${PACKAGE_PARENT_DIR}"
 
+# JSON files get rewritten by ucf.jar as they get included into the ZXP - move the CRDT_manifest.json away
+# so it is not included into the code-signing.
+#
+# We will restore it beside the ZXP file
+
+mv "${PACKAGE_NAME}/CRDT_manifest.json" "${UCF_TEMP_DIR}"
+
+find "${PACKAGE_NAME}" -name ".DS_Store" | while read a; do rm "$a"; done
+find "${PACKAGE_NAME}" -name "__MACOSX" | while read a; do rm -rf "$a"; done
+xattr -cr "${PACKAGE_NAME}"
+
 "${JAVA_HOME}/bin/java" -jar "${FILE_PATH_PLUGIN_INSTALLER_RESOURCES}/ucf.jar" -package -storetype PKCS12 -keystore "${FILE_PATH_CODE_SIGN_CERTIFICATE}" -storepass "${CODE_SIGN_CERTIFICATE_PASSWORD}" -tsa "${URL_TIME_STAMP_SERVER}" "${PACKAGE_NAME}.zxp" -C "${TARGET_PACKAGE_FOLDER}" .
 
-rm -rf "${UCF_TEMP_DIR}"
-
-rm -rf "${TARGET_PACKAGE_PRECURSOR_FOLDER}"
-mv "${TARGET_PACKAGE_FOLDER}" "${TARGET_PACKAGE_PRECURSOR_FOLDER}"
+mv "${PACKAGE_NAME}" "${PACKAGE_NAME}.precursor"
 
 mkdir "${PACKAGE_NAME}"
-cd "${PACKAGE_NAME}"
-unzip -q "../${PACKAGE_NAME}.zxp"
-cd ..
 
-mv "${PACKAGE_NAME}.zxp" "${SOURCE_PACKAGE_FOLDER}"
+mv "${PACKAGE_NAME}.zxp" "${PACKAGE_NAME}"
+
+mv "${UCF_TEMP_DIR}/CRDT_manifest.json" ${PACKAGE_NAME}
+
+rm -rf "${PACKAGE_NAME}.precursor"
+rm -rf "${UCF_TEMP_DIR}"
+
+cp "${PACKAGE_NAME}/${PACKAGE_NAME}.zxp" "${SOURCE_PACKAGE_FOLDER}"
 
 popd > /dev/null

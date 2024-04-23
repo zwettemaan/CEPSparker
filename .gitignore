@@ -27,3 +27,4 @@
 /CRDT_manifest.json
 *_trackingGUID.json
 *.tpkg
+*.zxp
