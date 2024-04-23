@@ -10,6 +10,7 @@ export FILE_PATH_PLUGIN_INSTALLER_RESOURCES="$3"
 export FILE_PATH_CODE_SIGN_CERTIFICATE="$4"
 export CODE_SIGN_CERTIFICATE_PASSWORD="$5"
 export URL_TIME_STAMP_SERVER="$6"
+export INJECT_DEBUG_FILE="$7"
 
 export CPU_ARCHITECTURE=`uname -p`
 export PACKAGE_NAME=`basename "${TARGET_PACKAGE_FOLDER}"`
@@ -53,7 +54,11 @@ find "${PACKAGE_NAME}" -name ".DS_Store" | while read a; do rm "$a"; done
 find "${PACKAGE_NAME}" -name "__MACOSX" | while read a; do rm -rf "$a"; done
 xattr -cr "${PACKAGE_NAME}"
 
-"${JAVA_HOME}/bin/java" -jar "${FILE_PATH_PLUGIN_INSTALLER_RESOURCES}/ucf.jar" -package -storetype PKCS12 -keystore "${FILE_PATH_CODE_SIGN_CERTIFICATE}" -storepass "${CODE_SIGN_CERTIFICATE_PASSWORD}" -tsa "${URL_TIME_STAMP_SERVER}" "${PACKAGE_NAME}.zxp" -C "${TARGET_PACKAGE_FOLDER}" .
+if [ "${INJECT_DEBUG_FILE}" = "1" -a -e "${SOURCE_PACKAGE_FOLDER}/debug" ]; then
+    "${JAVA_HOME}/bin/java" -jar "${FILE_PATH_PLUGIN_INSTALLER_RESOURCES}/ucf.jar" -package -storetype PKCS12 -keystore "${FILE_PATH_CODE_SIGN_CERTIFICATE}" -storepass "${CODE_SIGN_CERTIFICATE_PASSWORD}" -tsa "${URL_TIME_STAMP_SERVER}" "${PACKAGE_NAME}.zxp" -C "${TARGET_PACKAGE_FOLDER}" . -e "${SOURCE_PACKAGE_FOLDER}/debug" .debug
+else
+    "${JAVA_HOME}/bin/java" -jar "${FILE_PATH_PLUGIN_INSTALLER_RESOURCES}/ucf.jar" -package -storetype PKCS12 -keystore "${FILE_PATH_CODE_SIGN_CERTIFICATE}" -storepass "${CODE_SIGN_CERTIFICATE_PASSWORD}" -tsa "${URL_TIME_STAMP_SERVER}" "${PACKAGE_NAME}.zxp" -C "${TARGET_PACKAGE_FOLDER}" .
+fi
 
 mv "${PACKAGE_NAME}" "${PACKAGE_NAME}.precursor"
 

@@ -135,7 +135,7 @@ $$SHORTCODE$$.triggerHostScriptJsxLoad = function triggerHostScriptJsxLoad() {
 
 $if "$$STARTERCODE$$" == "ImageBrowser"
 
-//@include "imageBrowser.jsx"
+crdtes.evalScript("imageBrowser.jsx", $.fileName);
 
 $endif
 

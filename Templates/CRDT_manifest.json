@@ -8,6 +8,7 @@
     "selfSignedCodeSignCertificatePassword": "password",
     "selfSignedCodeSignCertificateCountryCode": "US",
     "selfSignedCodeSignCertificateLifetimeDays": 4000,
+    "injectDebugFile": false,
     "timestampServer": "http://timestamp.digicert.com",
     "prePackageScriptMac": "",
     "prePackageScriptWindows": "",
