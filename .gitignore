@@ -28,3 +28,5 @@
 *_trackingGUID.json
 *.tpkg
 *.zxp
+Developer/ZXPSignCmd.exe
+Developer/ZXPSignCmd-64bit.dmg
