@@ -42,6 +42,7 @@ else
         Mac/clean.command
 
 		rm -f *.tpkg
+        rm -f *.zxp
 		rm -f Developer/*_trackingGUID.json
         rm -f "CRDT_manifest.json"
         rm -f "tsconfig.json"
