@@ -37,7 +37,7 @@ IF NOT %errorLevel% == 0 (
     CALL "%SPRK_COMMANDS_DIR%adjustVersionInManifest.bat" NESTED
 
     ECHO.
-    ECHO Removing directory "!EXTENSION_HOME_DIR!"
+    ECHO Removing directory "%EXTENSION_HOME_DIR%"
     ECHO.
 
     RD /s /q "%EXTENSION_HOME_DIR%" >NUL 2>&1

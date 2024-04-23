@@ -50,7 +50,8 @@ IF NOT %errorLevel% == 0 (
         MKDIR LocalLinks
         CD LocalLinks
 
-        MKLINK /D Extensions_Application "%PROGRAMFILES(X86)%\Common Files\Adobe\CEP\extensions"
+        MKLINK /D Extensions_Application_x86 "%PROGRAMFILES(X86)%\Common Files\Adobe\CEP\extensions"
+        MKLINK /D Extensions_Application "%PROGRAMFILES%\Common Files\Adobe\CEP\extensions"
         MKLINK /D Extensions_User "%APPDATA%\Adobe\CEP\extensions"
         MKLINK /D Adobe_LogFiles "%LOCALAPPDATA%\Temp"
 

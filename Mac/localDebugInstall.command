@@ -1,7 +1,6 @@
 #
 # Setup the panel so we can run it in a live session of the target application
 #
-
 if [ "${SPRK_COMMANDS_DIR}" == "" -o ! -d "${SPRK_COMMANDS_DIR}" ]; then
     export SPRK_COMMANDS_DIR=`dirname "$0"`
 fi
@@ -42,6 +41,7 @@ if [ "${EXTENSION_HOME_DIR}" != "" ]; then
     mkdir "${EXTENSION_HOME_DIR}"
 
     ln -s "${PROJECT_ROOT_DIR}debug"         "${EXTENSION_HOME_DIR}.debug"
+
     ln -s "${PROJECT_ROOT_DIR}css"           "${EXTENSION_HOME_DIR}css"
     ln -s "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_HOME_DIR}CSXS"
     ln -s "${PROJECT_ROOT_DIR}CEP_html"      "${EXTENSION_HOME_DIR}CEP_html"
