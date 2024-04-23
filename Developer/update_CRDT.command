@@ -25,22 +25,42 @@ export CEP_SPARKER_DIR=`pwd`/
 
 echo "update_CRDT started"
 
-export CREATIVE_DEVELOPER_TOOLS_ES="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES"
-if [ ! -d "${CREATIVE_DEVELOPER_TOOLS_ES}" ]; then
+export CREATIVE_DEVELOPER_TOOLS_ES_NZIP="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES.nzip"
+if [ ! -e "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" ]; then
 
     echo "Cannot refresh from repo. CEPSparker repo needs to be installed alongside CRDT_ES repo"
     exit
 
 fi
 
-rm -rf "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES"
+cd "${CEP_SPARKER_DIR}Templates/jsx"
 
-cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}Templates/jsx"
+rm -rf "CreativeDeveloperTools_ES"
+rm -f "CreativeDeveloperTools_ES.zip"
+rm -f "CreativeDeveloperTools_ES.nzip"
+
+cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" "${CEP_SPARKER_DIR}Templates/jsx"
+
+mv CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.zip
+
+unzip -q CreativeDeveloperTools_ES.zip
+
+rm -f CreativeDeveloperTools_ES.zip
 
 if [ -d "${CEP_SPARKER_DIR}/jsx" ]; then
 
-    rm -rf "${CEP_SPARKER_DIR}jsx/CreativeDeveloperTools_ES"
+    cd "${CEP_SPARKER_DIR}jsx"
+    
+    rm -rf "CreativeDeveloperTools_ES"
+    rm -f "CreativeDeveloperTools_ES.zip"
+    rm -f "CreativeDeveloperTools_ES.nzip"
 
-    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES}" "${CEP_SPARKER_DIR}jsx"
+    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" "${CEP_SPARKER_DIR}Templates/jsx"
+
+    mv CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.zip
+
+    unzip -q CreativeDeveloperTools_ES.zip
+
+    rm -f CreativeDeveloperTools_ES.zip
     
 fi
