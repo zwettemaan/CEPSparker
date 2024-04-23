@@ -135,7 +135,7 @@ function getExtendScriptExtensionDirs_PRM() {
                             $$SHORTCODE$$.path.SEPARATOR;
 
                         $$SHORTCODE$$.dirs.PROJECT_ROOT = 
-                            File($.fileName).fsName + "/";
+                            $$SHORTCODE$$.path.dirname($$SHORTCODE$$.path.dirname(__filename));
                             
                         resolve();
                     } 
