@@ -13,7 +13,7 @@
     "prePackageScriptMac": "",
     "prePackageScriptWindows": "",
     "postPackageScriptMac": "Mac/postPackage.command",
-    "postPackageScriptWindows": "Windows/postPackage.bat",
+    "postPackageScriptWindows": "Windows\\postPackage.bat",
     "targets": [
       {
         "method": "EXTENSION",
