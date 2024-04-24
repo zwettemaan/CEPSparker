@@ -2,7 +2,7 @@
 
 ExtendExtendScript (EES) project
 
-(c) 2017-2019 Rorohiko Ltd. - Kris Coppieters - kris@rorohiko.com
+(c) 2017-2024 Rorohiko Ltd. - Kris Coppieters - kris@rorohiko.com
 
 File: JSInterface/index.js
 
@@ -61,7 +61,6 @@ function init() {
     if (! gInitialized) {
 
         gInitialized = true;
-        loadPlugPlugLibrary();
         setupJSInterfaceCommandListener();
         setupPlugins();
     }
@@ -77,30 +76,6 @@ function getData() {
 JSInterface.getPendingCommand = getPendingCommand;
 function getPendingCommand() {
     return window.jsInterface_pendingCommand;
-}
-
-function loadPlugPlugLibrary() {
-    
-    var osInformation = gCSInterface.getOSInformation();
-    
-    var plugPlugFile;
-    if (osInformation.match(/Mac OS/gi) != null) {
-        plugPlugFile = gCSInterface.getSystemPath(SystemPath.EXTENSION) + "/jsx/libs/PlugPlugExternalObject-Mac/osx10_64/PlugPlugExternalObject.framework";
-    }
-    else {
-        // getOSInformation seems buggy on Windows 7 64 bit, so we use 
-        // an evironment variable to help us out
-        if (osInformation.match(/64-bit/gi) != null || process.env["ProgramFiles(x86)"]) {
-            plugPlugFile = gCSInterface.getSystemPath(SystemPath.EXTENSION) + "/jsx/libs/PlugPlugExternalObject-Win/win64/PlugPlugExternalObject.dll";        
-        }
-        else {
-            plugPlugFile = gCSInterface.getSystemPath(SystemPath.EXTENSION) + "/jsx/libs/PlugPlugExternalObject-Win/win32/PlugPlugExternalObject.dll";                    
-        }
-    }
-    var plugPlugFileJSONStr = JSON.stringify(plugPlugFile);
-
-    var script = "JSInterface.loadPlugPlugLibrary('" + plugPlugFileJSONStr + "')";
-    gCSInterface.evalScript(script);
 }
 
 function setupJSInterfaceCommandListener() {
