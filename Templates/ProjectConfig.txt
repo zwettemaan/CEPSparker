@@ -28,6 +28,30 @@ HELP_TARGET_CC_LANGUAGE_CODE="The target Creative Cloud language code (needed to
 SELECT_TARGET_CC_LANGUAGE_CODE="en_US,cs_CZ,da_DK,de_DE,es_ES,es_MX,fi_FI,fr_CA,fr_FR,fr_MA,hu_HU,it_IT,ja_JP,ko_KR,nb_NO,nl_NL,pl_PL,pt_BR,ru_RU,sv_SE,tr_TR,uk_UA,zh_CN,zh_TW"
 IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 
+CERTIFICATE_FILENAME="selfSignedCert.p12"
+HELP_CERTIFICATE_FILENAME="The file name for the self-signed certificate."
+IS_ADVANCED_CERTIFICATE_FILENAME=1
+
+CERTIFICATE_PASSWORD="password"
+HELP_CERTIFICATE_PASSWORD="The password the self-signed certificate."
+IS_ADVANCED_CERTIFICATE_PASSWORD=1
+
+CERTIFICATE_COUNTRY_CODE="US"
+HELP_CERTIFICATE_COUNTRY_CODE="The country code for the self-signed certificate."
+IS_ADVANCED_CERTIFICATE_COUNTRY_CODE=1
+
+CERTIFICATE_COMMON_NAME="Self-signed certificate created for CEPSparker"
+HELP_CERTIFICATE_COMMON_NAME="The common name for the certificate."
+IS_ADVANCED_CERTIFICATE_COMMON_NAME=1
+
+TIMESTAMP_SERVER="http://timestamp.digicert.com"
+HELP_TIMESTAMP_SERVER="The time stamp server for the self-signed code signing certificate."
+IS_ADVANCED_TIMESTAMP_SERVER=1
+
+CERTIFICATE_LIFETIME_DAYS="4000"
+HELP_CERTIFICATE_LIFETIME_DAYS="The lifetime in days for the self-signed code signing certificate."
+IS_ADVANCED_CERTIFICATE_LIFETIME_DAYS=1
+
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
 SELECT_STARTERCODE="None,HelloWorld,SamplePanel,ImageBrowser,ScriptRunner,IFrameUIServer"
@@ -89,3 +113,4 @@ HELP_IFRAMEUI_PORT="Port number to use for locally running test IFrame UI server
 
 APP_MAPPER_SCRIPT=
 IS_INTERNAL_APP_MAPPER_SCRIPT=1
+
