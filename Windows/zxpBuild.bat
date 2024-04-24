@@ -87,13 +87,24 @@ RD /s /q "%EXTENSION_BUILD_DIR%" >NUL 2>&1
 MKDIR "%EXTENSION_BUILD_DIR%"
 
 XCOPY "%PROJECT_ROOT_DIR%css"           "%EXTENSION_BUILD_DIR%\css\" /y /s /e >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%CSXS"          "%EXTENSION_BUILD_DIR%\CSXS\" /y /s /e >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%CEP_html"      "%EXTENSION_BUILD_DIR%\CEP_html\" /y /s /e >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%node_modules"  "%EXTENSION_BUILD_DIR%\node_modules\" /y /s /e >NUL 2>&1
+RD /s /q "%EXTENSION_BUILD_DIR%\@types" >NUL 2>&1
+RD /s /q "%EXTENSION_BUILD_DIR%\types-for-adobe" >NUL 2>&1
+RD /s /q "%EXTENSION_BUILD_DIR%\undici-types" >NUL 2>&1
+RD /s /q "%EXTENSION_BUILD_DIR%\.package-lock.json" >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%jsx"           "%EXTENSION_BUILD_DIR%\jsx\" /y /s /e >NUL 2>&1
 DEL "%EXTENSION_BUILD_DIR%\jsx\manually*.jsx" >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%CEP_js"        "%EXTENSION_BUILD_DIR%\CEP_js\" /y /s /e >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%shared_js"     "%EXTENSION_BUILD_DIR%\shared_js\" /y /s /e >NUL 2>&1
+
 XCOPY "%PROJECT_ROOT_DIR%shared_js_jsx" "%EXTENSION_BUILD_DIR%\shared_js_jsx\" /y /s /e >NUL 2>&1
 
 CD "%BUILD_DIR%"

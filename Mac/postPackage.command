@@ -50,7 +50,7 @@ cd "${PACKAGE_PARENT_DIR}"
 
 mv "${PACKAGE_NAME}/CRDT_manifest.json" "${UCF_TEMP_DIR}"
 
-find "${PACKAGE_NAME}" -name ".DS_Store" | while read a; do rm "$a"; done
+find "${PACKAGE_NAME}" -name ".DS_Store" | while read a; do rm -f "$a"; done
 find "${PACKAGE_NAME}" -name "__MACOSX" | while read a; do rm -rf "$a"; done
 xattr -cr "${PACKAGE_NAME}"
 
