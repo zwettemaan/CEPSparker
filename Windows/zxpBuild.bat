@@ -62,11 +62,11 @@ IF NOT EXIST "%SPRK_DEV_TOOLS_DIR%ZXPSignCmd.exe" (
 
 CALL "%BUILD_SETTINGS_DIR%certinfo.bat"
 
-IF NOT EXIST "%BUILD_SETTINGS_DIR%\%SPRK_CERTFILE%" (
+IF NOT EXIST "%BUILD_SETTINGS_DIR%%SPRK_CERTFILE%" (
 
     ECHO.
     ECHO Error: certificate file
-    ECHO   %BUILD_SETTINGS_DIR%\%SPRK_CERTFILE%
+    ECHO   %BUILD_SETTINGS_DIR%%SPRK_CERTFILE%
     ECHO not found.
     ECHO Need to provide a certificate file, or create a self-signed one first. See devtools\makeSelfSignedCert.bat
     ECHO Aborting.
@@ -80,6 +80,7 @@ IF NOT EXIST "%BUILD_DIR%" (
 )
 
 CALL "%SPRK_COMMANDS_DIR%adjustVersionInManifest.bat" NESTED
+CALL "%PROJECT_ROOT_DIR%BuildSettings\buildSettings.bat"
 
 SET EXTENSION_BUILD_DIR=%BUILD_DIR%%TARGET_DIRNAME%
 
