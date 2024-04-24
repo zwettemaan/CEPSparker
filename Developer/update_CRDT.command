@@ -37,11 +37,8 @@ cd "${CEP_SPARKER_DIR}Templates/jsx"
 
 rm -rf "CreativeDeveloperTools_ES"
 rm -f "CreativeDeveloperTools_ES.zip"
-rm -f "CreativeDeveloperTools_ES.nzip"
 
-cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" "${CEP_SPARKER_DIR}Templates/jsx"
-
-mv CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.zip
+cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.zip
 
 unzip -q CreativeDeveloperTools_ES.zip
 
@@ -53,11 +50,8 @@ if [ -d "${CEP_SPARKER_DIR}/jsx" ]; then
     
     rm -rf "CreativeDeveloperTools_ES"
     rm -f "CreativeDeveloperTools_ES.zip"
-    rm -f "CreativeDeveloperTools_ES.nzip"
 
-    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" "${CEP_SPARKER_DIR}Templates/jsx"
-
-    mv CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.zip
+    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.zip
 
     unzip -q CreativeDeveloperTools_ES.zip
 
