@@ -71,6 +71,10 @@ mv "${UCF_TEMP_DIR}/CRDT_manifest.json" ${PACKAGE_NAME}
 rm -rf "${PACKAGE_NAME}.precursor"
 rm -rf "${UCF_TEMP_DIR}"
 
-cp "${PACKAGE_NAME}/${PACKAGE_NAME}.zxp" "${SOURCE_PACKAGE_FOLDER}"
+if [ ! -d "${SOURCE_PACKAGE_FOLDER}/build" ]; then
+	mkdir "${PACKAGE_NAME}/build"
+end if
+
+cp "${PACKAGE_NAME}/${PACKAGE_NAME}.zxp" "${SOURCE_PACKAGE_FOLDER}/build"
 
 popd > /dev/null
