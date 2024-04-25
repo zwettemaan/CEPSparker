@@ -1,6 +1,15 @@
 #
 # Build a code-signed ZXP file
 #
+# This is an alternate method - the preferred method is to package using the 
+# PluginInstaller, which can be downloaded from:
+#
+# https://store.tgrg.net
+#
+# PluginInstaller will handle creating the certificate, code-signing, and will
+# create both a .zxp (old) and .tpkg (new). At the user end, PluginInstaller can handle
+# installing the .tpkg file as well.
+#
 
 if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
     export SPRK_COMMANDS_DIR=`dirname "$0"`/

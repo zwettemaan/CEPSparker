@@ -1,3 +1,8 @@
+#
+# This script is used for building a CEPSparker release. It will grab the CreativeDeveloperTools_ES.nzip
+# file from the CRDT_ES repo.
+#
+
 if [ `uname` != "Darwin" ]; then
     echo Needs to run on Mac
     exit

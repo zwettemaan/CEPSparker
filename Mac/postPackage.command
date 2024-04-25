@@ -72,8 +72,8 @@ rm -rf "${PACKAGE_NAME}.precursor"
 rm -rf "${UCF_TEMP_DIR}"
 
 if [ ! -d "${SOURCE_PACKAGE_FOLDER}/build" ]; then
-	mkdir "${PACKAGE_NAME}/build"
-end if
+	mkdir "${SOURCE_PACKAGE_FOLDER}/build"
+fi
 
 cp "${PACKAGE_NAME}/${PACKAGE_NAME}.zxp" "${SOURCE_PACKAGE_FOLDER}/build"
 

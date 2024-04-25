@@ -1,4 +1,10 @@
 @ECHO OFF
+
+REM
+REM This script is used for building a CEPSparker release. It will grab the CreativeDeveloperTools_ES.nzip
+REM file from the CRDT_ES repo.
+REM
+
 SETLOCAL EnableDelayedExpansion
 
 SET SPRK_DEV_TOOLS_DIR=%~dp0

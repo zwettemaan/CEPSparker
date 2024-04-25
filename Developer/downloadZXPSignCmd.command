@@ -1,3 +1,14 @@
+#
+# This is an alternate method - the preferred method is to package using the 
+# PluginInstaller, which can be downloaded from:
+#
+# https://store.tgrg.net
+#
+# PluginInstaller will handle creating the certificate, code-signing, and will
+# create both a .zxp (old) and .tpkg (new). At the user end, PluginInstaller can handle
+# installing the .tpkg file as well.
+#
+
 export version="4.1.1"
 export OSXDir="osx10.15"
 export WinDir="win64"
