@@ -40,7 +40,7 @@ dependencies:
 - Mac OS X 10.9 or Windows 7.x or higher
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
-- PluginInstaller (download from https://store.tgrg.net)
+- PluginInstaller (download from https://tgrg.net)
 
 Things you need to understand to make sense of it all can be 
 found via the following link:
@@ -155,7 +155,7 @@ https://github.com/zwettemaan/CEPSparker/wiki/SparkerConfig
 
 ## PluginInstaller
 
-https://store.tgrg.net
+https://tgrg.net
 
 ## Finding your way around
 
