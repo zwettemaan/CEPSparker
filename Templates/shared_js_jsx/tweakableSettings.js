@@ -5,9 +5,7 @@
 // Tweakable Settings
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.S) {
     $$SHORTCODE$$.S = {}; // stash global settings here

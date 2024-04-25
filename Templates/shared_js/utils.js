@@ -2,9 +2,7 @@
 // This file contains js code shared between web browser and CEP panel
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.PROJECT_SENTINEL_FOLDER_NAME = "shared_js";
 

@@ -2,9 +2,7 @@
 // This file contains Node/JS-specific js code - used for testing from the command line
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.os) {
     $$SHORTCODE$$.os = require('os');

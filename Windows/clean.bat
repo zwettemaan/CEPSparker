@@ -24,6 +24,8 @@ IF NOT "%EXTENSION_HOME_DIR%" == "" (
 
 RD /S /Q LocalLinks >NUL 2>&1
 RD /S /Q build >NUL 2>&1
+DEL /Q *.tpkg >NUL 2>&1
+DEL /Q Developer\*_trackingGUID.json >NUL 2>&1
 
 POPD
 

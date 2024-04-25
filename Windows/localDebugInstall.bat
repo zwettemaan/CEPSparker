@@ -1,7 +1,5 @@
 @ECHO OFF
 
-SETLOCAL EnableDelayedExpansion
-
 REM
 REM Setup the panel so we can run it in a live debug session 
 REM
@@ -34,7 +32,6 @@ IF NOT %errorLevel% == 0 (
 
 ) ELSE (
 
-    CALL "%SPRK_COMMANDS_DIR%nodeSetup.bat"
     CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
     CALL "%SPRK_COMMANDS_DIR%setPlayerDebugMode.bat"
     CALL "%SPRK_COMMANDS_DIR%adjustVersionInManifest.bat" NESTED

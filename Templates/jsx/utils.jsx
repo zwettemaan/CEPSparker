@@ -2,9 +2,7 @@
 // This file mirrors the API of CEP_js/utils.js or shared_js/utils.js
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.appendLineToUTF8TextFile = function(filePath, line) {
 

@@ -2,9 +2,7 @@
 // This file mirrors the API of jsx/utils.jsx
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
 

@@ -1,5 +1,5 @@
 #
-# Read BuildSettings/buildSettings.bat and adjust the manifest
+# Read CRDT_manifest.json and adjust the CEP manifest
 #
 
 if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then

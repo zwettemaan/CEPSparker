@@ -1,0 +1,105 @@
+// You can add comments to this file, but all comments have to start with
+// double slash, not #, and comments should not be added to lines with JSON data
+{
+    "productCode": "$$TARGET_PRODUCT_CODE_FOR_CRDT$$",
+    "version": "$$PROJECT_VERSION$$",
+    "selfSignedCodeSignCertificateFileName": "BuildSettings/$$CERTIFICATE_FILENAME$$",
+    "selfSignedCodeSignCertificateName": "$$CERTIFICATE_COMMON_NAME$$",
+    "selfSignedCodeSignCertificatePassword": "$$CERTIFICATE_PASSWORD$$",
+    "selfSignedCodeSignCertificateCountryCode": "$$CERTIFICATE_COUNTRY_CODE$$",
+    "selfSignedCodeSignCertificateLifetimeDays": $$CERTIFICATE_LIFETIME_DAYS$$,
+    "injectDebugFile": false,
+    "timestampServer": "$$TIMESTAMP_SERVER$$",
+    "prePackageScriptMac": "",
+    "prePackageScriptWindows": "",
+    "postPackageScriptMac": "Mac/postPackage.command",
+    "postPackageScriptWindows": "Windows/postPackage.bat",
+    "targets": [
+      {
+        "method": "EXTENSION",
+        "preInstallScriptMac": "",
+        "preInstallScriptWindows": "",
+        "postInstallScriptMac": "",
+        "postInstallScriptWindows": "",
+        "needsDebugMode": false
+      }
+    ],
+    "filters": [
+        // By default, do not sign or encrypt any files
+        { 
+          "regExp": "/^.*$/",  
+          "encrypt": false,
+          "sign": false
+        },
+        // By default, encrypt all .jsx files
+        { 
+          "regExp": "/^.*\\.jsx$/i",  
+          "encrypt": true
+        },
+        // But don't encrypt
+        // - the hostscript.jsx and json2.jsx files
+        // - the shared_js_jsx files
+        { 
+          "regExp": "/^jsx\\/hostscript\\.jsx$/i",  
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^jsx\\/json2\\.jsx$/i",  
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^shared_js_jsx\\/.*$/i",  
+          "encrypt": false
+        },
+        { 
+          "regExp": "/^jsx\\/CreativeDeveloperTools_ES\\/.*$/i",
+          "encrypt": false
+        },
+        // Omit developer-only files
+        { 
+          "regExp": "/^(debug|package\\.json|package-lock\\.json|tsconfig\\.json)$/i",
+          "omit": true
+        },
+        { 
+          "regExp": "/^(Templates|Developer|Mac|ToolSources|Windows|build|BuildSettings|LocalLinks|VSCode|node_install)\\/$/i",
+          "omit": true
+        },
+        {
+          "regExp": "/^jsx\\/manuallyClearGlobalsIDSN_ES_FromDebugger\\.jsx$/i",
+          "omit": "true"
+        },
+        {
+          "regExp": "/^jsx\\/manuallyPreloadIDSN_ES_EngineFromDebugger\\.jsx$/i",
+          "omit": "true"
+        },
+        {
+          "regExp": "/^node_modules\\/@types.*$/i",
+          "omit": "true"
+        },
+        {
+          "regExp": "/^node_modules\\/types-for-adobe.*$/i",
+          "omit": "true"
+        },
+        {
+          "regExp": "/^node_modules\\/undici-types.*$/i",
+          "omit": "true"
+        },
+        { 
+          "regExp": "/^.*\\.tpkg$/i",  
+          "omit": true
+        },
+        { 
+          "regExp": "/^.*\\.zxp$/i",  
+          "omit": true
+        },
+        { 
+          "regExp": "/^.*\\.p12$/i",  
+          "omit": true
+        },
+        { 
+          // Invisible files whose name starts with a period .
+          "regExp": "/^\\..*$/i",  
+          "omit": true
+        }
+    ]
+}

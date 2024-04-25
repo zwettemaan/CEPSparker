@@ -1,6 +1,4 @@
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
@@ -15,8 +13,7 @@ if (! $$SHORTCODE$$.cepFS) {
     }
 }
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.CEP_JAVASCRIPT;
-$$SHORTCODE$$.C.DIRECTORY_PATH_INIT_JS   = __dirname;
+$$SHORTCODE$$.C.DIRECTORY_PATH_INIT_JS = __dirname;
 
 $$SHORTCODE$$.jsInterface = require("JSInterface");
 
@@ -29,18 +26,23 @@ $$SHORTCODE$$.init = function init() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    getJavaScriptExtensionDirs_PRM().
-    then(initHostScript_PRM).
-    then(getInDesignInfo_PRM).
-    then(getExtendScriptExtensionDirs_PRM).
-    then(getLocale_PRM).
-    then(wireUI_PRM).
-    then(readPreferences_PRM).
-    then(passCollectedInfoToExtendScript_PRM).
-    then(savePreferences_PRM).
-    then(updateUI_PRM).
-    then(jsInterfaceInit_PRM).
-    then(runTests_PRM);
+    $$SHORTCODE$$.csInterface.evalScript(
+        "$$SHORTCODE$$.triggerHostScriptJsxLoad()", 
+        function() {
+            getJavaScriptExtensionDirs_PRM().
+            then(initHostScript_PRM).
+            then(getInDesignInfo_PRM).
+            then(getExtendScriptExtensionDirs_PRM).
+            then(getLocale_PRM).
+            then(wireUI_PRM).
+            then(readPreferences_PRM).
+            then(passCollectedInfoToExtendScript_PRM).
+            then(savePreferences_PRM).
+            then(updateUI_PRM).
+            then(jsInterfaceInit_PRM).
+            then(runTests_PRM);
+        }
+    );
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -135,7 +137,11 @@ function getExtendScriptExtensionDirs_PRM() {
                             $$SHORTCODE$$.path.SEPARATOR;
 
                         $$SHORTCODE$$.dirs.PROJECT_ROOT = 
-                            $$SHORTCODE$$.path.dirname($$SHORTCODE$$.path.dirname(__filename));
+                            $$SHORTCODE$$.path.dirname(
+                                $$SHORTCODE$$.path.dirname(
+                                    location.pathname
+                                )
+                            ) + "/";
                             
                         resolve();
                     } 

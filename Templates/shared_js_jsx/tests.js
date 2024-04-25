@@ -2,9 +2,7 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.runTests = function runTests() {
 

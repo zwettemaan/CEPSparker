@@ -23,6 +23,8 @@ fi
 
 rm -rf "${PROJECT_ROOT_DIR}LocalLinks"
 rm -rf "${PROJECT_ROOT_DIR}build"
+rm -f "${PROJECT_ROOT_DIR}*.tpkg"
+rm -f "${PROJECT_ROOT_DIR}Developer/*_trackingGUID.json"
 
 popd > /dev/null
 

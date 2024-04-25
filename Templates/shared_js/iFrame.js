@@ -1,6 +1,4 @@
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.receiveEventFromCEPToIFrame = function receiveEventFromCEPToIFrame(event) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"

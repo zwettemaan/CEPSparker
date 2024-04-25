@@ -1,18 +1,24 @@
 #
 # Setup the panel so we can run it in a live session of the target application
 #
-
-if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
+if [ "${SPRK_COMMANDS_DIR}" == "" -o ! -d "${SPRK_COMMANDS_DIR}" ]; then
     export SPRK_COMMANDS_DIR=`dirname "$0"`
 fi
 
-pushd "$SPRK_COMMANDS_DIR" > /dev/null
+pushd "${SPRK_COMMANDS_DIR}" > /dev/null
 
 export SPRK_COMMANDS_DIR=`pwd`/
 
-. ./setTarget.command
+if [ ! -d "${SPRK_COMMANDS_DIR}../BuildSettings" ]; then
 
-./nodeSetup.command
+    echo ""
+    echo "This project has not been configured yet - nothing to install."
+    echo "Aborting."
+    echo ""
+	exit
+fi
+
+. ./setTarget.command
 
 if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe" ]; then
     mkdir "${USER_HOME_DIR}Library/Application Support/Adobe"
@@ -26,15 +32,16 @@ if [ ! -d "${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions" ]; 
     mkdir "${USER_HOME_DIR}Library/Application Support/Adobe/CEP/extensions"
 fi
 
-if [ "$EXTENSION_HOME_DIR" != "" ]; then
+if [ "${EXTENSION_HOME_DIR}" != "" ]; then
 
     "${SPRK_COMMANDS_DIR}setPlayerDebugMode.command"
     "${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
 
-    rm -rf "$EXTENSION_HOME_DIR"
-    mkdir "$EXTENSION_HOME_DIR"
+    rm -rf "${EXTENSION_HOME_DIR}"
+    mkdir "${EXTENSION_HOME_DIR}"
 
     ln -s "${PROJECT_ROOT_DIR}debug"         "${EXTENSION_HOME_DIR}.debug"
+
     ln -s "${PROJECT_ROOT_DIR}css"           "${EXTENSION_HOME_DIR}css"
     ln -s "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_HOME_DIR}CSXS"
     ln -s "${PROJECT_ROOT_DIR}CEP_html"      "${EXTENSION_HOME_DIR}CEP_html"

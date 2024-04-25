@@ -1,6 +1,4 @@
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
@@ -20,10 +18,8 @@ if (! $$SHORTCODE$$.url) {
 
 $$SHORTCODE$$.DIRECTORY_PATH_INIT_JS = __dirname;
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.NODE_JAVASCRIPT;
-
 // TODO needs to be a parameter on the command line
-$$SHORTCODE$$.C.APP_NAME = "InDesign";
+$$SHORTCODE$$.C.APP_NAME         = "InDesign";
 $$SHORTCODE$$.C.VERSION_INDESIGN = "2023";
 
 $$SHORTCODE$$.init = function init() {

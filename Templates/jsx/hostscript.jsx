@@ -5,41 +5,57 @@ $if "$$TARGET_APP$$" == "Bridge"
 //@targetengine $$EXTENSION_ID$$_Engine_Id
 $endif
 
-var app;
-
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
+function getPlatformGlobals() {
+    return $.global;
 }
+
+var platformGlobals = getPlatformGlobals();
+platformGlobals.getPlatformGlobals = getPlatformGlobals;
+platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
+    if (! platformGlobals[globalName]) {
+        platformGlobals[globalName] = {};
+    }
+    return platformGlobals[globalName];
+}
+
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
 }
 
-$$SHORTCODE$$.C.PLATFORM = $$SHORTCODE$$.C.EXTENDSCRIPT;
+$$SHORTCODE$$.C.BROWSER_JAVASCRIPT                       = "Browser JavaScript";
+$$SHORTCODE$$.C.CEP_JAVASCRIPT                           = "CEP JavaScript";
+$$SHORTCODE$$.C.EXTENDSCRIPT                             = "ExtendScript";
+$$SHORTCODE$$.C.NODE_JAVASCRIPT                          = "Node JavaScript";
 
-//@include "json2.jsx"
-//@include "JSInterface.jsx", 
+$$SHORTCODE$$.C.PLATFORM                                 = $$SHORTCODE$$.C.EXTENDSCRIPT;
+
+//@include "CreativeDeveloperTools_ES/crdtesDLLLoader.jsx"
+//@include "CreativeDeveloperTools_ES/crdtes.jsx"
+
+crdtes.evalScript("json2.jsx", $.fileName);
+crdtes.evalScript("JSInterface.jsx", $.fileName);
 
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
     "shared_js_jsx/globals.js",
     "shared_js_jsx/tweakableSettings.js",
-    "shared_js_jsx/Tests/utils_Test.js",
     "shared_js_jsx/utils.js",
     "jsx/utils.jsx",
     "shared_js_jsx/pathUtils.js",
     "jsx/pathUtils.jsx",
     "shared_js_jsx/protectedObject.js",
+    "jsx/Tests/jsx.jsx",
+    "jsx/Tests/sampleClass_Test.jsx",
+    "shared_js_jsx/Tests/shared_js_jsx.js",
+    "shared_js_jsx/Tests/utils_Test.js",
     "shared_js_jsx/tests.js",
-$if "$$STARTERCODE$$" == "XAPIDemo"
-    "shared_js_jsx/mockRouterAPI.js",    
-    "shared_js_jsx/getURLAPI.js",
-    "jsx/impl/getURLAPI.jsx",
-$endif
     "shared_js_jsx/init.js",
     "jsx/init.jsx"
 ];
+
 
 $$SHORTCODE$$.idsnOnlyRelativeFilePathsToLoad = [
         "jsx/idUtils.jsx"
@@ -79,22 +95,7 @@ $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath, appId) {
     }
 
     try {
-        var fullPath = extensionDir + scriptPath;
-        if (appId == "DRWV") {
-            var script = DWfile.read(fullPath);
-            eval(script);
-        }
-        else if ($$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INDESIGN || $$SHORTCODE$$.C.APP_ID == $$SHORTCODE$$.C.APP_CODE_INCOPY) {
-            var file = File(fullPath);
-            app.doScript(file, ScriptLanguage.JAVASCRIPT, [], UndoModes.FAST_ENTIRE_SCRIPT);
-        }
-        else {
-            var file = File(fullPath);
-            file.open("r");
-            var script = file.read();
-            file.close();
-            eval(script);
-        }
+        crdtes.evalScript(scriptPath, extensionDir + "/dummyScriptInProjectDir.jsx");
     }
     catch (err) {           
         $$SHORTCODE$$.errorBeforeLoggingAvailable("hostscript.jsx loadScript throws " + err + " for " + fullPath);  
@@ -128,9 +129,13 @@ $$SHORTCODE$$.initHostScript = function initHostScript(appId, extensionDir, disa
 }
 
 
+$$SHORTCODE$$.triggerHostScriptJsxLoad = function triggerHostScriptJsxLoad() {
+    return true;
+}
+
 $if "$$STARTERCODE$$" == "ImageBrowser"
 
-//@include "imageBrowser.jsx"
+crdtes.evalScript("imageBrowser.jsx", $.fileName);
 
 $endif
 

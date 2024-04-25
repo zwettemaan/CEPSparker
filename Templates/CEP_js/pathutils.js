@@ -2,9 +2,7 @@
 // This file mirrors the API of jsx/pathUtils.jsx
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};

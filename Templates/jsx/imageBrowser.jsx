@@ -2,9 +2,7 @@
 // Simple image handler
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 $$SHORTCODE$$.placeImage = function placeImage(imagePath, imageURL, width, height) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"

@@ -2,6 +2,8 @@
 // This code is shared between CEP/JavaScript and ExtendScript
 //
 
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
+
 $$SHORTCODE$$.CANONICAL_NUMBER_DIGITS            = 10;
 $$SHORTCODE$$.CANONICAL_GUID_DIGITS              = 32;
 $$SHORTCODE$$.FORMATTED_GUID_SEGMENTS            = [8,4,4,4,12];

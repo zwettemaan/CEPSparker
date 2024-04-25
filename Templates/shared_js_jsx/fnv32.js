@@ -14,11 +14,7 @@
 //
 // This code is shared between CEP/JavaScript and ExtendScript
 //
-// Don't use 'var' - some engines call this within a non-global scope
-// if using var we end up defining this in the wrong scope
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
+var $$SHORTCODE$$ = getPlatformGlobals().defineGlobalObject("$$SHORTCODE$$");
 
 var FNV = function () {
   this.offset_basis = 2166136261;    // The prime, 32 bit offset_basis = 2,166,136,261 = 0x811C9DC5.    

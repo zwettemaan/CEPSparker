@@ -1,14 +1,14 @@
 # A certificate file by this name in devtools/
 # If you have a proper certificate, copy it into devtools and adjust the name
-# for SPRK_CERTFILE below
-export SPRK_CERTFILE="selfSignedCert.p12"
+# for $$SHORTCODE$$_CERTFILE below
+export $$SHORTCODE$$_CERTFILE="$$CERTIFICATE_FILENAME$$"
 
 # A password for this certificate file
-export SPRK_PASSWORD="PASSWORD"
+export $$SHORTCODE$$_PASSWORD="$$CERTIFICATE_PASSWORD$$"
 
 # The following are only needed to create a self-signed certificate
 
-export SPRK_COUNTRY_CODE="US"
-export SPRK_STATE_OR_PROVINCE="CA"
-export SPRK_ORGANIZATION="My, Myself"
-export SPRK_COMMON_NAME="Whatever"
+export $$SHORTCODE$$_COUNTRY_CODE="$$CERTIFICATE_COUNTRY_CODE$$"
+export $$SHORTCODE$$_STATE_OR_PROVINCE=""
+export $$SHORTCODE$$_ORGANIZATION=""
+export $$SHORTCODE$$_COMMON_NAME="$$CERTIFICATE_COMMON_NAME$$"

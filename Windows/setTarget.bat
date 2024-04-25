@@ -24,15 +24,27 @@ IF NOT EXIST "%BUILD_SETTINGS_DIR%configSettings.bat" (
     ECHO.
     ECHO Run the SparkerConfig first - this project has not been configured.
     ECHO.
+    GOTO DONE
 
-) ELSE (
+) 
 
-    CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
-    CALL "%BUILD_SETTINGS_DIR%buildSettings.bat"
+SET CRDT_MANIFEST=%PROJECT_ROOT_DIR%CRDT_manifest.json
+SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -replace '^^\s*\/\/.*$','' } | ConvertFrom-Json); echo $manifest.version"
 
-)
+SETLOCAL EnableDelayedExpansion
+
+FOR /f "DELIMS=" %%a IN ('PowerShell %CMD%') DO SET PROJECT_VERSION=%%a
+
+ECHO SET PROJECT_VERSION=!PROJECT_VERSION!> "%BUILD_SETTINGS_DIR%buildSettings.bat"
+ECHO export PROJECT_VERSION="!PROJECT_VERSION!"> "%BUILD_SETTINGS_DIR%buildSettings.command"
+
+ENDLOCAL
+
+CALL "%BUILD_SETTINGS_DIR%configSettings.bat"
 
 SET EXTENSION_HOME_DIR=
 IF NOT "%TARGET_DIRNAME%" == "" (
     SET EXTENSION_HOME_DIR=%EXTENSION_DIR%%TARGET_DIRNAME%\
 )
+
+:DONE

@@ -1,7 +1,9 @@
 @ECHO OFF
 REM
-REM Read BuildSettings/buildSettings.bat and adjust the manifest
+REM Read CRDT_manifest.json and adjust the CEP manifest
 REM
+
+SETLOCAL EnableDelayedExpansion
 
 IF "%SPRK_COMMANDS_DIR%" == "" (
     SET SPRK_COMMANDS_DIR=%~dp0
@@ -11,7 +13,10 @@ PUSHD "%SPRK_COMMANDS_DIR%.."
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
+IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings\configSettings.bat" GOTO DONE
+
 CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
+CALL "%PROJECT_ROOT_DIR%BuildSettings\buildSettings.bat"
 
 PUSHD "%PROJECT_ROOT_DIR%"
 
@@ -24,10 +29,11 @@ IF EXIST CSXS\manifest.xml.new (
 
 POPD
 
-ECHO.
-ECHO Version number in CSXS\manifest.xml has been set to %PROJECT_VERSION%.
-ECHO.
-
 IF NOT "%1" == "NESTED" (
+    ECHO.
+    ECHO Version number in CSXS\manifest.xml has been set to %PROJECT_VERSION%.
+    ECHO.
     SET /P REPLY=Press [Enter] to finalize 
 )
+
+:DONE

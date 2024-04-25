@@ -1,6 +1,15 @@
 #
 # Build a code-signed ZXP file
 #
+# This is an alternate method - the preferred method is to package using the 
+# PluginInstaller, which can be downloaded from:
+#
+# https://store.tgrg.net
+#
+# PluginInstaller will handle creating the certificate, code-signing, and will
+# create both a .zxp (old) and .tpkg (new). At the user end, PluginInstaller can handle
+# installing the .tpkg file as well.
+#
 
 if [ "$SPRK_COMMANDS_DIR" == "" -o ! -d "$SPRK_COMMANDS_DIR" ]; then
     export SPRK_COMMANDS_DIR=`dirname "$0"`/
@@ -14,14 +23,7 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 pushd "${PROJECT_ROOT_DIR}" > /dev/null
 
-./Mac/nodeSetup.command
-
-# KC 20220726: this server worked, found it in a list
-# https://kbpdfstudio.qoppa.com/list-of-timestamp-servers-for-signing-pdf/
-
-export SPRK_TIMESTAMP_SERVER="http://timestamp.digicert.com"
-
-export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}devtools/"
+export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}Developer/"
 
 "${SPRK_COMMANDS_DIR}clean.command"
 
@@ -44,7 +46,7 @@ else
     if [ ! -f "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" ]; then
 
         echo ""
-        echo "Need to provide a certificate file, or create a self-signed one first. See devtools/makeSelfSignedCert.command"
+        echo "Need to provide a certificate file, or create a self-signed one first. See Developer/makeSelfSignedCert.command"
         echo ""
 
     elif [ "$TARGET_DIRNAME" == "" ]; then
@@ -73,24 +75,35 @@ else
         mkdir "$EXTENSION_BUILD_DIR"
 
         cp -R "${PROJECT_ROOT_DIR}css"           "${EXTENSION_BUILD_DIR}css"
+
         cp -R "${PROJECT_ROOT_DIR}CSXS"          "${EXTENSION_BUILD_DIR}CSXS"
+
         cp -R "${PROJECT_ROOT_DIR}CEP_html"      "${EXTENSION_BUILD_DIR}CEP_html"
+
         cp -R "${PROJECT_ROOT_DIR}node_modules"  "${EXTENSION_BUILD_DIR}node_modules"
+        rm -rf "${EXTENSION_BUILD_DIR}node_modules/@types"
+        rm -rf "${EXTENSION_BUILD_DIR}node_modules/types-for-adobe"
+        rm -rf "${EXTENSION_BUILD_DIR}node_modules/undici-types"
+        rm -f "${EXTENSION_BUILD_DIR}node_modules/.package-lock.json"
+
         cp -R "${PROJECT_ROOT_DIR}jsx"           "${EXTENSION_BUILD_DIR}jsx"
         rm -f "${EXTENSION_BUILD_DIR}jsx/manually*.jsx"
+
         cp -R "${PROJECT_ROOT_DIR}CEP_js"        "${EXTENSION_BUILD_DIR}CEP_js"
+
         cp -R "${PROJECT_ROOT_DIR}shared_js"     "${EXTENSION_BUILD_DIR}shared_js"
+
         cp -R "${PROJECT_ROOT_DIR}shared_js_jsx" "${EXTENSION_BUILD_DIR}shared_js_jsx"
 
         cd "$EXTENSION_BUILD_DIR"
 
-        find . -name ".DS_Store" | while read a; do rm "$a"; done
+        find . -name ".DS_Store" | while read a; do rm -f "$a"; done
         find . -name "__MACOSX" | while read a; do rm -rf "$a"; done
         xattr -cr .
 
         cd "${BUILD_DIR}"
 
-        "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "$SPRK_TIMESTAMP_SERVER"
+        "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "${TIMESTAMP_SERVER}"
 
         mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
 
