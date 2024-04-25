@@ -9,7 +9,7 @@ Starter project for developing CEP panels to be used with Adobe applications
 © 2018-2024, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v2.0.0, April 25, 2024
+v2.0.1, April 25, 2024
 
 ## Preamble
 
@@ -40,6 +40,7 @@ dependencies:
 - Mac OS X 10.9 or Windows 7.x or higher
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
+- PluginInstaller (download from https://store.tgrg.net)
 
 Things you need to understand to make sense of it all can be 
 found via the following link:
@@ -151,6 +152,10 @@ https://github.com/zwettemaan/CEPSparker/wiki/Uninstalling
 ## SparkerConfig
 
 https://github.com/zwettemaan/CEPSparker/wiki/SparkerConfig
+
+## PluginInstaller
+
+https://store.tgrg.net
 
 ## Finding your way around
 
