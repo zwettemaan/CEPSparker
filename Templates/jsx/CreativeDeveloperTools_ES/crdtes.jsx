@@ -1731,11 +1731,26 @@ function pluginInstaller() {
 
     var retVal = false;
 
-    var pluginInstallerFilePath = crdtesDLL.getPluginInstallerPath();
-    var pluginInstallerFile = File(pluginInstallerFilePath);
-    if (pluginInstallerFile.exists) {
-        retVal = pluginInstallerFile.execute();
+    do {
+        try {
+            
+            var pluginInstallerFilePath = crdtesDLL.getPluginInstallerPath();
+            
+            var pluginInstallerFile = File(pluginInstallerFilePath);
+            
+            if (crdtes.IS_WINDOWS) {
+                // Need to set the PATH before launching. Using a wrapper .bat file
+                pluginInstallerFile = File(pluginInstallerFile.parent + "/PluginInstaller Resources/launchEmbeddedPluginInstaller.bat");
+            }
+
+            if (pluginInstallerFile.exists) {
+                retVal = pluginInstallerFile.execute();
+            }
+        }
+        catch (err) {
+        }
     }
+    while (false);
 
     return retVal;
 }
