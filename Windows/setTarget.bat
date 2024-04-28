@@ -33,10 +33,7 @@ SET CMD="$manifest = (Get-Content '%CRDT_MANIFEST%' | ForEach-Object { $_ -repla
 
 SETLOCAL EnableDelayedExpansion
 
-FOR /f "DELIMS=" %%a IN ('PowerShell %CMD%') DO SET PROJECT_VERSION=%%a
-
-ECHO SET PROJECT_VERSION=!PROJECT_VERSION!> "%BUILD_SETTINGS_DIR%buildSettings.bat"
-ECHO export PROJECT_VERSION="!PROJECT_VERSION!"> "%BUILD_SETTINGS_DIR%buildSettings.command"
+FOR /f "DELIMS=" %%a IN ('PowerShell %CMD%') DO SET CRDT_VERSION=%%a
 
 ENDLOCAL
 

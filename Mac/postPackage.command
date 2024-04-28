@@ -23,8 +23,6 @@ export SPRK_COMMANDS_DIR=`pwd`/
 
 . ./setTarget.command
 
-./adjustVersionInManifest.command
-
 if [ -e "${UCF_TEMP_DIR}" ]; then
     rm -rf "${UCF_TEMP_DIR}"
 fi

@@ -4,7 +4,7 @@
 # This is an alternate method - the preferred method is to package using the 
 # PluginInstaller, which can be downloaded from:
 #
-# https://store.tgrg.net
+# https://tgrg.net
 #
 # PluginInstaller will handle creating the certificate, code-signing, and will
 # create both a .zxp (old) and .tpkg (new). At the user end, PluginInstaller can handle
@@ -27,7 +27,7 @@ export SPRK_DEV_TOOLS_DIR="${PROJECT_ROOT_DIR}Developer/"
 
 "${SPRK_COMMANDS_DIR}clean.command"
 
-if [ ! -e "${BUILD_SETTINGS_DIR}buildSettings.command" ]; then
+if [ ! -e "${BUILD_SETTINGS_DIR}configSettings.command" ]; then
 
     echo ""
     echo "This is an unconfigured CEPSparker directory. Nothing to build."
@@ -55,7 +55,7 @@ else
         echo "Cannot determine directory name for extension."
         echo ""
 
-    elif [ "$PROJECT_VERSION" == "" ]; then
+    elif [ "$CRDT_VERSION" == "" ]; then
 
         echo ""
         echo "Cannot determine version for extension."
@@ -63,7 +63,7 @@ else
 
     else 
 
-        "${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
+        "${SPRK_COMMANDS_DIR}adjustVersionDependencies.command"
 
         if [ ! -d "$BUILD_DIR" ]; then
             mkdir "$BUILD_DIR"
@@ -105,12 +105,12 @@ else
 
         "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "${TIMESTAMP_SERVER}"
 
-        mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$PROJECT_VERSION.zxp"
+        mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$CRDT_VERSION.zxp"
 
         rm -rf "$EXTENSION_BUILD_DIR"
 
         echo ""
-        echo "Signed extension has been created: $TARGET_DIRNAME.$PROJECT_VERSION.zxp"
+        echo "Signed extension has been created: $TARGET_DIRNAME.$CRDT_VERSION.zxp"
         echo ""
         
     fi

@@ -6,8 +6,6 @@
 //
 // engine, which is initiated from the ExtendScriptExtender extension.
 
-#include "json2.jsx"
-
 var JSInterface = {};
 
 JSInterface.loadPlugPlugLibrary = function() {
@@ -104,7 +102,7 @@ JSInterface.commandCompletion = function(retValJSONStr) {
       retValJSONStr = retValJSONStr.replace(/\\/g,'\\\\').replace(/'/g,"\\'")      
 
     var script = 
-      "#targetengine " + engineName + "\n" + 
+      "//@targetengine " + engineName + "\n" + 
       "JSInterface.commandCompletion('" + retValJSONStr + "');"
 
     app.doScript(script, ScriptLanguage.JAVASCRIPT);

@@ -98,7 +98,7 @@
         },
         { 
           // Invisible files whose name starts with a period .
-          "regExp": "/^\\..*$/i",  
+          "regExp": "/^(\\..*|.*\\\\\\..*|.*\\/\\..*)$/i",  
           "omit": true
         }
     ]

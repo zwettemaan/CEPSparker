@@ -35,7 +35,7 @@ fi
 if [ "${EXTENSION_HOME_DIR}" != "" ]; then
 
     "${SPRK_COMMANDS_DIR}setPlayerDebugMode.command"
-    "${SPRK_COMMANDS_DIR}adjustVersionInManifest.command"
+    "${SPRK_COMMANDS_DIR}adjustVersionDependencies.command"
 
     rm -rf "${EXTENSION_HOME_DIR}"
     mkdir "${EXTENSION_HOME_DIR}"

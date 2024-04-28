@@ -4,7 +4,7 @@ REM
 REM This is an alternate method - the preferred method is to package using the 
 REM PluginInstaller, which can be downloaded from:
 REM
-REM https://store.tgrg.net
+REM https://tgrg.net
 REM
 REM PluginInstaller will handle creating the certificate, code-signing, and will
 REM create both a .zxp (old) and .tpkg (new). At the user end, PluginInstaller can handle

@@ -32,9 +32,8 @@ IF NOT %errorLevel% == 0 (
 
 ) ELSE (
 
-    CALL "%SPRK_COMMANDS_DIR%setTarget.bat"
     CALL "%SPRK_COMMANDS_DIR%setPlayerDebugMode.bat"
-    CALL "%SPRK_COMMANDS_DIR%adjustVersionInManifest.bat" NESTED
+    CALL "%SPRK_COMMANDS_DIR%adjustVersionDependencies.bat" NESTED
 
     ECHO.
     ECHO Removing directory "%EXTENSION_HOME_DIR%"
