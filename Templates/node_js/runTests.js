@@ -4,10 +4,12 @@
 // node runTests.js
 //
 
-var runTests = require('runtests');
+// Lives in the current directory
+let environment = require('./environment');
 
-// The tests trigger logger events, which are expected and not relevant
-// Suppress log output.
-$$SHORTCODE$$.S.LOG_LEVEL = 0;
+// Lives in node_modules, pulls in $$SHORTCODE$$ global object and tests
+let runTests = require('runtests');
+
+$$SHORTCODE$$.pushLogLevel($$SHORTCODE$$.C.LOG_NOTE);
 
 runTests();
