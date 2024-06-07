@@ -40,7 +40,7 @@ dependencies:
 - Mac OS X 10.9 or Windows 7.x or higher
 - A text editor
 - Google Chrome browser, Google Chromium, or cefclient
-- PluginInstaller (download from https://tgrg.net)
+- PluginInstaller (download from https://PluginInstaller.com)
 
 Things you need to understand to make sense of it all can be 
 found via the following link:
