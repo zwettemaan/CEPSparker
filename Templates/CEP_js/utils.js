@@ -51,7 +51,7 @@ $$SHORTCODE$$.getAppScriptList = function getAppScriptList() {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 

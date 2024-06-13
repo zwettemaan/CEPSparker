@@ -30,7 +30,7 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 
     $endif
     return retVal;
-};
+}
 
 if ($$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG === undefined) {
     $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
@@ -45,7 +45,7 @@ $$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog = function() {
     $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
 
     return retVal;
-};
+}
 
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
