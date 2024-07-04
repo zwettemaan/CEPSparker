@@ -1,4 +1,7 @@
 .DS_Store
+*_trackingGUID.json
+*.tpkg
+*.zxp
 /.rnd
 /browser_html
 /browser_js
@@ -25,9 +28,6 @@
 /CreativeDeveloperTools_ES
 /CreativeDeveloperTools_ES.nzip
 /CRDT_manifest.json
-*_trackingGUID.json
-*.tpkg
-*.zxp
-Developer/ZXPSignCmd.exe
-Developer/ZXPSignCmd-64bit.dmg
-ZXPSignCmd
+/Developer/ZXPSignCmd.exe
+/Developer/ZXPSignCmd-64bit.dmg
+/Developer/ZXPSignCmd

@@ -10,9 +10,14 @@ function getPlatformGlobals() {
 
 var platformGlobals = getPlatformGlobals();
 platformGlobals.getPlatformGlobals = getPlatformGlobals;
-platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
+platformGlobals.defineGlobalObject = function defineGlobalObject(globalName, optionalValue) {
     if (! platformGlobals[globalName]) {
-        platformGlobals[globalName] = {};
+        if (optionalValue === undefined) {
+            platformGlobals[globalName] = {};
+        }
+        else {
+            platformGlobals[globalName] = optionalValue;
+        }
     }
     return platformGlobals[globalName];
 }

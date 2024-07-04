@@ -12,14 +12,13 @@ export SCRIPT_DIR=`dirname $0`
 cd $SCRIPT_DIR
 export SCRIPT_DIR=`pwd`/
 
+REFRESH=1
 if [ "${TIGHTENER_GIT_ROOT}" = "" ]; then
-    echo Needs to be on a workstation with Tightener installed
-    exit
+    REFRESH=0
 fi
 
 if [ ! -d "${TIGHTENER_GIT_ROOT}" ]; then
-    echo Needs to be on a workstation with Tightener installed
-    exit
+    REFRESH=0
 fi
 
 cd ..
@@ -30,24 +29,27 @@ export CEP_SPARKER_DIR=`pwd`/
 
 echo "update_CRDT started"
 
-export CREATIVE_DEVELOPER_TOOLS_ES_NZIP="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES.nzip"
-if [ ! -e "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" ]; then
-
-    echo "Cannot refresh from repo. CEPSparker repo needs to be installed alongside CRDT_ES repo"
-    exit
-
+if [ "$REFRESH" = "1" ]; then
+    export CREATIVE_DEVELOPER_TOOLS_ES_NZIP="${TIGHTENER_GIT_ROOT}/../CRDT_ES/scripts/CreativeDeveloperTools_ES.nzip"
+    if [ ! -e "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" ]; then
+        REFRESH=0
+    fi
 fi
 
-cd "${CEP_SPARKER_DIR}Templates/jsx"
+if [ "$REFRESH" = "1" ]; then
 
-rm -rf "CreativeDeveloperTools_ES"
-rm -f "CreativeDeveloperTools_ES.zip"
+    cd "${CEP_SPARKER_DIR}Templates/jsx"
 
-cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.zip
+    rm -rf "CreativeDeveloperTools_ES"
+    rm -f "CreativeDeveloperTools_ES.zip"
+    rm -f "CreativeDeveloperTools_ES.nzip"
 
-unzip -q CreativeDeveloperTools_ES.zip
+    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.nzip
+    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.zip
+    unzip -q CreativeDeveloperTools_ES.zip
+    rm -f CreativeDeveloperTools_ES.zip
 
-rm -f CreativeDeveloperTools_ES.zip
+fi
 
 if [ -d "${CEP_SPARKER_DIR}/jsx" ]; then
 
@@ -55,11 +57,12 @@ if [ -d "${CEP_SPARKER_DIR}/jsx" ]; then
     
     rm -rf "CreativeDeveloperTools_ES"
     rm -f "CreativeDeveloperTools_ES.zip"
+    rm -f "CreativeDeveloperTools_ES.nzip"
 
-    cp -R "${CREATIVE_DEVELOPER_TOOLS_ES_NZIP}" CreativeDeveloperTools_ES.zip
-
+    cp -R "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES.nzip" CreativeDeveloperTools_ES.nzip
+    
+    cp -R "${CEP_SPARKER_DIR}Templates/jsx/CreativeDeveloperTools_ES.nzip" CreativeDeveloperTools_ES.zip
     unzip -q CreativeDeveloperTools_ES.zip
-
     rm -f CreativeDeveloperTools_ES.zip
     
 fi
