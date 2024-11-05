@@ -23,8 +23,7 @@ $$SHORTCODE$$.path.exists = function exists(filePath) {
     do {
 
         try {
-            var stat = 
-            $$SHORTCODE$$.nodeFS.statSync(filePath);            
+            var stat = $$SHORTCODE$$.nodeFS.statSync(filePath);            
             retVal = true;
         }
         catch (err) {            

@@ -29,9 +29,13 @@ RD /S /Q CreativeDeveloperTools_ES >NUL 2>&1
 DEL CreativeDeveloperTools_ES.nzip >NUL 2>&1
 DEL CreativeDeveloperTools_ES.zip >NUL 2>&1
 
+COPY "%CREATIVE_DEVELOPER_TOOLS_ES_NZIP%" CreativeDeveloperTools_ES.nzip > NUL 2>&1
+
 COPY "%CREATIVE_DEVELOPER_TOOLS_ES_NZIP%" CreativeDeveloperTools_ES.zip > NUL 2>&1
 PowerShell -c "Expand-Archive -Path 'CreativeDeveloperTools_ES.zip' -DestinationPath '.'"
 DEL CreativeDeveloperTools_ES.zip >NUL 2>&1
+
+:NO_REFRESH
 
 IF NOT EXIST "%PROJECT_ROOT_DIR%jsx" GOTO DONE
 
@@ -41,16 +45,11 @@ RD /S /Q CreativeDeveloperTools_ES >NUL 2>&1
 DEL CreativeDeveloperTools_ES.nzip >NUL 2>&1
 DEL CreativeDeveloperTools_ES.zip >NUL 2>&1
 
-COPY "%CREATIVE_DEVELOPER_TOOLS_ES_NZIP%" CreativeDeveloperTools_ES.zip > NUL 2>&1
+COPY Templates\jsx\CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.nzip > NUL 2>&1
+
+COPY Templates\jsx\CreativeDeveloperTools_ES.nzip CreativeDeveloperTools_ES.zip > NUL 2>&1
 PowerShell -c "Expand-Archive -Path 'CreativeDeveloperTools_ES.zip' -DestinationPath '.'"
 DEL CreativeDeveloperTools_ES.zip >NUL 2>&1
-
-GOTO DONE
-
-:NO_REFRESH
-
-ECHO Cannot refresh from repo. CEPSparker repo needs to be installed alongside CRDT_ES repo with an .nzip file in it.
-GOTO :DONE
 
 :DONE
 

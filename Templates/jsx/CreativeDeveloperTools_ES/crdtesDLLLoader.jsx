@@ -10,11 +10,20 @@ function getPlatformGlobals() {
 
 var platformGlobals = getPlatformGlobals();
 platformGlobals.getPlatformGlobals = getPlatformGlobals;
-platformGlobals.defineGlobalObject = function defineGlobalObject(globalName) {
+platformGlobals.defineGlobalObject = function defineGlobalObject(globalName, optionalValue) {
     if (! platformGlobals[globalName]) {
-        platformGlobals[globalName] = {};
+        if (optionalValue === undefined) {
+            platformGlobals[globalName] = {};
+        }
+        else {
+            platformGlobals[globalName] = optionalValue;
+        }
     }
     return platformGlobals[globalName];
+}
+
+if ("undefined" != typeof JSXGetURL && JSXGetURL) {
+    CRDT_ES = JSXGetURL;
 }
 
 if (LOAD_DEBUG_CRDT_ES || "undefined" == typeof(CRDT_ES)) {

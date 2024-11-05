@@ -66,7 +66,7 @@ $$SHORTCODE$$.canonicalGUID = function canonicalGUID(guid) {
         }
         catch (err)
         {
-            $$SHORTCODE$$.logError(arguments, "throws " + e);
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
         }
     }
     while (false);

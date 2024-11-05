@@ -21,7 +21,7 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.searchProjectRoot = function searchProjectRoot(startDir) {
 

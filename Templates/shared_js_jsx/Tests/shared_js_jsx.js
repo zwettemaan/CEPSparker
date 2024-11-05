@@ -17,5 +17,5 @@ shared_js_jsx.runTests = function runTests() {
     testResults += $$SHORTCODE$$.Utils_Test.runTests();
 
     return testResults;
-};
+}
 

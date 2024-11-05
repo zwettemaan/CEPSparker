@@ -40,7 +40,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.basename = function basename(filePath, separator) {    
 
@@ -66,7 +66,7 @@ $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
 
     $endif
     return endSegment;
-};
+}
 
 $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {    
 
@@ -94,7 +94,7 @@ $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, separator) {
 
@@ -117,7 +117,7 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath, sepa
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(filePath, separator) {    
 
@@ -153,5 +153,5 @@ $$SHORTCODE$$.path.stripTrailingSeparator = function stripTrailingSeparator(file
 
     $endif
     return retVal;
-};
+}
 

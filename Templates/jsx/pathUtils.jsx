@@ -22,7 +22,7 @@ $$SHORTCODE$$.path.exists = function exists(filepath) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -42,7 +42,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
@@ -86,7 +86,7 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     $endif  
     return success;
-};
+}
 
 $$SHORTCODE$$.path.readFile = function readFile(path, optionalEncoding) {
 

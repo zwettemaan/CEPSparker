@@ -6,10 +6,14 @@ function formattedGUID_test(input, expectedOutput) {
 
     var failure = "";
 
+    $$SHORTCODE$$.pushLogLevel($$SHORTCODE$$.C.LOG_NONE);
+
     var output = $$SHORTCODE$$.formattedGUID(input);
     if (output != expectedOutput) {
         failure = "$$SHORTCODE$$.formattedGUID(" + input + "): expected: '" + expectedOutput + "' but instead got: '" + output + "'\n";
     }
+
+    $$SHORTCODE$$.popLogLevel();
 
     return failure;
 }
@@ -18,10 +22,14 @@ function canonicalGUID_test(input, expectedOutput) {
 
     var failure = "";
 
+    $$SHORTCODE$$.pushLogLevel($$SHORTCODE$$.C.LOG_NONE);
+
     var output = $$SHORTCODE$$.canonicalGUID(input);
     if (output != expectedOutput) {
         failure = "$$SHORTCODE$$.canonicalGUID(" + input + "): expected: '" + expectedOutput + "' but instead got: '" + output + "'\n";
     }
+
+    $$SHORTCODE$$.popLogLevel();
 
     return failure;
 }
