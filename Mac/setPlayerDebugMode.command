@@ -18,6 +18,8 @@ defaults write com.adobe.CSXS.10.plist PlayerDebugMode 1
 defaults write com.adobe.CSXS.10.plist LogLevel 5
 defaults write com.adobe.CSXS.11.plist PlayerDebugMode 1
 defaults write com.adobe.CSXS.11.plist LogLevel 5
+defaults write com.adobe.CSXS.12.plist PlayerDebugMode 1
+defaults write com.adobe.CSXS.12.plist LogLevel 5
 
 #
 # Force Mac OS to re-read the PLIST file

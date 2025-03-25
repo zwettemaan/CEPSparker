@@ -19,6 +19,8 @@ REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.10 /v PlayerDebugMode /t REG_SZ /d
 REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.10 /v LogLevel /t REG_SZ /d 1 /f > NUL
 REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.11 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
 REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.11 /v LogLevel /t REG_SZ /d 1 /f > NUL
+REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.12 /v PlayerDebugMode /t REG_SZ /d 0 /f > NUL
+REG add HKEY_CURRENT_USER\Software\Adobe\CSXS.12 /v LogLevel /t REG_SZ /d 1 /f > NUL
 
 ECHO.
 ECHO Player Debug mode has been cleared
