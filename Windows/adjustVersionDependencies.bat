@@ -26,7 +26,7 @@ IF EXIST CSXS\manifest.xml.new (
     MOVE CSXS\manifest.xml.new CSXS\manifest.xml >NUL
 )
 
-POWERSHELL -Command "$TextContent = \"%SHORTCODE%.C.VERSION = '%CRDT_VERSION%';\"; $TextContent | Out-File '%PROJECT_ROOT_DIR%\version.js'"
+POWERSHELL -Command "$TextContent = \"%SHORTCODE%.C.VERSION = '%CRDT_VERSION%';\"; $TextContent | Out-File '%PROJECT_ROOT_DIR%\shared_js_jsx\version.js'"
 
 ECHO 
 

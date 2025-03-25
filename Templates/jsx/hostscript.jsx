@@ -42,6 +42,7 @@ $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 $$SHORTCODE$$.relativeFilePathsToLoad = [
     "shared_js_jsx/globals.js",
     "shared_js_jsx/tweakableSettings.js",
+    "shared_js_jsx/version.js",
     "shared_js_jsx/utils.js",
     "jsx/utils.jsx",
     "shared_js_jsx/pathUtils.js",
