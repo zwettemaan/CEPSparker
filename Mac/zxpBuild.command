@@ -19,7 +19,7 @@ pushd "$SPRK_COMMANDS_DIR" > /dev/null
 
 export SPRK_COMMANDS_DIR=`pwd`/
 
-. setTarget.command
+. ./setTarget.command
 
 pushd "${PROJECT_ROOT_DIR}" > /dev/null
 
@@ -103,11 +103,12 @@ else
 
         cd "${BUILD_DIR}"
 
-        "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "$TARGET_DIRNAME" "$TARGET_DIRNAME.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "$SPRK_PASSWORD" -tsa "${TIMESTAMP_SERVER}"
+        java -jar "${SPRK_DEV_TOOLS_DIR}ucf.jar" -package -storetype PKCS12 -keystore "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" -storepass "${SPRK_PASSWORD}" -tsa "${TIMESTAMP_SERVER}" "${TARGET_DIRNAME}.zxp" -C "${TARGET_DIRNAME}" .
+        # "${SPRK_DEV_TOOLS_DIR}ZXPSignCmd" -sign "${TARGET_DIRNAME}" "${TARGET_DIRNAME}.zxp" "${BUILD_SETTINGS_DIR}${SPRK_CERTFILE}" "${SPRK_PASSWORD}" -tsa "${TIMESTAMP_SERVER}"
 
         mv "$TARGET_DIRNAME.zxp" "$TARGET_DIRNAME.$CRDT_VERSION.zxp"
 
-        rm -rf "$EXTENSION_BUILD_DIR"
+        # rm -rf "$EXTENSION_BUILD_DIR"
 
         echo ""
         echo "Signed extension has been created: $TARGET_DIRNAME.$CRDT_VERSION.zxp"

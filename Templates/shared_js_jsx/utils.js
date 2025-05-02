@@ -1001,8 +1001,8 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits) {
     try {
         var c;
         while (numDigits > 0) {
-            var nibble = (value % 16) >>> 0;
-            var value = (value >>> 4);
+            var nibble = value & 0x0F;
+            var value = value >> 4;
             if (nibble < 10) {
                 var c = String.fromCharCode(nibble + 48);
             }
