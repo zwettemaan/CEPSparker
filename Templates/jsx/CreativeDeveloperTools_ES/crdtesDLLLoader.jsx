@@ -2,7 +2,7 @@
 var CRDT_ES;
 var TIGHTENER;
 var IS_INDESIGN_SERVER;
-//var DEBUG_LIBPATH64_OVERRIDE = "/Users/kris/Documents/Controlled/Rorohiko/TightenerComponents/TightenerDLL/Xcode/Compiled/Debug/TightenerESDLL_x64D.framework";
+//var DEBUG_LIBPATH64_OVERRIDE = "~/Documents/Controlled/Rorohiko/TightenerComponents/TightenerDLL/Xcode/Compiled/Debug/TightenerESDLL_x64D.framework";
 
 function getPlatformGlobals() {
     return $.global;

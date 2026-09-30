@@ -1,28 +1,29 @@
 /**
- * Creative Developer Tools (CRDT) is a growing suite of tools aimed at script developers and plug-in developers for the Adobe Creative Cloud eco-system.
- *
- * Currently, it is at an alpha stage: the feature set is not frozen, and new features are added regularly.
- *
- * There are two different versions of CRDT: one for UXP/UXPScript and another for ExtendScript.
- *
- * The software is functional and useful, but without a doubt, there will be bugs and dragons…
- *
- * Features include:
- *
- * - Provides a unique machine GUID for each end-user computer
- * - Provides a unique account GUID for each end user
- * - Add licensing and activation features to your script
- * - Protect sensitive source code and make it hard to reverse engineer
- * - AES-256 encryption/decryption functions
- * - Base64 encode and decode functions
- *
- * More to come! You can contact us on dev@rorohiko.com with feature request
- *
- * For downloading and installation info, visit
- *
- * https://www.rorohiko.com/crdt
+ * Creative Developer Tools (CRDT) is a growing suite of tools aimed at script developers and plug-in developers for the Adobe Creative Cloud eco-system.<br>
+ * <br>
+ * Currently, it is at an alpha stage: the feature set is not frozen, and new features are added regularly.<br>
+ * <br>
+ * There are two different versions of CRDT: one for UXP/UXPScript and another for ExtendScript.<br>
+ * <br>
+ * The software is functional and useful, but without a doubt, there will be bugs and dragons…<br>
+ * <br>
+ * Features include:<br>
+ * <br>
+ * - Provides a unique machine GUID for each end-user computer<br>
+ * - Provides a unique account GUID for each end user<br>
+ * - Add licensing and activation features to your script<br>
+ * - Protect sensitive source code and make it hard to reverse engineer<br>
+ * - AES-256 encryption/decryption functions<br>
+ * - Base64 encode and decode functions<br>
+ * <br>
+ * More to come! You can contact us on dev@rorohiko.com with feature request<br>
+ * <br>
+ * For downloading and installation info, visit<br>
+ * <br>
+ * https://CreativeDeveloperTools.com<br>
  *
  * @module crdtes
+ * @namespace crdtes
  */
 
 var crdtes = getPlatformGlobals().defineGlobalObject("crdtes");
@@ -30,14 +31,18 @@ var crdtes = getPlatformGlobals().defineGlobalObject("crdtes");
 (function() {
 
 /**
- * The Tightener daemon provides persistent named scopes (similar to persistent ExtendScript engines).
- *
- * When executing multiple TQL scripts in succession a named scope will retain any globals that
- * were defined by a previous script.
+ * The Tightener daemon provides persistent named scopes (similar to persistent ExtendScript engines).<br>
+ * <br>
+ * When executing multiple TQL scripts in succession a named scope will retain any globals that<br>
+ * were defined by a previous script.<br>
  *
  * @constant {string} TQL_SCOPE_NAME_DEFAULT
  */
 const TQL_SCOPE_NAME_DEFAULT = "defaultScope";
+
+const LOCALE_EN_US                             = "en_US";
+
+const DEFAULT_LOCALE                           = LOCALE_EN_US;
 
 const STATE_IDLE                               =  0;
 const STATE_SEEN_OPEN_SQUARE_BRACKET           =  1;
@@ -67,28 +72,66 @@ const REGEXP_CICEROS                           = /^([\d]+)c(([\d]*)(\.([\d]+)?)?
 const REGEXP_CICEROS_REPLACE                   = "$1";
 const REGEXP_CICEROS_POINTS_REPLACE            = "$2";
 
+var LOCALE_STRINGS                             = {};
+
+crdtes.LOCALE                                  = DEFAULT_LOCALE;
+crdtes.LOCALE_STRINGS                          = LOCALE_STRINGS;
+crdtes.LOCALE_EN_US                            = LOCALE_EN_US;
+
+/**
+ * <code>crdtes.UNIT_NAME_NONE</code> represents unit-less values.
+ */
 crdtes.UNIT_NAME_NONE                           = "NONE";
+
+/**
+ * <code>crdtes.UNIT_NAME_INCH</code> for inches.
+ */
 crdtes.UNIT_NAME_INCH                           = "\"";
+
+/**
+ * <code>crdtes.UNIT_NAME_CM</code> for centimeters
+ */
 crdtes.UNIT_NAME_CM                             = "cm";
+
+/**
+ * <code>crdtes.UNIT_NAME_MM</code> for millimeters
+ */
 crdtes.UNIT_NAME_MM                             = "mm";
+
+/**
+ * <code>crdtes.UNIT_NAME_CICERO</code> for ciceros
+ */
 crdtes.UNIT_NAME_CICERO                         = "cicero";
+
+/**
+ * <code>crdtes.UNIT_NAME_PICA</code> for picas
+ */
 crdtes.UNIT_NAME_PICA                           = "pica";
+
+/**
+ * <code>crdtes.UNIT_NAME_PIXEL</code> for pixels
+ */
 crdtes.UNIT_NAME_PIXEL                          = "px";
+
+/**
+ * <code>crdtes.UNIT_NAME_POINT</code> for points
+ */
 crdtes.UNIT_NAME_POINT                          = "pt";
 
 crdtes.IS_MAC = $.os.substring(0,3).toLowerCase() == "mac";
 crdtes.IS_WINDOWS = ! crdtes.IS_MAC;
 
 /**
- * Setting log level to `LOG_LEVEL_OFF` causes all log output to be suppressed.
+ * Setting log level to <code>crdtes.LOG_LEVEL_OFF</code> causes all log output to be suppressed.
  *
  * @constant {number} LOG_LEVEL_OFF
+ *
  */
 const LOG_LEVEL_OFF = 0;
 crdtes.LOG_LEVEL_OFF = LOG_LEVEL_OFF;
 
 /**
- * Setting log level to `LOG_LEVEL_ERROR` causes all log output to be suppressed,
+ * Setting log level to <code>crdtes.LOG_LEVEL_ERROR</code> causes all log output to be suppressed,<br>
  * except for errors.
  *
  * @constant {number} LOG_LEVEL_ERROR
@@ -97,7 +140,7 @@ const LOG_LEVEL_ERROR = 1;
 crdtes.LOG_LEVEL_ERROR = LOG_LEVEL_ERROR;
 
 /**
- * Setting log level to `LOG_LEVEL_WARNING` causes all log output to be suppressed,
+ * Setting log level to <code>crdtes.LOG_LEVEL_WARNING</code> causes all log output to be suppressed,<br>
  * except for errors and warnings.
  *
  * @constant {number} LOG_LEVEL_WARNING
@@ -106,7 +149,7 @@ const LOG_LEVEL_WARNING = 2;
 crdtes.LOG_LEVEL_WARNING = LOG_LEVEL_WARNING;
 
 /**
- * Setting log level to `LOG_LEVEL_NOTE` causes all log output to be suppressed,
+ * Setting log level to <code>crdtes.LOG_LEVEL_NOTE</code> causes all log output to be suppressed,<br>
  * except for errors, warnings and notes.
  *
  * @constant {number} LOG_LEVEL_NOTE
@@ -115,7 +158,7 @@ const LOG_LEVEL_NOTE = 3;
 crdtes.LOG_LEVEL_NOTE = LOG_LEVEL_NOTE;
 
 /**
- * Setting log level to `LOG_LEVEL_TRACE` causes all log output to be output.
+ * Setting log level to <code>crdtes.LOG_LEVEL_TRACE</code> causes all log output to be output.
  *
  * @constant {number} LOG_LEVEL_TRACE
  */
@@ -125,51 +168,51 @@ crdtes.LOG_LEVEL_TRACE = LOG_LEVEL_TRACE;
 // Symbolic params to `getDir()`
 
 /**
- * Pass `DESKTOP_DIR` into `getDir()` to get the path of the user's Desktop folder.
+ * Pass <code>crdtes.DESKTOP_DIR</code> into <code>crdtes.getDir()</code> to get the path of the user's Desktop folder.
  *
  * @constant {string} DESKTOP_DIR
  */
 crdtes.DESKTOP_DIR    = "DESKTOP_DIR";
 
 /**
- * Pass `DOCUMENTS_DIR` into `getDir()` to get the path of the user's Documents folder.
+ * Pass <code>crdtes.DOCUMENTS_DIR</code> into <code>crdtes.getDir()</code> to get the path of the user's Documents folder.
  *
  * @constant {string} DOCUMENTS_DIR
  */
 crdtes.DOCUMENTS_DIR  = "DOCUMENTS_DIR";
 
 /**
- * Pass `HOME_DIR` into `getDir()` to get the path of the user's home folder.
+ * Pass <code>crdtes.HOME_DIR</code> into <code>crdtes.getDir()</code> to get the path of the user's home folder.
  *
  * @constant {string} HOME_DIR
  */
 crdtes.HOME_DIR       = "HOME_DIR";
 
 /**
- * Pass `LOG_DIR` into `getDir()` to get the path of the Tightener logging folder.
+ * Pass <code>crdtes.LOG_DIR</code> into <code>crdtes.getDir()</code> to get the path of the Tightener logging folder.
  *
  * @constant {string} LOG_DIR
  */
 crdtes.LOG_DIR        = "LOG_DIR";
 
 /**
- * Pass `SYSTEMDATA_DIR` into `getDir()` to get the path of the system data folder
- * (`%PROGRAMDATA%` or `/Library/Application Support`).
+ * Pass <code>crdtes.SYSTEMDATA_DIR</code> into <code>crdtes.getDir()</code> to get the path of the system data folder<br>
+ * (<code>%PROGRAMDATA%</code> or <code>/Library/Application Support</code>).
  *
  * @constant {string} SYSTEMDATA_DIR
  */
 crdtes.SYSTEMDATA_DIR = "SYSTEMDATA_DIR";
 
 /**
- * Pass `TMP_DIR` into `getDir()` to get the path of the temporary folder.
+ * Pass <code>crdtes.TMP_DIR</code> into <code>crdtes.getDir()</code> to get the path of the temporary folder.
  *
  * @constant {string} TMP_DIR
  */
 crdtes.TMP_DIR        = "TMP_DIR";
 
 /**
- * Pass `USERDATA_DIR` into `getDir()` to get the path to the user data folder
- * (`%APPDATA%` or `~/Library/Application Support`).
+ * Pass <code>crdtes.USERDATA_DIR</code> into <code>crdtes.getDir()</code> to get the path to the user data folder<br>
+ * (<code>%APPDATA%</code> or <code>~/Library/Application Support</code>).
  *
  * @constant {string} USERDATA_DIR
  */
@@ -189,6 +232,7 @@ var SYS_INFO;
  * Decode a string that was encoded using base64.
  *
  * @function base64decode
+ * @memberof crdtes
  *
  * @param {string} base64Str - base64 encoded string
  * @returns {string} decoded string
@@ -208,6 +252,7 @@ crdtes.base64decode = base64decode;
  * Encode a string or an array of bytes using Base 64 encoding.
  *
  * @function base64encode
+ * @memberof crdtes
  *
  * @param {string} str_or_ByteArr - either a string or an array containing bytes (0-255).
  * @returns {string} encoded string
@@ -233,11 +278,12 @@ function base64encode(str_or_ByteArr) {
 crdtes.base64encode = base64encode;
 
 /**
- * Convert an array of bytes into string format. This string is UTF-16 internally, and
- * we map one byte to one UTF-16 character. The resulting string might contain character values
- * (charCodeAt()) that would be invalid in UTF8.
+ * Convert an array of bytes into string format. This string is UTF-16 internally, and<br>
+ * we map one byte to one UTF-16 character. The resulting string might contain character values<br>
+ * (<code>charCodeAt()</code>) that would be invalid in UTF8.<br>
  *
  * @function binaryToStr
+ * @memberof crdtes
  *
  * @param {array} in_byteArray - an array containing UTF-16 values in the range 0-255
  * @returns {string} a string
@@ -268,9 +314,9 @@ crdtes.binaryToStr = binaryToStr;
  * Decode an array of bytes that contains a UTF-8 encoded string.
  *
  * @function binaryUTF8ToStr
+ * @memberof crdtes
  *
- * @param {array} in_byteArray - an array containing bytes (0-255)
- * for a string that was encoded using UTF-8 encoding.
+ * @param {array} in_byteArray - an array containing bytes (0-255) for a string that was encoded using UTF-8 encoding.
  * @returns {string} a string, or undefined if some invalid UTF-8 is encountered
  */
 function binaryUTF8ToStr(in_byteArray) {
@@ -374,13 +420,15 @@ function charCodeToUTF8__(in_charCode) {
  * Configure the logger
  *
  * @function configLogger
+ * @memberof crdtes
  *
- * @param {object} logInfo - object with logger setup info
- *     logLevel: 0-4
- *     logEntryExit: boolean
- *     logToESTKConsole: boolean
- *     logToCRDT: boolean
- *     logToFilePath: undefined or a file path for logging
+ * @param {object} logInfo - object with logger setup info<code>{<br>
+ *     logLevel: 0-4<br>
+ *     logEntryExit: boolean<br>
+ *     logToESTKConsole: boolean<br>
+ *     logToCRDT: boolean<br>
+ *     logToFilePath: undefined or a file path for logging<br>
+ * }</code>
  *
  * @returns {boolean} success/failure
  */
@@ -415,11 +463,12 @@ function configLogger(logInfo) {
 crdtes.configLogger = configLogger;
 
 /**
- * Reverse the operation of the `encrypt()` function.
+ * Reverse the operation of the <code>crdtes.encrypt()</code> function.
  *
  * Only available to paid developer accounts
  *
  * @function decrypt
+ * @memberof crdtes
  *
  * @param {string} str_or_ByteArr - a string or an array of bytes
  * @param {string} aesKey - a string or an array of bytes
@@ -453,13 +502,14 @@ function decrypt(str_or_ByteArr, aesKey, aesIV) {
 crdtes.decrypt = decrypt;
 
 /**
- * Reverse the operation of `dQ()` or `sQ()`.
+ * Reverse the operation of <code>crdtes.dQ()</code> or <code>crdtes.sQ()</code>.
  *
  * @function deQuote
+ * @memberof crdtes
  *
  * @param {string} quotedString - a quoted string
- * @returns {array} a byte array. If the quoted string contains any `\uHHHH`` codes,
- * these are first re-encoded using UTF-8 before storing them into the byte array.
+ * @returns {array} a byte array. If the quoted string contains any <code>\uHHHH</code> codes, these are first re-encoded<br>
+ * using UTF-8 before storing them into the byte array.
  */
 function deQuote(quotedString) {
 
@@ -600,12 +650,13 @@ function deQuote(quotedString) {
 crdtes.deQuote = deQuote;
 
 /**
- * Create a directory.
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Create a directory.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function dirCreate
+ * @memberof crdtes
  *
  * @param {string} filePath
  * @returns {array} list if items in directory
@@ -620,12 +671,13 @@ function dirCreate(filePath) {
 crdtes.dirCreate = dirCreate;
 
 /**
- * Delete a directory.
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Delete a directory.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function dirDelete
+ * @memberof crdtes
  *
  * @param {string} filePath
  * @param {boolean} recurse
@@ -643,14 +695,15 @@ function dirDelete(filePath, recurse) {
 crdtes.dirDelete = dirDelete;
 
 /**
- * Verify whether a directory exists. Will return `false` if the path points to a file (instead of a directory).
- *
- * Also see `fileExists()`.
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Verify whether a directory exists. Will return <code>false</code> if the path points to a file (instead of a directory).<br>
+ * <br>
+ * Also see <code>crdtes.fileExists()</code>.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function dirExists
+ * @memberof crdtes
  *
  * @param {string} dirPath - a path to a directory
  * @returns {boolean} true or false
@@ -665,12 +718,13 @@ function dirExists(dirPath) {
 crdtes.dirExists = dirExists;
 
 /**
- * Scan a directory.
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Scan a directory.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function dirScan
+ * @memberof crdtes
  *
  * @param {string} filePath
  * @returns {array} list if items in directory
@@ -685,23 +739,21 @@ function dirScan(filePath) {
 crdtes.dirScan = dirScan;
 
 /**
- * Wrap a string or a byte array into double quotes, encoding any
- * binary data as a string. Knows how to handle Unicode characters
- * or binary zeroes.
- *
- * When the input is a string, high Unicode characters are
- * encoded as `\uHHHH`.
- *
- * When the inoput is a byte array, all bytes are encoded
- * as characters or as `\xHH` escape sequences.
+ * Wrap a string or a byte array into double quotes, encoding any binary data as a string.<br>
+ * Knows how to handle Unicode characters or binary zeroes.<br>
+ * <br>
+ * When the input is a string, high Unicode characters are encoded as `\uHHHH`.<br>
+ * <br>
+ * When the input is a byte array, all bytes are encoded as characters or as `\xHH` escape sequences.
  *
  * @function dQ
+ * @memberof crdtes
  *
  * @param {string} str_or_ByteArr - a Unicode string or an array of bytes
- * @returns {string} a string enclosed in double quotes. This string is pure 7-bit
- * ASCII and can be inserted into generated script code
- * Example:
- * `var script = "a=b(" + dQ(somedata) + ");";`
+ * @returns {string} a string enclosed in double quotes. This string is pure 7-bit<br>
+ * ASCII and can be inserted into generated script code<br>
+ * Example:<br>
+ * <code>var script = "a=b(" + crdtes.dQ(somedata) + ");";</code>
  */
 function dQ(str_or_ByteArr) {
     return enQuote__(str_or_ByteArr, "\"");
@@ -709,13 +761,13 @@ function dQ(str_or_ByteArr) {
 crdtes.dQ = dQ;
 
 /**
- * Encrypt a string or array of bytes using a key. A random salt
- * is added into the mix, so even when passing in the same parameter values, the result will
- * be different every time.
- *
+ * Encrypt a string or array of bytes using a key. A random salt is added into the mix,<br>
+ * so even when passing in the same parameter values, the result will be different every time.<br>
+ * <br>
  * Only available to paid developer accounts
- * 
+ *
  * @function encrypt
+ * @memberof crdtes
  *
  * @param {string} str_or_ByteArr - a string or an array of bytes
  * @param {string} aesKey - a string or an array of bytes
@@ -803,13 +855,14 @@ function enQuote__(str_or_ByteArr, quoteChar) {
 }
 
 /**
- * Evaluate a script file. If the unencrypted script file is not available (`.jsx` or `.js`),
+ * Evaluate a script file. If the unencrypted script file is not available (`.jsx` or `.js`),<br>
  * use crdtesDLL to try and run an `.ejsx` or `.ejs` file.
  *
  * @function evalScript
+ * @memberof crdtes
  *
  * @param {string} scriptName - the name of the script to run, without file name extension or parent directory
- * @param {string} parentScriptFile - the name of the script from which we're calling this (pass in $.fileName).
+ * @param {string} parentScriptFile - the name of the script from which we're calling this (pass in <code>$.fileName</code>).<br>
  * If this is missing, evaluate the path relative to the parent of CreativeDeveloperTools_ES
  * @returns {any} the returned value
  */
@@ -841,21 +894,21 @@ function evalScript(scriptName, parentScriptFile) {
             var fileNameExtension = splitScriptName.pop().toLowerCase();
             if (fileNameExtension == "js") {
                 hasJSFileNameExtension = true;
-                scriptNameWithoutExtension = splitScriptName.join(".");            
+                scriptNameWithoutExtension = splitScriptName.join(".");
             }
             else if (fileNameExtension == "ejs") {
                 hasEncryptedFileNameExtension = true;
                 hasJSFileNameExtension = true;
-                scriptNameWithoutExtension = splitScriptName.join(".");            
+                scriptNameWithoutExtension = splitScriptName.join(".");
             }
             else if (fileNameExtension == "jsx") {
                 hasJSXFileNameExtension = true;
-                scriptNameWithoutExtension = splitScriptName.join(".");            
+                scriptNameWithoutExtension = splitScriptName.join(".");
             }
             else if (fileNameExtension == "ejsx") {
                 hasEncryptedFileNameExtension = true;
                 hasJSXFileNameExtension = true;
-                scriptNameWithoutExtension = splitScriptName.join(".");            
+                scriptNameWithoutExtension = splitScriptName.join(".");
             }
         }
 
@@ -883,10 +936,12 @@ function evalScript(scriptName, parentScriptFile) {
         }
 
         if (unencryptedScriptFile) {
+            crdtes.IS_DEBUGGING = true;
             var nearlyForever = 365*24*3600*1000;
             $.evalFile(unencryptedScriptFile,nearlyForever);
         }
         else {
+            crdtes.IS_DEBUGGING = false;
             crdtesDLL.evalScript(scriptNameWithoutExtension, parentScriptFolder.fsName);
         }
 
@@ -902,10 +957,10 @@ crdtes.evalScript = evalScript;
  * Send a TQL script to the DLL
  *
  * @function evalTQL
+ * @memberof crdtes
  *
  * @param {string} tqlScript - a script to run
- * @param {string} tqlScopeName - a scope name to use.
- * Such scope can be used to pass data between different processes
+ * @param {string} tqlScopeName - a scope name to use. Such scope can be used to pass data between different processes
  * @returns {any} the returned value
  */
 function evalTQL(tqlScript, tqlScopeName) {
@@ -928,14 +983,15 @@ function evalTQL(tqlScript, tqlScopeName) {
 crdtes.evalTQL = evalTQL;
 
 /**
- * Close a currently open file
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
- * provided to offer some compatibility with the UXP version of CRDT
+ * Close a currently open file.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
+ * provided to offer some compatibility with the UXP version of CRDT<br>
  *
  * @function fileClose
+ * @memberof crdtes
  *
- * @param {number} fileHandle - a file handle as returned by `fileOpen()`.
+ * @param {number} fileHandle - a file handle as returned by <code>crdtes.fileOpen()</code>.
  * @returns {boolean} success or failure
  */
 
@@ -948,12 +1004,13 @@ function fileClose(fileHandle) {
 crdtes.fileClose = fileClose;
 
 /**
- * Delete a file
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Delete a file<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function fileDelete
+ * @memberof crdtes
  *
  * @param {string} filePath
  * @returns {boolean} success or failure
@@ -968,14 +1025,15 @@ function fileDelete(filePath) {
 crdtes.fileDelete = fileDelete;
 
 /**
- * Check if a file exists. Will return `false` if the file path points to a directory.
- *
- * Also see `dirExists()`.
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Check if a file exists. Will return <code>false</code> if the file path points to a directory.<br>
+ * <br>
+ * Also see <code>crdtes.dirExists()</code>.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function fileExists
+ * @memberof crdtes
  *
  * @param {string} filePath
  * @returns {boolean} existence of file
@@ -990,15 +1048,16 @@ function fileExists(filePath) {
 crdtes.fileExists = fileExists;
 
 /**
- * Open a binary file and return a handle
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
- * provided to offer some compatibility with the UXP version of CRDT
+ * Open a binary file and return a handle.<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
+ * provided to offer some compatibility with the UXP version of CRDT<br>
  *
  * @function fileOpen
+ * @memberof crdtes
  *
  * @param {string} fileName - a native full file path to the file
- * @param {string} mode - one of `'a'`, `'r'`, `'w'` (append, read, write)
+ * @param {string} mode - one of <code>'a'</code>, <code>'r'</code>, <code>'w'</code> (append, read, write)
  * @returns {number} file handle
  */
 
@@ -1018,14 +1077,15 @@ function fileOpen(fileName, mode) {
 crdtes.fileOpen = fileOpen;
 
 /**
- * Read a file into memory
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Read a file into memory<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function fileRead
+ * @memberof crdtes
  *
- * @param {number} fileHandle - a file handle as returned by `fileOpen()`.
+ * @param {number} fileHandle - a file handle as returned by <code>crdtes.fileOpen()</code>.
  * @param {boolean} isBinary - whether the file is considered a binary file (as opposed to a UTF-8 text file)
  * @returns {any} either a byte array or a string
  */
@@ -1046,14 +1106,15 @@ function fileRead(fileHandle, isBinary) {
 crdtes.fileRead = fileRead;
 
 /**
- * Binary write to a file. Strings are written as UTF-8
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Binary write to a file. Strings are written as UTF-8<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function fileWrite
+ * @memberof crdtes
  *
- * @param {number} fileHandle - a file handle as returned by `fileOpen()`.
+ * @param {number} fileHandle - a file handle as returned by <code>crdtes.fileOpen()</code>.
  * @param {string} str_or_ByteArr - data to write to the file
  * @returns {boolean} success or failure
  */
@@ -1077,14 +1138,17 @@ crdtes.fileWrite = fileWrite;
  * Determine whether, or which, features of some software or module are currently activated or not
  *
  * @function getCapability
+ * @memberof crdtes
  *
  * @param {string} issuer - a GUID identifier for the developer account as seen in the PluginInstaller
- * @param {string} capabilityCode - a code for the software features to be activated (as determined by the developer who owns the account).
- * `capabilityCode` is not the same as `orderProductCode` - there can be multiple `orderProductCode` associated with
- * a single `capabilityCode` (e.g. `capabilityCode` 'XYZ', `orderProductCode` 'XYZ_1YEAR', 'XYZ_2YEAR'...).
- * @param {string} encryptionKey - the secret encryption key (created by the developer) needed to decode the capability data. As a developer you want to make
- * sure this encryptionKey is obfuscated and only contained within encrypted script code.
- * @returns {string} either "NOT_ACTIVATED" or a JSON structure with capability data (customer GUID, decrypted developer-provided data from the activation file).
+ * @param {string} capabilityCode - a code for the software features to be activated (as determined by<br>
+ * the developer who owns the account).<br>
+ * <code>capabilityCode</code> is not the same as <code>orderProductCode</code> - there can be multiple <code>orderProductCode</code> associated with
+ * a single <code>capabilityCode</code> (e.g. <code>capabilityCode</code>: 'XYZ', <code>orderProductCode</code>: 'XYZ_1YEAR', 'XYZ_2YEAR'...).
+ * @param {string} encryptionKey - the secret encryption key (created by the developer) needed to decode<br>
+ * the capability data. As a developer you want to make sure this encryptionKey is obfuscated and only contained<br>
+ * within encrypted script code.
+ * @returns {string} either <code>"NOT_ACTIVATED"</code> or a JSON structure with capability data (customer GUID, decrypted developer-provided data from the activation file).
  */
 function getCapability(issuer, capabilityCode, encryptionKey) {
 
@@ -1095,24 +1159,25 @@ function getCapability(issuer, capabilityCode, encryptionKey) {
 crdtes.getCapability = getCapability;
 
 /**
- * Get the path of a system directory
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
- * provided to offer some compatibility with the UXP version of CRDT
+ * Get the path of a system directory<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
+ * provided to offer some compatibility with the UXP version of CRDT<br>
  *
  * @function getDir
+ * @memberof crdtes
  *
- * @param {string} dirTag - a tag representing the dir:
- * ```
- *    DESKTOP_DIR
- *    DOCUMENTS_DIR
- *    HOME_DIR
- *    LOG_DIR
- *    SYSTEMDATA_DIR
- *    TMP_DIR
- *    USERDATA_DIR
- * ```
- * @returns {string} file path of dir or undefined. Directory paths include a trailing slash or backslash
+ * @param {string} dirTag - a tag representing the dir:<br>
+ * <code><br>
+ *    crdtes.DESKTOP_DIR<br>
+ *    crdtes.DOCUMENTS_DIR<br>
+ *    crdtes.HOME_DIR<br>
+ *    crdtes.LOG_DIR<br>
+ *    crdtes.SYSTEMDATA_DIR<br>
+ *    crdtes.TMP_DIR<br>
+ *    crdtes.USERDATA_DIR<br>
+ * </code>
+ * @returns {string} file path of dir or <code>undefined</code>. Directory paths include a trailing slash or backslash
  */
 function getDir(dirTag) {
 
@@ -1128,12 +1193,13 @@ function getDir(dirTag) {
 crdtes.getDir = getDir;
 
 /**
- * Access the environment
- *
- * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript - 
+ * Access the environment<br>
+ * <br>
+ * Not restricted by the UXP security sandbox. Not needed for pure ExtendScript -<br>
  * provided to offer some compatibility with the UXP version of CRDT
  *
  * @function getEnvironment
+ * @memberof crdtes
  *
  * @param {string} envVarName - name of environment variable
  * @returns {string} environment variable value
@@ -1147,9 +1213,10 @@ function getEnvironment(envVarName) {
 crdtes.getEnvironment = getEnvironment;
 
 /**
- * Interpret a value extracted from some INI data as a boolean. Things like y, n, yes, no, true, false, t, f, 0, 1
+ * Interpret a value extracted from some INI data as a boolean. Things like <code>y, n, yes, no, true, false, t, f, 0, 1</code>
  *
  * @function getBooleanFromINI
+ * @memberof crdtes
  *
  * @param {string} in_value - ini value
  * @returns {boolean} value
@@ -1170,10 +1237,11 @@ function getBooleanFromINI(in_value) {
 crdtes.getBooleanFromINI = getBooleanFromINI;
 
 /**
- * Interpret a string extracted from some INI data as a floating point value, followed by an optional unit
+ * Interpret a string extracted from some INI data as a floating point value, followed by an optional unit<br>
  * If there is no unit, then no conversion is performed.
  *
  * @function getFloatWithUnitFromINI
+ * @memberof crdtes
  *
  * @param {string} in_valueStr - ini value
  * @param {string} in_convertToUnit - unit to convert to
@@ -1256,9 +1324,10 @@ function getFloatWithUnitFromINI(in_valueStr, in_convertToUnit) {
 crdtes.getFloatWithUnitFromINI = getFloatWithUnitFromINI;
 
 /**
- * Interpret a string extracted from some INI data as an array with float values (e.g. "[ 255, 128.2, 1.7]" )
+ * Interpret a string extracted from some INI data as an array with float values (e.g. <code>"[ 255, 128.2, 1.7]"</code> )
  *
  * @function getFloatValuesFromINI
+ * @memberof crdtes
  *
  * @param {string} in_valueStr - ini value
  * @returns {array} array of numbers or undefined
@@ -1301,9 +1370,10 @@ function getFloatValuesFromINI(in_valueStr) {
 crdtes.getFloatValuesFromINI = getFloatValuesFromINI;
 
 /**
- * Interpret a string extracted from some INI data as an array with int values (e.g. "[ 255, 128, 1]" )
+ * Interpret a string extracted from some INI data as an array with int values (e.g. <code>"[ 255, 128, 1]"</code> )
  *
  * @function getIntValuesFromINI
+ * @memberof crdtes
  *
  * @param {string} in_valueStr - ini value
  * @returns {array} array of ints or undefined
@@ -1349,6 +1419,7 @@ crdtes.getIntValuesFromINI = getIntValuesFromINI;
  * Interpret a string extracted from some INI data as a unit name
  *
  * @function getUnitFromINI
+ * @memberof crdtes
  *
  * @param {string} in_value - ini value
  * @param {string} in_defaultUnit - default to use if no match is found
@@ -1393,6 +1464,7 @@ crdtes.getUnitFromINI = getUnitFromINI;
  * Get file path to PluginInstaller if it is installed
  *
  * @function getPluginInstallerPath
+ * @memberof crdtes
  *
  * @returns {string} file path
 */
@@ -1409,8 +1481,9 @@ crdtes.getPluginInstallerPath = getPluginInstallerPath;
  * Fetch some persistent data
  *
  * Only available to paid developer accounts
- * 
+ *
  * @function getPersistData
+ * @memberof crdtes
  *
  * @param {string} issuer - a GUID identifier for the developer account as seen in the PluginInstaller
  * @param {string} attribute - an attribute name for the data
@@ -1441,12 +1514,13 @@ function getSysInfo__() {
 }
 
 /**
- * Calculate an integer power of an int value. Avoids using floating point, so
- * should not have any floating-point round-off errors. `Math.pow()` will probably
- * give the exact same result, but I am doubtful that some implementations might internally use `log` and `exp`
+ * Calculate an integer power of an int value. Avoids using floating point, so<br>
+ * should not have any floating-point round-off errors. `Math.pow()` will probably<br>
+ * give the exact same result, but I am doubtful that some implementations might internally use `log` and `exp`<br>
  * to handle `Math.pow()`
  *
  * @function intPow
+ * @memberof crdtes
  *
  * @param {number} i - Integer base
  * @param {number} intPower - integer power
@@ -1501,12 +1575,13 @@ function intPow(i, intPower) {
 crdtes.intPow = intPow;
 
 /**
- * Determine the license level for CRDT: 0 = not, 1 = basic, 2 = full
- *
- * Some functions, marked with "Only available to paid developer accounts" 
+ * Determine the license level for CRDT: 0 = not, 1 = basic, 2 = full<br>
+ * <br>
+ * Some functions, marked with "Only available to paid developer accounts"<br>
  * will only work with level 2. Licensing function only work with level 1
  *
  * @function getCreativeDeveloperToolsLevel
+ * @memberof crdtes
  *
  * @returns {number} 0, 1 or 2
  */
@@ -1519,9 +1594,10 @@ function getCreativeDeveloperToolsLevel() {
 crdtes.getCreativeDeveloperToolsLevel = getCreativeDeveloperToolsLevel;
 
 /**
- * Extend or shorten a string to an exact length, adding `padChar` as needed
+ * Extend or shorten a string to an exact length, adding <code>padChar</code> as needed
  *
  * @function leftPad
+ * @memberof crdtes
  *
  * @param {string} s - string to be extended or shortened
  * @param {string} padChar - string to append repeatedly if length needs to extended
@@ -1561,11 +1637,13 @@ function leftPad(s, padChar, len) {
 crdtes.leftPad = leftPad;
 
 /**
- * Make a log entry of the call of a function. Pass in the `arguments` keyword as a parameter.
+ * Make a log entry of the call of a function. Pass in the <code>arguments</code> keyword as a parameter.
  *
  * @function logEntry
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  */
 
 function logEntry(reportingFunctionArguments) {
@@ -1576,12 +1654,14 @@ function logEntry(reportingFunctionArguments) {
 crdtes.logEntry = logEntry;
 
 /**
- * Make a log entry of an error message. Pass in the `arguments` keyword as the first parameter
- * If the error level is below `LOG_LEVEL_ERROR` nothing happens
+ * Make a log entry of an error message. Pass in the <code>arguments</code> keyword as the first parameter.<br>
+ * If the error level is below <code>crdtes.LOG_LEVEL_ERROR</code> nothing happens
  *
  * @function logError
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  * @param {string} message - error message
  */
 function logError(reportingFunctionArguments, message) {
@@ -1596,11 +1676,13 @@ function logError(reportingFunctionArguments, message) {
 crdtes.logError = logError;
 
 /**
- * Make a log entry of the exit of a function. Pass in the `arguments` keyword as a parameter.
+ * Make a log entry of the exit of a function. Pass in the <code>arguments</code> keyword as a parameter.
  *
  * @function logExit
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  */
 
 function logExit(reportingFunctionArguments) {
@@ -1614,8 +1696,10 @@ crdtes.logExit = logExit;
  * Extract the function name from its arguments
  *
  * @function functionNameFromArguments
+ * @memberof crdtes
  *
- * @param {object} functionArguments - pass in the current `arguments` to the function. This is used to determine the function's name
+ * @param {object} functionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name
  * @returns {string} function name
  */
 
@@ -1636,11 +1720,13 @@ crdtes.functionNameFromArguments = functionNameFromArguments;
 
 
 /**
- * Output a log message. Pass in the `arguments` keyword as the first parameter.
+ * Output a log message. Pass in the <code>arguments</code> keyword as the first parameter.
  *
  * @function logMessage
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  * @param {number} logLevel - log level
  * @param {string} message - the note to output
  */
@@ -1697,6 +1783,7 @@ function logMessage(reportingFunctionArguments, logLevel, message) {
 
             var platformPrefix = "E ";
 
+            var logLevelPrefix;
             switch (logLevel) {
                 case LOG_LEVEL_ERROR:
                     logLevelPrefix = "ERROR";
@@ -1727,9 +1814,9 @@ function logMessage(reportingFunctionArguments, logLevel, message) {
 
             if (LOG_TO_FILEPATH) {
                 var fileHandle = new File(LOG_TO_FILEPATH);
-                fileHandle.open("w+");
+                fileHandle.open("a");
                 fileHandle.writeln(logLine);
-                fileHandle.close()
+                fileHandle.close();
             }
 
         }
@@ -1743,12 +1830,14 @@ function logMessage(reportingFunctionArguments, logLevel, message) {
 crdtes.logMessage = logMessage;
 
 /**
- * Make a log entry of a note. Pass in the `arguments` keyword as the first parameter.
- * If the error level is below `LOG_LEVEL_NOTE` nothing happens
+ * Make a log entry of a note. Pass in the <code>arguments</code> keyword as the first parameter.<br>
+ * If the error level is below <code>crdtes.LOG_LEVEL_NOTE</code> nothing happens
  *
  * @function logNote
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  * @param {string} message - the note to output
  */
 function logNote(reportingFunctionArguments, message) {
@@ -1763,12 +1852,14 @@ function logNote(reportingFunctionArguments, message) {
 crdtes.logNote = logNote;
 
 /**
- * Emit a trace messsage into the log. Pass in the `arguments` keyword as the first parameter.
- * If the error level is below `LOG_LEVEL_TRACE` nothing happens
+ * Emit a trace messsage into the log. Pass in the <code>arguments</code> keyword as the first parameter.<br>
+ * If the error level is below <code>crdtes.LOG_LEVEL_TRACE</code> nothing happens
  *
  * @function logTrace
+ * @memberof crdtes
  *
- * @param {array} reportingFunctionArguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} reportingFunctionArguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  * @param {string} message - the trace message to output
  */
 function logTrace(reportingFunctionArguments, message) {
@@ -1783,12 +1874,14 @@ function logTrace(reportingFunctionArguments, message) {
 crdtes.logTrace = logTrace;
 
 /**
- * Emit a warning messsage into the log. Pass in the `arguments` keyword as the first parameter.
- * If the error level is below `LOG_LEVEL_WARNING` nothing happens
+ * Emit a warning messsage into the log. Pass in the <code>arguments</code> keyword as the first parameter.<br>
+ * If the error level is below <code>crdtes.LOG_LEVEL_WARNING</code> nothing happens
  *
  * @function logWarning
+ * @memberof crdtes
  *
- * @param {array} arguments - pass in the current `arguments` to the function. This is used to determine the function's name for the log
+ * @param {array} arguments - pass in the current <code>arguments</code> to the function.<br>
+ * This is used to determine the function's name for the log
  * @param {string} message - the warning message to output
  */
 function logWarning(reportingFunctionArguments, message) {
@@ -1803,13 +1896,14 @@ function logWarning(reportingFunctionArguments, message) {
 crdtes.logWarning = logWarning;
 
 /**
- * The unique `GUID` of this computer
- *
+ * The unique <code>GUID</code> of this computer<br>
+ * <br>
  * Only available to paid developer accounts
- * 
- * @function machineGUID
  *
- * @returns {string} a `GUID` string
+ * @function machineGUID
+ * @memberof crdtes
+ *
+ * @returns {string} a <code>GUID</code> string
  */
 function machineGUID() {
 
@@ -1823,6 +1917,7 @@ crdtes.machineGUID = machineGUID;
  * Attempt to launch the PluginInstaller if it is installed
  *
  * @function pluginInstaller
+ * @memberof crdtes
  *
  * @returns {boolean} success or failure
 */
@@ -1833,11 +1928,11 @@ function pluginInstaller() {
 
     do {
         try {
-            
+
             var pluginInstallerFilePath = crdtesDLL.getPluginInstallerPath();
-            
+
             var pluginInstallerFile = File(pluginInstallerFilePath);
-            
+
             if (crdtes.IS_WINDOWS) {
                 // Need to set the PATH before launching. Using a wrapper .vbs file
                 pluginInstallerFile = File(pluginInstallerFile.parent + "/PluginInstaller Resources/launchEmbeddedPluginInstaller.vbs");
@@ -1860,6 +1955,7 @@ crdtes.pluginInstaller = pluginInstaller;
  * Restore the log level to what it was when pushLogLevel was called
  *
  * @function popLogLevel
+ * @memberof crdtes
  *
  * @returns {number} log level that was popped off the stack
  */
@@ -1884,6 +1980,7 @@ crdtes.popLogLevel = popLogLevel;
  * Save the previous log level and set a new log level
  *
  * @function pushLogLevel
+ * @memberof crdtes
  *
  * @param {number} newLogLevel - new log level to set
  * @returns {number} previous log level
@@ -1902,78 +1999,81 @@ function pushLogLevel(newLogLevel) {
 crdtes.pushLogLevel = pushLogLevel;
 
 /**
- * Read a bunch of text and try to extract structured information in .INI format
- *
- * This function is lenient and is able to extract slightly mangled INI data from the text frame
- * content of an InDesign text frame.
- *
- * This function knows how to handle curly quotes should they be present.
- *
- * The following flexibilities have been built-in:
- *
- * - Attribute names are case-insensitive and anything not `a-z 0-9` is ignored.
- * Entries like `this or that = ...` or `thisOrThat = ...` or `this'orThat = ...` are
- * all equivalent. Only letters and digits are retained, and converted to lowercase.
- *
- * - Attribute values can be quoted with either single, double, curly quotes.
- * This often occurs because InDesign can be configured to convert normal quotes into
- * curly quotes automatically.
- * Attribute values without quotes are trimmed (e.g. `bla =    x  ` is the same as `bla=x`)
- * Spaces are retained in quoted attribute values.
- *
- * - Any text will be ignore if not properly formatted as either a section name or an attribute-value
- * pair with an equal sign
- *
- * - Hard and soft returns are equivalent
- *
- * The return value is an object with the section names at the top level, and attribute names
- * below that. The following .INI
- * ```
- * [My data]
- * this is = " abc "
- * that =      abc
- * ```
- * returns
- * ```
- * {
- *   "mydata": {
- *      "__rawSectionName": "My data",
- *      "thisis": " abc ",
- *      "that": "abc"
- *   }
- * }
- * ```
- *
+ * Read a bunch of text and try to extract structured information in .INI format<br>
+ * <br>
+ * This function is lenient and is able to extract slightly mangled INI data from the text frame<br>
+ * content of an InDesign text frame.<br>
+ * <br>
+ * This function knows how to handle curly quotes should they be present.<br>
+ * <br>
+ * The following flexibilities have been built-in:<br>
+ * <br>
+ * - Attribute names are case-insensitive and anything not <code>a-z 0-9</code> is ignored.<br>
+ * Entries like <code>this or that = ...</code> or <code>thisOrThat = ...</code> or <code>this'orThat = ...</code> are<br>
+ * all equivalent. Only letters and digits are retained, and converted to lowercase.<br>
+ * <br>
+ * - Attribute values can be quoted with either single, double, curly quotes.<br>
+ * This often occurs because InDesign can be configured to convert normal quotes into<br>
+ * curly quotes automatically.<br>
+ * Attribute values without quotes are trimmed (e.g. <code>bla =    x  </code> is the same as <code>bla=x</code>)<br>
+ * Spaces are retained in quoted attribute values.<br>
+ * <br>
+ * - Any text will be ignore if not properly formatted as either a section name or an attribute-value<br>
+ * pair with an equal sign<br>
+ * <br>
+ * - Hard and soft returns are equivalent<br>
+ * <br>
+ * The return value is an object with the section names at the top level, and attribute names<br>
+ * below that. The following .INI<br>
+ * <code><br>
+ * [My data]<br>
+ * this is = " abc "<br>
+ * that =      abc<br>
+ * </code><br>
+ * returns<br>
+ * <code><br><br>
+ * {<br>
+ *   "mydata": {<br>
+ *      "__rawSectionName": "My data",<br>
+ *      "thisis": " abc ",<br>
+ *      "that": "abc"<br>
+ *   }<br>
+ * }<br>
+ * </code><br>
  * Duplicated sections and entries are automatically suffixed with a counter suffix - e.g.
- * 
+ * <code><br>
  * [main]
  * a=1
  * a=2
  * a=3
- * 
- * is equivalent with 
- * 
+ * </code><br>
+ * is equivalent with
+ * <code><br>
  * [main]
  * a=1
  * a_2=2
  * a_3=3
- * 
+ * </code><br>
+ * and
+ * <code><br>
  * [a]
  * a=1
  * [a]
- * a=2
- * 
+ * a=2<br>
+ * </code><br>
  * is equivalent with
- * 
+ * <code><br>
  * [a]
  * a=1
  * [a_2]
- * a=2
- * 
+ * a=2<br>
+ * </code><br>
+ *
  * @function readINI
+ * @memberof crdtes
  *
  * @param {string} in_text - raw text, which might or might not contain some INI-formatted data mixed with normal text
- * @returns {object} either the ini data or `undefined`.
+ * @returns {object} either the ini data or <code>undefined</code>.
  */
 
 function readINI(in_text) {
@@ -2139,9 +2239,10 @@ function readINI(in_text) {
 crdtes.readINI = readINI;
 
 /**
- * Extend or shorten a string to an exact length, adding `padChar` as needed
+ * Extend or shorten a string to an exact length, adding <code>padChar</code> as needed
  *
  * @function rightPad
+ * @memberof crdtes
  *
  * @param {string} s - string to be extended or shortened
  * @param {string} padChar - string to append repeatedly if length needs to extended
@@ -2182,11 +2283,56 @@ function rightPad(s, padChar, len) {
 crdtes.rightPad = rightPad;
 
 /**
- * Send in activation data to determine whether some software is currently activated or not.
+ * Fetch a localized string.
  *
- * Needs to be followed by a `sublicense()` call
+ * @function S
+ * @memberof crdtes
+ *
+ * @param {string} stringCode - a token for the string to be localized (e.g. BTN_OK)
+ * @param {string=} locale - a locale. Optional - defaults to "en_US"
+ * @returns {string} a localized string. If the stringCode is not found, returns the stringCode itself.
+ */
+function S(stringCode, locale) {
+
+    var retVal = stringCode;
+
+    do {
+
+        try {
+            if (! locale) {
+                locale = DEFAULT_LOCALE;
+            }
+
+            if (! (stringCode in LOCALE_STRINGS)) {
+                break;
+            }
+
+            var localeStrings = LOCALE_STRINGS[stringCode];
+            if (locale in localeStrings) {
+                retVal = localeStrings[locale]; 
+            }
+            else if (LOCALE_EN_US in localeStrings) {
+                retVal = localeStrings[LOCALE_EN_US];
+            }
+
+        }
+        catch (err) {
+            crdtes.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    return retVal;
+}
+crdtes.S = S;
+
+/**
+ * Send in activation data to determine whether some software is currently activated or not.<br>
+ * <br>
+ * Needs to be followed by a <code>crdtes.sublicense()</code> call<br>
  *
  * @function setIssuer
+ * @memberof crdtes
  *
  * @param {string} issuerGUID - a GUID identifier for the developer account as seen in the PluginInstaller
  * @param {string} issuerEmail - the email for the developer account as seen in the PluginInstaller
@@ -2201,11 +2347,12 @@ function setIssuer(issuerGUID, issuerEmail) {
 crdtes.setIssuer = setIssuer;
 
 /**
- * Store some persistent data (e.g. a time stamp to determine a demo version lapsing)
- *
+ * Store some persistent data (e.g. a time stamp to determine a demo version lapsing)<br>
+ * <br>
  * Only available to paid developer accounts
  *
  * @function setPersistData
+ * @memberof crdtes
  *
  * @param {string} issuer - a GUID identifier for the developer account as seen in the PluginInstaller
  * @param {string} attribute - an attribute name for the data
@@ -2222,22 +2369,21 @@ function setPersistData(issuer, attribute, password, data) {
 crdtes.setPersistData = setPersistData;
 
 /**
- * Wrap a string or a byte array into single quotes, encoding any
- * binary data as a string. Knows how to handle Unicode characters
- * or binary zeroes.
- *
- * When the input is a string, high Unicode characters are
- * encoded as `\uHHHH`
- *
- * When the input is a byte array, all bytes are encoded as `\xHH` escape sequences.
+ * Wrap a string or a byte array into single quotes, encoding any binary data as a string.<br>
+ * Knows how to handle Unicode characters or binary zeroes.<br>
+ * <br>
+ * When the input is a string, high Unicode characters are encoded as <code>\uHHHH</code><br>
+ * <br>
+ * When the input is a byte array, all bytes are encoded as <code>\xHH</code> escape sequences.
  *
  * @function sQ
+ * @memberof crdtes
  *
  * @param {string} str_or_ByteArr - a Unicode string or an array of bytes
- * @returns {string} a string enclosed in double quotes. This string is pure 7-bit
- * ASCII and can be used into generated script code
- * Example:
- * `var script = "a=b(" + sQ(somedata) + ");";`
+ * @returns {string} a string enclosed in double quotes. This string is pure 7-bit<br>
+ * ASCII and can be used into generated script code<br>
+ * Example:<br>
+ * <code>var script = "a=b(" + crdtes.sQ(somedata) + ");";</code>
  */
 function sQ(str_or_ByteArr) {
     return enQuote__(str_or_ByteArr, "'");
@@ -2248,6 +2394,7 @@ crdtes.sQ = sQ;
  * Encode a string into an byte array using UTF-8
  *
  * @function strToUTF8
+ * @memberof crdtes
  *
  * @param {string} in_s - a string
  * @returns { array } a byte array
@@ -2282,6 +2429,7 @@ crdtes.strToUTF8 = strToUTF8;
  * Encode a string into an byte array using the 8 lowest bits of each UTF-16 character
  *
  * @function strToBinary
+ * @memberof crdtes
  *
  * @param {string} in_s - a string
  * @returns { array } a byte array
@@ -2305,11 +2453,12 @@ function strToBinary(in_s) {
 crdtes.strToBinary = strToBinary;
 
 /**
- * Send in sublicense info generated in the PluginInstaller so we can determine whether some software is currently activated or not.
- *
- * Needs to be preceded by a `setIssuer()` call.
+ * Send in sublicense info generated in the PluginInstaller so we can determine whether some software is currently activated or not.<br>
+ * <br>
+ * Needs to be preceded by a <code>crdtes.setIssuer()</code> call.
  *
  * @function sublicense
+ * @memberof crdtes
  *
  * @param {string} key - key needed to decode activation data
  * @param {string} activation - encrypted activation data
@@ -2324,10 +2473,11 @@ function sublicense(key, activation) {
 crdtes.sublicense = sublicense;
 
 /**
- * Convert an integer into a hex representation with a fixed number of digits.
- * Negative numbers are converted using 2-s complement (so `-15` results in `0x01`)
+ * Convert an integer into a hex representation with a fixed number of digits.<br>
+ * Negative numbers are converted using 2-s complement (so <code>-15</code> results in <code>0x01</code>)<br>
  *
  * @function toHex
+ * @memberof crdtes
  *
  * @param {number} i - integer to convert to hex
  * @param {number} numDigits - How many digits. Defaults to 4 if omitted.
@@ -2371,9 +2521,10 @@ crdtes.toHex = toHex;
  * Conversion factor from a length unit into inches
  *
  * @function unitToInchFactor
+ * @memberof crdtes
  *
- * @param {string} in_unit - unit name (`crdtes.UNIT_NAME...`)
- * @returns { number } conversion factor or 1.0 if unknown/not applicable
+ * @param {string} in_unit - unit name (<code>crdtes.UNIT_NAME...</code>)
+ * @returns { number } conversion factor or <code>1.0</code> if unknown/not applicable
  */
 
 function unitToInchFactor(in_unit) {
